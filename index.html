@@ -120,11 +120,11 @@
       cursor: pointer;
       box-shadow: 0 3px 6px rgba(0,0,0,0.3);
     }
-    .fab.generar { background: #28a745; } /* verde */
-    .fab.generar:active { background: #1e7e34; }
-    .fab.imprimir { background: #007bff; } /* azul */
-    .fab.imprimir:active { background: #0056b3; }
-
+    .fab:active {
+      filter: brightness(85%);
+    }
+    .fab-generar { background: #28a745; } /* verde */
+    .fab-imprimir { background: #17a2b8; } /* azul */
     .fab-label {
       margin-top: 4px;
       font-size: 0.8em;
@@ -165,11 +165,11 @@
   <!-- Botones flotantes -->
   <div class="fab-container">
     <div class="fab-group">
-      <button class="fab generar" onclick="generarEtiquetas()" title="Generar etiquetas">📝</button>
+      <button class="fab fab-generar" onclick="generarEtiquetas()" title="Generar etiquetas">📝</button>
       <div class="fab-label">Generar</div>
     </div>
     <div class="fab-group">
-      <button class="fab imprimir" onclick="window.print()" title="Imprimir etiquetas">🖨️</button>
+      <button class="fab fab-imprimir" onclick="window.print()" title="Imprimir etiquetas">🖨️</button>
       <div class="fab-label">Imprimir</div>
     </div>
   </div>
@@ -177,7 +177,7 @@
   <script src="productos.js"></script>
   <script>
     // Empleados
-    const empleados = ["Ronald", "Lorena", "Johnny", "Sofía"];
+    const empleados = ["Ronald", "Lorena", "Johnny", "Sofía", "Claudia", "Pamela", "Abril", "Gloria", "Steven"];
 
     // Referencias
     const empleadoSelect = document.getElementById("empleado");
@@ -247,9 +247,12 @@
 
     // Generar etiquetas seleccionadas
     function generarEtiquetas() {
-      // Limpiar buscador al generar
+      // Limpiar buscador y mostrar todos los productos
       buscadorInput.value = "";
       productButtons.forEach(btn => btn.style.display = "block");
+
+      // Limpiar área de etiquetas antes de generar nuevas
+      printArea.innerHTML = "";
 
       const empleado = empleadoSelect.value;
       const seleccionados = document.querySelectorAll(".producto-btn.active");
