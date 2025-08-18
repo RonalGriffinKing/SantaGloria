@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -48,18 +47,32 @@
     button:active {
       background: #9a67ea;
     }
-    #productoLista label {
+
+    /* grid de productos */
+    #productoLista {
       display: flex;
-      align-items: center;
-      padding: 8px;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .producto-btn {
+      flex: 1 1 calc(50% - 8px); /* 2 columnas en móvil */
       background: #1e1e1e;
-      margin-bottom: 6px;
-      border-radius: 4px;
+      color: #fff;
+      padding: 12px;
+      border-radius: 6px;
+      text-align: center;
+      font-size: 0.9em;
+      cursor: pointer;
+      user-select: none;
     }
-    #productoLista input {
-      margin-right: 10px;
-      transform: scale(1.2);
+    .producto-btn.active {
+      background: #bb86fc;
+      color: #121212;
+      font-weight: bold;
     }
+
+    /* etiquetas impresas */
     .etiqueta {
       border: 1px dashed #bb86fc;
       padding: 6px;
@@ -72,15 +85,15 @@
     .etiqueta p { margin: 2px 0; }
     .print-area { display: block; }
 
-    /* Modo impresión ticket */
+    /* impresión térmica */
     @media print {
       body * { visibility: hidden; }
       .print-area, .print-area * { visibility: visible; }
       .print-area { position: absolute; top: 0; left: 0; width: 100%; }
       .etiqueta { 
-        page-break-after: always; 
-        border: none; 
-        width: 100%; 
+        page-break-after: always;
+        border: none;
+        width: 100%;
         font-size: 12px;
       }
     }
@@ -99,7 +112,7 @@
     <label for="buscador">🔍 Buscar producto</label>
     <input type="text" id="buscador" placeholder="Escribe para filtrar...">
     
-    <label>✔️ Productos</label>
+    <label>✔️ Selecciona productos</label>
     <div id="productoLista"></div>
     
     <button onclick="generarEtiquetas()">Generar Etiquetas</button>
@@ -110,10 +123,9 @@
   
   <button onclick="window.print()">🖨️ Imprimir</button>
   
-  <!-- base de datos de productos -->
   <script src="productos.js"></script>
   <script>
-    // Lista de empleados
+    // Empleados
     const empleados = ["Ronald", "Lorena", "Johnny", "Sofía"];
 
     // Referencias
@@ -139,23 +151,24 @@
       categoriaSelect.appendChild(opt);
     });
 
-    let checkboxes = [];
+    let productButtons = [];
 
-    // Cargar productos
+    // Cargar productos como botones
     function cargarProductos() {
       productoLista.innerHTML = "";
-      checkboxes = [];
+      productButtons = [];
       const categoria = categoriaSelect.value;
       productos[categoria].forEach(p => {
-        let label = document.createElement("label");
-        let chk = document.createElement("input");
-        chk.type = "checkbox";
-        chk.value = p.nombre;
-        chk.dataset.dias = p.dias;
-        label.appendChild(chk);
-        label.appendChild(document.createTextNode(" " + p.nombre));
-        productoLista.appendChild(label);
-        checkboxes.push({element: label, nombre: p.nombre.toLowerCase()});
+        let btn = document.createElement("div");
+        btn.className = "producto-btn";
+        btn.textContent = p.nombre;
+        btn.dataset.nombre = p.nombre;
+        btn.dataset.dias = p.dias;
+        btn.onclick = () => {
+          btn.classList.toggle("active");
+        };
+        productoLista.appendChild(btn);
+        productButtons.push(btn);
       });
     }
     cargarProductos();
@@ -163,19 +176,19 @@
     // Filtro buscador
     buscadorInput.addEventListener("input", () => {
       const texto = buscadorInput.value.toLowerCase();
-      checkboxes.forEach(item => {
-        item.element.style.display = item.nombre.includes(texto) ? "flex" : "none";
+      productButtons.forEach(btn => {
+        btn.style.display = btn.dataset.nombre.toLowerCase().includes(texto) ? "block" : "none";
       });
     });
 
     // Generar etiquetas seleccionadas
     function generarEtiquetas() {
       const empleado = empleadoSelect.value;
-      const seleccionados = document.querySelectorAll("#productoLista input:checked");
+      const seleccionados = document.querySelectorAll(".producto-btn.active");
 
-      seleccionados.forEach(chk => {
-        const nombreProd = chk.value;
-        const dias = parseInt(chk.dataset.dias);
+      seleccionados.forEach(btn => {
+        const nombreProd = btn.dataset.nombre;
+        const dias = parseInt(btn.dataset.dias);
 
         const ahora = new Date();
         const aperturaFecha = ahora.toLocaleDateString("es-ES");
