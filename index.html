@@ -46,4 +46,85 @@
   <h2>Etiquetas para imprimir:</h2>
   <div class="print-area" id="printArea"></div>
   
-  <button onclick="window.print()">🖨️ Imprimir
+  <button onclick="window.print()">🖨️ Imprimir etiquetas</button>
+  
+  <!-- primero cargamos la base de datos de productos -->
+  <script src="productos.js"></script>
+  <!-- luego el script que usa esos datos -->
+  <script>
+    // Lista de empleados
+    const empleados = ["Ronald", "Lorena", "Johnny", "Sofía"];
+
+    // Referencias a elementos
+    const empleadoSelect = document.getElementById("empleado");
+    const categoriaSelect = document.getElementById("categoria");
+    const productoLista = document.getElementById("productoLista");
+    const printArea = document.getElementById("printArea");
+
+    // Cargar empleados
+    empleados.forEach(e => {
+      let opt = document.createElement("option");
+      opt.value = e;
+      opt.textContent = e;
+      empleadoSelect.appendChild(opt);
+    });
+
+    // Cargar categorías
+    Object.keys(productos).forEach(cat => {
+      let opt = document.createElement("option");
+      opt.value = cat;
+      opt.textContent = cat;
+      categoriaSelect.appendChild(opt);
+    });
+
+    // Cargar productos (checkboxes)
+    function cargarProductos() {
+      productoLista.innerHTML = "";
+      const categoria = categoriaSelect.value;
+      productos[categoria].forEach(p => {
+        let label = document.createElement("label");
+        let chk = document.createElement("input");
+        chk.type = "checkbox";
+        chk.value = p.nombre;
+        chk.dataset.dias = p.dias;
+        label.appendChild(chk);
+        label.appendChild(document.createTextNode(" " + p.nombre));
+        productoLista.appendChild(label);
+        productoLista.appendChild(document.createElement("br"));
+      });
+    }
+    cargarProductos();
+
+    // Generar etiquetas seleccionadas
+    function generarEtiquetas() {
+      const empleado = empleadoSelect.value;
+      const checkboxes = document.querySelectorAll("#productoLista input:checked");
+
+      checkboxes.forEach(chk => {
+        const nombreProd = chk.value;
+        const dias = parseInt(chk.dataset.dias);
+
+        const ahora = new Date();
+        const aperturaFecha = ahora.toLocaleDateString("es-ES");
+        const aperturaHora = ahora.toLocaleTimeString("es-ES", {hour: '2-digit', minute: '2-digit'});
+
+        let cad = new Date(ahora);
+        cad.setDate(cad.getDate() + dias);
+        const caducidadFecha = cad.toLocaleDateString("es-ES");
+        const caducidadHora = aperturaHora;
+
+        const etiqueta = document.createElement("div");
+        etiqueta.className = "etiqueta";
+        etiqueta.innerHTML = `
+          <p><strong>Producto:</strong> ${nombreProd}</p>
+          <p><strong>Manipulador:</strong> ${empleado}</p>
+          <p><strong>Fecha cad. primaria / Lote:</strong> ________</p>
+          <p><strong>R-Apert. Envase:</strong> ${aperturaFecha} - ${aperturaHora}</p>
+          <p><strong>R-Cad. Secundaria:</strong> ${caducidadFecha} - ${caducidadHora}</p>
+        `;
+        printArea.appendChild(etiqueta);
+      });
+    }
+  </script>
+</body>
+</html>
