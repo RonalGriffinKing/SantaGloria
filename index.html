@@ -1,64 +1,117 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Generador de Etiquetas</title>
+  <title>Etiquetas App</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    body { font-family: Arial, sans-serif; margin: 20px; background: #f5f5f5; }
-    h1 { color: #333; }
-    .form-section { margin-bottom: 20px; }
-    label { display: block; margin-top: 10px; font-weight: bold; }
-    select, button, input[type="text"] { padding: 8px; margin-top: 5px; }
-    .etiqueta {
-      border: 2px solid #000;
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #121212;
+      color: #eee;
+      padding: 15px;
+    }
+    h1 {
+      text-align: center;
+      color: #bb86fc;
+      margin-bottom: 15px;
+      font-size: 1.4em;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+      color: #bb86fc;
+      font-size: 0.9em;
+    }
+    select, button, input[type="text"] {
+      width: 100%;
+      padding: 12px;
+      margin-top: 6px;
+      border-radius: 6px;
+      border: none;
+      font-size: 1em;
+    }
+    select, input[type="text"] {
+      background: #1e1e1e;
+      color: #fff;
+    }
+    button {
+      background: #bb86fc;
+      color: #121212;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 12px;
+    }
+    button:active {
+      background: #9a67ea;
+    }
+    #productoLista label {
+      display: flex;
+      align-items: center;
       padding: 8px;
-      margin: 5px auto;
+      background: #1e1e1e;
+      margin-bottom: 6px;
+      border-radius: 4px;
+    }
+    #productoLista input {
+      margin-right: 10px;
+      transform: scale(1.2);
+    }
+    .etiqueta {
+      border: 1px dashed #bb86fc;
+      padding: 6px;
+      margin: 8px auto;
       background: #fff;
-      width: 220px;   /* ancho aprox. ticket 58mm */
+      color: #000;
+      width: 220px;   /* ancho ticket 58mm */
       font-size: 12px;
     }
     .etiqueta p { margin: 2px 0; }
     .print-area { display: block; }
+
+    /* Modo impresión ticket */
     @media print {
       body * { visibility: hidden; }
       .print-area, .print-area * { visibility: visible; }
       .print-area { position: absolute; top: 0; left: 0; width: 100%; }
       .etiqueta { 
-        page-break-after: always; /* Fuerza corte por etiqueta */
+        page-break-after: always; 
         border: none; 
-        margin: 0;
-        width: 100%; /* que ocupe todo el ancho de ticket */
+        width: 100%; 
+        font-size: 12px;
       }
     }
   </style>
 </head>
 <body>
-  <h1>Generador de Etiquetas</h1>
+  <h1>🖨️ Generador de Etiquetas</h1>
   
   <div class="form-section">
-    <label for="empleado">¿Quién etiqueta?</label>
+    <label for="empleado">👤 ¿Quién etiqueta?</label>
     <select id="empleado"></select>
 
-    <label for="categoria">Categoría</label>
+    <label for="categoria">📦 Categoría</label>
     <select id="categoria" onchange="cargarProductos()"></select>
     
-    <label for="buscador">Buscar producto</label>
+    <label for="buscador">🔍 Buscar producto</label>
     <input type="text" id="buscador" placeholder="Escribe para filtrar...">
     
-    <label>Productos</label>
+    <label>✔️ Productos</label>
     <div id="productoLista"></div>
     
     <button onclick="generarEtiquetas()">Generar Etiquetas</button>
   </div>
   
-  <h2>Etiquetas para imprimir:</h2>
+  <h2 style="margin-top:20px; color:#bb86fc;">Etiquetas listas:</h2>
   <div class="print-area" id="printArea"></div>
   
-  <button onclick="window.print()">🖨️ Imprimir etiquetas</button>
+  <button onclick="window.print()">🖨️ Imprimir</button>
   
-  <!-- primero cargamos la base de datos de productos -->
+  <!-- base de datos de productos -->
   <script src="productos.js"></script>
-  <!-- luego la lógica -->
   <script>
     // Lista de empleados
     const empleados = ["Ronald", "Lorena", "Johnny", "Sofía"];
@@ -86,7 +139,6 @@
       categoriaSelect.appendChild(opt);
     });
 
-    // Guardamos lista de checkboxes para poder filtrar
     let checkboxes = [];
 
     // Cargar productos
@@ -103,7 +155,6 @@
         label.appendChild(chk);
         label.appendChild(document.createTextNode(" " + p.nombre));
         productoLista.appendChild(label);
-        productoLista.appendChild(document.createElement("br"));
         checkboxes.push({element: label, nombre: p.nombre.toLowerCase()});
       });
     }
@@ -113,11 +164,7 @@
     buscadorInput.addEventListener("input", () => {
       const texto = buscadorInput.value.toLowerCase();
       checkboxes.forEach(item => {
-        if (item.nombre.includes(texto)) {
-          item.element.style.display = "block";
-        } else {
-          item.element.style.display = "none";
-        }
+        item.element.style.display = item.nombre.includes(texto) ? "flex" : "none";
       });
     });
 
@@ -144,7 +191,7 @@
         etiqueta.innerHTML = `
           <p><strong>${nombreProd}</strong></p>
           <p>Manipulador: ${empleado}</p>
-          <p>Cad. primaria / Lote: ________</p>
+          <p>Cad. primaria/Lote: ________</p>
           <p>Apertura: ${aperturaFecha} ${aperturaHora}</p>
           <p>Cad. secundaria: ${caducidadFecha} ${caducidadHora}</p>
         `;
