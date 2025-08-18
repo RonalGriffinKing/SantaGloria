@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -109,7 +108,6 @@
       align-items: center;
     }
     .fab {
-      background: #00ff6c;
       color: #fff;
       border: none;
       border-radius: 50%;
@@ -122,9 +120,11 @@
       cursor: pointer;
       box-shadow: 0 3px 6px rgba(0,0,0,0.3);
     }
-    .fab:active {
-      background: #4b087a;
-    }
+    .fab.generar { background: #28a745; } /* verde */
+    .fab.generar:active { background: #1e7e34; }
+    .fab.imprimir { background: #007bff; } /* azul */
+    .fab.imprimir:active { background: #0056b3; }
+
     .fab-label {
       margin-top: 4px;
       font-size: 0.8em;
@@ -165,11 +165,11 @@
   <!-- Botones flotantes -->
   <div class="fab-container">
     <div class="fab-group">
-      <button class="fab" onclick="generarEtiquetas()" title="Generar etiquetas">📝</button>
+      <button class="fab generar" onclick="generarEtiquetas()" title="Generar etiquetas">📝</button>
       <div class="fab-label">Generar</div>
     </div>
     <div class="fab-group">
-      <button class="fab" onclick="window.print()" title="Imprimir etiquetas">🖨️</button>
+      <button class="fab imprimir" onclick="window.print()" title="Imprimir etiquetas">🖨️</button>
       <div class="fab-label">Imprimir</div>
     </div>
   </div>
@@ -194,8 +194,10 @@
       empleadoSelect.appendChild(opt);
     });
 
-    // Cargar categorías
-    Object.keys(productos).forEach(cat => {
+    // Cargar categorías + opción "Todo"
+    let categorias = Object.keys(productos);
+    categoriaSelect.appendChild(new Option("Todo", "Todo"));
+    categorias.forEach(cat => {
       let opt = document.createElement("option");
       opt.value = cat;
       opt.textContent = cat;
@@ -209,7 +211,18 @@
       productoLista.innerHTML = "";
       productButtons = [];
       const categoria = categoriaSelect.value;
-      productos[categoria].forEach(p => {
+
+      let productosMostrar = [];
+
+      if (categoria === "Todo") {
+        Object.values(productos).forEach(arr => {
+          productosMostrar = productosMostrar.concat(arr);
+        });
+      } else {
+        productosMostrar = productos[categoria] || [];
+      }
+
+      productosMostrar.forEach(p => {
         let btn = document.createElement("div");
         btn.className = "producto-btn";
         btn.textContent = p.nombre;
@@ -234,6 +247,10 @@
 
     // Generar etiquetas seleccionadas
     function generarEtiquetas() {
+      // Limpiar buscador al generar
+      buscadorInput.value = "";
+      productButtons.forEach(btn => btn.style.display = "block");
+
       const empleado = empleadoSelect.value;
       const seleccionados = document.querySelectorAll(".producto-btn.active");
 
