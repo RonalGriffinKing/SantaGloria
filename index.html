@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Generador de Etiquetas</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; background: #f5f5f5; }
+    h1 { color: #333; }
+    .form-section { margin-bottom: 20px; }
+    label { display: block; margin-top: 10px; font-weight: bold; }
+    select, button { padding: 8px; margin-top: 5px; }
+    .etiqueta {
+      border: 2px solid #000;
+      padding: 10px;
+      margin: 10px;
+      background: #fff;
+      width: 280px;
+      font-size: 14px;
+    }
+    .etiqueta p { margin: 3px 0; }
+    .print-area { display: flex; flex-wrap: wrap; gap: 10px; }
+    @media print {
+      body * { visibility: hidden; }
+      .print-area, .print-area * { visibility: visible; }
+      .print-area { position: absolute; top: 0; left: 0; }
+      .etiqueta { page-break-after: always; }
+    }
+  </style>
+</head>
+<body>
+  <h1>Generador de Etiquetas</h1>
+  
+  <div class="form-section">
+    <label for="empleado">¿Quién etiqueta?</label>
+    <select id="empleado"></select>
+
+    <label for="categoria">Categoría</label>
+    <select id="categoria" onchange="cargarProductos()"></select>
+    
+    <label>Productos</label>
+    <div id="productoLista"></div>
+    
+    <button onclick="generarEtiquetas()">Generar Etiquetas</button>
+  </div>
+  
+  <h2>Etiquetas para imprimir:</h2>
+  <div class="print-area" id="printArea"></div>
+  
+  <button onclick="window.print()">🖨️ Imprimir
