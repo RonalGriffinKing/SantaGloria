@@ -8,22 +8,27 @@
     h1 { color: #333; }
     .form-section { margin-bottom: 20px; }
     label { display: block; margin-top: 10px; font-weight: bold; }
-    select, button { padding: 8px; margin-top: 5px; }
+    select, button, input[type="text"] { padding: 8px; margin-top: 5px; }
     .etiqueta {
       border: 2px solid #000;
-      padding: 10px;
-      margin: 10px;
+      padding: 8px;
+      margin: 5px auto;
       background: #fff;
-      width: 280px;
-      font-size: 14px;
+      width: 220px;   /* ancho aprox. ticket 58mm */
+      font-size: 12px;
     }
-    .etiqueta p { margin: 3px 0; }
-    .print-area { display: flex; flex-wrap: wrap; gap: 10px; }
+    .etiqueta p { margin: 2px 0; }
+    .print-area { display: block; }
     @media print {
       body * { visibility: hidden; }
       .print-area, .print-area * { visibility: visible; }
-      .print-area { position: absolute; top: 0; left: 0; }
-      .etiqueta { page-break-after: always; }
+      .print-area { position: absolute; top: 0; left: 0; width: 100%; }
+      .etiqueta { 
+        page-break-after: always; /* Fuerza corte por etiqueta */
+        border: none; 
+        margin: 0;
+        width: 100%; /* que ocupe todo el ancho de ticket */
+      }
     }
   </style>
 </head>
@@ -36,6 +41,9 @@
 
     <label for="categoria">Categoría</label>
     <select id="categoria" onchange="cargarProductos()"></select>
+    
+    <label for="buscador">Buscar producto</label>
+    <input type="text" id="buscador" placeholder="Escribe para filtrar...">
     
     <label>Productos</label>
     <div id="productoLista"></div>
@@ -50,15 +58,16 @@
   
   <!-- primero cargamos la base de datos de productos -->
   <script src="productos.js"></script>
-  <!-- luego el script que usa esos datos -->
+  <!-- luego la lógica -->
   <script>
     // Lista de empleados
     const empleados = ["Ronald", "Lorena", "Johnny", "Sofía"];
 
-    // Referencias a elementos
+    // Referencias
     const empleadoSelect = document.getElementById("empleado");
     const categoriaSelect = document.getElementById("categoria");
     const productoLista = document.getElementById("productoLista");
+    const buscadorInput = document.getElementById("buscador");
     const printArea = document.getElementById("printArea");
 
     // Cargar empleados
@@ -77,9 +86,13 @@
       categoriaSelect.appendChild(opt);
     });
 
-    // Cargar productos (checkboxes)
+    // Guardamos lista de checkboxes para poder filtrar
+    let checkboxes = [];
+
+    // Cargar productos
     function cargarProductos() {
       productoLista.innerHTML = "";
+      checkboxes = [];
       const categoria = categoriaSelect.value;
       productos[categoria].forEach(p => {
         let label = document.createElement("label");
@@ -91,16 +104,29 @@
         label.appendChild(document.createTextNode(" " + p.nombre));
         productoLista.appendChild(label);
         productoLista.appendChild(document.createElement("br"));
+        checkboxes.push({element: label, nombre: p.nombre.toLowerCase()});
       });
     }
     cargarProductos();
 
+    // Filtro buscador
+    buscadorInput.addEventListener("input", () => {
+      const texto = buscadorInput.value.toLowerCase();
+      checkboxes.forEach(item => {
+        if (item.nombre.includes(texto)) {
+          item.element.style.display = "block";
+        } else {
+          item.element.style.display = "none";
+        }
+      });
+    });
+
     // Generar etiquetas seleccionadas
     function generarEtiquetas() {
       const empleado = empleadoSelect.value;
-      const checkboxes = document.querySelectorAll("#productoLista input:checked");
+      const seleccionados = document.querySelectorAll("#productoLista input:checked");
 
-      checkboxes.forEach(chk => {
+      seleccionados.forEach(chk => {
         const nombreProd = chk.value;
         const dias = parseInt(chk.dataset.dias);
 
@@ -116,11 +142,11 @@
         const etiqueta = document.createElement("div");
         etiqueta.className = "etiqueta";
         etiqueta.innerHTML = `
-          <p><strong>Producto:</strong> ${nombreProd}</p>
-          <p><strong>Manipulador:</strong> ${empleado}</p>
-          <p><strong>Fecha cad. primaria / Lote:</strong> ________</p>
-          <p><strong>R-Apert. Envase:</strong> ${aperturaFecha} - ${aperturaHora}</p>
-          <p><strong>R-Cad. Secundaria:</strong> ${caducidadFecha} - ${caducidadHora}</p>
+          <p><strong>${nombreProd}</strong></p>
+          <p>Manipulador: ${empleado}</p>
+          <p>Cad. primaria / Lote: ________</p>
+          <p>Apertura: ${aperturaFecha} ${aperturaHora}</p>
+          <p>Cad. secundaria: ${caducidadFecha} ${caducidadHora}</p>
         `;
         printArea.appendChild(etiqueta);
       });
