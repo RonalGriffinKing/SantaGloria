@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Etiquetas App</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0">
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      margin: 0;
+      background: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
+      min-height: 100vh;
+      padding-bottom: 100px;
+    }
+
+    header {
+      background: rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(12px) saturate(180%);
+      -webkit-backdrop-filter: blur(12px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: #fff;
+      text-align: center;
+      padding: 12px;
+      font-size: 1.1em;
+      font-weight: bold;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: #fff;
+      margin: 20px 0;
+      font-size: 1.6em;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    .form-section {
+      margin: 15px;
+      padding: 20px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      border: 1px solid rgba(255,255,255,0.3);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+
+    label {
+      display: block;
+      margin-top: 12px;
+      font-weight: 600;
+      color: #333;
+      font-size: 0.95em;
+    }
+
+    select, input[type="text"] {
+      width: 100%;
+      padding: 12px;
+      margin-top: 6px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      font-size: 1em;
+      background: rgba(255,255,255,0.6);
+      backdrop-filter: blur(6px);
+      color: #333;
+      transition: all 0.2s ease-in-out;
+    }
+    select:focus, input[type="text"]:focus {
+      outline: none;
+      border: 1px solid #6a0dad;
+      box-shadow: 0 0 0 2px rgba(106,13,173,0.2);
+    }
+
+    #productoLista, #masUsados {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .producto-btn {
+      flex: 1 1 calc(50% - 8px);
+      background: rgba(255,255,255,0.3);
+      padding: 12px;
+      border-radius: 12px;
+      text-align: center;
+      font-size: 0.9em;
+      cursor: pointer;
+      border: 1px solid rgba(255,255,255,0.3);
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .producto-btn:hover {
+      background: rgba(255,255,255,0.5);
+    }
+    .producto-btn.active {
+      background: #6a0dad;
+      color: #fff;
+      font-weight: bold;
+      border: 1px solid #333;
+    }
+
+    .etiqueta {
+      border: 1px dashed #6a0dad;
+      padding: 8px;
+      margin: 8px auto;
+      background: #fff;
+      color: #000;
+      width: 220px;
+      font-size: 12px;
+      border-radius: 8px;
+    }
+
+    @media print {
+      body { background: #fff !important; } 
+      body * { visibility: hidden; }
+      .print-area, .print-area * { visibility: visible; }
+
+      .print-area {
+        position: relative;
+        width: auto;
+        margin: 0;
+      }
+
+      .etiqueta {
+        border: 1px dashed #000;
+        background: #fff !important;
+        width: 220px;
+        font-size: 12px;
+        margin: 0 auto;
+        page-break-before: always;
+        page-break-inside: avoid;
+      }
+
+      .etiqueta:first-child {
+        page-break-before: auto;
+      }
+    }
+
+    .fab-container {
+      position: fixed;
+      bottom: 15px;
+      right: 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      z-index: 999;
+      align-items: center;
+    }
+    .fab {
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      font-size: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+    }
+    .fab:active { filter: brightness(85%); }
+    .fab-generar { background: #28a745; }
+    .fab-imprimir { background: #17a2b8; }
+    .fab-label {
+      margin-top: 4px;
+      font-size: 0.8em;
+      color: #333;
+      font-weight: bold;
+      text-align: center;
+    }
+    .fab-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    Creado por Ronald – Santa Gloria Russafa
+  </header>
+  <h1>🖨️ Generador de Etiquetas</h1>
+  
+  <div class="form-section">
+    <label for="empleado">👤 ¿Quién etiqueta?</label>
+    <select id="empleado"></select>
+
+    <label for="categoria">📦 Categoría</label>
+    <select id="categoria" onchange="cargarProductos()"></select>
+    
+    <label>⭐ Más usados por ti</label>
+    <div id="masUsados"></div>
+
+    <label for="buscador">🔍 Buscar producto</label>
+    <input type="text" id="buscador" placeholder="Escribe para filtrar...">
+    
+    <label>✔️ Selecciona productos</label>
+    <div id="productoLista"></div>
+  </div>
+  
+  <h2 style="margin:20px 15px 10px; color:#fff;">Etiquetas listas:</h2>
+  <div class="print-area" id="printArea"></div>
+  
+  <div class="fab-container">
+    <div class="fab-group">
+      <button class="fab fab-generar" onclick="generarEtiquetas()">📝</button>
+      <div class="fab-label">Generar</div>
+    </div>
+    <div class="fab-group">
+      <button class="fab fab-imprimir" onclick="window.print()">🖨️</button>
+      <div class="fab-label">Imprimir</div>
+    </div>
+  </div>
+
+  <script src="productos.js"></script>
+  <script>
+    const empleados = ["Ronald", "Lorena", "Johnny", "Sofía", "Claudia", "Pamela", "Abril", "Gloria", "Steven"];
+    const empleadoSelect = document.getElementById("empleado");
+    const categoriaSelect = document.getElementById("categoria");
+    const productoLista = document.getElementById("productoLista");
+    const buscadorInput = document.getElementById("buscador");
+    const printArea = document.getElementById("printArea");
+    const masUsadosDiv = document.getElementById("masUsados");
+
+    empleados.forEach(e => empleadoSelect.appendChild(new Option(e, e)));
+    const LAST_EMP_KEY = "ultimo_empleado";
+    let lastEmp = localStorage.getItem(LAST_EMP_KEY);
+    if (lastEmp && empleados.includes(lastEmp)) {
+      empleadoSelect.value = lastEmp;
+    }
+    empleadoSelect.addEventListener("change", () => {
+      localStorage.setItem(LAST_EMP_KEY, empleadoSelect.value);
+      mostrarMasUsados();
+    });
+
+    let categorias = Object.keys(productos);
+    categoriaSelect.appendChild(new Option("Todo", "Todo"));
+    categorias.forEach(cat => categoriaSelect.appendChild(new Option(cat, cat)));
+
+    let productButtons = [];
+
+    function cargarProductos() {
+      productoLista.innerHTML = "";
+      productButtons = [];
+      const categoria = categoriaSelect.value;
+      let productosMostrar = (categoria === "Todo") ? Object.values(productos).flat() : productos[categoria] || [];
+      productosMostrar.forEach(p => {
+        let btn = document.createElement("div");
+        btn.className = "producto-btn";
+        btn.textContent = p.nombre;
+        btn.dataset.nombre = p.nombre;
+        btn.dataset.dias = p.dias;
+        btn.dataset.tipo = p.tipo;
+        btn.onclick = () => btn.classList.toggle("active");
+        productoLista.appendChild(btn);
+        productButtons.push(btn);
+      });
+    }
+    cargarProductos();
+
+    buscadorInput.addEventListener("input", () => {
+      const texto = buscadorInput.value.toLowerCase();
+      productButtons.forEach(btn => {
+        btn.style.display = btn.dataset.nombre.toLowerCase().includes(texto) ? "block" : "none";
+      });
+    });
+
+    function guardarUso(empleado, producto) {
+      let key = "usados_" + empleado;
+      let usados = JSON.parse(localStorage.getItem(key) || "[]");
+      let obj = usados.find(u => u.nombre === producto);
+      if (obj) obj.count++;
+      else usados.push({ nombre: producto, count: 1 });
+      usados.sort((a,b) => b.count - a.count);
+      localStorage.setItem(key, JSON.stringify(usados));
+    }
+
+    function mostrarMasUsados() {
+      masUsadosDiv.innerHTML = "";
+      let key = "usados_" + empleadoSelect.value;
+      let usados = JSON.parse(localStorage.getItem(key) || "[]").slice(0,5);
+      usados.forEach(u => {
+        let wrapper = document.createElement("div");
+        wrapper.style.display = "flex";
+        wrapper.style.alignItems = "center";
+        wrapper.style.gap = "6px";
+        let btn = document.createElement("div");
+        btn.className = "producto-btn";
+        btn.textContent = u.nombre;
+        btn.onclick = () => {
+          let prodBtn = productButtons.find(pb => pb.dataset.nombre === u.nombre);
+          if (prodBtn) prodBtn.classList.add("active");
+        };
+        wrapper.appendChild(btn);
+        masUsadosDiv.appendChild(wrapper);
+      });
+    }
+    mostrarMasUsados();
+
+    function generarEtiquetas() {
+      printArea.innerHTML = "";
+      let selected = productButtons.filter(btn => btn.classList.contains("active"));
+      let empleado = empleadoSelect.value;
+      selected.forEach(btn => {
+        let div = document.createElement("div");
+        div.className = "etiqueta";
+        div.innerHTML = `<strong>${btn.dataset.nombre}</strong><br>${btn.dataset.tipo} – ${btn.dataset.dias} días<br>Etiqueta: ${empleado}`;
+        printArea.appendChild(div);
+        guardarUso(empleado, btn.dataset.nombre);
+      });
+      mostrarMasUsados();
+    }
+  </script>
+</body>
+</html>
