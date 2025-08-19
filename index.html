@@ -123,7 +123,8 @@
         width: 220px;
         font-size: 12px;
         margin: 0;
-        page-break-inside: avoid;
+        page-break-inside: avoid;   /* evita que se corte dentro de la etiqueta */
+        page-break-after: always;   /* corta después de cada etiqueta */
       }
     }
 
@@ -207,7 +208,7 @@
 
   <script src="productos.js"></script>
   <script>
-    const empleados = ["Ronald", "Lorena", "Johnny", "Sofía", "Claudia", "Pamela", "Abril", "Gloria", "Steven"];
+    const empleados = ["Ronald","Steven", "Lorena", "Johnny", "Sofía", "Claudia", "Pamela", "Abril", "Gloria"];
     const empleadoSelect = document.getElementById("empleado");
     const categoriaSelect = document.getElementById("categoria");
     const productoLista = document.getElementById("productoLista");
@@ -292,74 +293,4 @@
 
         let btn = document.createElement("div");
         btn.className = "producto-btn";
-        btn.style.flex = "1"; 
-        btn.textContent = u.nombre + " ⭐";
-        btn.onclick = () => {
-          let prodBtn = [...productButtons].find(b => b.dataset.nombre === u.nombre);
-          if (prodBtn) prodBtn.classList.toggle("active");
-        };
-
-        let delBtn = document.createElement("button");
-        delBtn.textContent = "❌";
-        delBtn.style.border = "none";
-        delBtn.style.background = "transparent";
-        delBtn.style.cursor = "pointer";
-        delBtn.style.fontSize = "16px";
-        delBtn.onclick = () => {
-          let lista = JSON.parse(localStorage.getItem(key) || "[]");
-          lista = lista.filter(item => item.nombre !== u.nombre);
-          localStorage.setItem(key, JSON.stringify(lista));
-          mostrarMasUsados();
-        };
-
-        wrapper.appendChild(btn);
-        wrapper.appendChild(delBtn);
-        masUsadosDiv.appendChild(wrapper);
-      });
-    }
-    mostrarMasUsados();
-
-    // Generar etiquetas
-    function generarEtiquetas() {
-      printArea.innerHTML = "";
-      const empleado = empleadoSelect.value;
-      const seleccionados = document.querySelectorAll(".producto-btn.active");
-      if (seleccionados.length === 0) return;
-
-      seleccionados.forEach(btn => {
-        const nombreProd = btn.dataset.nombre;
-        const dias = parseInt(btn.dataset.dias);
-        const tipo = btn.dataset.tipo;
-        const ahora = new Date();
-        const aperturaFecha = ahora.toLocaleDateString("es-ES");
-        const aperturaHora = ahora.toLocaleTimeString("es-ES", {hour: '2-digit', minute: '2-digit'});
-        let cad = new Date(ahora);
-        cad.setDate(cad.getDate() + dias);
-        const caducidadFecha = cad.toLocaleDateString("es-ES");
-        const caducidadHora = aperturaHora;
-
-        let tipoTexto = "";
-        if (tipo === "R") tipoTexto = "🅡 Refrigerado";
-        else if (tipo === "C") tipoTexto = "🅒 Congelado";
-
-        const etiqueta = document.createElement("div");
-        etiqueta.className = "etiqueta";
-        etiqueta.innerHTML = `
-          <p><strong>${nombreProd}</strong></p>
-          <p>${tipoTexto}</p>
-          <p>Manipulador: ${empleado}</p>
-          <p>Cad. primaria/Lote: ________</p>
-          <p>Apertura: ${aperturaFecha} ${aperturaHora}</p>
-          <p>Cad. secundaria: ${caducidadFecha} ${caducidadHora}</p>
-        `;
-        printArea.appendChild(etiqueta);
-
-        guardarUso(empleado, nombreProd);
-      });
-
-      mostrarMasUsados();
-      printArea.scrollIntoView({ behavior: "smooth" });
-    }
-  </script>
-</body>
-</html>
+        btn
