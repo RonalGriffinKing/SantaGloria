@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+Ayudane con esto: <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
@@ -113,7 +113,7 @@
     }
 
     @media print {
-      body { background: #fff !important; }
+      body { background: #fff !important; } /* siempre blanco en impresión */
       body * { visibility: hidden; }
       .print-area, .print-area * { visibility: visible; }
       .print-area { position: absolute; top: 0; left: 0; width: 100%; }
@@ -179,7 +179,7 @@
     <select id="empleado"></select>
 
     <label for="categoria">📦 Categoría</label>
-    <select id="categoria"></select>
+    <select id="categoria" onchange="cargarProductos()"></select>
     
     <label>⭐ Más usados por ti</label>
     <div id="masUsados"></div>
@@ -224,7 +224,6 @@
     if (lastEmp && empleados.includes(lastEmp)) {
       empleadoSelect.value = lastEmp;
     }
-
     empleadoSelect.addEventListener("change", () => {
       localStorage.setItem(LAST_EMP_KEY, empleadoSelect.value);
       mostrarMasUsados();
@@ -254,64 +253,113 @@
         productoLista.appendChild(btn);
         productButtons.push(btn);
       });
-
-      buscadorInput.value = "";
-      filtrarProductos();
     }
+    cargarProductos();
 
-    categoriaSelect.addEventListener("change", cargarProductos);
-
-    buscadorInput.addEventListener("input", filtrarProductos);
-
-    function filtrarProductos() {
-      const filtro = buscadorInput.value.toLowerCase();
+    // Filtro buscador
+    buscadorInput.addEventListener("input", () => {
+      const texto = buscadorInput.value.toLowerCase();
       productButtons.forEach(btn => {
-        btn.style.display = btn.dataset.nombre.toLowerCase().includes(filtro) ? "flex" : "none";
+        btn.style.display = btn.dataset.nombre.toLowerCase().includes(texto) ? "block" : "none";
       });
+    });
+
+    // Guardar en localStorage los más usados
+    function guardarUso(empleado, producto) {
+      let key = "usados_" + empleado;
+      let usados = JSON.parse(localStorage.getItem(key) || "[]");
+      let obj = usados.find(u => u.nombre === producto);
+      if (obj) {
+        obj.count++;
+      } else {
+        usados.push({ nombre: producto, count: 1 });
+      }
+      usados.sort((a,b) => b.count - a.count);
+      localStorage.setItem(key, JSON.stringify(usados));
     }
 
-    // Más usados
     function mostrarMasUsados() {
-      const empleado = empleadoSelect.value;
-      let usados = JSON.parse(localStorage.getItem("masUsados_" + empleado)) || [];
       masUsadosDiv.innerHTML = "";
-      usados.slice(0,5).forEach(nombre => {
+      let key = "usados_" + empleadoSelect.value;
+      let usados = JSON.parse(localStorage.getItem(key) || "[]").slice(0,5);
+
+      usados.forEach(u => {
+        let wrapper = document.createElement("div");
+        wrapper.style.display = "flex";
+        wrapper.style.alignItems = "center";
+        wrapper.style.gap = "6px";
+        wrapper.style.width = "100%";
+
         let btn = document.createElement("div");
         btn.className = "producto-btn";
-        btn.textContent = nombre;
+        btn.style.flex = "1"; 
+        btn.textContent = u.nombre + " ⭐";
         btn.onclick = () => {
-          let targetBtn = productButtons.find(b => b.dataset.nombre === nombre);
-          if (targetBtn) targetBtn.classList.toggle("active");
+          let prodBtn = [...productButtons].find(b => b.dataset.nombre === u.nombre);
+          if (prodBtn) prodBtn.classList.toggle("active");
         };
-        masUsadosDiv.appendChild(btn);
+
+        let delBtn = document.createElement("button");
+        delBtn.textContent = "❌";
+        delBtn.style.border = "none";
+        delBtn.style.background = "transparent";
+        delBtn.style.cursor = "pointer";
+        delBtn.style.fontSize = "16px";
+        delBtn.onclick = () => {
+          let lista = JSON.parse(localStorage.getItem(key) || "[]");
+          lista = lista.filter(item => item.nombre !== u.nombre);
+          localStorage.setItem(key, JSON.stringify(lista));
+          mostrarMasUsados();
+        };
+
+        wrapper.appendChild(btn);
+        wrapper.appendChild(delBtn);
+        masUsadosDiv.appendChild(wrapper);
       });
     }
-
-    function generarEtiquetas() {
-      const empleado = empleadoSelect.value;
-      const activos = productButtons.filter(b => b.classList.contains("active"));
-      if (!activos.length) { alert("Selecciona al menos un producto"); return; }
-
-      // Guardar más usados
-      let usados = JSON.parse(localStorage.getItem("masUsados_" + empleado)) || [];
-      activos.forEach(b => {
-        if (!usados.includes(b.dataset.nombre)) usados.unshift(b.dataset.nombre);
-      });
-      localStorage.setItem("masUsados_" + empleado, JSON.stringify(usados.slice(0,10)));
-      mostrarMasUsados();
-
-      printArea.innerHTML = "";
-      activos.forEach(b => {
-        const div = document.createElement("div");
-        div.className = "etiqueta";
-        div.innerHTML = `<strong>${b.dataset.nombre}</strong><br>Vence en: ${b.dataset.dias} días (${b.dataset.tipo})<br>Empleado: ${empleado}`;
-        printArea.appendChild(div);
-      });
-    }
-
-    // Inicializar
-    cargarProductos();
     mostrarMasUsados();
+
+    // Generar etiquetas
+    function generarEtiquetas() {
+      printArea.innerHTML = "";
+      const empleado = empleadoSelect.value;
+      const seleccionados = document.querySelectorAll(".producto-btn.active");
+      if (seleccionados.length === 0) return;
+
+      seleccionados.forEach(btn => {
+        const nombreProd = btn.dataset.nombre;
+        const dias = parseInt(btn.dataset.dias);
+        const tipo = btn.dataset.tipo;
+        const ahora = new Date();
+        const aperturaFecha = ahora.toLocaleDateString("es-ES");
+        const aperturaHora = ahora.toLocaleTimeString("es-ES", {hour: '2-digit', minute: '2-digit'});
+        let cad = new Date(ahora);
+        cad.setDate(cad.getDate() + dias);
+        const caducidadFecha = cad.toLocaleDateString("es-ES");
+        const caducidadHora = aperturaHora;
+
+        let tipoTexto = "";
+        if (tipo === "R") tipoTexto = "🅡 Refrigerado";
+        else if (tipo === "C") tipoTexto = "🅒 Congelado";
+
+        const etiqueta = document.createElement("div");
+        etiqueta.className = "etiqueta";
+        etiqueta.innerHTML = `
+          <p><strong>${nombreProd}</strong></p>
+          <p>${tipoTexto}</p>
+          <p>Manipulador: ${empleado}</p>
+          <p>Cad. primaria/Lote: ________</p>
+          <p>Apertura: ${aperturaFecha} ${aperturaHora}</p>
+          <p>Cad. secundaria: ${caducidadFecha} ${caducidadHora}</p>
+        `;
+        printArea.appendChild(etiqueta);
+
+        guardarUso(empleado, nombreProd);
+      });
+
+      mostrarMasUsados();
+      printArea.scrollIntoView({ behavior: "smooth" });
+    }
   </script>
 </body>
 </html>
