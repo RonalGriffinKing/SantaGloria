@@ -6,46 +6,73 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0">
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       margin: 0;
-      background: #fff;
-      color: #333;
-      padding-bottom: 100px; /* espacio para botones flotantes */
+      background: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
+      min-height: 100vh;
+      padding-bottom: 100px;
     }
+
     header {
-      background: #6a0dad;
+      background: rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(12px) saturate(180%);
+      -webkit-backdrop-filter: blur(12px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.3);
       color: #fff;
       text-align: center;
       padding: 12px;
       font-size: 1.1em;
       font-weight: bold;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
+
     h1 {
       text-align: center;
-      color: #6a0dad;
-      margin: 10px 0 15px;
-      font-size: 1.4em;
+      color: #fff;
+      margin: 20px 0;
+      font-size: 1.6em;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.2);
     }
+
+    .form-section {
+      margin: 15px;
+      padding: 20px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+
     label {
       display: block;
-      margin-top: 10px;
-      font-weight: bold;
-      color: #6a0dad;
-      font-size: 0.9em;
+      margin-top: 12px;
+      font-weight: 600;
+      color: #333;
+      font-size: 0.95em;
     }
+
     select, input[type="text"] {
       width: 100%;
       padding: 12px;
       margin-top: 6px;
-      border-radius: 6px;
-      border: 2px solid #6a0dad;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.4);
       font-size: 1em;
-      background: #fff;
+      background: rgba(255,255,255,0.6);
+      backdrop-filter: blur(6px);
       color: #333;
+      transition: all 0.2s ease-in-out;
+    }
+    select:focus, input[type="text"]:focus {
+      outline: none;
+      border: 1px solid #6a0dad;
+      box-shadow: 0 0 0 2px rgba(106,13,173,0.2);
     }
 
-    /* grid de productos */
-    #productoLista {
+    /* botones de producto */
+    #productoLista, #masUsados {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
@@ -53,15 +80,18 @@
     }
     .producto-btn {
       flex: 1 1 calc(50% - 8px);
-      background: #f3f0fa;
-      color: #333;
+      background: rgba(255,255,255,0.3);
       padding: 12px;
-      border-radius: 6px;
+      border-radius: 12px;
       text-align: center;
       font-size: 0.9em;
       cursor: pointer;
-      user-select: none;
-      border: 1px solid #ddd;
+      border: 1px solid rgba(255,255,255,0.3);
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .producto-btn:hover {
+      background: rgba(255,255,255,0.5);
     }
     .producto-btn.active {
       background: #6a0dad;
@@ -70,33 +100,32 @@
       border: 1px solid #333;
     }
 
-    /* etiquetas impresas */
+    /* etiquetas */
     .etiqueta {
       border: 1px dashed #6a0dad;
-      padding: 6px;
+      padding: 8px;
       margin: 8px auto;
       background: #fff;
       color: #000;
-      width: 220px;   /* ancho ticket 58mm */
+      width: 220px;
       font-size: 12px;
+      border-radius: 8px;
     }
-    .etiqueta p { margin: 2px 0; }
-    .print-area { display: block; }
 
-    /* impresión térmica */
     @media print {
       body * { visibility: hidden; }
       .print-area, .print-area * { visibility: visible; }
       .print-area { position: absolute; top: 0; left: 0; width: 100%; }
       .etiqueta { 
-        page-break-after: always;
         border: none;
-        width: 100%;
+        width: 220px;
         font-size: 12px;
+        margin: 0;
+        page-break-inside: avoid;
       }
     }
 
-    /* Botones flotantes con texto */
+    /* botones flotantes */
     .fab-container {
       position: fixed;
       bottom: 15px;
@@ -120,11 +149,9 @@
       cursor: pointer;
       box-shadow: 0 3px 6px rgba(0,0,0,0.3);
     }
-    .fab:active {
-      filter: brightness(85%);
-    }
-    .fab-generar { background: #28a745; } /* verde */
-    .fab-imprimir { background: #17a2b8; } /* azul */
+    .fab:active { filter: brightness(85%); }
+    .fab-generar { background: #28a745; }
+    .fab-imprimir { background: #17a2b8; }
     .fab-label {
       margin-top: 4px;
       font-size: 0.8em;
@@ -145,13 +172,16 @@
   </header>
   <h1>🖨️ Generador de Etiquetas</h1>
   
-  <div class="form-section" style="padding: 0 15px;">
+  <div class="form-section">
     <label for="empleado">👤 ¿Quién etiqueta?</label>
     <select id="empleado"></select>
 
     <label for="categoria">📦 Categoría</label>
     <select id="categoria" onchange="cargarProductos()"></select>
     
+    <label>⭐ Más usados por ti</label>
+    <div id="masUsados"></div>
+
     <label for="buscador">🔍 Buscar producto</label>
     <input type="text" id="buscador" placeholder="Escribe para filtrar...">
     
@@ -159,68 +189,56 @@
     <div id="productoLista"></div>
   </div>
   
-  <h2 style="margin:20px 15px 10px; color:#6a0dad;">Etiquetas listas:</h2>
+  <h2 style="margin:20px 15px 10px; color:#fff;">Etiquetas listas:</h2>
   <div class="print-area" id="printArea"></div>
   
-  <!-- Botones flotantes -->
   <div class="fab-container">
     <div class="fab-group">
-      <button class="fab fab-generar" onclick="generarEtiquetas()" title="Generar etiquetas">📝</button>
+      <button class="fab fab-generar" onclick="generarEtiquetas()">📝</button>
       <div class="fab-label">Generar</div>
     </div>
     <div class="fab-group">
-      <button class="fab fab-imprimir" onclick="window.print()" title="Imprimir etiquetas">🖨️</button>
+      <button class="fab fab-imprimir" onclick="window.print()">🖨️</button>
       <div class="fab-label">Imprimir</div>
     </div>
   </div>
 
   <script src="productos.js"></script>
   <script>
-    // Empleados
     const empleados = ["Ronald", "Lorena", "Johnny", "Sofía", "Claudia", "Pamela", "Abril", "Gloria", "Steven"];
-
-    // Referencias
     const empleadoSelect = document.getElementById("empleado");
     const categoriaSelect = document.getElementById("categoria");
     const productoLista = document.getElementById("productoLista");
     const buscadorInput = document.getElementById("buscador");
     const printArea = document.getElementById("printArea");
+    const masUsadosDiv = document.getElementById("masUsados");
 
     // Cargar empleados
-    empleados.forEach(e => {
-      let opt = document.createElement("option");
-      opt.value = e;
-      opt.textContent = e;
-      empleadoSelect.appendChild(opt);
+    empleados.forEach(e => empleadoSelect.appendChild(new Option(e, e)));
+
+    // Recordar último empleado
+    const LAST_EMP_KEY = "ultimo_empleado";
+    let lastEmp = localStorage.getItem(LAST_EMP_KEY);
+    if (lastEmp && empleados.includes(lastEmp)) {
+      empleadoSelect.value = lastEmp;
+    }
+    empleadoSelect.addEventListener("change", () => {
+      localStorage.setItem(LAST_EMP_KEY, empleadoSelect.value);
+      mostrarMasUsados();
     });
 
-    // Cargar categorías + opción "Todo"
+    // Categorías
     let categorias = Object.keys(productos);
     categoriaSelect.appendChild(new Option("Todo", "Todo"));
-    categorias.forEach(cat => {
-      let opt = document.createElement("option");
-      opt.value = cat;
-      opt.textContent = cat;
-      categoriaSelect.appendChild(opt);
-    });
+    categorias.forEach(cat => categoriaSelect.appendChild(new Option(cat, cat)));
 
     let productButtons = [];
 
-    // Cargar productos como botones
     function cargarProductos() {
       productoLista.innerHTML = "";
       productButtons = [];
       const categoria = categoriaSelect.value;
-
-      let productosMostrar = [];
-
-      if (categoria === "Todo") {
-        Object.values(productos).forEach(arr => {
-          productosMostrar = productosMostrar.concat(arr);
-        });
-      } else {
-        productosMostrar = productos[categoria] || [];
-      }
+      let productosMostrar = (categoria === "Todo") ? Object.values(productos).flat() : productos[categoria] || [];
 
       productosMostrar.forEach(p => {
         let btn = document.createElement("div");
@@ -228,9 +246,8 @@
         btn.textContent = p.nombre;
         btn.dataset.nombre = p.nombre;
         btn.dataset.dias = p.dias;
-        btn.onclick = () => {
-          btn.classList.toggle("active");
-        };
+        btn.dataset.tipo = p.tipo;
+        btn.onclick = () => btn.classList.toggle("active");
         productoLista.appendChild(btn);
         productButtons.push(btn);
       });
@@ -245,46 +262,75 @@
       });
     });
 
-    // Generar etiquetas seleccionadas
+    // Guardar en localStorage los más usados
+    function guardarUso(empleado, producto) {
+      let key = "usados_" + empleado;
+      let usados = JSON.parse(localStorage.getItem(key) || "[]");
+      let obj = usados.find(u => u.nombre === producto);
+      if (obj) {
+        obj.count++;
+      } else {
+        usados.push({ nombre: producto, count: 1 });
+      }
+      usados.sort((a,b) => b.count - a.count);
+      localStorage.setItem(key, JSON.stringify(usados));
+    }
+
+    function mostrarMasUsados() {
+      masUsadosDiv.innerHTML = "";
+      let key = "usados_" + empleadoSelect.value;
+      let usados = JSON.parse(localStorage.getItem(key) || "[]").slice(0,5);
+      usados.forEach(u => {
+        let btn = document.createElement("div");
+        btn.className = "producto-btn";
+        btn.textContent = u.nombre + " ⭐";
+        btn.onclick = () => {
+          [...productButtons].find(b => b.dataset.nombre === u.nombre)?.classList.add("active");
+        };
+        masUsadosDiv.appendChild(btn);
+      });
+    }
+    mostrarMasUsados();
+
+    // Generar etiquetas
     function generarEtiquetas() {
-      // Limpiar buscador y mostrar todos los productos
-      buscadorInput.value = "";
-      productButtons.forEach(btn => btn.style.display = "block");
-
-      // Limpiar área de etiquetas antes de generar nuevas
       printArea.innerHTML = "";
-
       const empleado = empleadoSelect.value;
       const seleccionados = document.querySelectorAll(".producto-btn.active");
-
       if (seleccionados.length === 0) return;
 
       seleccionados.forEach(btn => {
         const nombreProd = btn.dataset.nombre;
         const dias = parseInt(btn.dataset.dias);
-
+        const tipo = btn.dataset.tipo;
         const ahora = new Date();
         const aperturaFecha = ahora.toLocaleDateString("es-ES");
         const aperturaHora = ahora.toLocaleTimeString("es-ES", {hour: '2-digit', minute: '2-digit'});
-
         let cad = new Date(ahora);
         cad.setDate(cad.getDate() + dias);
         const caducidadFecha = cad.toLocaleDateString("es-ES");
         const caducidadHora = aperturaHora;
 
+        let tipoTexto = "";
+        if (tipo === "R") tipoTexto = "🅡 Refrigerado";
+        else if (tipo === "C") tipoTexto = "🅒 Congelado";
+
         const etiqueta = document.createElement("div");
         etiqueta.className = "etiqueta";
         etiqueta.innerHTML = `
           <p><strong>${nombreProd}</strong></p>
+          <p>${tipoTexto}</p>
           <p>Manipulador: ${empleado}</p>
           <p>Cad. primaria/Lote: ________</p>
           <p>Apertura: ${aperturaFecha} ${aperturaHora}</p>
           <p>Cad. secundaria: ${caducidadFecha} ${caducidadHora}</p>
         `;
         printArea.appendChild(etiqueta);
+
+        guardarUso(empleado, nombreProd);
       });
 
-      // Scroll automático a etiquetas
+      mostrarMasUsados();
       printArea.scrollIntoView({ behavior: "smooth" });
     }
   </script>
