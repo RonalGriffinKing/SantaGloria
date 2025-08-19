@@ -1,226 +1,317 @@
-const productos = {
-  "Congelados": [
-    { nombre: "Aguacate pulpa", dias: 2, tipo: "C" },
-    { nombre: "Arroz integral", dias: 1, tipo: "C" },
-    { nombre: "Base focaccia tomate cherry", dias: 1, tipo: "C" },
-    { nombre: "Brownie", dias: 2, tipo: "C" },
-    { nombre: "Buñuelos crema", dias: 2, tipo: "C" },
-    { nombre: "Buñuelos nata", dias: 2, tipo: "C" },
-    { nombre: "Buñuelos trufa", dias: 2, tipo: "C" },
-    { nombre: "Buñuelos viento", dias: 2, tipo: "C" },
-    { nombre: "Cebolla caramelizada", dias: 20, tipo: "C" },
-    { nombre: "Cookie chocolate blanco", dias: 3, tipo: "C" },
-    { nombre: "Cookie chocolate con leche", dias: 3, tipo: "C" },
-    { nombre: "Cookie avena y pasas", dias: 3, tipo: "C" },
-    { nombre: "Dot panadero", dias: 3, tipo: "C" },
-    { nombre: "Edamame (Mukimame)", dias: 2, tipo: "C" },
-    { nombre: "Mango dados", dias: 2, tipo: "C" },
-    { nombre: "Muffin blueberry", dias: 2, tipo: "C" },
-    { nombre: "Muffin choco sin gluten", dias: 2, tipo: "C" },
-    { nombre: "Muffin chocolate con avellana", dias: 2, tipo: "C" },
-    { nombre: "Pan espelta rebanado", dias: 2, tipo: "C" },
-    { nombre: "Pan molde brioche", dias: 2, tipo: "C" },
-    { nombre: "Pan molde wholegrain", dias: 2, tipo: "C" },
-    { nombre: "Pasta rigatoni", dias: 1, tipo: "C" },
-    { nombre: "Pollo asado deshebrado", dias: 2, tipo: "C" },
-    { nombre: "Pop dots blanco", dias: 2, tipo: "C" },
-    { nombre: "Pop dots negritos", dias: 2, tipo: "C" },
-    { nombre: "Pop dots sucre", dias: 2, tipo: "C" },
-    { nombre: "Salmón ahumado", dias: 2, tipo: "C" },
-    { nombre: "Tarta de chocolate fondant", dias: 2, tipo: "C" },
-    { nombre: "Tarta de manzana", dias: 2, tipo: "C" },
-    { nombre: "Tarta de queso con lotus", dias: 2, tipo: "C" },
-    { nombre: "Tarta red velvet", dias: 2, tipo: "C" },
-    { nombre: "Tarta zanahoria", dias: 2, tipo: "C" },
-    { nombre: "Tortitas", dias: 2, tipo: "C" },
-    { nombre: "Tortilla campera", dias: 2, tipo: "C" },
-    { nombre: "Torrija", dias: 3, tipo: "C" },
-    { nombre: "Tortilla francesa", dias: 1, tipo: "C" }
-  ],
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Etiquetas App</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0">
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      margin: 0;
+      background: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
+      min-height: 100vh;
+      padding-bottom: 100px;
+    }
 
-  "Refrigerados": [
-    { nombre: "Aguacate", dias: 1, tipo: "R" },
-    { nombre: "Atún claro", dias: 2, tipo: "R" },
-    { nombre: "Bacon", dias: 5, tipo: "R" },
-    { nombre: "Bebida vegetal almendra", dias: 2, tipo: "R" },
-    { nombre: "Bebida vegetal avena", dias: 2, tipo: "R" },
-    { nombre: "Bebida vegetal soja", dias: 2, tipo: "R" },
-    { nombre: "Ensalada campestre", dias: 1, tipo: "R" },
-    { nombre: "Espinacas brotes", dias: 1, tipo: "R" },
-    { nombre: "Fresón", dias: 1, tipo: "R" },
-    { nombre: "Huevo plancha", dias: 2, tipo: "R" },
-    { nombre: "Jamón cocido", dias: 3, tipo: "R" },
-    { nombre: "Kiwi", dias: 1, tipo: "R" },
-    { nombre: "Leche Pasc BOT 1,5L", dias: 2, tipo: "R" },
-    { nombre: "Leche sin lactosa", dias: 2, tipo: "R" },
-    { nombre: "Manzana", dias: 1, tipo: "R" },
-    { nombre: "Mayonesa", dias: 30, tipo: "R" },
-    { nombre: "Mayonesa de trufa", dias: 10, tipo: "R" },
-    { nombre: "Nata spray", dias: 15, tipo: "R" },
-    { nombre: "Paleta ibérica", dias: 14, tipo: "R" },
-    { nombre: "Pechuga de pavo", dias: 3, tipo: "R" },
-    { nombre: "Pesto", dias: 5, tipo: "R" },
-    { nombre: "Queso Brie", dias: 10, tipo: "R" },
-    { nombre: "Queso crema", dias: 7, tipo: "R" },
-    { nombre: "Queso Edam", dias: 4, tipo: "R" },
-    { nombre: "Queso feta", dias: 3, tipo: "R" },
-    { nombre: "Queso lascas", dias: 5, tipo: "R" },
-    { nombre: "Queso mezcla semicurado", dias: 5, tipo: "R" },
-    { nombre: "Queso mozzarella perlas", dias: 4, tipo: "R" },
-    { nombre: "Queso mozzarella rallada", dias: 3, tipo: "R" },
-    { nombre: "Rúcula", dias: 1, tipo: "R" },
-    { nombre: "Salsa César", dias: 4, tipo: "R" },
-    { nombre: "Salsa holandesa", dias: 5, tipo: "R" },
-    { nombre: "Sobrasada", dias: 2, tipo: "R" },
-    { nombre: "Secallona", dias: 4, tipo: "R" },
-    { nombre: "Tomate (abierto)", dias: 1, tipo: "R" },
-    { nombre: "Tomate seco", dias: 15, tipo: "R" },
-    { nombre: "Tomate cherry cortado", dias: 1, tipo: "R" },
-    { nombre: "Zumo limón exprimido", dias: 40, tipo: "R" }
-  ],
+    header {
+      background: rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(12px) saturate(180%);
+      -webkit-backdrop-filter: blur(12px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: #fff;
+      text-align: center;
+      padding: 12px;
+      font-size: 1.1em;
+      font-weight: bold;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
 
-  "Elaborados": [
-    { nombre: "Almíbar", dias: 4 },
-    { nombre: "Almíbar miel", dias: 4 },
-    { nombre: "Bacon cocinado", dias: 2 },
-    { nombre: "Banda hojaldre frutas", dias: 1 },
-    { nombre: "Bocadillo ibérico", dias: 1 },
-    { nombre: "Bocadillo ibérico y brie", dias: 1 },
-    { nombre: "Bocadillo mixto", dias: 1 },
-    { nombre: "Bocadillo pollo César", dias: 1 },
-    { nombre: "Bocadillo secallona", dias: 1 },
-    { nombre: "Bocadillo tortilla de patata", dias: 1 },
-    { nombre: "Bocadillo vegetal omega 3", dias: 1 },
-    { nombre: "Bretzel crema y almendra", dias: 2 },
-    { nombre: "Chocolate taza (preparado)", dias: 2 },
-    { nombre: "Churros", dias: 1 },
-    { nombre: "Chusco espelta", dias: 1 },
-    { nombre: "Cobertura blanca choco derretida", dias: 3 },
-    { nombre: "Cobertura de pistacho", dias: 1 },
-    { nombre: "Cobertura vegetal choco derretida", dias: 3 },
-    { nombre: "Coca de llardons", dias: 2 },
-    { nombre: "Corazón hojaldre fruta y manzana", dias: 1 },
-    { nombre: "Corazón hojaldre manzana", dias: 1 },
-    { nombre: "Crema pastelera hecha", dias: 1 },
-    { nombre: "Croissant crema de pistacho y chocolate", dias: 1 },
-    { nombre: "Croissant curvo cereales", dias: 1 },
-    { nombre: "Croissant ibérico brie", dias: 1 },
-    { nombre: "Croissant mixto", dias: 1 },
-    { nombre: "Croissant nocciolata", dias: 1 },
-    { nombre: "Croissant Paris choco", dias: 1 },
-    { nombre: "Croissant pequeño mantequilla", dias: 1 },
-    { nombre: "Croissant vienes Sophie", dias: 1 },
-    { nombre: "Crujiente manzana obrador", dias: 1 },
-    { nombre: "Dot chocolate blanco y filipinos", dias: 1 },
-    { nombre: "Dot chocolate y lotus", dias: 1 },
-    { nombre: "Empanadilla pollo curry", dias: 2 },
-    { nombre: "Empanadilla ternera mechada", dias: 2 },
-    { nombre: "Ensaïmada", dias: 1 },
-    { nombre: "Ensalada de pollo", dias: 1 },
-    { nombre: "Ensalada de salmón", dias: 1 },
-    { nombre: "Ensalada italiana", dias: 1 },
-    { nombre: "Flat croissant", dias: 1 },
-    { nombre: "Flat croissant choco blanco y lotus", dias: 1 },
-    { nombre: "Flat croissant choco pistacho", dias: 1 },
-    { nombre: "Flauta ibérica", dias: 1 },
-    { nombre: "Flautín atún", dias: 1 },
-    { nombre: "Flautín ibérico", dias: 1 },
-    { nombre: "Flautín mixto", dias: 1 },
-    { nombre: "Flautín queso", dias: 1 },
-    { nombre: "Focaccia bacon y trufa", dias: 1 },
-    { nombre: "Focaccia feta", dias: 1 },
-    { nombre: "Glasseado", dias: 10 },
-    { nombre: "Gloria aguacate y pavo", dias: 1 },
-    { nombre: "Gloria básica", dias: 1 },
-    { nombre: "Gloria chocolate blanco", dias: 1 },
-    { nombre: "Gloria de filipinos blancos", dias: 1 },
-    { nombre: "Gloria de lotus", dias: 1 },
-    { nombre: "Gloria de nocilla", dias: 1 },
-    { nombre: "Gloria de oreo", dias: 1 },
-    { nombre: "Gloria de pistacho", dias: 1 },
-    { nombre: "Gloria de violetas", dias: 1 },
-    { nombre: "Gloria jamón ibérico y tomate", dias: 1 },
-    { nombre: "Gloria salmón", dias: 1 },
-    { nombre: "Limón rodajas", dias: 1 },
-    { nombre: "Limonada", dias: 3 },
-    { nombre: "Manga de crema de pistacho", dias: 3 },
-    { nombre: "Manga de nocciolata", dias: 3 },
-    { nombre: "Napolitana bombón fácil", dias: 1 },
-    { nombre: "Naranja rodajas", dias: 1 },
-    { nombre: "Palmerita petit cereales", dias: 2 },
-    { nombre: "Palmerón chocolate", dias: 2 },
-    { nombre: "Palmerón mantequilla", dias: 2 },
-    { nombre: "Pan baguette GR cereales", dias: 1 },
-    { nombre: "Pan baguette GR salvado", dias: 1 },
-    { nombre: "Pan baguette gran reserva", dias: 1 },
-    { nombre: "Pan cristalino XL", dias: 1 },
-    { nombre: "Pan de payés 500g", dias: 1 },
-    { nombre: "Pan flautín de aceitunas", dias: 1 },
-    { nombre: "Pan flautín semillas", dias: 1 },
-    { nombre: "Pan flautín tradición", dias: 1 },
-    { nombre: "Pan hogaza avena y semillas", dias: 1 },
-    { nombre: "Pan hogaza espelta y sésamo", dias: 1 },
-    { nombre: "Pan hogaza sarraceno bio", dias: 1 },
-    { nombre: "Pan hogaza wholegrain", dias: 1 },
-    { nombre: "Pan omega 3", dias: 1 },
-    { nombre: "Pastel nata (Pastel Belem)", dias: 1 },
-    { nombre: "Placa hojaldre mantequilla", dias: 1 },
-    { nombre: "Roll de canela", dias: 1 },
-    { nombre: "Rollito cacao petit dore", dias: 1 },
-    { nombre: "Salsa holandesa (preparado)", dias: 1 },
-    { nombre: "Sandwich brioche trufado", dias: 1 },
-    { nombre: "Sandwich salmon club", dias: 1 },
-    { nombre: "Sandwich Santagloria club", dias: 1 },
-    { nombre: "Santa", dias: 2 },
-    { nombre: "Santa chocolate", dias: 2 },
-    { nombre: "Santa chocolate blanco", dias: 2 },
-    { nombre: "Tomate triturado", dias: 2 },
-    { nombre: "Tortitas choco avellanas", dias: 1 },
-    { nombre: "Tortitas frutos rojos", dias: 1 },
-    { nombre: "Trenza Almudévar", dias: 4 },
-    { nombre: "Vinagreta pesto", dias: 2 }
-  ],
+    h1 {
+      text-align: center;
+      color: #fff;
+      margin: 20px 0;
+      font-size: 1.6em;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
 
-  "Secos": [
-    { nombre: "Aceite de oliva virgen 3x5lt", dias: 60 },
-    { nombre: "Almendra granillo", dias: 0 },
-    { nombre: "Avellana tostada", dias: 0 },
-    { nombre: "Azúcar glass saco 10kg", dias: 0 },
-    { nombre: "Azúcar", dias: 0 },
-    { nombre: "Café eco nat descafeinado", dias: 5 },
-    { nombre: "Café eco nat SG 8x1kg", dias: 5 },
-    { nombre: "Canela molida", dias: 0 },
-    { nombre: "Caramelos violetas", dias: 0 },
-    { nombre: "Cebolla frita deshidratada", dias: 15 },
-    { nombre: "Choco crispies", dias: 0 },
-    { nombre: "Cobertura blanca choco 10kg", dias: 0 },
-    { nombre: "Cobertura vegetal choco", dias: 0 },
-    { nombre: "Coco rallado", dias: 0 },
-    { nombre: "Crema pastelera saco", dias: 0 },
-    { nombre: "Crema pistacho", dias: 0 },
-    { nombre: "Frappé vainilla", dias: 0 },
-    { nombre: "Galleta filipinos", dias: 15 },
-    { nombre: "Galleta molida lotus", dias: 15 },
-    { nombre: "Galleta molida oreo", dias: 15 },
-    { nombre: "Gelatina miroir cubo", dias: 0 },
-    { nombre: "Glasseado (cinamon roll)", dias: 20 },
-    { nombre: "Granos de chía", dias: 0 },
-    { nombre: "Mermelada frutos bosque", dias: 0 },
-    { nombre: "Miel de flores", dias: 365 },
-    { nombre: "Nocciolata", dias: 0 },
-    { nombre: "Nocilla fluida", dias: 0 },
-    { nombre: "Nueces cuartos", dias: 30 },
-    { nombre: "Orégano seco", dias: 0 },
-    { nombre: "Pipas de calabaza", dias: 0 },
-    { nombre: "Pistacho granillo", dias: 0 },
-    { nombre: "Semilla sésamo", dias: 0 },
-    { nombre: "Sirope azúcar caña", dias: 0 },
-    { nombre: "Sirope chocolate Colac", dias: 0 },
-    { nombre: "Sirope coco", dias: 0 },
-    { nombre: "Sirope galleta negra", dias: 0 },
-    { nombre: "Sirope lotus", dias: 60 },
-    { nombre: "Sirope tiramisú", dias: 0 },
-    { nombre: "Sirope vainilla", dias: 0 },
-    { nombre: "Sirope violeta", dias: 60 }
-  ]
-};
+    .form-section {
+      margin: 15px;
+      padding: 20px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+
+    label {
+      display: block;
+      margin-top: 12px;
+      font-weight: 600;
+      color: #333;
+      font-size: 0.95em;
+    }
+
+    select, input[type="text"] {
+      width: 100%;
+      padding: 12px;
+      margin-top: 6px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      font-size: 1em;
+      background: rgba(255,255,255,0.6);
+      backdrop-filter: blur(6px);
+      color: #333;
+      transition: all 0.2s ease-in-out;
+    }
+    select:focus, input[type="text"]:focus {
+      outline: none;
+      border: 1px solid #6a0dad;
+      box-shadow: 0 0 0 2px rgba(106,13,173,0.2);
+    }
+
+    /* botones de producto */
+    #productoLista, #masUsados {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .producto-btn {
+      flex: 1 1 calc(50% - 8px);
+      background: rgba(255,255,255,0.3);
+      padding: 12px;
+      border-radius: 12px;
+      text-align: center;
+      font-size: 0.9em;
+      cursor: pointer;
+      border: 1px solid rgba(255,255,255,0.3);
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .producto-btn:hover {
+      background: rgba(255,255,255,0.5);
+    }
+    .producto-btn.active {
+      background: #6a0dad;
+      color: #fff;
+      font-weight: bold;
+      border: 1px solid #333;
+    }
+
+    /* etiquetas */
+    .etiqueta {
+      border: 1px dashed #6a0dad;
+      padding: 8px;
+      margin: 8px auto;
+      background: #fff;
+      color: #000;
+      width: 220px;
+      font-size: 12px;
+      border-radius: 8px;
+    }
+
+    @media print {
+      body { background: #fff !important; }
+      body * { visibility: hidden; }
+      .print-area, .print-area * { visibility: visible; }
+      .print-area { position: absolute; top: 0; left: 0; width: 100%; }
+      .etiqueta { 
+        border: 1px dashed #000;
+        background: #fff !important;
+        width: 220px;
+        font-size: 12px;
+        margin: 0;
+        page-break-inside: avoid;
+      }
+    }
+
+    /* botones flotantes */
+    .fab-container {
+      position: fixed;
+      bottom: 15px;
+      right: 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      z-index: 999;
+      align-items: center;
+    }
+    .fab {
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      font-size: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+    }
+    .fab:active { filter: brightness(85%); }
+    .fab-generar { background: #28a745; }
+    .fab-imprimir { background: #17a2b8; }
+    .fab-label {
+      margin-top: 4px;
+      font-size: 0.8em;
+      color: #333;
+      font-weight: bold;
+      text-align: center;
+    }
+    .fab-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    Creado por Ronald – Santa Gloria Russafa
+  </header>
+  <h1>🖨️ Generador de Etiquetas</h1>
+  
+  <div class="form-section">
+    <label for="empleado">👤 ¿Quién etiqueta?</label>
+    <select id="empleado"></select>
+
+    <label for="categoria">📦 Categoría</label>
+    <select id="categoria"></select>
+    
+    <label>⭐ Más usados por ti</label>
+    <div id="masUsados"></div>
+
+    <label for="buscador">🔍 Buscar producto</label>
+    <input type="text" id="buscador" placeholder="Escribe para filtrar...">
+    
+    <label>✔️ Selecciona productos</label>
+    <div id="productoLista"></div>
+  </div>
+  
+  <h2 style="margin:20px 15px 10px; color:#fff;">Etiquetas listas:</h2>
+  <div class="print-area" id="printArea"></div>
+  
+  <div class="fab-container">
+    <div class="fab-group">
+      <button class="fab fab-generar" onclick="generarEtiquetas()">📝</button>
+      <div class="fab-label">Generar</div>
+    </div>
+    <div class="fab-group">
+      <button class="fab fab-imprimir" onclick="window.print()">🖨️</button>
+      <div class="fab-label">Imprimir</div>
+    </div>
+  </div>
+
+  <script src="productos.js"></script>
+  <script>
+    const empleados = ["Ronald", "Lorena", "Johnny", "Sofía", "Claudia", "Pamela", "Abril", "Gloria", "Steven"];
+    const empleadoSelect = document.getElementById("empleado");
+    const categoriaSelect = document.getElementById("categoria");
+    const productoLista = document.getElementById("productoLista");
+    const buscadorInput = document.getElementById("buscador");
+    const printArea = document.getElementById("printArea");
+    const masUsadosDiv = document.getElementById("masUsados");
+
+    // Cargar empleados
+    empleados.forEach(e => empleadoSelect.appendChild(new Option(e, e)));
+
+    // Recordar último empleado
+    const LAST_EMP_KEY = "ultimo_empleado";
+    let lastEmp = localStorage.getItem(LAST_EMP_KEY);
+    if (lastEmp && empleados.includes(lastEmp)) {
+      empleadoSelect.value = lastEmp;
+    }
+
+    empleadoSelect.addEventListener("change", () => {
+      localStorage.setItem(LAST_EMP_KEY, empleadoSelect.value);
+      mostrarMasUsados();
+    });
+
+    // Categorías
+    let categorias = Object.keys(productos);
+    categoriaSelect.appendChild(new Option("Todo", "Todo"));
+    categorias.forEach(cat => categoriaSelect.appendChild(new Option(cat, cat)));
+
+    let productButtons = [];
+
+    function cargarProductos() {
+      productoLista.innerHTML = "";
+      productButtons = [];
+      const categoria = categoriaSelect.value;
+      let productosMostrar = (categoria === "Todo") ? Object.values(productos).flat() : productos[categoria] || [];
+
+      productosMostrar.forEach(p => {
+        let btn = document.createElement("div");
+        btn.className = "producto-btn";
+        btn.textContent = p.nombre;
+        btn.dataset.nombre = p.nombre;
+        btn.dataset.dias = p.dias;
+        btn.dataset.tipo = p.tipo;
+        btn.onclick = () => btn.classList.toggle("active");
+        productoLista.appendChild(btn);
+        productButtons.push(btn);
+      });
+
+      buscadorInput.value = "";
+      filtrarProductos();
+    }
+
+    categoriaSelect.addEventListener("change", cargarProductos);
+
+    buscadorInput.addEventListener("input", filtrarProductos);
+
+    function filtrarProductos() {
+      const filtro = buscadorInput.value.toLowerCase();
+      productButtons.forEach(btn => {
+        btn.style.display = btn.dataset.nombre.toLowerCase().includes(filtro) ? "flex" : "none";
+      });
+    }
+
+    // Más usados
+    function mostrarMasUsados() {
+      const empleado = empleadoSelect.value;
+      let usados = JSON.parse(localStorage.getItem("masUsados_" + empleado)) || [];
+      masUsadosDiv.innerHTML = "";
+      usados.slice(0,5).forEach(nombre => {
+        let btn = document.createElement("div");
+        btn.className = "producto-btn";
+        btn.textContent = nombre;
+        btn.onclick = () => {
+          let targetBtn = productButtons.find(b => b.dataset.nombre === nombre);
+          if (targetBtn) targetBtn.classList.toggle("active");
+        };
+        masUsadosDiv.appendChild(btn);
+      });
+    }
+
+    function generarEtiquetas() {
+      const empleado = empleadoSelect.value;
+      const activos = productButtons.filter(b => b.classList.contains("active"));
+      if (!activos.length) { alert("Selecciona al menos un producto"); return; }
+
+      // Guardar más usados
+      let usados = JSON.parse(localStorage.getItem("masUsados_" + empleado)) || [];
+      activos.forEach(b => {
+        if (!usados.includes(b.dataset.nombre)) usados.unshift(b.dataset.nombre);
+      });
+      localStorage.setItem("masUsados_" + empleado, JSON.stringify(usados.slice(0,10)));
+      mostrarMasUsados();
+
+      printArea.innerHTML = "";
+      activos.forEach(b => {
+        const div = document.createElement("div");
+        div.className = "etiqueta";
+        div.innerHTML = `<strong>${b.dataset.nombre}</strong><br>Vence en: ${b.dataset.dias} días (${b.dataset.tipo})<br>Empleado: ${empleado}`;
+        printArea.appendChild(div);
+      });
+    }
+
+    // Inicializar
+    cargarProductos();
+    mostrarMasUsados();
+  </script>
+</body>
+</html>
