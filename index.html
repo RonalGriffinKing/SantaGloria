@@ -123,8 +123,8 @@
         width: 220px;
         font-size: 12px;
         margin: 0;
-        page-break-inside: avoid;   /* evita que se corte dentro de la etiqueta */
-        page-break-after: always;   /* corta después de cada etiqueta */
+        page-break-inside: avoid;  /* no partir dentro de la etiqueta */
+        page-break-after: always;  /* cortar después de cada etiqueta */
       }
     }
 
@@ -293,4 +293,39 @@
 
         let btn = document.createElement("div");
         btn.className = "producto-btn";
-        btn
+        btn.style.flex = "1"; 
+        btn.textContent = u.nombre + " ⭐";
+        btn.onclick = () => {
+          let targetBtn = productButtons.find(pb => pb.dataset.nombre === u.nombre);
+          if (targetBtn) targetBtn.classList.toggle("active");
+        };
+        wrapper.appendChild(btn);
+        masUsadosDiv.appendChild(wrapper);
+      });
+    }
+    mostrarMasUsados();
+
+    function generarEtiquetas() {
+      printArea.innerHTML = "";
+      let empleado = empleadoSelect.value;
+      let seleccionados = productButtons.filter(b => b.classList.contains("active"));
+      if (!seleccionados.length) {
+        alert("Selecciona al menos un producto.");
+        return;
+      }
+      seleccionados.forEach(b => {
+        let div = document.createElement("div");
+        div.className = "etiqueta";
+        div.innerHTML = `<strong>${b.dataset.nombre}</strong><br>
+                         ${b.dataset.dias} días<br>
+                         Tipo: ${b.dataset.tipo}<br>
+                         Etiquetado por: ${empleado}`;
+        printArea.appendChild(div);
+        guardarUso(empleado, b.dataset.nombre);
+        b.classList.remove("active");
+      });
+      mostrarMasUsados();
+    }
+  </script>
+</body>
+</html>
