@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -113,11 +114,13 @@
     }
 
     @media print {
+      body { background: #fff !important; } /* siempre blanco en impresión */
       body * { visibility: hidden; }
       .print-area, .print-area * { visibility: visible; }
       .print-area { position: absolute; top: 0; left: 0; width: 100%; }
       .etiqueta { 
-        border: none;
+        border: 1px dashed #000;
+        background: #fff !important;
         width: 220px;
         font-size: 12px;
         margin: 0;
@@ -280,14 +283,39 @@
       masUsadosDiv.innerHTML = "";
       let key = "usados_" + empleadoSelect.value;
       let usados = JSON.parse(localStorage.getItem(key) || "[]").slice(0,5);
+
       usados.forEach(u => {
+        let wrapper = document.createElement("div");
+        wrapper.style.display = "flex";
+        wrapper.style.alignItems = "center";
+        wrapper.style.gap = "6px";
+        wrapper.style.width = "100%";
+
         let btn = document.createElement("div");
         btn.className = "producto-btn";
+        btn.style.flex = "1"; 
         btn.textContent = u.nombre + " ⭐";
         btn.onclick = () => {
-          [...productButtons].find(b => b.dataset.nombre === u.nombre)?.classList.add("active");
+          let prodBtn = [...productButtons].find(b => b.dataset.nombre === u.nombre);
+          if (prodBtn) prodBtn.classList.toggle("active");
         };
-        masUsadosDiv.appendChild(btn);
+
+        let delBtn = document.createElement("button");
+        delBtn.textContent = "❌";
+        delBtn.style.border = "none";
+        delBtn.style.background = "transparent";
+        delBtn.style.cursor = "pointer";
+        delBtn.style.fontSize = "16px";
+        delBtn.onclick = () => {
+          let lista = JSON.parse(localStorage.getItem(key) || "[]");
+          lista = lista.filter(item => item.nombre !== u.nombre);
+          localStorage.setItem(key, JSON.stringify(lista));
+          mostrarMasUsados();
+        };
+
+        wrapper.appendChild(btn);
+        wrapper.appendChild(delBtn);
+        masUsadosDiv.appendChild(wrapper);
       });
     }
     mostrarMasUsados();
