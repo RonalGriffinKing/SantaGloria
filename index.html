@@ -8,9 +8,10 @@
     body {
       font-family: Arial, sans-serif;
       margin: 0;
-      background: #f7f7f7;
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(12px);
       color: #333;
-      padding-bottom: 100px;
+      padding-bottom: 100px; /* espacio para botones flotantes */
     }
     header {
       background: #6a0dad;
@@ -40,11 +41,12 @@
       border-radius: 6px;
       border: 2px solid #6a0dad;
       font-size: 1em;
-      background: #fff;
+      background: rgba(255,255,255,0.7);
       color: #333;
+      backdrop-filter: blur(8px);
     }
 
-    /* grid productos */
+    /* grid de productos */
     #productoLista {
       display: flex;
       flex-wrap: wrap;
@@ -62,6 +64,10 @@
       cursor: pointer;
       user-select: none;
       border: 1px solid #ddd;
+      transition: all 0.2s ease-in-out;
+    }
+    .producto-btn:hover {
+      background: #e2d9f3;
     }
     .producto-btn.active {
       background: #6a0dad;
@@ -72,16 +78,19 @@
 
     /* etiquetas impresas */
     .etiqueta {
+      width: 5cm;
+      height: 3cm;
       border: 1px solid black;
       border-radius: 4px;
       padding: 4px 6px;
-      margin: 4px auto;
-      background: #fff;
-      color: #000;
-      width: 5cm;
-      height: 3cm;
+      margin: 6px;
+      display: inline-block;
+      font-family: Arial, sans-serif;
       font-size: 10pt;
+      page-break-inside: avoid;
       position: relative;
+      background: white;
+      color: black;
     }
     .etiqueta h2 {
       font-size: 11pt;
@@ -105,21 +114,20 @@
       margin: 2px 0;
       font-size: 9pt;
     }
+
     .print-area { display: block; }
 
-    /* impresión */
+    /* impresión térmica */
     @media print {
       body * { visibility: hidden; }
       .print-area, .print-area * { visibility: visible; }
       .print-area { position: absolute; top: 0; left: 0; width: 100%; }
-      .etiqueta { 
-        page-break-after: always; /* fuerza corte por etiqueta */
-        border: 1px solid black;
-        background: #fff !important;
+      .etiqueta {
+        page-break-after: always;
       }
     }
 
-    /* Botones flotantes */
+    /* Botones flotantes con texto */
     .fab-container {
       position: fixed;
       bottom: 15px;
@@ -143,9 +151,11 @@
       cursor: pointer;
       box-shadow: 0 3px 6px rgba(0,0,0,0.3);
     }
-    .fab:active { filter: brightness(85%); }
-    .fab-generar { background: #28a745; }
-    .fab-imprimir { background: #17a2b8; }
+    .fab:active {
+      filter: brightness(85%);
+    }
+    .fab-generar { background: #28a745; } /* verde */
+    .fab-imprimir { background: #17a2b8; } /* azul */
     .fab-label {
       margin-top: 4px;
       font-size: 0.8em;
@@ -157,6 +167,23 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+    }
+
+    /* Más usados */
+    #masUsados div {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 4px;
+    }
+    #masUsados .producto-btn {
+      flex: 1;
+    }
+    #masUsados button {
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      font-size: 16px;
     }
   </style>
 </head>
@@ -175,7 +202,7 @@
     
     <label for="buscador">🔍 Buscar producto</label>
     <input type="text" id="buscador" placeholder="Escribe para filtrar...">
-
+    
     <label>⭐ Más usados</label>
     <div id="masUsados"></div>
 
@@ -189,19 +216,21 @@
   <!-- Botones flotantes -->
   <div class="fab-container">
     <div class="fab-group">
-      <button class="fab fab-generar" onclick="generarEtiquetas()">📝</button>
+      <button class="fab fab-generar" onclick="generarEtiquetas()" title="Generar etiquetas">📝</button>
       <div class="fab-label">Generar</div>
     </div>
     <div class="fab-group">
-      <button class="fab fab-imprimir" onclick="window.print()">🖨️</button>
+      <button class="fab fab-imprimir" onclick="imprimirSecuencial()" title="Imprimir etiquetas">🖨️</button>
       <div class="fab-label">Imprimir</div>
     </div>
   </div>
 
   <script src="productos.js"></script>
   <script>
+    // Empleados
     const empleados = ["Ronald", "Lorena", "Johnny", "Sofía", "Claudia", "Pamela", "Abril", "Gloria", "Steven"];
 
+    // Referencias
     const empleadoSelect = document.getElementById("empleado");
     const categoriaSelect = document.getElementById("categoria");
     const productoLista = document.getElementById("productoLista");
@@ -209,24 +238,21 @@
     const printArea = document.getElementById("printArea");
     const masUsadosDiv = document.getElementById("masUsados");
 
-    // Cargar empleados
+    // Cargar empleados (recordar último seleccionado)
+    const ultimoEmpleado = localStorage.getItem("ultimoEmpleado");
     empleados.forEach(e => {
       let opt = document.createElement("option");
       opt.value = e;
       opt.textContent = e;
+      if (e === ultimoEmpleado) opt.selected = true;
       empleadoSelect.appendChild(opt);
     });
-
-    // Restaurar último usuario usado
-    const ultimo = localStorage.getItem("ultimoEmpleado");
-    if (ultimo) empleadoSelect.value = ultimo;
-
     empleadoSelect.addEventListener("change", () => {
       localStorage.setItem("ultimoEmpleado", empleadoSelect.value);
       mostrarMasUsados();
     });
 
-    // Cargar categorías
+    // Cargar categorías + opción "Todo"
     let categorias = Object.keys(productos);
     categoriaSelect.appendChild(new Option("Todo", "Todo"));
     categorias.forEach(cat => {
@@ -238,6 +264,7 @@
 
     let productButtons = [];
 
+    // Cargar productos como botones
     function cargarProductos() {
       productoLista.innerHTML = "";
       productButtons = [];
@@ -247,10 +274,10 @@
 
       if (categoria === "Todo") {
         Object.values(productos).forEach(arr => {
-          productosMostrar = productosMostrar.concat(arr.map(p => ({...p, categoria: Object.keys(productos).find(c => productos[c].includes(p)) })));
+          productosMostrar = productosMostrar.concat(arr);
         });
       } else {
-        productosMostrar = (productos[categoria] || []).map(p => ({...p, categoria}));
+        productosMostrar = productos[categoria] || [];
       }
 
       productosMostrar.forEach(p => {
@@ -259,8 +286,10 @@
         btn.textContent = p.nombre;
         btn.dataset.nombre = p.nombre;
         btn.dataset.dias = p.dias;
-        btn.dataset.categoria = p.categoria;
-        btn.onclick = () => { btn.classList.toggle("active"); };
+        btn.dataset.categoria = categoria;
+        btn.onclick = () => {
+          btn.classList.toggle("active");
+        };
         productoLista.appendChild(btn);
         productButtons.push(btn);
       });
@@ -275,48 +304,7 @@
       });
     });
 
-    function mostrarMasUsados() {
-      masUsadosDiv.innerHTML = "";
-      let key = "usados_" + empleadoSelect.value;
-      let usados = JSON.parse(localStorage.getItem(key) || "[]").slice(0,5);
-
-      usados.forEach(u => {
-        let wrapper = document.createElement("div");
-        wrapper.style.display = "flex";
-        wrapper.style.alignItems = "center";
-        wrapper.style.gap = "6px";
-        wrapper.style.width = "100%";
-
-        let btn = document.createElement("div");
-        btn.className = "producto-btn";
-        btn.style.flex = "1"; 
-        btn.textContent = u.nombre + " ⭐";
-        btn.onclick = () => {
-          let prodBtn = [...productButtons].find(b => b.dataset.nombre === u.nombre);
-          if (prodBtn) prodBtn.classList.toggle("active");
-        };
-
-        let delBtn = document.createElement("button");
-        delBtn.textContent = "❌";
-        delBtn.style.border = "none";
-        delBtn.style.background = "transparent";
-        delBtn.style.cursor = "pointer";
-        delBtn.style.fontSize = "16px";
-        delBtn.onclick = () => {
-          let lista = JSON.parse(localStorage.getItem(key) || "[]");
-          lista = lista.filter(item => item.nombre !== u.nombre);
-          localStorage.setItem(key, JSON.stringify(lista));
-          mostrarMasUsados();
-        };
-
-        wrapper.appendChild(btn);
-        wrapper.appendChild(delBtn);
-        masUsadosDiv.appendChild(wrapper);
-      });
-    }
-    mostrarMasUsados();
-
-    // Generar etiquetas
+    // Generar etiquetas seleccionadas
     function generarEtiquetas() {
       buscadorInput.value = "";
       productButtons.forEach(btn => btn.style.display = "block");
@@ -324,7 +312,11 @@
 
       const empleado = empleadoSelect.value;
       const seleccionados = document.querySelectorAll(".producto-btn.active");
+
       if (seleccionados.length === 0) return;
+
+      let key = "usados_" + empleado;
+      let usados = JSON.parse(localStorage.getItem(key) || "[]");
 
       seleccionados.forEach(btn => {
         const nombreProd = btn.dataset.nombre;
@@ -337,13 +329,10 @@
 
         let cad = new Date(ahora);
         cad.setDate(cad.getDate() + dias);
-        const caducidadFecha = dias > 0 ? cad.toLocaleDateString("es-ES") : "Según lote";
-        const caducidadHora = dias > 0 ? aperturaHora : "";
+        const caducidadFecha = cad.toLocaleDateString("es-ES");
+        const caducidadHora = aperturaHora;
 
-        // tipo R/C
-        let tipo = "";
-        if (categoria === "Refrigerados") tipo = "R";
-        else if (categoria === "Congelados") tipo = "C";
+        const tipo = (categoria === "Congelados") ? "C" : "R";
 
         const etiqueta = document.createElement("div");
         etiqueta.className = "etiqueta";
@@ -357,16 +346,74 @@
         `;
         printArea.appendChild(etiqueta);
 
-        // Guardar como más usado
-        let key = "usados_" + empleado;
-        let usados = JSON.parse(localStorage.getItem(key) || "[]");
-        usados = [{nombre: nombreProd}, ...usados.filter(u => u.nombre !== nombreProd)];
-        localStorage.setItem(key, JSON.stringify(usados));
+        if (!usados.find(u => u.nombre === nombreProd)) {
+          usados.unshift({ nombre: nombreProd, categoria });
+        }
       });
 
-      printArea.scrollIntoView({ behavior: "smooth" });
+      localStorage.setItem(key, JSON.stringify(usados.slice(0,10)));
       mostrarMasUsados();
+      printArea.scrollIntoView({ behavior: "smooth" });
     }
+
+    // Imprimir secuencialmente una por una
+    function imprimirSecuencial() {
+      const etiquetas = [...document.querySelectorAll(".etiqueta")];
+      if (etiquetas.length === 0) return;
+
+      let i = 0;
+
+      function imprimirUna() {
+        if (i >= etiquetas.length) return;
+
+        const original = printArea.innerHTML;
+        printArea.innerHTML = "";
+        printArea.appendChild(etiquetas[i].cloneNode(true));
+
+        window.print();
+
+        i++;
+        printArea.innerHTML = original;
+        setTimeout(imprimirUna, 500);
+      }
+
+      imprimirUna();
+    }
+
+    // Mostrar más usados
+    function mostrarMasUsados() {
+      masUsadosDiv.innerHTML = "";
+      let key = "usados_" + empleadoSelect.value;
+      let usados = JSON.parse(localStorage.getItem(key) || "[]").slice(0,5);
+
+      usados.forEach(u => {
+        let wrapper = document.createElement("div");
+
+        let btn = document.createElement("div");
+        btn.className = "producto-btn";
+        btn.style.flex = "1";
+        btn.textContent = u.nombre + " ⭐";
+        btn.onclick = () => {
+          let prodBtn = [...productButtons].find(b => b.dataset.nombre === u.nombre);
+          if (prodBtn) prodBtn.classList.toggle("active");
+        };
+
+        let delBtn = document.createElement("button");
+        delBtn.textContent = "❌";
+        delBtn.onclick = () => {
+          let lista = JSON.parse(localStorage.getItem(key) || "[]");
+          lista = lista.filter(item => item.nombre !== u.nombre);
+          localStorage.setItem(key, JSON.stringify(lista));
+          mostrarMasUsados();
+        };
+
+        wrapper.appendChild(btn);
+        wrapper.appendChild(delBtn);
+        masUsadosDiv.appendChild(wrapper);
+      });
+    }
+
+    mostrarMasUsados();
   </script>
 </body>
 </html>
