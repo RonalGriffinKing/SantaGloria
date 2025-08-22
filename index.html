@@ -183,6 +183,23 @@
       flex-direction: column;
       align-items: center;
     }
+
+    /* Resultados de consulta mejorados */
+    .resultado-producto {
+      border: 2px dashed #6a0dad;
+      border-radius: 12px;
+      padding: 10px;
+      margin-bottom: 10px;
+      background: #f3f0fa;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-size: 0.9em;
+    }
+    .resultado-producto p {
+      margin: 0;
+    }
+
   </style>
 </head>
 <body>
@@ -372,38 +389,45 @@
       document.getElementById("vista-consultar").style.display = vista === "consultar" ? "block" : "none";
     }
 
-    // Buscar caducidad en Consulta
+    // Buscar caducidad en Consulta (mejorado)
     busquedaProducto.addEventListener("input", () => {
       const texto = busquedaProducto.value.toLowerCase();
-      if (!texto) {
-        resultadoConsulta.innerHTML = "";
+      resultadoConsulta.innerHTML = ""; // limpiar resultados
+
+      if (!texto) return;
+
+      let coincidencias = [];
+
+      for (let cat in productos) {
+        productos[cat].forEach(p => {
+          if (p.nombre.toLowerCase().includes(texto)) {
+            coincidencias.push({ ...p, categoria: cat });
+          }
+        });
+      }
+
+      if (coincidencias.length === 0) {
+        resultadoConsulta.innerHTML = `<p style="color:red;">❌ Producto no encontrado</p>`;
         return;
       }
-      let encontrado = null;
-      let categoriaEncontrada = null;
-      for (let cat in productos) {
-        let prod = productos[cat].find(p => p.nombre.toLowerCase().includes(texto));
-        if (prod) {
-          encontrado = prod;
-          categoriaEncontrada = cat;
-          break;
-        }
-      }
-      if (encontrado) {
+
+      coincidencias.forEach(prod => {
         const ahora = new Date();
         const aperturaFecha = ahora.toLocaleDateString("es-ES");
         let cad = new Date(ahora);
-        cad.setDate(cad.getDate() + encontrado.dias);
+        cad.setDate(cad.getDate() + prod.dias);
         const caducidadFecha = cad.toLocaleDateString("es-ES");
-        resultadoConsulta.innerHTML = `
-          <p><strong>Producto:</strong> ${encontrado.nombre}</p>
-          <p><strong>Categoría:</strong> ${categoriaEncontrada}</p>
+
+        const div = document.createElement("div");
+        div.className = "resultado-producto";
+        div.innerHTML = `
+          <p><strong>Producto:</strong> ${prod.nombre}</p>
+          <p><strong>Categoría:</strong> ${prod.categoria}</p>
           <p><strong>Apertura:</strong> ${aperturaFecha}</p>
           <p><strong>Caducidad:</strong> ${caducidadFecha}</p>
         `;
-      } else {
-        resultadoConsulta.innerHTML = `<p style="color:red;">❌ Producto no encontrado</p>`;
-      }
+        resultadoConsulta.appendChild(div);
+      });
     });
   </script>
 </body>
