@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -59,7 +60,6 @@
   <script>
     const contenedorCategorias = document.getElementById('categorias');
 
-    // Render de productos
     for (let categoria in productos) {
       const div = document.createElement('div');
       div.classList.add('categoria');
@@ -131,16 +131,14 @@
           </head>
           <body>
             ${etiquetaHTML}
-            <script>
-              window.onload = function() {
-                window.print();
-                window.onafterprint = function() { window.close(); }
-              }
-            </script>
           </body>
         </html>
       `);
       ventana.document.close();
+      ventana.onload = function() {
+        ventana.print();
+        ventana.onafterprint = function() { ventana.close(); }
+      };
     }
 
     function consultarProducto() {
@@ -175,4 +173,3 @@
   </script>
 </body>
 </html>
-
