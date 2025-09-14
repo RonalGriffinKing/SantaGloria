@@ -77,7 +77,6 @@ const productos = {
     { nombre: "Tomate seco", dias: 15, tipo: "R" },
     { nombre: "Tomate cherry cortado", dias: 1, tipo: "R" },
     { nombre: "Zumo limón exprimido", dias: 40, tipo: "R" },
-    // Nuevos productos
     { nombre: "Matcha biberón", dias: 3, tipo: "R" },
     { nombre: "Salmón tupper", dias: 3, tipo: "R" }
   ],
@@ -227,3 +226,4 @@ const productos = {
     { nombre: "Sirope violeta", dias: 60 }
   ]
 };
+
