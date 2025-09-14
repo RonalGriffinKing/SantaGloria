@@ -2,174 +2,437 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Etiquetas de Productos</title>
+  <title>Etiquetas App</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0">
   <style>
     body {
       font-family: Arial, sans-serif;
-      margin: 20px;
+      margin: 0;
+      background: #f9f9fb;
+      color: #000;
+      padding-bottom: 100px;
+    }
+    header {
+      background: rgba(255,255,255,0.7);
+      backdrop-filter: blur(8px);
+      color: #000;
+      text-align: center;
+      padding: 12px;
+      font-size: 1.1em;
+      font-weight: bold;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+    }
+    .nav-buttons {
+      margin-top: 8px;
+    }
+    .nav-buttons button {
+      margin: 0 4px;
+      padding: 6px 12px;
+      border: none;
+      border-radius: 6px;
+      background: #000;
+      color: #fff;
+      cursor: pointer;
+      font-size: 0.9em;
+    }
+    .nav-buttons button:hover {
+      background: #333;
+    }
+    h1 {
+      text-align: center;
+      color: #000;
+      margin: 10px 0 15px;
+      font-size: 1.4em;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+      color: #000;
+      font-size: 0.9em;
+    }
+    select, input[type="text"] {
+      width: 100%;
+      padding: 12px;
+      margin-top: 6px;
+      border-radius: 6px;
+      border: 2px solid #000;
+      font-size: 1em;
+      background: #fff;
+      color: #000;
     }
 
-    .categoria {
-      margin-bottom: 20px;
+    /* grid de productos */
+    #productoLista {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .producto-btn {
+      flex: 1 1 calc(50% - 8px);
+      background: #eee;
+      color: #000;
+      padding: 12px;
+      border-radius: 6px;
+      text-align: center;
+      font-size: 0.9em;
+      cursor: pointer;
+      user-select: none;
+      border: 1px solid #ddd;
+    }
+    .producto-btn.active {
+      background: #000;
+      color: #fff;
+      font-weight: bold;
+      border: 1px solid #333;
     }
 
+    /* etiquetas impresas */
     .etiqueta {
-      border: 1px solid #000;
       width: 5cm;
       height: 3cm;
+      border: 1px solid black;
+      border-radius: 4px;
+      padding: 4px 6px;
+      margin: 6px;
+      display: inline-block;
+      font-family: Arial, sans-serif;
+      font-size: 10pt;
+      page-break-inside: avoid;
+      position: relative;
+    }
+    .etiqueta h2 {
+      font-size: 11pt;
+      margin: 0;
+      text-align: left;
+    }
+    .etiqueta .tipo {
+      position: absolute;
+      top: 4px;
+      right: 6px;
+      font-size: 12pt;
+      font-weight: bold;
+      border: 1px solid black;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      text-align: center;
+      line-height: 20px;
+    }
+    .etiqueta p {
+      margin: 2px 0;
+      font-size: 9pt;
+    }
+
+    .print-area { display: block; }
+
+    @media print {
+      body * { visibility: hidden; }
+      .print-area, .print-area * { visibility: visible; }
+      .print-area { position: absolute; top: 0; left: 0; width: 100%; }
+      .etiqueta { 
+        page-break-after: always;
+        border: 1px solid black;
+        width: 5cm;
+        height: 3cm;
+        font-size: 10pt;
+      }
+    }
+
+    /* Botones flotantes */
+    .fab-container {
+      position: fixed;
+      bottom: 15px;
+      right: 15px;
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      gap: 16px;
+      z-index: 999;
       align-items: center;
-      margin-bottom: 10px;
-      font-size: 12px;
+    }
+    .fab {
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      font-size: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+    }
+    .fab:active {
+      filter: brightness(85%);
+    }
+    .fab-generar { background: #000; }
+    .fab-imprimir { background: #444; }
+    .fab-label {
+      margin-top: 4px;
+      font-size: 0.8em;
+      color: #000;
+      font-weight: bold;
       text-align: center;
     }
+    .fab-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
 
-    .resultado {
-      border: 1px solid #000;
+    /* Resultados de consulta */
+    .resultado-producto {
+      border: 2px dashed #000;
+      border-radius: 12px;
       padding: 10px;
-      margin: 10px 0;
+      margin-bottom: 10px;
+      background: #f8f8f8;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-size: 0.9em;
+    }
+    .resultado-producto p {
+      margin: 0;
     }
 
-    button {
-      margin: 5px;
-      padding: 5px 10px;
+    .btn-seleccionar-todo {
+      margin-top: 10px;
+      padding: 6px 12px;
+      border: 1px solid #000;
+      border-radius: 6px;
+      background: #fff;
       cursor: pointer;
+      font-size: 0.9em;
     }
-
-    input[type="checkbox"] {
-      margin-right: 5px;
+    .btn-seleccionar-todo:hover {
+      background: #ddd;
     }
   </style>
 </head>
 <body>
-  <h1>Gestor de Etiquetas</h1>
+  <header>
+    Creado por Ronald – Santa Gloria Russafa
+    <div class="nav-buttons">
+      <button onclick="mostrarVista('etiquetas')">🖨️ Generar</button>
+      <button onclick="mostrarVista('consultar')">📅 Consultar</button>
+    </div>
+  </header>
 
-  <div id="categorias"></div>
+  <!-- Vista Generar -->
+  <div id="vista-etiquetas">
+    <h1>🖨️ Generador de Etiquetas</h1>
+    <div class="form-section" style="padding: 0 15px;">
+      <label for="empleado">👤 ¿Quién etiqueta?</label>
+      <select id="empleado"></select>
 
-  <button onclick="seleccionarTodo()">Seleccionar Todo</button>
-  <button onclick="imprimirSeleccion()">Imprimir Seleccionados</button>
+      <label for="categoria">📦 Categoría</label>
+      <select id="categoria" onchange="cargarProductos()"></select>
 
-  <h2>Consulta de Productos</h2>
-  <input type="text" id="buscador" placeholder="Buscar producto..." oninput="consultarProducto()">
-  <div id="resultados"></div>
+      <button class="btn-seleccionar-todo" onclick="seleccionarTodos()">✔️ Seleccionar todo</button>
+      
+      <label for="buscador">🔍 Buscar producto</label>
+      <input type="text" id="buscador" placeholder="Escribe para filtrar...">
+      
+      <label>✔️ Selecciona productos</label>
+      <div id="productoLista"></div>
+    </div>
+    
+    <h2 style="margin:20px 15px 10px;">Etiquetas listas:</h2>
+    <div class="print-area" id="printArea"></div>
+    
+    <!-- Botones flotantes -->
+    <div class="fab-container">
+      <div class="fab-group">
+        <button class="fab fab-generar" onclick="generarEtiquetas()" title="Generar etiquetas">📝</button>
+        <div class="fab-label">Generar</div>
+      </div>
+      <div class="fab-group">
+        <button class="fab fab-imprimir" onclick="imprimirSecuencial()" title="Imprimir etiquetas">🖨️</button>
+        <div class="fab-label">Imprimir</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Vista Consultar -->
+  <div id="vista-consultar" style="display:none; padding: 15px;">
+    <h1>📅 Consulta de Caducidades</h1>
+    <label for="busquedaProducto">🔍 Buscar producto</label>
+    <input type="text" id="busquedaProducto" placeholder="Escribe un producto...">
+    <div id="resultadoConsulta" style="margin-top:15px; font-size:1em;"></div>
+  </div>
 
   <script src="productos.js"></script>
   <script>
-    const contenedorCategorias = document.getElementById('categorias');
+    const empleados = ["Ronald", "Lorena", "Johnny", "Sofía", "Claudia", "Pamela", "Abril", "Gloria", "Steven"];
 
-    // Render de productos
-    for (let categoria in productos) {
-      const div = document.createElement('div');
-      div.classList.add('categoria');
-      div.innerHTML = `<h3>${categoria}</h3>`;
-      productos[categoria].forEach(prod => {
-        const label = document.createElement('label');
-        const checkbox = document.createElement('input');
-        checkbox.type = 'checkbox';
-        checkbox.value = JSON.stringify({ ...prod, categoria });
-        label.appendChild(checkbox);
-        label.appendChild(document.createTextNode(prod.nombre));
-        div.appendChild(label);
-        div.appendChild(document.createElement('br'));
-      });
-      contenedorCategorias.appendChild(div);
+    const empleadoSelect = document.getElementById("empleado");
+    const categoriaSelect = document.getElementById("categoria");
+    const productoLista = document.getElementById("productoLista");
+    const buscadorInput = document.getElementById("buscador");
+    const printArea = document.getElementById("printArea");
+    const busquedaProducto = document.getElementById("busquedaProducto");
+    const resultadoConsulta = document.getElementById("resultadoConsulta");
+
+    empleados.forEach(e => {
+      let opt = document.createElement("option");
+      opt.value = e;
+      opt.textContent = e;
+      empleadoSelect.appendChild(opt);
+    });
+
+    if(localStorage.getItem("ultimoEmpleado")){
+      empleadoSelect.value = localStorage.getItem("ultimoEmpleado");
     }
+    empleadoSelect.addEventListener("change", () => {
+      localStorage.setItem("ultimoEmpleado", empleadoSelect.value);
+    });
 
-    function seleccionarTodo() {
-      document.querySelectorAll('input[type="checkbox"]').forEach(chk => chk.checked = true);
-    }
+    let categorias = Object.keys(productos);
+    categoriaSelect.appendChild(new Option("Todo", "Todo"));
+    categorias.forEach(cat => {
+      let opt = document.createElement("option");
+      opt.value = cat;
+      opt.textContent = cat;
+      categoriaSelect.appendChild(opt);
+    });
 
-    function imprimirSeleccion() {
-      const seleccionados = [...document.querySelectorAll('input[type="checkbox"]:checked')];
-      if (seleccionados.length === 0) {
-        alert("No has seleccionado ningún producto.");
-        return;
+    let productButtons = [];
+
+    function cargarProductos() {
+      productoLista.innerHTML = "";
+      productButtons = [];
+      const categoria = categoriaSelect.value;
+      let productosMostrar = [];
+
+      if (categoria === "Todo") {
+        Object.values(productos).forEach(arr => productosMostrar = productosMostrar.concat(arr));
+      } else {
+        productosMostrar = productos[categoria] || [];
       }
 
-      seleccionados.forEach(chk => {
-        const prod = JSON.parse(chk.value);
-        generarEtiqueta(prod);
+      productosMostrar.forEach(p => {
+        let btn = document.createElement("div");
+        btn.className = "producto-btn";
+        btn.textContent = p.nombre;
+        btn.dataset.nombre = p.nombre;
+        btn.dataset.dias = p.dias;
+        btn.onclick = () => btn.classList.toggle("active");
+        productoLista.appendChild(btn);
+        productButtons.push(btn);
       });
     }
+    cargarProductos();
 
-    function generarEtiqueta(prod) {
-      const apertura = new Date();
-      const caducidad = new Date(apertura);
-      if (prod.dias > 0) caducidad.setDate(apertura.getDate() + prod.dias);
-
-      const aperturaFecha = apertura.toLocaleDateString('es-ES');
-      const caducidadFecha = prod.dias === 0 ? "No aplica" : caducidad.toLocaleDateString('es-ES');
-
-      const etiquetaHTML = `
-        <div class="etiqueta">
-          <strong>${prod.nombre}</strong><br>
-          ${prod.categoria}<br>
-          Duración: <strong>${prod.dias === 0 ? "No caduca" : prod.dias + (prod.dias === 1 ? " día" : " días")}</strong><br>
-          Apertura: ${aperturaFecha}<br>
-          Caducidad: ${caducidadFecha}
-        </div>
-      `;
-
-      imprimirEtiqueta(etiquetaHTML);
+    function seleccionarTodos() {
+      productButtons.forEach(btn => btn.classList.add("active"));
     }
 
-    function imprimirEtiqueta(etiquetaHTML) {
-      const ventana = window.open('', '', 'width=400,height=400');
-      ventana.document.write(`
-        <html>
-          <head>
-            <title>Etiqueta</title>
-            <style>
-              @media print {
-                @page { size: 5cm 3cm; margin: 0; }
-                body { margin: 0; display: flex; justify-content: center; align-items: center; }
-                .etiqueta { width: 5cm; height: 3cm; font-size: 12px; text-align: center; border: 1px solid black; }
-              }
-            </style>
-          </head>
-          <body>
-            ${etiquetaHTML}
-          </body>
-        </html>
-      `);
-      ventana.document.close();
-      ventana.onload = function() {
-        ventana.print();
-        ventana.onafterprint = function() { ventana.close(); }
-      };
+    buscadorInput.addEventListener("input", () => {
+      const texto = buscadorInput.value.toLowerCase();
+      productButtons.forEach(btn => {
+        btn.style.display = btn.dataset.nombre.toLowerCase().includes(texto) ? "block" : "none";
+      });
+    });
+
+    function generarEtiquetas() {
+      buscadorInput.value = "";
+      productButtons.forEach(btn => btn.style.display = "block");
+      printArea.innerHTML = "";
+      const empleado = empleadoSelect.value;
+      const seleccionados = document.querySelectorAll(".producto-btn.active");
+      if (seleccionados.length === 0) return;
+
+      seleccionados.forEach(btn => {
+        const nombreProd = btn.dataset.nombre;
+        const dias = parseInt(btn.dataset.dias);
+        const ahora = new Date();
+        const aperturaFecha = ahora.toLocaleDateString("es-ES");
+        const aperturaHora = ahora.toLocaleTimeString("es-ES", {hour: '2-digit', minute: '2-digit'});
+        let cad = new Date(ahora);
+        cad.setDate(cad.getDate() + dias);
+        const caducidadFecha = dias === 0 ? "No aplica" : cad.toLocaleDateString("es-ES");
+        const tipo = categoriaSelect.value === "Congelados" ? "C" : "R";
+
+        const etiqueta = document.createElement("div");
+        etiqueta.className = "etiqueta";
+        etiqueta.innerHTML = `
+          <h2>${nombreProd}</h2>
+          <div class="tipo">${tipo}</div>
+          <p>Manipulador: ${empleado}</p>
+          <p>Cad. primaria / Lote: ________</p>
+          <p>Apertura: ${aperturaFecha} ${aperturaHora}</p>
+          <p>Cad. secundaria: ${caducidadFecha} ${aperturaHora}</p>
+        `;
+        printArea.appendChild(etiqueta);
+      });
+      printArea.scrollIntoView({ behavior: "smooth" });
     }
 
-    function consultarProducto() {
-      const texto = document.getElementById('buscador').value.toLowerCase();
-      const resultados = document.getElementById('resultados');
-      resultados.innerHTML = "";
+    function imprimirSecuencial() {
+      const etiquetas = [...document.querySelectorAll(".etiqueta")];
+      if (etiquetas.length === 0) return;
+      let i = 0;
+      function imprimirUna() {
+        if (i >= etiquetas.length) return;
+        const original = printArea.innerHTML;
+        printArea.innerHTML = "";
+        printArea.appendChild(etiquetas[i].cloneNode(true));
+        window.print();
+        i++;
+        printArea.innerHTML = original;
+        setTimeout(imprimirUna, 500);
+      }
+      imprimirUna();
+    }
 
-      for (let categoria in productos) {
-        productos[categoria].forEach(prod => {
-          if (prod.nombre.toLowerCase().includes(texto)) {
-            const apertura = new Date();
-            const caducidad = new Date(apertura);
-            if (prod.dias > 0) caducidad.setDate(apertura.getDate() + prod.dias);
+    function mostrarVista(vista) {
+      document.getElementById("vista-etiquetas").style.display = vista === "etiquetas" ? "block" : "none";
+      document.getElementById("vista-consultar").style.display = vista === "consultar" ? "block" : "none";
+    }
 
-            const aperturaFecha = apertura.toLocaleDateString('es-ES');
-            const caducidadFecha = prod.dias === 0 ? "No aplica" : caducidad.toLocaleDateString('es-ES');
+    busquedaProducto.addEventListener("input", () => {
+      const texto = busquedaProducto.value.toLowerCase();
+      resultadoConsulta.innerHTML = "";
+      if (!texto) return;
 
-            const div = document.createElement('div');
-            div.classList.add('resultado');
-            div.innerHTML = `
-              <p><strong>Producto:</strong> ${prod.nombre}</p>
-              <p><strong>Categoría:</strong> ${categoria}</p>
-              <p><strong>Duración:</strong> <strong>${prod.dias === 0 ? "No caduca" : prod.dias + (prod.dias === 1 ? " día" : " días")}</strong></p>
-              <p><strong>Apertura:</strong> ${aperturaFecha}</p>
-              <p><strong>Caducidad:</strong> ${caducidadFecha}</p>
-            `;
-            resultados.appendChild(div);
+      let coincidencias = [];
+      for (let cat in productos) {
+        productos[cat].forEach(p => {
+          if (p.nombre.toLowerCase().includes(texto)) {
+            coincidencias.push({ ...p, categoria: cat });
           }
         });
       }
-    }
+
+      if (coincidencias.length === 0) {
+        resultadoConsulta.innerHTML = `<p>❌ Producto no encontrado</p>`;
+        return;
+      }
+
+      coincidencias.forEach(prod => {
+        const ahora = new Date();
+        const aperturaFecha = ahora.toLocaleDateString("es-ES");
+        let cad = new Date(ahora);
+        cad.setDate(cad.getDate() + prod.dias);
+        const caducidadFecha = prod.dias === 0 ? "No aplica" : cad.toLocaleDateString("es-ES");
+
+        const div = document.createElement("div");
+        div.className = "resultado-producto";
+        div.innerHTML = `
+          <p><strong>Producto:</strong> ${prod.nombre}</p>
+          <p><strong>Categoría:</strong> ${prod.categoria}</p>
+          <p><strong>Duración:</strong> <strong>${prod.dias === 0 ? "No caduca" : prod.dias + (prod.dias === 1 ? " día" : " días")}</strong></p>
+          <p><strong>Apertura:</strong> ${aperturaFecha}</p>
+          <p><strong>Caducidad:</strong> ${caducidadFecha}</p>
+        `;
+        resultadoConsulta.appendChild(div);
+      });
+    });
   </script>
 </body>
 </html>
