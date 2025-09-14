@@ -373,19 +373,50 @@
       printArea.scrollIntoView({ behavior: "smooth" });
     }
 
+    // Función agregada
+    function imprimirEtiqueta(etiquetaHTML) {
+      const ventana = window.open('', '', 'width=400,height=400');
+      ventana.document.write(`
+        <html>
+          <head>
+            <title>Etiqueta</title>
+            <style>
+              @media print {
+                @page { margin: 5mm; }
+                body { margin: 0; font-family: sans-serif; }
+                .etiqueta {
+                  width: 100%;
+                  text-align: center;
+                  font-size: 14px;
+                }
+              }
+            </style>
+          </head>
+          <body>
+            <div class="etiqueta">${etiquetaHTML}</div>
+            <script>
+              window.onload = function() {
+                window.print();
+                window.onafterprint = function() { window.close(); }
+              }
+            </script>
+          </body>
+        </html>
+      `);
+      ventana.document.close();
+    }
+
     function imprimirSecuencial() {
       const etiquetas = [...document.querySelectorAll(".etiqueta")];
       if (etiquetas.length === 0) return;
+
       let i = 0;
       function imprimirUna() {
         if (i >= etiquetas.length) return;
-        const original = printArea.innerHTML;
-        printArea.innerHTML = "";
-        printArea.appendChild(etiquetas[i].cloneNode(true));
-        window.print();
+        const html = etiquetas[i].outerHTML;
+        imprimirEtiqueta(html);
         i++;
-        printArea.innerHTML = original;
-        setTimeout(imprimirUna, 500);
+        setTimeout(imprimirUna, 700);
       }
       imprimirUna();
     }
