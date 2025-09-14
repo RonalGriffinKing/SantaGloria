@@ -278,6 +278,7 @@
     const busquedaProducto = document.getElementById("busquedaProducto");
     const resultadoConsulta = document.getElementById("resultadoConsulta");
 
+    // Cargar empleados en el select
     empleados.forEach(e => {
       let opt = document.createElement("option");
       opt.value = e;
@@ -288,10 +289,12 @@
     if(localStorage.getItem("ultimoEmpleado")){
       empleadoSelect.value = localStorage.getItem("ultimoEmpleado");
     }
+
     empleadoSelect.addEventListener("change", () => {
       localStorage.setItem("ultimoEmpleado", empleadoSelect.value);
     });
 
+    // Cargar categorías
     let categorias = Object.keys(productos);
     categoriaSelect.appendChild(new Option("Todo", "Todo"));
     categorias.forEach(cat => {
@@ -373,7 +376,7 @@
       printArea.scrollIntoView({ behavior: "smooth" });
     }
 
-    // Función agregada
+    // Función corregida para imprimir sin errores
     function imprimirEtiqueta(etiquetaHTML) {
       const ventana = window.open('', '', 'width=400,height=400');
       ventana.document.write(`
@@ -384,22 +387,12 @@
               @media print {
                 @page { margin: 5mm; }
                 body { margin: 0; font-family: sans-serif; }
-                .etiqueta {
-                  width: 100%;
-                  text-align: center;
-                  font-size: 14px;
-                }
+                .etiqueta { width: 100%; text-align: center; font-size: 14px; }
               }
             </style>
           </head>
-          <body>
+          <body onload="window.print(); window.onafterprint=function(){window.close();}">
             <div class="etiqueta">${etiquetaHTML}</div>
-            <script>
-              window.onload = function() {
-                window.print();
-                window.onafterprint = function() { window.close(); }
-              }
-            </script>
           </body>
         </html>
       `);
