@@ -227,3 +227,97 @@ const productos = {
   ]
 };
 
+const obradorData = {
+    "productos": [
+        {
+            "nombre": "Crujiente de Manzana",
+            "descongelacion": "3 min a temperatura ambiente",
+            "horno_temp": "170°C",
+            "horno_prog": "3",
+            "horno_tiempo": "35 min",
+            "ingredientes": "Hojaldre, manzana, azúcar, gelatina",
+            "preparacion": "Rebozar la base de hojaldre con 2gr de azúcar. Añadir 210gr de crema pastelera en toda la base. Hornear a 170°C durante 35 minutos. Pintar con 2gr de gelatina espejo."
+        },
+        {
+            "nombre": "Banda de Hojaldre con Frutas",
+            "descongelacion": "No se especifica",
+            "horno_temp": "170°C",
+            "horno_prog": "3",
+            "horno_tiempo": "35 min",
+            "ingredientes": "Hojaldre, frutas, crema pastelera, azúcar",
+            "preparacion": "Hornear a 170°C durante 35 min. No necesita vapor. Debe quedar con un color dorado."
+        },
+        {
+            "nombre": "Pastel Belem Caprice",
+            "descongelacion": "45 min a temperatura ambiente",
+            "horno_temp": "250°C",
+            "horno_prog": "N/A",
+            "horno_tiempo": "8 a 10 min",
+            "ingredientes": "Hojaldre, crema pastelera",
+            "preparacion": "Hornear a 250°C de 8 a 10 min. Debe quedar dorado. Servir caliente."
+        },
+        {
+            "nombre": "Brownie",
+            "descongelacion": "Descongelar sobre bandeja",
+            "horno_temp": "N/A",
+            "horno_prog": "N/A",
+            "horno_tiempo": "N/A",
+            "ingredientes": "Brownie, azúcar",
+            "preparacion": "Descongelar en bandeja. Se puede calentar si se desea en el microondas."
+        },
+        {
+            "nombre": "Tortitas Frutos Rojos",
+            "descongelacion": "1 hora a temperatura ambiente",
+            "horno_temp": "200°C",
+            "horno_prog": "7",
+            "horno_tiempo": "2 min",
+            "ingredientes": "Tortitas, mermelada de frutos rojos",
+            "preparacion": "Descongelar 1 hora a temperatura ambiente. Calentar en el Merrychef. En un plato poner 1 tortita, repartir 60g de mermelada en zigzag, añadir otra tortita y repetir. Terminar con la tercera."
+        },
+        {
+            "nombre": "Croissant de Mantequilla",
+            "descongelacion": "No se especifica",
+            "horno_temp": "185°C",
+            "horno_prog": "1",
+            "horno_tiempo": "18 min",
+            "ingredientes": "No se especifica",
+            "preparacion": "Hornear a 185°C durante 18 min."
+        },
+        {
+            "nombre": "Gloria Básica",
+            "descongelacion": "Descongelar congelado en bandeja",
+            "horno_temp": "185°C",
+            "horno_prog": "1",
+            "horno_tiempo": "15 min",
+            "ingredientes": "No se especifica",
+            "preparacion": "Hornear a 185°C, programa 1, durante 15 minutos."
+        },
+        {
+            "nombre": "Focaccia",
+            "descongelacion": "No se especifica",
+            "horno_temp": "200°C",
+            "horno_prog": "2",
+            "horno_tiempo": "8 min",
+            "ingredientes": "No se especifica",
+            "preparacion": "Hornear a 200°C, programa 2, durante 8 minutos."
+        },
+        {
+            "nombre": "Ensalada Pollo Cesar",
+            "descongelacion": "N/A",
+            "horno_temp": "N/A",
+            "horno_prog": "N/A",
+            "horno_tiempo": "N/A",
+            "ingredientes": "Ensalada campestre, espinaca, rúcula, pollo asado deshebrado, grana padano, tomatitos cherry, cebolla frita, orégano, chusco",
+            "preparacion": "Repartir 40gr de ensalada, 15gr de espinaca y 5gr de rúcula. Añadir 50gr de pollo asado y 20gr de grana padano. Distribuir 40gr de tomatitos, 5gr de cebolla frita y 0.5gr de orégano. Servir con pan chusco aparte."
+        },
+        {
+            "nombre": "Ensalada Italiana",
+            "descongelacion": "N/A",
+            "horno_temp": "N/A",
+            "horno_prog": "N/A",
+            "horno_tiempo": "N/A",
+            "ingredientes": "Espinaca, rúcula, pasta, tomate seco",
+            "preparacion": "Repartir 15gr de espinaca y 5gr de rúcula. Añadir 160gr de pasta con un poco de AOVE. Distribuir 10gr de tomate seco cortado en juliana."
+        }
+    ]
+};
