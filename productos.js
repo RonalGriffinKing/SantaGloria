@@ -228,96 +228,303 @@ const productos = {
 };
 
 const obradorData = {
-    "productos": [
-        {
-            "nombre": "Crujiente de Manzana",
-            "descongelacion": "3 min a temperatura ambiente",
-            "horno_temp": "170°C",
-            "horno_prog": "3",
-            "horno_tiempo": "35 min",
-            "ingredientes": "Hojaldre, manzana, azúcar, gelatina",
-            "preparacion": "Rebozar la base de hojaldre con 2gr de azúcar. Añadir 210gr de crema pastelera en toda la base. Hornear a 170°C durante 35 minutos. Pintar con 2gr de gelatina espejo."
-        },
-        {
-            "nombre": "Banda de Hojaldre con Frutas",
-            "descongelacion": "No se especifica",
-            "horno_temp": "170°C",
-            "horno_prog": "3",
-            "horno_tiempo": "35 min",
-            "ingredientes": "Hojaldre, frutas, crema pastelera, azúcar",
-            "preparacion": "Hornear a 170°C durante 35 min. No necesita vapor. Debe quedar con un color dorado."
-        },
-        {
-            "nombre": "Pastel Belem Caprice",
-            "descongelacion": "45 min a temperatura ambiente",
-            "horno_temp": "250°C",
-            "horno_prog": "N/A",
-            "horno_tiempo": "8 a 10 min",
-            "ingredientes": "Hojaldre, crema pastelera",
-            "preparacion": "Hornear a 250°C de 8 a 10 min. Debe quedar dorado. Servir caliente."
-        },
-        {
-            "nombre": "Brownie",
-            "descongelacion": "Descongelar sobre bandeja",
-            "horno_temp": "N/A",
-            "horno_prog": "N/A",
-            "horno_tiempo": "N/A",
-            "ingredientes": "Brownie, azúcar",
-            "preparacion": "Descongelar en bandeja. Se puede calentar si se desea en el microondas."
-        },
-        {
-            "nombre": "Tortitas Frutos Rojos",
-            "descongelacion": "1 hora a temperatura ambiente",
-            "horno_temp": "200°C",
-            "horno_prog": "7",
-            "horno_tiempo": "2 min",
-            "ingredientes": "Tortitas, mermelada de frutos rojos",
-            "preparacion": "Descongelar 1 hora a temperatura ambiente. Calentar en el Merrychef. En un plato poner a un lado 1 tortita y repartir en zigzag 60gr de mermelada dejando caer por los bordes. Añadir otra tortita y repetir. Añadir la tercera y terminar con la mermelada por encima."
-        },
-        {
-            "nombre": "Croissant de Mantequilla",
-            "descongelacion": "No se especifica",
-            "horno_temp": "185°C",
-            "horno_prog": "1",
-            "horno_tiempo": "18 min",
-            "ingredientes": "No se especifica",
-            "preparacion": "Hornear a 185°C durante 18 min."
-        },
-        {
-            "nombre": "Gloria Básica",
-            "descongelacion": "Descongelar congelado en bandeja",
-            "horno_temp": "185°C",
-            "horno_prog": "1",
-            "horno_tiempo": "15 min",
-            "ingredientes": "No se especifica",
-            "preparacion": "Hornear a 185°C, programa 1, durante 15 minutos."
-        },
-        {
-            "nombre": "Focaccia",
-            "descongelacion": "No se especifica",
-            "horno_temp": "200°C",
-            "horno_prog": "2",
-            "horno_tiempo": "8 min",
-            "ingredientes": "No se especifica",
-            "preparacion": "Hornear a 200°C, programa 2, durante 8 minutos."
-        },
-        {
-            "nombre": "Ensalada Pollo Cesar",
-            "descongelacion": "N/A",
-            "horno_temp": "N/A",
-            "horno_prog": "N/A",
-            "horno_tiempo": "N/A",
-            "ingredientes": "Ensalada campestre, espinaca, rúcula, pollo asado deshebrado, grana padano, tomatitos cherry, cebolla frita, orégano, chusco",
-            "preparacion": "Repartir 40gr de ensalada, 15gr de espinaca y 5gr de rúcula. Añadir 50gr de pollo asado y 20gr de grana padano. Distribuir 40gr de tomatitos, 5gr de cebolla frita y 0.5gr de orégano. Servir con pan chusco aparte."
-        },
-        {
-            "nombre": "Ensalada Italiana",
-            "descongelacion": "N/A",
-            "horno_temp": "N/A",
-            "horno_prog": "N/A",
-            "horno_tiempo": "N/A",
-            "ingredientes": "Espinaca, rúcula, pasta, tomate seco",
-            "preparacion": "Repartir 15gr de espinaca y 5gr de rúcula. Añadir 160gr de pasta con un poco de AOVE. Distribuir 10gr de tomate seco cortado en juliana."
-        }
-    ]
+  "productos": [
+    {
+      "nombre": "Crujiente de Manzana",
+      "descongelacion": "3 min a temperatura ambiente",
+      "horno_temp": "170°C",
+      "horno_prog": "3",
+      "horno_tiempo": "35 min",
+      "ingredientes": "Hojaldre, manzana, azúcar, gelatina",
+      "preparacion": "Rebozar la base de hojaldre con 2gr de azúcar. Hornear a 170°C, programa 3, durante 35 minutos. Pintar con 2gr de gelatina espejo."
+    },
+    {
+      "nombre": "Banda de Hojaldre con Frutas",
+      "descongelacion": "No se especifica",
+      "horno_temp": "170°C",
+      "horno_prog": "3",
+      "horno_tiempo": "35 min",
+      "ingredientes": "Hojaldre, frutas, crema pastelera, azúcar",
+      "preparacion": "Hornear a 170°C, programa 3, durante 35 min. La banda debe quedar con un color dorado. Pintar con 40gr de gelatina y distribuir 31gr de moras, 25gr de frambuesas y 21gr de arándanos."
+    },
+    {
+      "nombre": "Pastel Belem Caprice",
+      "descongelacion": "45 min a temperatura ambiente",
+      "horno_temp": "250°C",
+      "horno_prog": "N/A",
+      "horno_tiempo": "8 a 10 min",
+      "ingredientes": "Hojaldre, crema pastelera",
+      "preparacion": "Hornear a 250°C de 8 a 10 min. Debe quedar dorado. Desmoldar y pintar con gelatina. Servir caliente."
+    },
+    {
+      "nombre": "Brownie",
+      "descongelacion": "Sobre bandeja",
+      "horno_temp": "N/A",
+      "horno_prog": "N/A",
+      "horno_tiempo": "N/A",
+      "ingredientes": "Brownie, azúcar",
+      "preparacion": "Descongelar en bandeja. Se puede calentar si se desea en el microondas."
+    },
+    {
+      "nombre": "Tortitas Frutos Rojos",
+      "descongelacion": "1 hora a temperatura ambiente",
+      "horno_temp": "200°C",
+      "horno_prog": "7",
+      "horno_tiempo": "2 min",
+      "ingredientes": "Tortitas, mermelada de frutos rojos",
+      "preparacion": "Descongelar 1 hora a temperatura ambiente. Calentar en el Merrychef, programa 7 a 200°C durante 2 minutos. En un plato, colocar una tortita y repartir en zigzag 60gr de mermelada. Añadir otra tortita, repetir. Añadir la tercera y terminar con mermelada por encima."
+    },
+    {
+      "nombre": "Croissant 100% Mantequilla",
+      "descongelacion": "Dejar descongelar con una separación de 5cm",
+      "horno_temp": "185°C",
+      "horno_prog": "1",
+      "horno_tiempo": "15 min",
+      "ingredientes": "No se especifica",
+      "preparacion": "Colocar una bandeja de horno con papel siliconado. Hornear a 185°C, programa 1, durante 15 minutos (aprox) hasta que tenga un color dorado."
+    },
+    {
+      "nombre": "Gloria Básica",
+      "descongelacion": "Desde congelado en una bandeja con papel de parafina",
+      "horno_temp": "185°C",
+      "horno_prog": "1",
+      "horno_tiempo": "15 min",
+      "ingredientes": "Croissant pequeño",
+      "preparacion": "Hornear a 185°C, programa 1, durante 15 minutos. Después de hornear, sumergir en almíbar y dejar escurrir."
+    },
+    {
+      "nombre": "Gloria Chocolate",
+      "descongelacion": "N/A (usar Gloria Básica)",
+      "horno_temp": "N/A",
+      "horno_prog": "N/A",
+      "horno_tiempo": "N/A",
+      "ingredientes": "Gloria básica, cobertura de chocolate",
+      "preparacion": "Tomar una Gloria Básica ya horneada. Calentar la cobertura de chocolate en una manga y bañar ambas puntas de la gloria con 5gr de cobertura."
+    },
+    {
+      "nombre": "Gloria Chocolate Blanco",
+      "descongelacion": "N/A (usar Gloria Básica)",
+      "horno_temp": "N/A",
+      "horno_prog": "N/A",
+      "horno_tiempo": "N/A",
+      "ingredientes": "Gloria básica, cobertura de chocolate blanco",
+      "preparacion": "Tomar una Gloria Básica ya horneada. Calentar la cobertura de chocolate blanco y bañar media gloria con 5gr de cobertura."
+    },
+    {
+      "nombre": "Focaccia",
+      "descongelacion": "N/A",
+      "horno_temp": "200°C",
+      "horno_prog": "2",
+      "horno_tiempo": "8 min",
+      "ingredientes": "No se especifica",
+      "preparacion": "Hornear a 200°C, programa 2, durante 8 minutos."
+    },
+    {
+      "nombre": "Ensalada de Salmón",
+      "ingredientes": [
+        { "nombre": "Ensalada campestre", "cantidad": "30G" },
+        { "nombre": "Brotes de espinaca", "cantidad": "40G" },
+        { "nombre": "Arroz integral", "cantidad": "80G" },
+        { "nombre": "Mango", "cantidad": "50G" },
+        { "nombre": "Salmón ahumado", "cantidad": "30G" },
+        { "nombre": "Nueces", "cantidad": "15G" },
+        { "nombre": "Tomate cherry", "cantidad": "40G (4 UD)" },
+        { "nombre": "Micromezclum", "cantidad": "3G" },
+        { "nombre": "Hierbabuena", "cantidad": "2G" }
+      ],
+      "preparacion": "1. En un bowl de ensaladas poner las espinacas y la ensalada campestre con volumen. 2. Colocar a un lado el arroz integral y al lado el mango en dados. 3. Continuar con el salmón ahumado (cortado en tiras de 0,5 cm de ancho) y las nueces. 4. Luego poner los 4 tomates cherry en mitades. 5. Finalmente poner el micromezclum en el centro y la hierbabuena en juliana sobre el mango."
+    },
+    {
+      "nombre": "Ensalada de Pollo",
+      "ingredientes": [
+        { "nombre": "Ensalada campestre", "cantidad": "50G" },
+        { "nombre": "Brotes de espinaca", "cantidad": "20G" },
+        { "nombre": "Tomate cherry", "cantidad": "40G (4 UD)" },
+        { "nombre": "Fresón", "cantidad": "30G" },
+        { "nombre": "Mukimame (edamame)", "cantidad": "40G" },
+        { "nombre": "Pollo asado desmigado", "cantidad": "50G" },
+        { "nombre": "Queso feta", "cantidad": "30G" },
+        { "nombre": "Nueces", "cantidad": "15G" },
+        { "nombre": "Hierbabuena", "cantidad": "2G" }
+      ],
+      "preparacion": "1. En un bowl de ensaladas poner la ensalada campestre y las espinacas, con volumen. 2. Colocar los 4 cherry cortados a la mitad en un lado y enfrente los fresones en mitades (o cuartos si son muy grandes). 3. Poner el edamame a un lado de los fresones y el pollo desmigado al otro lado. 4. Colocar los dados de queso feta al lado de los cherry y a continuación las nueces. 5. Terminar con la hierbabuena en juliana por encima de toda la ensalada."
+    },
+    {
+      "nombre": "Ensalada Italiana",
+      "ingredientes": [
+        { "nombre": "Brotes de espinaca", "cantidad": "15 G." },
+        { "nombre": "Ensalada rúcula", "cantidad": "5 G." },
+        { "nombre": "Pasta rigatoni", "cantidad": "160 G." },
+        { "nombre": "Aceite oliva virgen", "cantidad": "10 ML (2TSP)" },
+        { "nombre": "Atún claro", "cantidad": "70 G." },
+        { "nombre": "Tomate seco", "cantidad": "10 G." },
+        { "nombre": "Lascas grana padano", "cantidad": "10 G." },
+        { "nombre": "Mozzarella fresca minibolas", "cantidad": "30 G." },
+        { "nombre": "Tomate cherry", "cantidad": "40 G. (4 UD)" }
+      ],
+      "preparacion": "1. Repartir en la mitad del bowl la espinaca y la rúcula mezcladas con volumen. Colocar la pasta cocida mezclada con el AOVE en la otra mitad. 2. Colocar el atún en aceite escurrido por encima de la pasta y a su lado los 4 tomates cherry cortados. 3. Dejando una parte visible de la pasta, colocar a su lado el tomate seco cortado. 4. Colocar las lascas de grana padano y las perlas de mozzarella dejando en medio de los dos el tomate seco."
+    },
+    {
+      "nombre": "Empanadilla Pollo al Curry",
+      "descongelacion": "No se especifica",
+      "horno_temp": "230°C",
+      "horno_prog": "N/A",
+      "horno_tiempo": "8 min",
+      "ingredientes": "No se especifica",
+      "preparacion": "Colocar 1 ud de empanadilla en una bandeja de horno con papel siliconado. Antes de hornear, pinchar alrededor de la circunferencia. Hornear a 230°C durante 8 minutos."
+    },
+    {
+      "nombre": "Empanadilla Ternera Mechada",
+      "descongelacion": "No se especifica",
+      "horno_temp": "230°C",
+      "horno_prog": "N/A",
+      "horno_tiempo": "8 min",
+      "ingredientes": "No se especifica",
+      "preparacion": "Colocar 1 ud de empanadilla en una bandeja de horno con papel siliconado. Antes de hornear, pinchar alrededor de la circunferencia. Hornear a 230°C durante 8 minutos."
+    },
+    {
+      "nombre": "Bretzel",
+      "descongelacion": "5 min a temperatura ambiente",
+      "horno_temp": "180°C",
+      "horno_prog": "N/A",
+      "horno_tiempo": "15 min",
+      "ingredientes": "No se especifica",
+      "preparacion": "Descongelar 5 min a temperatura ambiente. Hornear a 180°C durante 15 minutos. Espolvorear con 2gr de azúcar glass medio y 2gr de gelatina."
+    },
+    {
+      "nombre": "Roll de Canela",
+      "descongelacion": "30 min a temperatura ambiente",
+      "horno_temp": "180°C",
+      "horno_prog": "N/A",
+      "horno_tiempo": "10-15 min",
+      "ingredientes": "No se especifica",
+      "preparacion": "Descongelar 30 min. Hornear a 180°C de 10-15 min. Pintar con 1gr de glasé y añadir unas líneas de cobertura de chocolate."
+    },
+    {
+      "nombre": "Croissant Crema de Avellana",
+      "descongelacion": "20 min en bandeja de horno",
+      "horno_temp": "185°C",
+      "horno_prog": "N/A",
+      "horno_tiempo": "15 min",
+      "ingredientes": "Nocciolata, cobertura de chocolate, avellanas",
+      "preparacion": "Hornear a 185°C durante 15 min. Hacer un agujero en un extremo del croissant. Colocar 50gr de nocciolata con una manga pastelera. Decorar con 8gr de cobertura de chocolate y 5gr de avellanas."
+    },
+    {
+      "nombre": "Croissant de Chocolate",
+      "descongelacion": "20 min en bandeja de horno",
+      "horno_temp": "185°C",
+      "horno_prog": "1",
+      "horno_tiempo": "15 min",
+      "ingredientes": "No se especifica",
+      "preparacion": "Colocar los croissants con una separación de 5cm. Hornear a 185°C, programa 1, durante 15 minutos (aprox)."
+    },
+    {
+      "nombre": "Croissant Curvo Cereales",
+      "descongelacion": "20 min en bandeja de horno",
+      "horno_temp": "185°C",
+      "horno_prog": "1",
+      "horno_tiempo": "15 min",
+      "ingredientes": "No se especifica",
+      "preparacion": "Colocar los croissants con una separación de 5cm. Hornear a 185°C, programa 1, durante 15 minutos (aprox)."
+    },
+    {
+      "nombre": "Croissant Crema Pistacho y Chocolate",
+      "descongelacion": "20 min en bandeja de horno",
+      "horno_temp": "185°C",
+      "horno_prog": "1",
+      "horno_tiempo": "15 min",
+      "ingredientes": "No se especifica",
+      "preparacion": "Hornear a 185°C, programa 1, durante 15 minutos (aprox). Rellenar con crema de pistacho y decorar con grano de pistacho."
+    },
+    {
+      "nombre": "Flautín de Queso",
+      "descongelacion": "N/A",
+      "horno_temp": "185°C",
+      "horno_prog": "1",
+      "horno_tiempo": "10-12 min",
+      "ingredientes": "Tomate rallado, queso mezcla",
+      "preparacion": "Hornear a 185°C durante 10-12 min. Abrir por la mitad y untar 45gr de tomate rallado. Repartir 54gr de queso mezcla en tres rectángulos en la parte inferior. Cerrar, cortar en 4 trozos y exponer."
+    },
+    {
+      "nombre": "Flautín Mixto",
+      "descongelacion": "N/A",
+      "horno_temp": "185°C",
+      "horno_prog": "1",
+      "horno_tiempo": "10-12 min",
+      "ingredientes": "Jamón cocido, queso mezcla, tomate rallado",
+      "preparacion": "Hornear a 185°C durante 10-12 min. Añadir 45gr de tomate rallado, 30gr de jamón cocido y 30gr de queso mezcla. Cerrar, cortar en 4 trozos y exponer."
+    },
+    {
+      "nombre": "Flautín Atún",
+      "descongelacion": "N/A",
+      "horno_temp": "185°C",
+      "horno_prog": "1",
+      "horno_tiempo": "10-12 min",
+      "ingredientes": "Atún, tomate rallado",
+      "preparacion": "Hornear a 185°C durante 10-12 min. Añadir 45gr de tomate rallado y 75gr de atún bien escurrido. Cerrar, cortar en 4 trozos y exponer."
+    },
+    {
+      "nombre": "Flautín Paletilla Ibérica",
+      "descongelacion": "N/A",
+      "horno_temp": "185°C",
+      "horno_prog": "1",
+      "horno_tiempo": "10-12 min",
+      "ingredientes": "Paletilla Ibérica, tomate rallado, aceite de oliva",
+      "preparacion": "Hornear a 185°C durante 10-12 min. Untar 45gr de tomate rallado y aderezar con 0.5gr de sal y 1ud de AOVE. Añadir 43gr de paletilla ibérica con volumen. Cerrar, cortar en 4 trozos y exponer."
+    },
+    {
+      "nombre": "Bikini Clásico",
+      "ingredientes": [
+        { "nombre": "Pan Molde Brioche", "cantidad": "2 rebanadas" },
+        { "nombre": "Queso Edam", "cantidad": "2 lonchas" },
+        { "nombre": "Jamón Cocido S. Martin", "cantidad": "1.5 lonchas" }
+      ],
+      "preparacion": "1. Tostar el pan brioche hasta que tenga un tono dorado. 2. Poner una loncha de queso edam, encima 1.5 lonchas de jamón cocido y luego la otra loncha de queso edam. 3. Por último, tapar, empapelar y exponer."
+    },
+    {
+      "nombre": "Bikini Sobrasada",
+      "ingredientes": [
+        { "nombre": "Pan Molde Brioche", "cantidad": "2 rebanadas" },
+        { "nombre": "Sobrasada", "cantidad": "20 g" },
+        { "nombre": "Queso Mezcla Semicurado", "cantidad": "20 g" },
+        { "nombre": "Queso Brie", "cantidad": "40 g" }
+      ],
+      "preparacion": "1. Tostar el pan brioche hasta que tenga un tono dorado. 2. Poner la loncha de queso mezcla semicurado y extender la sobrasada por encima. 3. Cubrir la sobrasada con el queso brie, tapar, empapelar y exponer."
+    }
+  ],
+  "subrecetas": [
+    {
+      "nombre": "Vinagreta Pesto",
+      "ingredientes": [
+        { "nombre": "Pesto a la Genovesa", "cantidad": "100 ML" },
+        { "nombre": "Aceite Oliva Virgen (AOVE)", "cantidad": "100 G" }
+      ],
+      "preparacion": "Mezclar en un biberón la cantidad proporcional de aceite y pesto. Agitar antes de cada uso."
+    },
+    {
+      "nombre": "Vinagreta Oriental",
+      "ingredientes": [
+        { "nombre": "Vinagreta Oriental", "cantidad": "Biberón" }
+      ],
+      "preparacion": "Pasar la vinagreta oriental a un biberón y mantenerla en refrigeración."
+    }
+  ],
+  "instrucciones_empapelado": [
+    {
+      "paso": 1,
+      "descripcion": "Doblar un papel antigrasa Santagloria por la mitad por el lado largo."
+    },
+    {
+      "paso": 2,
+      "descripcion": "Cortar por la mitad."
+    },
+    {
+      "paso": 3,
+      "descripcion": "Colocar bajo la mitad del bikini. Doblar la parte de abajo en sentido a la flecha (1) y por último ambos laterales (2 y 3)."
+    },
+    {
+      "paso": 4,
+      "descripcion": "Para finalizar, cerrar los laterales del papel con una Pegatina Santagloria."
+    }
+  ]
 };
