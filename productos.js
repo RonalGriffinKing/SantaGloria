@@ -235,6 +235,7 @@ const obradorData = {
       "horno_temp": "170°C",
       "horno_prog": "3",
       "horno_tiempo": "35 min",
+      "ingredientes_resumen": "Hojaldre, manzana, azúcar, gelatina",
       "ingredientes": "Hojaldre, manzana, azúcar, gelatina",
       "preparacion": "Rebozar la base de hojaldre con 2gr de azúcar. Hornear a 170°C, programa 3, durante 35 minutos. Pintar con 2gr de gelatina espejo."
     },
@@ -244,6 +245,7 @@ const obradorData = {
       "horno_temp": "170°C",
       "horno_prog": "3",
       "horno_tiempo": "35 min",
+      "ingredientes_resumen": "Hojaldre, frutas, crema pastelera, azúcar",
       "ingredientes": "Hojaldre, frutas, crema pastelera, azúcar",
       "preparacion": "Hornear a 170°C, programa 3, durante 35 min. La banda debe quedar con un color dorado. Pintar con 40gr de gelatina y distribuir 31gr de moras, 25gr de frambuesas y 21gr de arándanos."
     },
@@ -253,6 +255,7 @@ const obradorData = {
       "horno_temp": "250°C",
       "horno_prog": "N/A",
       "horno_tiempo": "8 a 10 min",
+      "ingredientes_resumen": "Hojaldre, crema pastelera",
       "ingredientes": "Hojaldre, crema pastelera",
       "preparacion": "Hornear a 250°C de 8 a 10 min. Debe quedar dorado. Desmoldar y pintar con gelatina. Servir caliente."
     },
@@ -262,6 +265,7 @@ const obradorData = {
       "horno_temp": "N/A",
       "horno_prog": "N/A",
       "horno_tiempo": "N/A",
+      "ingredientes_resumen": "Brownie, azúcar",
       "ingredientes": "Brownie, azúcar",
       "preparacion": "Descongelar en bandeja. Se puede calentar si se desea en el microondas."
     },
@@ -271,6 +275,7 @@ const obradorData = {
       "horno_temp": "200°C",
       "horno_prog": "7",
       "horno_tiempo": "2 min",
+      "ingredientes_resumen": "Tortitas, mermelada de frutos rojos",
       "ingredientes": "Tortitas, mermelada de frutos rojos",
       "preparacion": "Descongelar 1 hora a temperatura ambiente. Calentar en el Merrychef, programa 7 a 200°C durante 2 minutos. En un plato, colocar una tortita y repartir en zigzag 60gr de mermelada. Añadir otra tortita, repetir. Añadir la tercera y terminar con mermelada por encima."
     },
@@ -280,6 +285,7 @@ const obradorData = {
       "horno_temp": "185°C",
       "horno_prog": "1",
       "horno_tiempo": "15 min",
+      "ingredientes_resumen": "No se especifica",
       "ingredientes": "No se especifica",
       "preparacion": "Colocar una bandeja de horno con papel siliconado. Hornear a 185°C, programa 1, durante 15 minutos (aprox) hasta que tenga un color dorado."
     },
@@ -289,6 +295,7 @@ const obradorData = {
       "horno_temp": "185°C",
       "horno_prog": "1",
       "horno_tiempo": "15 min",
+      "ingredientes_resumen": "Croissant pequeño",
       "ingredientes": "Croissant pequeño",
       "preparacion": "Hornear a 185°C, programa 1, durante 15 minutos. Después de hornear, sumergir en almíbar y dejar escurrir."
     },
@@ -298,6 +305,7 @@ const obradorData = {
       "horno_temp": "N/A",
       "horno_prog": "N/A",
       "horno_tiempo": "N/A",
+      "ingredientes_resumen": "Gloria básica, cobertura de chocolate",
       "ingredientes": "Gloria básica, cobertura de chocolate",
       "preparacion": "Tomar una Gloria Básica ya horneada. Calentar la cobertura de chocolate en una manga y bañar ambas puntas de la gloria con 5gr de cobertura."
     },
@@ -307,6 +315,7 @@ const obradorData = {
       "horno_temp": "N/A",
       "horno_prog": "N/A",
       "horno_tiempo": "N/A",
+      "ingredientes_resumen": "Gloria básica, cobertura de chocolate blanco",
       "ingredientes": "Gloria básica, cobertura de chocolate blanco",
       "preparacion": "Tomar una Gloria Básica ya horneada. Calentar la cobertura de chocolate blanco y bañar media gloria con 5gr de cobertura."
     },
@@ -316,21 +325,25 @@ const obradorData = {
       "horno_temp": "200°C",
       "horno_prog": "2",
       "horno_tiempo": "8 min",
+      "ingredientes_resumen": "No se especifica",
       "ingredientes": "No se especifica",
       "preparacion": "Hornear a 200°C, programa 2, durante 8 minutos."
     },
     {
       "nombre": "Ensalada de Salmón",
+      "ingredientes_resumen": "Ensalada campestre, espinaca, arroz integral, mango, salmón, nueces, tomate cherry, micromezclum, hierbabuena",
       "ingredientes": "Ensalada campestre: 30G, Brotes de espinaca: 40G, Arroz integral: 80G, Mango: 50G, Salmón ahumado: 30G, Nueces: 15G, Tomate cherry: 40G (4 UD), Micromezclum: 3G, Hierbabuena: 2G",
       "preparacion": "1. En un bowl de ensaladas poner las espinacas y la ensalada campestre con volumen. 2. Colocar a un lado el arroz integral y al lado el mango en dados. 3. Continuar con el salmón ahumado (cortado en tiras de 0,5 cm de ancho) y las nueces. 4. Luego poner los 4 tomates cherry en mitades. 5. Finalmente poner el micromezclum en el centro y la hierbabuena en juliana sobre el mango."
     },
     {
       "nombre": "Ensalada de Pollo",
+      "ingredientes_resumen": "Ensalada campestre, espinaca, tomate cherry, fresón, edamame, pollo, queso feta, nueces, hierbabuena",
       "ingredientes": "Ensalada campestre: 50G, Brotes de espinaca: 20G, Tomate cherry: 40G (4 UD), Fresón: 30G, Mukimame (edamame): 40G, Pollo asado desmigado: 50G, Queso feta: 30G, Nueces: 15G, Hierbabuena: 2G",
       "preparacion": "1. En un bowl de ensaladas poner la ensalada campestre y las espinacas, con volumen. 2. Colocar los 4 cherry cortados a la mitad en un lado y enfrente los fresones en mitades (o cuartos si son muy grandes). 3. Poner el edamame a un lado de los fresones y el pollo desmigado al otro lado. 4. Colocar los dados de queso feta al lado de los cherry y a continuación las nueces. 5. Terminar con la hierbabuena en juliana por encima de toda la ensalada."
     },
     {
       "nombre": "Ensalada Italiana",
+      "ingredientes_resumen": "Espinaca, rúcula, pasta rigatoni, atún, tomate seco, lascas de grana padano, mozzarella, tomate cherry",
       "ingredientes": "Brotes de espinaca: 15 G, Ensalada rúcula: 5 G, Pasta rigatoni: 160 G, Aceite oliva virgen: 10 ML (2TSP), Atún claro: 70 G, Tomate seco: 10 G, Lascas grana padano: 10 G, Mozzarella fresca minibolas: 30 G, Tomate cherry: 40 G. (4 UD)",
       "preparacion": "1. Repartir en la mitad del bowl la espinaca y la rúcula mezcladas con volumen. Colocar la pasta cocida mezclada con el AOVE en la otra mitad. 2. Colocar el atún en aceite escurrido por encima de la pasta y a su lado los 4 tomates cherry cortados. 3. Dejando una parte visible de la pasta, colocar a su lado el tomate seco cortado. 4. Colocar las lascas de grana padano y las perlas de mozzarella dejando en medio de los dos el tomate seco."
     },
@@ -340,6 +353,7 @@ const obradorData = {
       "horno_temp": "230°C",
       "horno_prog": "N/A",
       "horno_tiempo": "8 min",
+      "ingredientes_resumen": "No se especifica",
       "ingredientes": "No se especifica",
       "preparacion": "Colocar 1 ud de empanadilla en una bandeja de horno con papel siliconado. Antes de hornear, pinchar alrededor de la circunferencia. Hornear a 230°C durante 8 minutos."
     },
@@ -349,6 +363,7 @@ const obradorData = {
       "horno_temp": "230°C",
       "horno_prog": "N/A",
       "horno_tiempo": "8 min",
+      "ingredientes_resumen": "No se especifica",
       "ingredientes": "No se especifica",
       "preparacion": "Colocar 1 ud de empanadilla en una bandeja de horno con papel siliconado. Antes de hornear, pinchar alrededor de la circunferencia. Hornear a 230°C durante 8 minutos."
     },
@@ -358,6 +373,7 @@ const obradorData = {
       "horno_temp": "180°C",
       "horno_prog": "N/A",
       "horno_tiempo": "15 min",
+      "ingredientes_resumen": "No se especifica",
       "ingredientes": "No se especifica",
       "preparacion": "Descongelar 5 min a temperatura ambiente. Hornear a 180°C durante 15 minutos. Espolvorear con 2gr de azúcar glass medio y 2gr de gelatina."
     },
@@ -367,6 +383,7 @@ const obradorData = {
       "horno_temp": "180°C",
       "horno_prog": "N/A",
       "horno_tiempo": "10-15 min",
+      "ingredientes_resumen": "No se especifica",
       "ingredientes": "No se especifica",
       "preparacion": "Descongelar 30 min. Hornear a 180°C de 10-15 min. Pintar con 1gr de glasé y añadir unas líneas de cobertura de chocolate."
     },
@@ -376,6 +393,7 @@ const obradorData = {
       "horno_temp": "185°C",
       "horno_prog": "N/A",
       "horno_tiempo": "15 min",
+      "ingredientes_resumen": "Nocciolata, cobertura de chocolate, avellanas",
       "ingredientes": "Nocciolata, cobertura de chocolate, avellanas",
       "preparacion": "Hornear a 185°C durante 15 min. Hacer un agujero en un extremo del croissant. Colocar 50gr de nocciolata con una manga pastelera. Decorar con 8gr de cobertura de chocolate y 5gr de avellanas."
     },
@@ -385,6 +403,7 @@ const obradorData = {
       "horno_temp": "185°C",
       "horno_prog": "1",
       "horno_tiempo": "15 min",
+      "ingredientes_resumen": "No se especifica",
       "ingredientes": "No se especifica",
       "preparacion": "Colocar los croissants con una separación de 5cm. Hornear a 185°C, programa 1, durante 15 minutos (aprox)."
     },
@@ -394,6 +413,7 @@ const obradorData = {
       "horno_temp": "185°C",
       "horno_prog": "1",
       "horno_tiempo": "15 min",
+      "ingredientes_resumen": "No se especifica",
       "ingredientes": "No se especifica",
       "preparacion": "Colocar los croissants con una separación de 5cm. Hornear a 185°C, programa 1, durante 15 minutos (aprox)."
     },
@@ -403,6 +423,7 @@ const obradorData = {
       "horno_temp": "185°C",
       "horno_prog": "1",
       "horno_tiempo": "15 min",
+      "ingredientes_resumen": "Crema de pistacho, grano de pistacho",
       "ingredientes": "No se especifica",
       "preparacion": "Hornear a 185°C, programa 1, durante 15 minutos (aprox). Rellenar con crema de pistacho y decorar con grano de pistacho."
     },
@@ -412,6 +433,7 @@ const obradorData = {
       "horno_temp": "185°C",
       "horno_prog": "1",
       "horno_tiempo": "10-12 min",
+      "ingredientes_resumen": "Tomate rallado, queso mezcla",
       "ingredientes": "Tomate rallado, queso mezcla",
       "preparacion": "Hornear a 185°C durante 10-12 min. Abrir por la mitad y untar 45gr de tomate rallado. Repartir 54gr de queso mezcla en tres rectángulos en la parte inferior. Cerrar, cortar en 4 trozos y exponer."
     },
@@ -421,6 +443,7 @@ const obradorData = {
       "horno_temp": "185°C",
       "horno_prog": "1",
       "horno_tiempo": "10-12 min",
+      "ingredientes_resumen": "Jamón cocido, queso mezcla, tomate rallado",
       "ingredientes": "Jamón cocido, queso mezcla, tomate rallado",
       "preparacion": "Hornear a 185°C durante 10-12 min. Añadir 45gr de tomate rallado, 30gr de jamón cocido y 30gr de queso mezcla. Cerrar, cortar en 4 trozos y exponer."
     },
@@ -430,6 +453,7 @@ const obradorData = {
       "horno_temp": "185°C",
       "horno_prog": "1",
       "horno_tiempo": "10-12 min",
+      "ingredientes_resumen": "Atún, tomate rallado",
       "ingredientes": "Atún, tomate rallado",
       "preparacion": "Hornear a 185°C durante 10-12 min. Añadir 45gr de tomate rallado y 75gr de atún bien escurrido. Cerrar, cortar en 4 trozos y exponer."
     },
@@ -439,16 +463,19 @@ const obradorData = {
       "horno_temp": "185°C",
       "horno_prog": "1",
       "horno_tiempo": "10-12 min",
+      "ingredientes_resumen": "Paletilla Ibérica, tomate rallado, aceite de oliva",
       "ingredientes": "Paletilla Ibérica, tomate rallado, aceite de oliva",
       "preparacion": "Hornear a 185°C durante 10-12 min. Untar 45gr de tomate rallado y aderezar con 0.5gr de sal y 1ud de AOVE. Añadir 43gr de paletilla ibérica con volumen. Cerrar, cortar en 4 trozos y exponer."
     },
     {
       "nombre": "Bikini Clásico",
+      "ingredientes_resumen": "Pan Molde Brioche, Queso Edam, Jamón Cocido",
       "ingredientes": "Pan Molde Brioche: 2 rebanadas, Queso Edam: 2 lonchas, Jamón Cocido S. Martin: 1.5 lonchas",
       "preparacion": "1. Tostar el pan brioche hasta que tenga un tono dorado. 2. Poner una loncha de queso edam, encima 1.5 lonchas de jamón cocido y luego la otra loncha de queso edam. 3. Por último, tapar, empapelar y exponer."
     },
     {
       "nombre": "Bikini Sobrasada",
+      "ingredientes_resumen": "Pan Molde Brioche, Sobrasada, Queso Mezcla Semicurado, Queso Brie",
       "ingredientes": "Pan Molde Brioche: 2 rebanadas, Sobrasada: 20 g, Queso Mezcla Semicurado: 20 g, Queso Brie: 40 g",
       "preparacion": "1. Tostar el pan brioche hasta que tenga un tono dorado. 2. Poner la loncha de queso mezcla semicurado y extender la sobrasada por encima. 3. Cubrir la sobrasada con el queso brie, tapar, empapelar y exponer."
     }
@@ -456,11 +483,13 @@ const obradorData = {
   "subrecetas": [
     {
       "nombre": "Vinagreta Pesto",
+      "ingredientes_resumen": "Pesto a la Genovesa, Aceite Oliva Virgen",
       "ingredientes": "Pesto a la Genovesa: 100 ML, Aceite Oliva Virgen (AOVE): 100 G",
       "preparacion": "Mezclar en un biberón la cantidad proporcional de aceite y pesto. Agitar antes de cada uso."
     },
     {
       "nombre": "Vinagreta Oriental",
+      "ingredientes_resumen": "Vinagreta Oriental",
       "ingredientes": "Vinagreta Oriental: Biberón",
       "preparacion": "Pasar la vinagreta oriental a un biberón y mantenerla en refrigeración."
     }
