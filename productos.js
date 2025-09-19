@@ -321,47 +321,17 @@ const obradorData = {
     },
     {
       "nombre": "Ensalada de Salmón",
-      "ingredientes": [
-        { "nombre": "Ensalada campestre", "cantidad": "30G" },
-        { "nombre": "Brotes de espinaca", "cantidad": "40G" },
-        { "nombre": "Arroz integral", "cantidad": "80G" },
-        { "nombre": "Mango", "cantidad": "50G" },
-        { "nombre": "Salmón ahumado", "cantidad": "30G" },
-        { "nombre": "Nueces", "cantidad": "15G" },
-        { "nombre": "Tomate cherry", "cantidad": "40G (4 UD)" },
-        { "nombre": "Micromezclum", "cantidad": "3G" },
-        { "nombre": "Hierbabuena", "cantidad": "2G" }
-      ],
+      "ingredientes": "Ensalada campestre: 30G, Brotes de espinaca: 40G, Arroz integral: 80G, Mango: 50G, Salmón ahumado: 30G, Nueces: 15G, Tomate cherry: 40G (4 UD), Micromezclum: 3G, Hierbabuena: 2G",
       "preparacion": "1. En un bowl de ensaladas poner las espinacas y la ensalada campestre con volumen. 2. Colocar a un lado el arroz integral y al lado el mango en dados. 3. Continuar con el salmón ahumado (cortado en tiras de 0,5 cm de ancho) y las nueces. 4. Luego poner los 4 tomates cherry en mitades. 5. Finalmente poner el micromezclum en el centro y la hierbabuena en juliana sobre el mango."
     },
     {
       "nombre": "Ensalada de Pollo",
-      "ingredientes": [
-        { "nombre": "Ensalada campestre", "cantidad": "50G" },
-        { "nombre": "Brotes de espinaca", "cantidad": "20G" },
-        { "nombre": "Tomate cherry", "cantidad": "40G (4 UD)" },
-        { "nombre": "Fresón", "cantidad": "30G" },
-        { "nombre": "Mukimame (edamame)", "cantidad": "40G" },
-        { "nombre": "Pollo asado desmigado", "cantidad": "50G" },
-        { "nombre": "Queso feta", "cantidad": "30G" },
-        { "nombre": "Nueces", "cantidad": "15G" },
-        { "nombre": "Hierbabuena", "cantidad": "2G" }
-      ],
+      "ingredientes": "Ensalada campestre: 50G, Brotes de espinaca: 20G, Tomate cherry: 40G (4 UD), Fresón: 30G, Mukimame (edamame): 40G, Pollo asado desmigado: 50G, Queso feta: 30G, Nueces: 15G, Hierbabuena: 2G",
       "preparacion": "1. En un bowl de ensaladas poner la ensalada campestre y las espinacas, con volumen. 2. Colocar los 4 cherry cortados a la mitad en un lado y enfrente los fresones en mitades (o cuartos si son muy grandes). 3. Poner el edamame a un lado de los fresones y el pollo desmigado al otro lado. 4. Colocar los dados de queso feta al lado de los cherry y a continuación las nueces. 5. Terminar con la hierbabuena en juliana por encima de toda la ensalada."
     },
     {
       "nombre": "Ensalada Italiana",
-      "ingredientes": [
-        { "nombre": "Brotes de espinaca", "cantidad": "15 G." },
-        { "nombre": "Ensalada rúcula", "cantidad": "5 G." },
-        { "nombre": "Pasta rigatoni", "cantidad": "160 G." },
-        { "nombre": "Aceite oliva virgen", "cantidad": "10 ML (2TSP)" },
-        { "nombre": "Atún claro", "cantidad": "70 G." },
-        { "nombre": "Tomate seco", "cantidad": "10 G." },
-        { "nombre": "Lascas grana padano", "cantidad": "10 G." },
-        { "nombre": "Mozzarella fresca minibolas", "cantidad": "30 G." },
-        { "nombre": "Tomate cherry", "cantidad": "40 G. (4 UD)" }
-      ],
+      "ingredientes": "Brotes de espinaca: 15 G, Ensalada rúcula: 5 G, Pasta rigatoni: 160 G, Aceite oliva virgen: 10 ML (2TSP), Atún claro: 70 G, Tomate seco: 10 G, Lascas grana padano: 10 G, Mozzarella fresca minibolas: 30 G, Tomate cherry: 40 G. (4 UD)",
       "preparacion": "1. Repartir en la mitad del bowl la espinaca y la rúcula mezcladas con volumen. Colocar la pasta cocida mezclada con el AOVE en la otra mitad. 2. Colocar el atún en aceite escurrido por encima de la pasta y a su lado los 4 tomates cherry cortados. 3. Dejando una parte visible de la pasta, colocar a su lado el tomate seco cortado. 4. Colocar las lascas de grana padano y las perlas de mozzarella dejando en medio de los dos el tomate seco."
     },
     {
@@ -474,57 +444,31 @@ const obradorData = {
     },
     {
       "nombre": "Bikini Clásico",
-      "ingredientes": [
-        { "nombre": "Pan Molde Brioche", "cantidad": "2 rebanadas" },
-        { "nombre": "Queso Edam", "cantidad": "2 lonchas" },
-        { "nombre": "Jamón Cocido S. Martin", "cantidad": "1.5 lonchas" }
-      ],
+      "ingredientes": "Pan Molde Brioche: 2 rebanadas, Queso Edam: 2 lonchas, Jamón Cocido S. Martin: 1.5 lonchas",
       "preparacion": "1. Tostar el pan brioche hasta que tenga un tono dorado. 2. Poner una loncha de queso edam, encima 1.5 lonchas de jamón cocido y luego la otra loncha de queso edam. 3. Por último, tapar, empapelar y exponer."
     },
     {
       "nombre": "Bikini Sobrasada",
-      "ingredientes": [
-        { "nombre": "Pan Molde Brioche", "cantidad": "2 rebanadas" },
-        { "nombre": "Sobrasada", "cantidad": "20 g" },
-        { "nombre": "Queso Mezcla Semicurado", "cantidad": "20 g" },
-        { "nombre": "Queso Brie", "cantidad": "40 g" }
-      ],
+      "ingredientes": "Pan Molde Brioche: 2 rebanadas, Sobrasada: 20 g, Queso Mezcla Semicurado: 20 g, Queso Brie: 40 g",
       "preparacion": "1. Tostar el pan brioche hasta que tenga un tono dorado. 2. Poner la loncha de queso mezcla semicurado y extender la sobrasada por encima. 3. Cubrir la sobrasada con el queso brie, tapar, empapelar y exponer."
     }
   ],
   "subrecetas": [
     {
       "nombre": "Vinagreta Pesto",
-      "ingredientes": [
-        { "nombre": "Pesto a la Genovesa", "cantidad": "100 ML" },
-        { "nombre": "Aceite Oliva Virgen (AOVE)", "cantidad": "100 G" }
-      ],
+      "ingredientes": "Pesto a la Genovesa: 100 ML, Aceite Oliva Virgen (AOVE): 100 G",
       "preparacion": "Mezclar en un biberón la cantidad proporcional de aceite y pesto. Agitar antes de cada uso."
     },
     {
       "nombre": "Vinagreta Oriental",
-      "ingredientes": [
-        { "nombre": "Vinagreta Oriental", "cantidad": "Biberón" }
-      ],
+      "ingredientes": "Vinagreta Oriental: Biberón",
       "preparacion": "Pasar la vinagreta oriental a un biberón y mantenerla en refrigeración."
     }
   ],
   "instrucciones_empapelado": [
     {
-      "paso": 1,
-      "descripcion": "Doblar un papel antigrasa Santagloria por la mitad por el lado largo."
-    },
-    {
-      "paso": 2,
-      "descripcion": "Cortar por la mitad."
-    },
-    {
-      "paso": 3,
-      "descripcion": "Colocar bajo la mitad del bikini. Doblar la parte de abajo en sentido a la flecha (1) y por último ambos laterales (2 y 3)."
-    },
-    {
-      "paso": 4,
-      "descripcion": "Para finalizar, cerrar los laterales del papel con una Pegatina Santagloria."
+      "nombre": "Instrucciones de Empapelado",
+      "pasos": "1. Doblar un papel antigrasa Santagloria por la mitad por el lado largo. 2. Cortar por la mitad. 3. Colocar bajo la mitad del bikini. Doblar la parte de abajo en sentido a la flecha (1) y por último ambos laterales (2 y 3). 4. Para finalizar, cerrar los laterales del papel con una Pegatina Santagloria."
     }
   ]
 };
