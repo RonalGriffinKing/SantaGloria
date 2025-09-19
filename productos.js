@@ -44,7 +44,7 @@ const productos = {
     { nombre: "Bacon", dias: 5, tipo: "R" },
     { nombre: "Bebida vegetal almendra", dias: 2, tipo: "R" },
     { nombre: "Bebida vegetal avena", dias: 2, tipo: "R" },
-    { nombre: "Bebida vegetal soja", dias: 2, tipo: "R" },
+    { nombre: "Bebida vegetal soja", dias: 2, "tipo": "R" },
     { nombre: "Ensalada campestre", dias: 1, tipo: "R" },
     { nombre: "Espinacas brotes", dias: 1, tipo: "R" },
     { nombre: "Fresón", dias: 1, tipo: "R" },
@@ -272,7 +272,7 @@ const obradorData = {
             "horno_prog": "7",
             "horno_tiempo": "2 min",
             "ingredientes": "Tortitas, mermelada de frutos rojos",
-            "preparacion": "Descongelar 1 hora a temperatura ambiente. Calentar en el Merrychef. En un plato poner a un lado 1 fortita y repartir en zigzag 60gr de mermelada dejando caer por los bordes. Añadir otra tortita y repetir. Añadir la tercera y terminar con la."
+            "preparacion": "Descongelar 1 hora a temperatura ambiente. Calentar en el Merrychef. En un plato poner a un lado 1 tortita y repartir en zigzag 60gr de mermelada dejando caer por los bordes. Añadir otra tortita y repetir. Añadir la tercera y terminar con la mermelada por encima."
         },
         {
             "nombre": "Croissant de Mantequilla",
