@@ -464,7 +464,7 @@ const obradorData = {
       "horno_prog": "1",
       "horno_tiempo": "10-12 min",
       "ingredientes_resumen": "Paletilla Ibérica, tomate rallado, aceite de oliva",
-      "ingredientes": "Paletilla Ibérica, tomate rallado, aceite de oliva",
+      "ingredientes": "Paletilla Ibérica: 43G, tomate rallado: 45G, aceite de oliva virgen extra",
       "preparacion": "Hornear a 185°C durante 10-12 min. Untar 45gr de tomate rallado y aderezar con 0.5gr de sal y 1ud de AOVE. Añadir 43gr de paletilla ibérica con volumen. Cerrar, cortar en 4 trozos y exponer."
     },
     {
@@ -478,6 +478,42 @@ const obradorData = {
       "ingredientes_resumen": "Pan Molde Brioche, Sobrasada, Queso Mezcla Semicurado, Queso Brie",
       "ingredientes": "Pan Molde Brioche: 2 rebanadas, Sobrasada: 20 g, Queso Mezcla Semicurado: 20 g, Queso Brie: 40 g",
       "preparacion": "1. Tostar el pan brioche hasta que tenga un tono dorado. 2. Poner la loncha de queso mezcla semicurado y extender la sobrasada por encima. 3. Cubrir la sobrasada con el queso brie, tapar, empapelar y exponer."
+    },
+    {
+      "nombre": "Gloria Pistacho",
+      "ingredientes_resumen": "Gloria Básica, Cobertura Pistacho, Pistacho Granillo. Contiene: Gluten, Lácteos, Frutos de cáscara, Soja y trazas de Huevo, Sulfitos, Mostaza, Sésamo, Cacahuetes.",
+      "ingredientes": "SUBRECETA GLORIA BÁSICA, SUBRECETA COBERTURA PISTACHO, PISTACHO GRANILLO (1 G.). SUBRECETA ALMÍBAR: 1000 ML de AGUA, 1500 G. de AZUCAR BLANQUILLA, 2 G. de LIMON EXTRA. SUBRECETA COBERTURA PISTACHO: 100 G. de CHOCO CREAM PISTACHO, 50 G. de COBERTURA BLANCA 5KG.",
+      "preparacion": "PASO 1-Tomar una gloria ya terminada. PASO 2-Bañar la parte superior de la gloria con la cobertura de pistacho. PASO 3 - Espolvorear el pistacho por encima. NOTA: Dependiendo de la temperatura del local y de la temporada, el chocolate puede tardar en cristalizar. Puedes llevar a refrigeración por 5 minutos para acelerar el proceso."
+    },
+    {
+      "nombre": "Focaccia Bacon Brie & Trufa",
+      "ingredientes_resumen": "Base de tomate cherry, mozzarella rallada, bacon, lonchas de brie, mayonesa trufada y tomate seco juliana.",
+      "ingredientes": "Base tomate cherry, 2 CUP de mozzarella rallada, 272 gr de bacon, 8 lonchas brie (16 mitades), mayonesa trufada, tomate seco juliana.",
+      "preparacion": "Cortar 1ud de base tomate cherry por la mitad a lo ancho. Coger una de las mitades y distribuir la mozzarella rallada. Distribuir el bacon (272 gr) y las 8 lonchas brie. Hornear (PROG.2), cortar en 8 y reposar. Poner la mayonesa trufada en zigzag y el tomate seco juliana."
+    },
+    {
+      "nombre": "Focaccia Feta Tomate Seco & Pistacho",
+      "ingredientes_resumen": "Base de tomate cherry, mozzarella rallada, cebolla caramelizada, queso Feta, tomate seco, pistacho y orégano.",
+      "ingredientes": "Base tomate cherry, 2 CUP de mozzarella rallada, 8 TBSpoon de cebolla caramelizada, 95gr Feta, 56gr Tomate seco, 4 Tspoon Pistacho, Orégano.",
+      "preparacion": "Cortar 1ud de base tomate cherry por la mitad a lo ancho. Coger una de las mitades y distribuir la mozzarella rallada y la cebolla caramelizada. Hornear (PROG.2), y reposar. Poner el queso Feta, el Tomate seco, el Pistacho y el Orégano."
+    },
+    {
+      "nombre": "SW SALMON CLUB",
+      "ingredientes_resumen": "Pan de molde wholegrain, queso crema, tomate, rúcula, salmón ahumado, semillas de sésamo y pistacho granillo.",
+      "ingredientes": "2 REBANADAS de Molde wholegrain ALMA, 50 G. de QUESO CREMA, 60 G. de TOMATE PERA (3-4 rodajas), 6 G. de ENSALADA RÚCULA, 30 G. de SALMON AHUMADO, 1 G. de SEMILLAS SESAMO BLANCO, 3 G. (1Tspoon) de PISTACHO GRANILLO.",
+      "preparacion": "PASO 1- Cortar el pan de molde wholegrain en 12 rebanadas y tostarlo. PASO 2- Extender el queso crema en ambos panes. Poner las rodajas de tomate y la rúcula encima. PASO 3- Poner sobre la rúcula el salmón. Poner las semillas de sésamo y la mitad del pistacho en la tapa y cerrar. PASO 4- Cortar a la mitad en diagonal y exponer vertical. Repartir el pistacho restante sobre los lados visibles."
+    },
+    {
+      "nombre": "SW SANTAGLORIA CLUB",
+      "ingredientes_resumen": "Pan de molde wholegrain, mayonesa, brie, jamón cocido, tortilla francesa, tomate seco, rúcula, aceite de oliva y orégano.",
+      "ingredientes": "2 REBANADAS de Molde wholegrain, 20 G. de MAYONESA, 40 G. de BRIE, 45 G. (1,5 Lonchas) de JAMON COCIDO, 0,5 U. de TORTILLA FRANCESA GOURMET, 10 G. de TOMATE SECO, 6 G. de ENSALADA RÚCULA, 5 ML. de ACEITE DE OLIVA VIRGEN, 1 PIZCA de OREGANO.",
+      "preparacion": "PASO 1- Tostar el pan de molde wholegrain. PASO 2- Untar la base con mayonesa y colocar el brie laminado y el jamón cocido encima. Añadir la media tortilla francesa. PASO 3- Colocar el tomate seco, la rúcula, el aceite y el orégano. PASO 4- Cortar a la mitad en diagonal y exponer vertical con palillos. Calentar en Merrychef en prog. Focaccias 2-3 veces cuando lo pidan."
+    },
+    {
+      "nombre": "BRIOCHE TRUFADO",
+      "ingredientes_resumen": "Pan de molde brioche, mayonesa trufa, queso Edam, jamón cocido, brie, brotes espinaca y lascas de grana padano.",
+      "ingredientes": "2 REBANADAS de Pan molde brioche, 30 G. de MAYONESA TRUFA, 20 G. (1 loncha) de QUESO EDAM, 60 G. (2 Lonchas) de JAMON COCIDO, 30 G. (1,5 lonchas) de BRIE, 6 G. de BROTES ESPINACA, 8 G. de LASCAS GRANA PADANO.",
+      "preparacion": "PASO 1- Tostar el pan de molde y untar la base con la mayonesa trufada. PASO 2- Añadir la loncha de edam, las lonchas de jamón cocido y el brie encima. PASO 3- Colocar las espinacas y las lascas de grana padano. PASO 4- Cerrar con la tapa y servir con un pincho, dejando ver el interior. Cuando lo pidan, calentar en programa Focaccias 2 veces y servir."
     }
   ],
   "subrecetas": [
