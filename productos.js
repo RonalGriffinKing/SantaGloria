@@ -514,6 +514,76 @@ const obradorData = {
       "ingredientes_resumen": "Pan de molde brioche, mayonesa trufa, queso Edam, jamón cocido, brie, brotes espinaca y lascas de grana padano.",
       "ingredientes": "2 REBANADAS de Pan molde brioche, 30 G. de MAYONESA TRUFA, 20 G. (1 loncha) de QUESO EDAM, 60 G. (2 Lonchas) de JAMON COCIDO, 30 G. (1,5 lonchas) de BRIE, 6 G. de BROTES ESPINACA, 8 G. de LASCAS GRANA PADANO.",
       "preparacion": "PASO 1- Tostar el pan de molde y untar la base con la mayonesa trufada. PASO 2- Añadir la loncha de edam, las lonchas de jamón cocido y el brie encima. PASO 3- Colocar las espinacas y las lascas de grana padano. PASO 4- Cerrar con la tapa y servir con un pincho, dejando ver el interior. Cuando lo pidan, calentar en programa Focaccias 2 veces y servir."
+    },
+    {
+      "nombre": "Bocadillo ibérico",
+      "descongelacion": "N/A",
+      "horno_temp": "N/A",
+      "horno_prog": "N/A",
+      "horno_tiempo": "N/A",
+      "ingredientes_resumen": "Pan omega 3, paleta ibérica, tomate rallado, AOVE",
+      "ingredientes": "Pan omega 3: 1 ud, Paleta ibérica: 30 g, Tomate rallado: 45 g, Aceite de oliva virgen extra: 1 chorro",
+      "preparacion": "Abrir el pan omega 3 y tostarlo. Untar el tomate rallado en la base. Añadir la paleta ibérica. Terminar con un chorro de AOVE."
+    },
+    {
+      "nombre": "Bocadillo ibérico y brie",
+      "descongelacion": "N/A",
+      "horno_temp": "N/A",
+      "horno_prog": "N/A",
+      "horno_tiempo": "N/A",
+      "ingredientes_resumen": "Pan bocadillo, paleta ibérica, queso brie, rúcula, AOVE",
+      "ingredientes": "Pan bocadillo Tradición: 1 ud, Paleta ibérica: 25 g, Queso Brie: 30 g, Rúcula: 3 g, Aceite oliva virgen extra: 1 chorro",
+      "preparacion": "Tostar la parte interior del bocadillo. Poner el queso brie en la base y calentar en el Merrychef (programa de pan). Al sacar, añadir la rúcula y la paleta ibérica. Terminar con un chorro de AOVE."
+    },
+    {
+      "nombre": "Bocadillo mixto",
+      "descongelacion": "N/A",
+      "horno_temp": "N/A",
+      "horno_prog": "N/A",
+      "horno_tiempo": "N/A",
+      "ingredientes_resumen": "Pan omega 3, jamón cocido, queso lascas, mayonesa",
+      "ingredientes": "Pan omega 3: 1 ud, Jamón cocido: 4 lonchas, Queso lascas: 3 lonchas, Mayonesa: 20 g",
+      "preparacion": "Abrir el pan omega 3 y tostar. Untar la mayonesa en la base. Colocar el queso. Colocar el jamón. Cerrar el bocadillo."
+    },
+    {
+      "nombre": "Bocadillo pollo César",
+      "descongelacion": "N/A",
+      "horno_temp": "N/A",
+      "horno_prog": "N/A",
+      "horno_tiempo": "N/A",
+      "ingredientes_resumen": "Pan omega 3, pollo, salsa César, queso lascas, orégano",
+      "ingredientes": "Pan omega 3: 1 ud, Pollo asado deshebrado: 65 g, Salsa César: 45 g, Queso lascas: 10 g, Orégano: 0.5 g",
+      "preparacion": "Abrir el pan de Omega 3 y tostarlo. Calentar el pollo en un bol en el microondas durante 2 minutos. Añadir la salsa César al pollo y mezclar. Rellenar el bocadillo con la mezcla de pollo. Terminar con las lascas de queso y el orégano."
+    },
+    {
+      "nombre": "Bocadillo secallona",
+      "descongelacion": "N/A",
+      "horno_temp": "N/A",
+      "horno_prog": "N/A",
+      "horno_tiempo": "N/A",
+      "ingredientes_resumen": "Pan bocadillo, secallona, tomate rallado, AOVE",
+      "ingredientes": "Pan bocadillo Tradición: 1 ud, Secallona: 6 lonchas, Tomate rallado: 45 g, Aceite oliva virgen extra: 1 chorro",
+      "preparacion": "Abrir el pan y tostarlo. Untar la base con tomate rallado. Añadir la secallona y un chorro de AOVE. Cerrar el bocadillo."
+    },
+    {
+      "nombre": "Bocadillo tortilla de patata",
+      "descongelacion": "N/A",
+      "horno_temp": "N/A",
+      "horno_prog": "N/A",
+      "horno_tiempo": "N/A",
+      "ingredientes_resumen": "Pan bocadillo, tortilla campera, mayonesa, AOVE, sal",
+      "ingredientes": "Pan bocadillo Tradición: 1 ud, Tortilla campera: 1 ud, Mayonesa: 20 g, Aceite oliva virgen extra: 1 chorro, Sal: 1 pellizco",
+      "preparacion": "Abrir el pan y tostarlo. Calentar la tortilla en el Merrychef (programa tortilla). Abrir la tortilla por la mitad. Untar la base con mayonesa. Colocar la tortilla, añadir un chorro de AOVE y un pellizco de sal. Cerrar el bocadillo."
+    },
+    {
+      "nombre": "Bocadillo vegetal omega 3",
+      "descongelacion": "N/A",
+      "horno_temp": "N/A",
+      "horno_prog": "N/A",
+      "horno_tiempo": "N/A",
+      "ingredientes_resumen": "Pan omega 3, queso crema, pavo, aguacate, rúcula",
+      "ingredientes": "Pan omega 3: 1 ud, Queso crema: 40 g, Pavo: 2 lonchas, Aguacate: 30 g, Rúcula: 6 g",
+      "preparacion": "Abrir el pan omega 3 y tostarlo. Untar el queso crema en la base. Colocar las dos lonchas de pavo. Añadir el aguacate en láminas. Terminar con la rúcula y cerrar el bocadillo."
     }
   ],
   "subrecetas": [
