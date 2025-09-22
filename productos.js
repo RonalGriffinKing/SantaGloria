@@ -77,82 +77,82 @@ const productos = {
   ],
 
   "Elaborados": [
-    { nombre: "Gloria básica", dias: 1 },
-    { nombre: "Gloria chocolate", dias: 1 },
-    { nombre: "Gloria chocolate blanco", dias: 1 },
-    { nombre: "Gloria de pistacho", dias: 1 },
-    { nombre: "Gloria de oreo", dias: 1 },
-    { nombre: "Gloria de lotus", dias: 1 },
-    { nombre: "Gloria de violetas", dias: 1 },
-    { nombre: "Gloria de nocilla", dias: 1 },
-    { nombre: "Sandwich brioche trufado", dias: 1 },
-    { nombre: "Sandwich salmon club", dias: 1 },
-    { nombre: "Sandwich Santagloria club", dias: 1 },
-    { nombre: "Tosta aguacate y cherry", dias: 1 },
-    { nombre: "Tosta aguacate y salmón", dias: 1 },
-    { nombre: "Tosta aguacate y tortilla", dias: 1 },
-    { nombre: "Tosta benedictine", dias: 1 },
-    { nombre: "Tosta paletilla ibérica", dias: 1 },
-    { nombre: "Focaccia bacon y trufa", dias: 1 },
-    { nombre: "Focaccia feta", dias: 1 },
-    { nombre: "Flautín mixto", dias: 1 },
-    { nombre: "Flautín atún", dias: 1 },
-    { nombre: "Flautín queso", dias: 1 },
-    { nombre: "Flautín paletilla ibérica", dias: 1 },
-    { nombre: "Empanadilla pollo curry", dias: 2 },
-    { nombre: "Empanadilla ternera mechada", dias: 2 },
-    { nombre: "Ensalada italiana", dias: 1 },
-    { nombre: "Ensalada pollo", dias: 1 },
-    { nombre: "Ensalada salmón", dias: 1 },
-    { nombre: "Tortitas frutos rojos", dias: 1 }
+    { nombre: "Gloria básica", dias: 1, tipo: "E" },
+    { nombre: "Gloria chocolate", dias: 1, tipo: "E" },
+    { nombre: "Gloria chocolate blanco", dias: 1, tipo: "E" },
+    { nombre: "Gloria de pistacho", dias: 1, tipo: "E" },
+    { nombre: "Gloria de oreo", dias: 1, tipo: "E" },
+    { nombre: "Gloria de lotus", dias: 1, tipo: "E" },
+    { nombre: "Gloria de violetas", dias: 1, tipo: "E" },
+    { nombre: "Gloria de nocilla", dias: 1, tipo: "E" },
+    { nombre: "Sandwich brioche trufado", dias: 1, tipo: "E" },
+    { nombre: "Sandwich salmon club", dias: 1, tipo: "E" },
+    { nombre: "Sandwich Santagloria club", dias: 1, tipo: "E" },
+    { nombre: "Tosta aguacate y cherry", dias: 1, tipo: "E" },
+    { nombre: "Tosta aguacate y salmón", dias: 1, tipo: "E" },
+    { nombre: "Tosta aguacate y tortilla", dias: 1, tipo: "E" },
+    { nombre: "Tosta benedictine", dias: 1, tipo: "E" },
+    { nombre: "Tosta paletilla ibérica", dias: 1, tipo: "E" },
+    { nombre: "Focaccia bacon y trufa", dias: 1, tipo: "E" },
+    { nombre: "Focaccia feta", dias: 1, tipo: "E" },
+    { nombre: "Flautín mixto", dias: 1, tipo: "E" },
+    { nombre: "Flautín atún", dias: 1, tipo: "E" },
+    { nombre: "Flautín queso", dias: 1, tipo: "E" },
+    { nombre: "Flautín paletilla ibérica", dias: 1, tipo: "E" },
+    { nombre: "Empanadilla pollo curry", dias: 2, tipo: "E" },
+    { nombre: "Empanadilla ternera mechada", dias: 2, tipo: "E" },
+    { nombre: "Ensalada italiana", dias: 1, tipo: "E" },
+    { nombre: "Ensalada pollo", dias: 1, tipo: "E" },
+    { nombre: "Ensalada salmón", dias: 1, tipo: "E" },
+    { nombre: "Tortitas frutos rojos", dias: 1, tipo: "E" }
   ],
 
   "Secos": [
-    { nombre: "Aceite de oliva virgen 3x5lt", dias: 60 },
-    { nombre: "Almendra granillo", dias: 0 },
-    { nombre: "Avellana tostada", dias: 0 },
-    { nombre: "Azúcar glass saco 10kg", dias: 0 },
-    { nombre: "Azúcar", dias: 0 },
-    { nombre: "Café eco nat descafeinado", dias: 5 },
-    { nombre: "Café eco nat SG 8x1kg", dias: 5 },
-    { nombre: "Canela molida", dias: 0 },
-    { nombre: "Caramelos violetas", dias: 0 },
-    { nombre: "Cebolla frita deshidratada", dias: 15 },
-    { nombre: "Choco crispies", dias: 0 },
-    { nombre: "Cobertura blanca choco 10kg", dias: 0 },
-    { nombre: "Cobertura vegetal choco", dias: 0 },
-    { nombre: "Coco rallado", dias: 0 },
-    { nombre: "Crema pastelera saco", dias: 0 },
-    { nombre: "Crema pistacho", dias: 0 },
-    { nombre: "Frappé vainilla", dias: 0 },
-    { nombre: "Galleta molida lotus", dias: 15 },
-    { nombre: "Galleta molida oreo", dias: 15 },
-    { nombre: "Gelatina miroir cubo", dias: 0 },
-    { nombre: "Glasseado (cinamon roll)", dias: 20 },
-    { nombre: "Granos de chía", dias: 0 },
-    { nombre: "Mermelada frutos bosque", dias: 0 },
-    { nombre: "Miel de flores", dias: 365 },
-    { nombre: "Nocciolata", dias: 0 },
-    { nombre: "Nocilla fluida", dias: 0 },
-    { nombre: "Nueces cuartos", dias: 30 },
-    { nombre: "Orégano seco", dias: 0 },
-    { nombre: "Pipas de calabaza", dias: 0 },
-    { nombre: "Pistacho granillo", dias: 0 },
-    { nombre: "Semilla sésamo", dias: 0 },
-    { nombre: "Sirope lotus", dias: 60 },
-    { nombre: "Sirope violeta", dias: 60 }
+    { nombre: "Aceite de oliva virgen 3x5lt", dias: 60, tipo: "S" },
+    { nombre: "Almendra granillo", dias: 0, tipo: "S" },
+    { nombre: "Avellana tostada", dias: 0, tipo: "S" },
+    { nombre: "Azúcar glass saco 10kg", dias: 0, tipo: "S" },
+    { nombre: "Azúcar", dias: 0, tipo: "S" },
+    { nombre: "Café eco nat descafeinado", dias: 5, tipo: "S" },
+    { nombre: "Café eco nat SG 8x1kg", dias: 5, tipo: "S" },
+    { nombre: "Canela molida", dias: 0, tipo: "S" },
+    { nombre: "Caramelos violetas", dias: 0, tipo: "S" },
+    { nombre: "Cebolla frita deshidratada", dias: 15, tipo: "S" },
+    { nombre: "Choco crispies", dias: 0, tipo: "S" },
+    { nombre: "Cobertura blanca choco 10kg", dias: 0, tipo: "S" },
+    { nombre: "Cobertura vegetal choco", dias: 0, tipo: "S" },
+    { nombre: "Coco rallado", dias: 0, tipo: "S" },
+    { nombre: "Crema pastelera saco", dias: 0, tipo: "S" },
+    { nombre: "Crema pistacho", dias: 0, tipo: "S" },
+    { nombre: "Frappé vainilla", dias: 0, tipo: "S" },
+    { nombre: "Galleta molida lotus", dias: 15, tipo: "S" },
+    { nombre: "Galleta molida oreo", dias: 15, tipo: "S" },
+    { nombre: "Gelatina miroir cubo", dias: 0, tipo: "S" },
+    { nombre: "Glasseado (cinamon roll)", dias: 20, tipo: "S" },
+    { nombre: "Granos de chía", dias: 0, tipo: "S" },
+    { nombre: "Mermelada frutos bosque", dias: 0, tipo: "S" },
+    { nombre: "Miel de flores", dias: 365, tipo: "S" },
+    { nombre: "Nocciolata", dias: 0, tipo: "S" },
+    { nombre: "Nocilla fluida", dias: 0, tipo: "S" },
+    { nombre: "Nueces cuartos", dias: 30, tipo: "S" },
+    { nombre: "Orégano seco", dias: 0, tipo: "S" },
+    { nombre: "Pipas de calabaza", dias: 0, tipo: "S" },
+    { nombre: "Pistacho granillo", dias: 0, tipo: "S" },
+    { nombre: "Semilla sésamo", dias: 0, tipo: "S" },
+    { nombre: "Sirope lotus", dias: 60, tipo: "S" },
+    { nombre: "Sirope violeta", dias: 60, tipo: "S" }
   ]
 };
+
 const obradorData = {
   "productos": [
-    // --- GLORIAS ---
     {
       "nombre": "Gloria Básica",
       "descongelacion": "Desde congelado en bandeja con papel parafina",
       "horno_temp": "185°C",
       "horno_prog": "1",
       "horno_tiempo": "15 min",
-      "ingredientes_resumen": "Croissant pequeño, almíbar",
+      "ingredientes_resumen": "Croissant pequeño (1 ud), Almíbar (30 g)",
       "ingredientes": "Croissant pequeño (1 ud), Almíbar (30 g)",
       "preparacion": "Hornear croissant a 185°C programa 1 durante 15 min, sumergir en almíbar y escurrir sobre rejilla."
     },
@@ -162,7 +162,7 @@ const obradorData = {
       "horno_temp": "-",
       "horno_prog": "-",
       "horno_tiempo": "-",
-      "ingredientes_resumen": "Gloria básica, cobertura chocolate",
+      "ingredientes_resumen": "Gloria básica (1 ud), Cobertura chocolate (5 g)",
       "ingredientes": "Gloria básica (1 ud), Cobertura chocolate (5 g)",
       "preparacion": "Bañar ambas puntas de la gloria en cobertura de chocolate derretida (5 g por gloria)."
     },
@@ -172,7 +172,7 @@ const obradorData = {
       "horno_temp": "-",
       "horno_prog": "-",
       "horno_tiempo": "-",
-      "ingredientes_resumen": "Gloria básica, cobertura chocolate blanco",
+      "ingredientes_resumen": "Gloria básica (1 ud), Cobertura chocolate blanco (5 g)",
       "ingredientes": "Gloria básica (1 ud), Cobertura chocolate blanco (5 g)",
       "preparacion": "Bañar ambas puntas con cobertura de chocolate blanco derretido."
     },
@@ -182,7 +182,7 @@ const obradorData = {
       "horno_temp": "-",
       "horno_prog": "-",
       "horno_tiempo": "-",
-      "ingredientes_resumen": "Gloria básica, cobertura blanca, granillo pistacho",
+      "ingredientes_resumen": "Gloria básica (1 ud), Cobertura blanca (5 g), Pistacho granillo (2 g)",
       "ingredientes": "Gloria básica (1 ud), Cobertura blanca (5 g), Pistacho granillo (2 g)",
       "preparacion": "Bañar puntas con cobertura blanca y rebozar pistacho granillo en fresco."
     },
@@ -192,7 +192,67 @@ const obradorData = {
       "horno_temp": "-",
       "horno_prog": "-",
       "horno_tiempo": "-",
-      "ingredientes_resumen": "Gloria básica, crema lotus, galleta molida",
+      "ingredientes_resumen": "Gloria básica (1 ud), Crema lotus (5 g), Galleta molida lotus (2 g)",
+      "ingredientes": "Gloria básica (1 ud), Crema lotus (5 g), Galleta molida lotus (2 g)",
+      "preparacion": "Rellenar con crema lotus, bañar puntas en la misma crema y espolvorear galleta molida."
+    }
+    // Puedes continuar con el resto de las recetas siguiendo este formato
+  ]
+};
+
+export { productos, obradorData };
+
+
+
+const obradorData = {
+  "productos": [
+    {
+      "nombre": "Gloria Básica",
+      "descongelacion": "Desde congelado en bandeja con papel parafina",
+      "horno_temp": "185°C",
+      "horno_prog": "1",
+      "horno_tiempo": "15 min",
+      "ingredientes_resumen": "Croissant pequeño (1 ud), Almíbar (30 g)",
+      "ingredientes": "Croissant pequeño (1 ud), Almíbar (30 g)",
+      "preparacion": "Hornear croissant a 185°C programa 1 durante 15 min, sumergir en almíbar y escurrir sobre rejilla."
+    },
+    {
+      "nombre": "Gloria Chocolate",
+      "descongelacion": "Usar Gloria Básica ya horneada",
+      "horno_temp": "-",
+      "horno_prog": "-",
+      "horno_tiempo": "-",
+      "ingredientes_resumen": "Gloria básica (1 ud), Cobertura chocolate (5 g)",
+      "ingredientes": "Gloria básica (1 ud), Cobertura chocolate (5 g)",
+      "preparacion": "Bañar ambas puntas de la gloria en cobertura de chocolate derretida (5 g por gloria)."
+    },
+    {
+      "nombre": "Gloria Chocolate Blanco",
+      "descongelacion": "Usar Gloria Básica ya horneada",
+      "horno_temp": "-",
+      "horno_prog": "-",
+      "horno_tiempo": "-",
+      "ingredientes_resumen": "Gloria básica (1 ud), Cobertura chocolate blanco (5 g)",
+      "ingredientes": "Gloria básica (1 ud), Cobertura chocolate blanco (5 g)",
+      "preparacion": "Bañar ambas puntas con cobertura de chocolate blanco derretido."
+    },
+    {
+      "nombre": "Gloria Pistacho",
+      "descongelacion": "Usar Gloria Básica",
+      "horno_temp": "-",
+      "horno_prog": "-",
+      "horno_tiempo": "-",
+      "ingredientes_resumen": "Gloria básica (1 ud), Cobertura blanca (5 g), Pistacho granillo (2 g)",
+      "ingredientes": "Gloria básica (1 ud), Cobertura blanca (5 g), Pistacho granillo (2 g)",
+      "preparacion": "Bañar puntas con cobertura blanca y rebozar pistacho granillo en fresco."
+    },
+    {
+      "nombre": "Gloria Lotus",
+      "descongelacion": "Usar Gloria Básica",
+      "horno_temp": "-",
+      "horno_prog": "-",
+      "horno_tiempo": "-",
+      "ingredientes_resumen": "Gloria básica (1 ud), Crema lotus (5 g), Galleta molida lotus (2 g)",
       "ingredientes": "Gloria básica (1 ud), Crema lotus (5 g), Galleta molida lotus (2 g)",
       "preparacion": "Rellenar con crema lotus, bañar puntas en la misma crema y espolvorear galleta molida."
     },
@@ -202,18 +262,17 @@ const obradorData = {
       "horno_temp": "-",
       "horno_prog": "-",
       "horno_tiempo": "-",
-      "ingredientes_resumen": "Gloria básica, crema nocciolata, galleta oreo",
+      "ingredientes_resumen": "Gloria básica (1 ud), Crema nocciolata (5 g), Galleta oreo molida (2 g)",
       "ingredientes": "Gloria básica (1 ud), Crema nocciolata (5 g), Galleta oreo molida (2 g)",
       "preparacion": "Rellenar con nocciolata y espolvorear oreo molida."
     },
-    // --- SANDWICHES Y TOSTAS ---
     {
       "nombre": "SW Salmon Club",
       "descongelacion": "Pan descongelado 12h antes",
       "horno_temp": "Merrychef",
       "horno_prog": "2",
       "horno_tiempo": "1.5 min",
-      "ingredientes_resumen": "Pan wholegrain, queso crema, tomate, rúcula, salmón, sésamo, pistacho",
+      "ingredientes_resumen": "Pan wholegrain (2 rebanadas), Queso crema (50 g), Tomate pera (60 g), Rúcula (6 g), Salmón ahumado (30 g), Sésamo (1 g), Pistacho (3 g)",
       "ingredientes": "Pan wholegrain (2 rebanadas), Queso crema (50 g), Tomate pera (60 g), Rúcula (6 g), Salmón ahumado (30 g), Sésamo (1 g), Pistacho (3 g)",
       "preparacion": "Tostar pan en programa 2, untar queso crema, colocar tomate, rúcula y salmón. Espolvorear sésamo y pistacho, cortar y pinchar."
     },
@@ -223,7 +282,7 @@ const obradorData = {
       "horno_temp": "Merrychef",
       "horno_prog": "2",
       "horno_tiempo": "1.5 min + regenerar focaccias 2-3 veces",
-      "ingredientes_resumen": "Pan wholegrain, mayonesa, brie, jamón cocido, tortilla, tomate seco, rúcula, AOVE, orégano",
+      "ingredientes_resumen": "Pan wholegrain (2 rebanadas), Mayonesa (20 g), Brie (40 g), Jamón cocido (45 g), Tortilla francesa (75 g), Tomate seco (10 g), Rúcula (6 g), AOVE (5 ml), Orégano (1 pizca)",
       "ingredientes": "Pan wholegrain (2 rebanadas), Mayonesa (20 g), Brie (40 g), Jamón cocido (45 g), Tortilla francesa (75 g), Tomate seco (10 g), Rúcula (6 g), AOVE (5 ml), Orégano (1 pizca)",
       "preparacion": "Tostar pan, untar mayonesa, colocar brie, jamón y tortilla, añadir tomate seco, rúcula, aceite y orégano. Cortar y regenerar."
     },
@@ -233,7 +292,7 @@ const obradorData = {
       "horno_temp": "Merrychef",
       "horno_prog": "2",
       "horno_tiempo": "1.5 min + regenerar focaccias 2 veces",
-      "ingredientes_resumen": "Pan brioche, mayonesa trufada, edam, jamón cocido, brie, espinaca baby, grana padano",
+      "ingredientes_resumen": "Pan brioche (2 rebanadas), Mayonesa trufada (30 g), Queso edam (20 g), Jamón cocido (60 g), Queso brie (30 g), Espinaca baby (6 g), Grana padano (8 g)",
       "ingredientes": "Pan brioche (2 rebanadas), Mayonesa trufada (30 g), Queso edam (20 g), Jamón cocido (60 g), Queso brie (30 g), Espinaca baby (6 g), Grana padano (8 g)",
       "preparacion": "Tostar pan, untar mayonesa trufada, colocar queso, jamón, brie, espinaca y grana padano. Cerrar y regenerar."
     },
@@ -243,7 +302,7 @@ const obradorData = {
       "horno_temp": "Merrychef",
       "horno_prog": "Tostadas",
       "horno_tiempo": "2 min",
-      "ingredientes_resumen": "Pan espelta, aguacate, tomate cherry, sésamo, micro mezclum, AOVE, sal, flor",
+      "ingredientes_resumen": "Pan espelta (1 ud), Aguacate (40 g), Tomate cherry (40 g), Sésamo (0.5 g), Micro mezclum (3 g), AOVE (3 ml), Sal (3 g), Flor (1 ud)",
       "ingredientes": "Pan espelta (1 ud), Aguacate (40 g), Tomate cherry (40 g), Sésamo (0.5 g), Micro mezclum (3 g), AOVE (3 ml), Sal (3 g), Flor (1 ud)",
       "preparacion": "Tostar pan, untar aguacate, añadir tomate cherry, sésamo, mezclum, AOVE, flor y sal."
     },
@@ -253,7 +312,7 @@ const obradorData = {
       "horno_temp": "Merrychef",
       "horno_prog": "Tostadas",
       "horno_tiempo": "2 min",
-      "ingredientes_resumen": "Pan espelta, aguacate, salmón ahumado, sésamo, mezclum, AOVE, sal, flor",
+      "ingredientes_resumen": "Pan espelta (1 ud), Aguacate (40 g), Salmón ahumado (30 g), Sésamo (0.5 g), Micro mezclum (3 g), AOVE (3 ml), Sal (3 g), Flor (1 ud)",
       "ingredientes": "Pan espelta (1 ud), Aguacate (40 g), Salmón ahumado (30 g), Sésamo (0.5 g), Micro mezclum (3 g), AOVE (3 ml), Sal (3 g), Flor (1 ud)",
       "preparacion": "Tostar pan, untar aguacate, añadir salmón ahumado, sésamo, mezclum, AOVE, flor y sal."
     },
@@ -263,18 +322,17 @@ const obradorData = {
       "horno_temp": "Merrychef",
       "horno_prog": "1",
       "horno_tiempo": "2 min",
-      "ingredientes_resumen": "Pan espelta, queso edam, bacon, huevo plancha, salsa holandesa, orégano",
+      "ingredientes_resumen": "Pan espelta (1 ud), Queso edam (40 g), Bacon (35 g), Huevo plancha (1 ud), Salsa holandesa (30 g), Orégano (0.5 g), Sal (0.5 g)",
       "ingredientes": "Pan espelta (1 ud), Queso edam (40 g), Bacon (35 g), Huevo plancha (1 ud), Salsa holandesa (30 g), Orégano (0.5 g), Sal (0.5 g)",
       "preparacion": "Montar tosta con queso, bacon y huevo. Hornear, cubrir con holandesa y espolvorear orégano."
     },
-    // --- FOCACCIAS ---
     {
       "nombre": "Focaccia Bacon y Trufa",
       "descongelacion": "Base descongelada 12h antes",
       "horno_temp": "Merrychef",
       "horno_prog": "Focaccia",
       "horno_tiempo": "3 min",
-      "ingredientes_resumen": "Focaccia, bacon, mayonesa trufada, mozzarella, rúcula",
+      "ingredientes_resumen": "Focaccia (1 ud), Bacon (40 g), Mayonesa trufada (20 g), Mozzarella rallada (30 g), Rúcula (6 g)",
       "ingredientes": "Focaccia (1 ud), Bacon (40 g), Mayonesa trufada (20 g), Mozzarella rallada (30 g), Rúcula (6 g)",
       "preparacion": "Montar base con bacon y mozzarella, hornear, al salir añadir mayonesa trufada y rúcula fresca."
     },
@@ -284,18 +342,17 @@ const obradorData = {
       "horno_temp": "Merrychef",
       "horno_prog": "Focaccia",
       "horno_tiempo": "3 min",
-      "ingredientes_resumen": "Focaccia, tomate cherry, queso feta, rúcula",
+      "ingredientes_resumen": "Focaccia (1 ud), Tomate cherry (40 g), Queso feta (30 g), Rúcula (6 g)",
       "ingredientes": "Focaccia (1 ud), Tomate cherry (40 g), Queso feta (30 g), Rúcula (6 g)",
       "preparacion": "Colocar tomates y feta en base, hornear y terminar con rúcula fresca."
     },
-    // --- FLAUTINES ---
-    {
+        {
       "nombre": "Flautín Mixto",
       "descongelacion": "Desde congelado",
       "horno_temp": "Merrychef",
       "horno_prog": "Flautín",
       "horno_tiempo": "2.5 min",
-      "ingredientes_resumen": "Pan flautín, jamón cocido, queso edam",
+      "ingredientes_resumen": "Flautín (1 ud), Jamón cocido (40 g), Queso edam (20 g)",
       "ingredientes": "Flautín (1 ud), Jamón cocido (40 g), Queso edam (20 g)",
       "preparacion": "Abrir flautín, rellenar con jamón y queso, calentar en Merrychef programa flautín 2.5 min."
     },
@@ -305,18 +362,17 @@ const obradorData = {
       "horno_temp": "Merrychef",
       "horno_prog": "Flautín",
       "horno_tiempo": "2.5 min",
-      "ingredientes_resumen": "Pan flautín, atún, mayonesa",
+      "ingredientes_resumen": "Flautín (1 ud), Atún claro (40 g), Mayonesa (15 g)",
       "ingredientes": "Flautín (1 ud), Atún claro (40 g), Mayonesa (15 g)",
       "preparacion": "Mezclar atún con mayonesa, rellenar flautín y calentar en Merrychef."
     },
-    // --- EMPANADILLAS ---
     {
       "nombre": "Empanadilla Pollo Curry",
       "descongelacion": "Desde congelado",
       "horno_temp": "185°C",
       "horno_prog": "Empanadillas",
       "horno_tiempo": "10 min",
-      "ingredientes_resumen": "Empanadilla de pollo al curry",
+      "ingredientes_resumen": "Empanadilla (1 ud, 70 g)",
       "ingredientes": "Empanadilla (1 ud, 70 g)",
       "preparacion": "Hornear en bandeja perforada a 185°C durante 10 minutos."
     },
@@ -326,18 +382,17 @@ const obradorData = {
       "horno_temp": "185°C",
       "horno_prog": "Empanadillas",
       "horno_tiempo": "10 min",
-      "ingredientes_resumen": "Empanadilla de ternera mechada",
+      "ingredientes_resumen": "Empanadilla (1 ud, 70 g)",
       "ingredientes": "Empanadilla (1 ud, 70 g)",
       "preparacion": "Hornear en bandeja perforada a 185°C durante 10 minutos."
     },
-    // --- ENSALADAS ---
     {
       "nombre": "Ensalada Italiana",
       "descongelacion": "-",
       "horno_temp": "-",
       "horno_prog": "-",
       "horno_tiempo": "-",
-      "ingredientes_resumen": "Base campestre, tomate cherry, mozzarella, pesto",
+      "ingredientes_resumen": "Mezcla ensalada (70 g), Tomate cherry (50 g), Mozzarella perlas (40 g), Pesto (15 g)",
       "ingredientes": "Mezcla ensalada (70 g), Tomate cherry (50 g), Mozzarella perlas (40 g), Pesto (15 g)",
       "preparacion": "Montar ensalada en bowl, aderezar con pesto al momento de servir."
     },
@@ -347,7 +402,7 @@ const obradorData = {
       "horno_temp": "-",
       "horno_prog": "-",
       "horno_tiempo": "-",
-      "ingredientes_resumen": "Base campestre, pollo asado, parmesano, salsa césar",
+      "ingredientes_resumen": "Mezcla ensalada (70 g), Pollo asado (50 g), Lascas parmesano (10 g), Salsa César (20 g)",
       "ingredientes": "Mezcla ensalada (70 g), Pollo asado (50 g), Lascas parmesano (10 g), Salsa César (20 g)",
       "preparacion": "Montar ensalada y aderezar con salsa césar."
     },
@@ -357,18 +412,17 @@ const obradorData = {
       "horno_temp": "-",
       "horno_prog": "-",
       "horno_tiempo": "-",
-      "ingredientes_resumen": "Base campestre, salmón, aguacate, semillas",
+      "ingredientes_resumen": "Mezcla ensalada (70 g), Salmón ahumado (40 g), Aguacate (40 g), Sésamo (1 g)",
       "ingredientes": "Mezcla ensalada (70 g), Salmón ahumado (40 g), Aguacate (40 g), Sésamo (1 g)",
       "preparacion": "Montar ensalada y espolvorear semillas antes de servir."
     },
-    // --- TORTITAS ---
     {
       "nombre": "Tortitas Frutos Rojos",
       "descongelacion": "Descongelar 1h antes",
       "horno_temp": "-",
       "horno_prog": "-",
       "horno_tiempo": "-",
-      "ingredientes_resumen": "Tortitas, frutos rojos, nata, sirope",
+      "ingredientes_resumen": "Tortitas (3 ud), Frutos rojos (50 g), Nata montada (30 g), Sirope (20 ml)",
       "ingredientes": "Tortitas (3 ud), Frutos rojos (50 g), Nata montada (30 g), Sirope (20 ml)",
       "preparacion": "Regenerar tortitas en plancha, colocar en torre, cubrir con frutos rojos, nata y sirope."
     }
