@@ -131,7 +131,14 @@ select, input[type="text"] { width:100%; padding:12px; margin-top:6px; border-ra
 </div>
 
 <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
-<script src="productos.js"></script>
+<script type="module">
+  import { productos, obradorData } from './productos.js';
+
+  // Aquí puedes usar los datos normalmente
+  console.log(productos);
+  console.log(obradorData);
+</script>
+
 <script>
 // VARIABLES GLOBALES
 const empleados = ["Ronald","Lorena","Johnny","Sofía","Claudia","Pamela","Abril","Gloria","Steven"];
