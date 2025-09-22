@@ -144,65 +144,6 @@ const productos = {
   ]
 };
 
-const obradorData = {
-  "productos": [
-    {
-      "nombre": "Gloria Básica",
-      "descongelacion": "Desde congelado en bandeja con papel parafina",
-      "horno_temp": "185°C",
-      "horno_prog": "1",
-      "horno_tiempo": "15 min",
-      "ingredientes_resumen": "Croissant pequeño (1 ud), Almíbar (30 g)",
-      "ingredientes": "Croissant pequeño (1 ud), Almíbar (30 g)",
-      "preparacion": "Hornear croissant a 185°C programa 1 durante 15 min, sumergir en almíbar y escurrir sobre rejilla."
-    },
-    {
-      "nombre": "Gloria Chocolate",
-      "descongelacion": "Usar Gloria Básica ya horneada",
-      "horno_temp": "-",
-      "horno_prog": "-",
-      "horno_tiempo": "-",
-      "ingredientes_resumen": "Gloria básica (1 ud), Cobertura chocolate (5 g)",
-      "ingredientes": "Gloria básica (1 ud), Cobertura chocolate (5 g)",
-      "preparacion": "Bañar ambas puntas de la gloria en cobertura de chocolate derretida (5 g por gloria)."
-    },
-    {
-      "nombre": "Gloria Chocolate Blanco",
-      "descongelacion": "Usar Gloria Básica ya horneada",
-      "horno_temp": "-",
-      "horno_prog": "-",
-      "horno_tiempo": "-",
-      "ingredientes_resumen": "Gloria básica (1 ud), Cobertura chocolate blanco (5 g)",
-      "ingredientes": "Gloria básica (1 ud), Cobertura chocolate blanco (5 g)",
-      "preparacion": "Bañar ambas puntas con cobertura de chocolate blanco derretido."
-    },
-    {
-      "nombre": "Gloria Pistacho",
-      "descongelacion": "Usar Gloria Básica",
-      "horno_temp": "-",
-      "horno_prog": "-",
-      "horno_tiempo": "-",
-      "ingredientes_resumen": "Gloria básica (1 ud), Cobertura blanca (5 g), Pistacho granillo (2 g)",
-      "ingredientes": "Gloria básica (1 ud), Cobertura blanca (5 g), Pistacho granillo (2 g)",
-      "preparacion": "Bañar puntas con cobertura blanca y rebozar pistacho granillo en fresco."
-    },
-    {
-      "nombre": "Gloria Lotus",
-      "descongelacion": "Usar Gloria Básica",
-      "horno_temp": "-",
-      "horno_prog": "-",
-      "horno_tiempo": "-",
-      "ingredientes_resumen": "Gloria básica (1 ud), Crema lotus (5 g), Galleta molida lotus (2 g)",
-      "ingredientes": "Gloria básica (1 ud), Crema lotus (5 g), Galleta molida lotus (2 g)",
-      "preparacion": "Rellenar con crema lotus, bañar puntas en la misma crema y espolvorear galleta molida."
-    }
-    // Puedes continuar con el resto de las recetas siguiendo este formato
-  ]
-};
-
-export { productos, obradorData };
-
-
 
 const obradorData = {
   "productos": [
