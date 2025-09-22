@@ -370,4 +370,3 @@ const obradorData = {
   ]
 };
 
-export { productos, obradorData };
