@@ -52,10 +52,18 @@
   }
 
   /* Borde izquierdo de color (urgencia) — un poco más pequeño */
-  .card::before{
-    content:""; position:absolute; left:-1px; top:0; width:var(--left-width); height:100%;
-    background:var(--colorBorde,#ccc); border-radius:0; z-index:3;
-  }
+/* Borde izquierdo de color (urgencia) — alineado con esquinas */
+.card::before{
+    content:""; 
+    position:absolute; 
+    left:0; 
+    top:0; 
+    width:8px; /* un poco más delgado */
+    height:100%;
+    background:var(--colorBorde,transparent); /* si no hay datos será transparente */
+    border-radius:10px 0 0 10px; /* sigue el borde de la tarjeta */
+    z-index:3;
+}
 
   .card h3{ margin:0; font-size:1.05rem; font-weight:800; }
   .meta-row{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; font-size:0.92rem; color:#111; }
