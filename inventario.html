@@ -1,80 +1,103 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Inventario – Santa Gloria Russafa</title>
 <style>
-body { font-family: Arial, sans-serif; margin:0; background:#fff; color:#000; padding-bottom:100px; }
-header { background: rgba(255,255,255,0.9); color:#000; text-align:center; padding:12px; font-size:1.2em; font-weight:bold; position:sticky; top:0; z-index:999; }
-.nav-buttons { margin-top:8px; display:flex; flex-wrap:wrap; justify-content:center; gap:6px; }
-.nav-buttons button { padding:6px 12px; border:none; border-radius:6px; background:#fff; color:#000; cursor:pointer; font-size:0.9em; border:1px solid #000; }
-.nav-buttons button.active { background:#000; color:#fff; }
-.nav-buttons button:hover { background:#eee; }
-#buscador { width:90%; margin:10px auto; display:block; padding:8px 12px; border-radius:6px; border:2px solid #000; font-size:1em; }
-#grid { display:grid; grid-template-columns: repeat(auto-fill,minmax(280px,1fr)); gap:12px; padding:15px; }
+  /* === Layout y tipografía === */
+  :root{
+    --bg:#fff;
+    --text:#000;
+    --card-border:#000;
+    --left-width:10px; /* ancho del borde de color (un poco más pequeño) */
+    --dias-size:1.45rem; /* tamaño indicador días (más grande) */
+  }
+  *{box-sizing:border-box}
+  body{font-family:Arial, sans-serif; margin:0; background:var(--bg); color:var(--text); padding-bottom:60px;}
+  header{
+    position:sticky; top:0; z-index:999;
+    background: rgba(255,255,255,0.95);
+    padding:12px 10px; text-align:center; font-weight:700;
+    border-bottom:1px solid #eee;
+  }
 
-.obrador-item { 
-  border-radius:8px; 
-  padding:12px; 
-  background:#fff; 
-  position:relative; 
-  display:flex; 
-  flex-direction:column; 
-  justify-content:space-between; 
-  overflow:hidden;
-  border:1px solid #000;
-}
-.obrador-item h3 { margin:0 0 6px 0; font-size:1.1em; }
-.obrador-item p { margin:2px 0; font-size:0.9em; }
-.obrador-item .dias-restantes { 
-  position:absolute; 
-  top:8px; 
-  right:8px; 
-  font-weight:bold; 
-  font-size:1.2em;
-  background:#000; 
-  color:#fff; 
-  padding:4px 10px; 
-  border-radius:6px;
-}
-.obrador-item::before { 
-  content:''; 
-  position:absolute; 
-  left:0; 
-  top:0; 
-  width:10px; 
-  height:100%; 
-  background:var(--colorBorde, #ccc); 
-  border-radius:0 8px 8px 0;
-}
-.obrador-item button { 
-  background:#000; 
-  color:#fff; 
-  border:none; 
-  padding:6px 10px; 
-  border-radius:4px; 
-  cursor:pointer; 
-  font-size:0.85em; 
-  margin-top:8px; 
-}
-.obrador-item button:hover { background:#333; }
+  .nav-buttons{ margin-top:8px; display:flex; flex-wrap:wrap; justify-content:center; gap:8px; }
+  .nav-buttons button{
+    padding:8px 12px; border-radius:8px; background:#fff; color:#000; border:1px solid #000;
+    cursor:pointer; font-weight:700;
+  }
+  .nav-buttons button.active{ background:#000; color:#fff; }
+  .nav-buttons button:hover{ background:#f3f3f3; }
 
-/* Modal */
-#modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.4); align-items:center; justify-content:center; z-index:1000; }
-.modal-content { background:#fff; padding:20px; border-radius:8px; width:90%; max-width:420px; box-shadow:0 3px 6px rgba(0,0,0,0.2); display:flex; flex-direction:column; gap:10px; }
-.modal-content h2 { margin:0; text-align:center; }
-.modal-content label { font-weight:bold; font-size:0.9em; }
-.modal-content input { padding:8px; border:1px solid #000; border-radius:6px; width:100%; }
-.modal-content button { background:#000; color:#fff; border:none; padding:10px; border-radius:6px; cursor:pointer; margin-top:10px; }
-.modal-content button:hover { background:#333; }
+  #buscador{
+    width:94%; max-width:920px; margin:12px auto 0; display:block; padding:10px 12px; font-size:1rem;
+    border:2px solid #000; border-radius:8px; background:#fff; color:#000;
+  }
+
+  /* === Grid (2 columnas) === */
+  main#grid{
+    padding:18px; display:grid; grid-template-columns: repeat(2,1fr); gap:14px; max-width:1100px; margin:0 auto;
+  }
+  @media (max-width:760px){
+    main#grid{ grid-template-columns: 1fr; padding:12px; }
+  }
+
+  /* === Card producto === */
+  .card{
+    position:relative; background:#fff; border-radius:10px; padding:14px 14px 16px 20px;
+    border:1px solid var(--card-border); overflow:visible;
+    display:flex; flex-direction:column; gap:6px; min-height:120px;
+    z-index:0;
+  }
+
+  /* Borde izquierdo de color (urgencia) — un poco más pequeño */
+  .card::before{
+    content:""; position:absolute; left:-1px; top:0; width:var(--left-width); height:100%;
+    background:var(--colorBorde,#ccc); border-radius:0; z-index:3;
+  }
+
+  .card h3{ margin:0; font-size:1.05rem; font-weight:800; }
+  .meta-row{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; font-size:0.92rem; color:#111; }
+
+  .dias-restantes{
+    position:absolute; top:10px; right:10px;
+    background:#000; color:#fff; padding:6px 10px; border-radius:8px; font-weight:900;
+    font-size:var(--dias-size); z-index:4; min-width:54px; text-align:center;
+  }
+
+  .card p{ margin:0; font-size:0.9rem; color:#111; }
+  .small{ font-size:0.85rem; color:#333; }
+
+  .btn-actualizar{
+    margin-top:8px; align-self:flex-start; background:#000; color:#fff; border:none; padding:8px 12px;
+    border-radius:8px; cursor:pointer; font-weight:700;
+  }
+  .btn-actualizar:hover{ background:#222; }
+
+  /* Modal */
+  #modal{ display:none; position:fixed; inset:0; background:rgba(0,0,0,0.45); align-items:center; justify-content:center; z-index:9999; }
+  .modal-contenido{
+    width:94%; max-width:520px; background:#fff; border-radius:10px; padding:18px; box-shadow:0 6px 28px rgba(0,0,0,0.2);
+    display:flex; flex-direction:column; gap:8px;
+  }
+  .modal-contenido h2{ margin:0; text-align:center; font-size:1.1rem; }
+  .fila{ display:flex; gap:8px; flex-wrap:wrap; }
+  label{ font-weight:700; font-size:0.9rem; }
+  input[type="number"]{ width:100%; padding:8px 10px; border-radius:8px; border:1px solid #000; font-size:1rem; }
+  .btn-guardar{ background:#000; color:#fff; border:none; padding:10px; border-radius:8px; cursor:pointer; font-weight:800; margin-top:8px; }
+  .btn-guardar:hover{ background:#333; }
+
+  /* Mensaje cuando no hay items */
+  .vacio{ text-align:center; padding:30px; color:#777; font-weight:700; }
+
 </style>
 </head>
 <body>
 
 <header>
   Inventario – Santa Gloria Russafa
-  <div class="nav-buttons">
+  <div class="nav-buttons" style="margin-top:10px;">
     <button onclick="filtrarCategoria('')" class="active">Todos</button>
     <button onclick="filtrarCategoria('Quesos')">Quesos</button>
     <button onclick="filtrarCategoria('Dulces')">Dulces</button>
@@ -85,143 +108,249 @@ header { background: rgba(255,255,255,0.9); color:#000; text-align:center; paddi
     <button onclick="filtrarCategoria('Cremas y Salsas')">Cremas y Salsas</button>
     <button onclick="filtrarCategoria('Tartas')">Tartas</button>
     <button onclick="filtrarCategoria('Otros')">Otros</button>
-    <button onclick="descargarJSON()">⬇️ Descargar JSON</button>
   </div>
-  <input type="text" id="buscador" placeholder="Buscar producto..." oninput="filtrarBusqueda()">
+  <input id="buscador" placeholder="Buscar producto..." />
 </header>
 
 <main id="grid"></main>
 
 <!-- Modal actualización -->
-<div id="modal">
-  <div class="modal-content">
-    <h2 id="modalNombre"></h2>
+<div id="modal" onclick="cerrarSiOverlay(event)">
+  <div class="modal-contenido" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <h2 id="modalTitle">Actualizar producto</h2>
+
     <label>Cantidad total</label>
-    <input type="number" id="modalCantidadTotal">
-    <label>Peso total</label>
-    <input type="number" id="modalPesoTotal">
+    <input id="modalCantidadTotal" type="number" min="0" step="1" />
+
+    <label>Peso total (g)</label>
+    <input id="modalPesoTotal" type="number" min="0" step="0.1" />
+
     <label>Cantidad disponible</label>
-    <input type="number" id="modalCantidadDisponible">
-    <label>Peso disponible</label>
-    <input type="number" id="modalPesoDisponible">
+    <input id="modalCantidadDisponible" type="number" min="0" step="1" />
+
+    <label>Peso disponible (g)</label>
+    <input id="modalPesoDisponible" type="number" min="0" step="0.1" />
+
     <label>Uso diario (cantidad)</label>
-    <input type="number" id="modalUsoCantidad">
-    <label>Uso diario (peso)</label>
-    <input type="number" id="modalUsoPeso">
-    <button onclick="guardarCambios()">Guardar</button>
+    <input id="modalUsoCantidad" type="number" min="0" step="1" />
+
+    <label>Uso diario (peso) (g)</label>
+    <input id="modalUsoPeso" type="number" min="0" step="0.1" />
+
+    <button class="btn-guardar" onclick="guardarCambios()">Guardar</button>
   </div>
 </div>
 
+<!-- Añade inventario.js en la misma carpeta: debe definir `productos` (objeto por categorías) -->
 <script src="inventario.js"></script>
 <script>
-let productos = {};
+/* === INICIALIZACIÓN y copia a localStorage === */
+(function(){
+  // productos viene de inventario.js (objeto con categorías => arrays)
+  const inicial = (typeof productos !== 'undefined') ? productos : {};
+  let almacen = null;
+  try { almacen = JSON.parse(localStorage.getItem('inventario')); } catch(e){ almacen = null; }
 
-// Copiar inventario inicial a localStorage si no existe
-if (!localStorage.getItem('inventario')) {
-  localStorage.setItem('inventario', JSON.stringify(productosIniciales)); // productosIniciales viene de inventario.js
+  if(!almacen || Object.keys(almacen).length === 0){
+    inventario = structuredClone(inicial); // usar copia
+    localStorage.setItem('inventario', JSON.stringify(inventario));
+  } else {
+    inventario = almacen;
+  }
+})();
+
+/* seguridad: si inventario undefined, crea vacio */
+if(typeof inventario === 'undefined' || !inventario) inventario = {};
+
+/* Util: obtener lista plana de items */
+function listaPlana(){
+  return Object.values(inventario).flat();
 }
-productos = JSON.parse(localStorage.getItem('inventario'));
 
-function calcularDias(p) {
-  let dias = null;
-  if (p.peso_disponible && p.uso_diario_peso) dias = p.peso_disponible / p.uso_diario_peso;
-  else if (p.cantidad_disponible && p.uso_diario_cantidad) dias = p.cantidad_disponible / p.uso_diario_cantidad;
-  return dias ? Math.floor(dias) : null;
+/* Calculo días: prioriza peso si uso_diario_peso>0 y peso_disponible definido, si no usa cantidad */
+function calcularDias(item){
+  if(!item) return null;
+  const usoPeso = Number(item.uso_diario_peso);
+  const dispPeso = Number(item.peso_disponible);
+  const usoCant = Number(item.uso_diario_cantidad);
+  const dispCant = Number(item.cantidad_disponible);
+
+  if(!isNaN(usoPeso) && usoPeso > 0 && !isNaN(dispPeso) && dispPeso >= 0){
+    return dispPeso / usoPeso;
+  }
+  if(!isNaN(usoCant) && usoCant > 0 && !isNaN(dispCant) && dispCant >= 0){
+    return dispCant / usoCant;
+  }
+  return null;
 }
 
-function getColor(dias) {
-  if (dias === null) return "#ccc";
-  if (dias <= 1) return "red";
-  if (dias === 2 || dias === 3) return "orange";
-  return "green";
+/* asigna color segun dias */
+function colorPorDias(dias){
+  if(dias === null) return '#cfcfcf'; // gris N/A
+  if(dias < 2) return '#ff3b30';     // rojo
+  if(dias <= 3) return '#ffb400';    // amarillo
+  return '#2db84c';                  // verde
 }
 
-function renderGrid(categoria = "", search = "") {
-  const grid = document.getElementById("grid");
-  grid.innerHTML = "";
-  
-  let items = [];
-  for (let categoriaKey in productos) {
-    productos[categoriaKey].forEach(p => {
-      if ((categoria === "" || p.categoria === categoria) &&
-          (search === "" || p.nombre.toLowerCase().includes(search.toLowerCase()))) {
-        items.push(p);
-      }
-    });
+/* Render del grid */
+function renderizarInventario(filtroCategoria = '', busqueda = ''){
+  const grid = document.getElementById('grid');
+  grid.innerHTML = '';
+
+  let items = listaPlana();
+
+  // filtro de categoría: '' o null => todos
+  if(filtroCategoria && filtroCategoria.trim() !== ''){
+    items = items.filter(it => (it.categoria || '').toString() === filtroCategoria.toString());
   }
 
-  // Ordenar por prioridad (rojo -> naranja -> verde)
-  items.sort((a,b) => {
-    const da = calcularDias(a);
-    const db = calcularDias(b);
-    const pa = da === null ? 3 : da <= 1 ? 0 : da <= 3 ? 1 : 2;
-    const pb = db === null ? 3 : db <= 1 ? 0 : db <= 3 ? 1 : 2;
-    return pa - pb;
-  });
+  // busqueda por nombre
+  if(busqueda && busqueda.trim() !== ''){
+    const q = busqueda.toLowerCase();
+    items = items.filter(it => (it.nombre || '').toLowerCase().includes(q));
+  }
 
-  items.forEach(p => {
-    const dias = calcularDias(p);
-    const color = getColor(dias);
-    const card = document.createElement("div");
-    card.className = "obrador-item";
-    card.style.setProperty("--colorBorde", color);
-    card.innerHTML = `
-      <h3>${p.nombre}</h3>
-      <span class="dias-restantes">${dias !== null ? dias + "d" : "?"}</span>
-      <p><b>Cant. diaria:</b> ${p.uso_diario_cantidad ?? "-"} | <b>Peso diario:</b> ${p.uso_diario_peso ?? "-"}</p>
-      <button onclick="abrirModal('${p.nombre}', '${p.categoria}')">Actualizar</button>
-    `;
+  if(items.length === 0){
+    grid.innerHTML = '<div class="vacio">No hay productos para mostrar.</div>';
+    return;
+  }
+
+  // ordenar por prioridad: rojo(0) -> amarillo(1) -> verde(2) -> NA(3)
+  function prioridadPorItem(it){
+    const d = calcularDias(it);
+    if(d === null) return 3;
+    if(d < 2) return 0;
+    if(d <= 3) return 1;
+    return 2;
+  }
+  items.sort((a,b) => prioridadPorItem(a) - prioridadPorItem(b) || (a.nombre||'').localeCompare(b.nombre||''));
+
+  // crear cards (2 columnas ya definido por CSS)
+  items.forEach(item => {
+    const diasRaw = calcularDias(item);
+    const diasDisplay = (diasRaw === null) ? null : Math.floor(diasRaw); // mostrar entero (más claro)
+    const color = colorPorDias(diasRaw);
+
+    const card = document.createElement('article');
+    card.className = 'card';
+    card.style.setProperty('--colorBorde', color);
+
+    // dni visual top-right
+    const diasHtml = document.createElement('div');
+    diasHtml.className = 'dias-restantes';
+    diasHtml.textContent = (diasDisplay === null) ? 'N/A' : (diasDisplay + (diasDisplay === 1 ? 'd' : 'd'));
+    card.appendChild(diasHtml);
+
+    // contenido
+    const h = document.createElement('h3'); h.textContent = item.nombre || '—';
+    card.appendChild(h);
+
+    // metadatos
+    const p1 = document.createElement('p');
+    p1.innerHTML = `<span class="small"><strong>Cant. total:</strong></span> ${item.cantidad_caja ?? '-'}`;
+    const p2 = document.createElement('p'); p2.innerHTML = `<span class="small"><strong>Peso total:</strong></span> ${item.peso_caja ?? '-'}`;
+    const p3 = document.createElement('p'); p3.innerHTML = `<span class="small"><strong>Cant. disponible:</strong></span> ${item.cantidad_disponible ?? '-'}`;
+    const p4 = document.createElement('p'); p4.innerHTML = `<span class="small"><strong>Peso disponible:</strong></span> ${item.peso_disponible ?? '-'}`;
+    const p5 = document.createElement('p'); p5.innerHTML = `<span class="small"><strong>Uso diario (cant):</strong></span> ${item.uso_diario_cantidad ?? '-'}`;
+    const p6 = document.createElement('p'); p6.innerHTML = `<span class="small"><strong>Uso diario (peso):</strong></span> ${item.uso_diario_peso ?? '-'}`;
+
+    card.appendChild(p1);
+    card.appendChild(p2);
+    card.appendChild(p3);
+    card.appendChild(p4);
+    card.appendChild(p5);
+    card.appendChild(p6);
+
+    // boton actualizar
+    const btn = document.createElement('button');
+    btn.className = 'btn-actualizar';
+    btn.textContent = 'Actualizar';
+    btn.onclick = function(){ abrirModal(item.nombre); };
+    card.appendChild(btn);
+
     grid.appendChild(card);
   });
 }
 
-function filtrarCategoria(cat) {
-  document.querySelectorAll(".nav-buttons button").forEach(btn => btn.classList.remove("active"));
-  event.target.classList.add("active");
-  renderGrid(cat, document.getElementById("buscador").value);
+/* Filtrado y control de botones */
+function getActiveCategory(){
+  const abtn = document.querySelector('.nav-buttons button.active');
+  if(!abtn) return '';
+  const txt = abtn.textContent.trim();
+  return (txt === 'Todos') ? '' : txt;
 }
 
-function filtrarBusqueda() {
-  renderGrid(document.querySelector(".nav-buttons button.active").textContent || "", document.getElementById("buscador").value);
+function filtrarCategoria(cat){
+  // Actualizar clase active en botones
+  document.querySelectorAll('.nav-buttons button').forEach(b => b.classList.remove('active'));
+  // Si cat=='' queremos activar "Todos" botón (texto "Todos")
+  const textToMatch = (cat === '' || cat === null) ? 'Todos' : cat;
+  const btn = Array.from(document.querySelectorAll('.nav-buttons button')).find(b => b.textContent.trim() === textToMatch);
+  if(btn) btn.classList.add('active');
+  // Renderizar
+  const filtro = (textToMatch === 'Todos') ? '' : textToMatch;
+  renderizarInventario(filtro, document.getElementById('buscador').value);
 }
 
-let productoEditando = null;
-function abrirModal(nombre, categoria) {
-  productoEditando = { nombre, categoria };
-  const p = productos[categoria].find(x => x.nombre === nombre);
-  document.getElementById("modalNombre").textContent = nombre;
-  document.getElementById("modalCantidadTotal").value = p.cantidad_caja ?? "";
-  document.getElementById("modalPesoTotal").value = p.peso_caja ?? "";
-  document.getElementById("modalCantidadDisponible").value = p.cantidad_disponible ?? "";
-  document.getElementById("modalPesoDisponible").value = p.peso_disponible ?? "";
-  document.getElementById("modalUsoCantidad").value = p.uso_diario_cantidad ?? "";
-  document.getElementById("modalUsoPeso").value = p.uso_diario_peso ?? "";
-  document.getElementById("modal").style.display = "flex";
+/* Buscador */
+document.getElementById('buscador').addEventListener('input', function(e){
+  renderizarInventario(getActiveCategory(), e.target.value);
+});
+
+/* Modal: abrir con datos del item */
+let productoActual = null;
+function abrirModal(nombre){
+  const flat = listaPlana();
+  productoActual = flat.find(i => i.nombre === nombre);
+  if(!productoActual) return;
+  document.getElementById('modalTitle').textContent = productoActual.nombre || 'Actualizar';
+  document.getElementById('modalCantidadTotal').value = productoActual.cantidad_caja ?? '';
+  document.getElementById('modalPesoTotal').value = productoActual.peso_caja ?? '';
+  document.getElementById('modalCantidadDisponible').value = productoActual.cantidad_disponible ?? '';
+  document.getElementById('modalPesoDisponible').value = productoActual.peso_disponible ?? '';
+  document.getElementById('modalUsoCantidad').value = productoActual.uso_diario_cantidad ?? '';
+  document.getElementById('modalUsoPeso').value = productoActual.uso_diario_peso ?? '';
+  document.getElementById('modal').style.display = 'flex';
 }
 
-function guardarCambios() {
-  const { nombre, categoria } = productoEditando;
-  let p = productos[categoria].find(x => x.nombre === nombre);
-  p.cantidad_caja = Number(document.getElementById("modalCantidadTotal").value) || null;
-  p.peso_caja = Number(document.getElementById("modalPesoTotal").value) || null;
-  p.cantidad_disponible = Number(document.getElementById("modalCantidadDisponible").value) || null;
-  p.peso_disponible = Number(document.getElementById("modalPesoDisponible").value) || null;
-  p.uso_diario_cantidad = Number(document.getElementById("modalUsoCantidad").value) || null;
-  p.uso_diario_peso = Number(document.getElementById("modalUsoPeso").value) || null;
-  localStorage.setItem('inventario', JSON.stringify(productos));
-  document.getElementById("modal").style.display = "none";
-  renderGrid();
+/* Guardar cambios — actualiza localStorage */
+function guardarCambios(){
+  if(!productoActual) return;
+  // Obtener valores numéricos o null
+  function nOrNull(id){
+    const v = document.getElementById(id).value;
+    if(v === '' || v === null) return null;
+    const num = Number(v);
+    return isNaN(num) ? null : num;
+  }
+  productoActual.cantidad_caja = nOrNull('modalCantidadTotal');
+  productoActual.peso_caja = nOrNull('modalPesoTotal');
+  productoActual.cantidad_disponible = nOrNull('modalCantidadDisponible');
+  productoActual.peso_disponible = nOrNull('modalPesoDisponible');
+  productoActual.uso_diario_cantidad = nOrNull('modalUsoCantidad');
+  productoActual.uso_diario_peso = nOrNull('modalUsoPeso');
+  productoActual.fecha_actualizacion = new Date().toISOString();
+
+  // Guardar en inventario (debemos localizar el objeto dentro de inventario por referencia)
+  // Como productoActual es referencia desde la lista plana (objeto dentro de inventario), ya está modificado.
+  localStorage.setItem('inventario', JSON.stringify(inventario));
+  document.getElementById('modal').style.display = 'none';
+  renderizarInventario(getActiveCategory(), document.getElementById('buscador').value);
 }
 
-function descargarJSON() {
-  const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(productos, null, 2));
-  const a = document.createElement("a");
-  a.href = dataStr;
-  a.download = "inventario_actualizado.json";
-  a.click();
+/* Cerrar modal clicando overlay */
+function cerrarSiOverlay(e){
+  if(e.target.id === 'modal') document.getElementById('modal').style.display = 'none';
 }
 
-renderGrid();
+/* Inicial render */
+renderizarInventario();
+
+/* Exponer algunas funciones para usar desde HTML si se quiere */
+window.filtrarCategoria = filtrarCategoria;
+window.abrirModal = abrirModal;
+window.guardarCambios = guardarCambios;
+window.cerrarSiOverlay = cerrarSiOverlay;
 </script>
 </body>
 </html>
