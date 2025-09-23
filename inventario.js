@@ -1,13 +1,25 @@
-const productos = {
+const productos =
+{
   "Quesos": [
     {
       "nombre": "Queso Brie",
       "cantidad_caja": null,
-      "peso_caja": null,
+      "peso_caja": 1330,
       "cantidad_disponible": null,
-      "peso_disponible": null,
+      "peso_disponible": 1330,
       "uso_diario_cantidad": null,
-      "uso_diario_peso": null,
+      "uso_diario_peso": 770,
+      "fecha_actualizacion": null,
+      "categoria": "Quesos"
+    },
+    {
+      "nombre": "Queso de Cabra",
+      "cantidad_caja": 1,
+      "peso_caja": 1000,
+      "cantidad_disponible": 1,
+      "peso_disponible": 1000,
+      "uso_diario_cantidad": null,
+      "uso_diario_peso": 0,
       "fecha_actualizacion": null,
       "categoria": "Quesos"
     },
@@ -18,7 +30,7 @@ const productos = {
       "cantidad_disponible": null,
       "peso_disponible": null,
       "uso_diario_cantidad": null,
-      "uso_diario_peso": null,
+      "uso_diario_peso": 250,
       "fecha_actualizacion": null,
       "categoria": "Quesos"
     },
@@ -29,7 +41,7 @@ const productos = {
       "cantidad_disponible": null,
       "peso_disponible": null,
       "uso_diario_cantidad": null,
-      "uso_diario_peso": null,
+      "uso_diario_peso": 500,
       "fecha_actualizacion": null,
       "categoria": "Quesos"
     },
@@ -40,7 +52,7 @@ const productos = {
       "cantidad_disponible": null,
       "peso_disponible": null,
       "uso_diario_cantidad": null,
-      "uso_diario_peso": null,
+      "uso_diario_peso": 125,
       "fecha_actualizacion": null,
       "categoria": "Quesos"
     },
@@ -51,7 +63,7 @@ const productos = {
       "cantidad_disponible": null,
       "peso_disponible": null,
       "uso_diario_cantidad": null,
-      "uso_diario_peso": null,
+      "uso_diario_peso": 900,
       "fecha_actualizacion": null,
       "categoria": "Quesos"
     },
@@ -62,12 +74,144 @@ const productos = {
       "cantidad_disponible": null,
       "peso_disponible": null,
       "uso_diario_cantidad": null,
-      "uso_diario_peso": null,
+      "uso_diario_peso": 480,
+      "fecha_actualizacion": null,
+      "categoria": "Quesos"
+    },
+    {
+      "nombre": "Lascas Grana Padano",
+      "cantidad_caja": null,
+      "peso_caja": null,
+      "cantidad_disponible": null,
+      "peso_disponible": null,
+      "uso_diario_cantidad": null,
+      "uso_diario_peso": 50,
+      "fecha_actualizacion": null,
+      "categoria": "Quesos"
+    },
+    {
+      "nombre": "Mozzarella Fresca (Minibol)",
+      "cantidad_caja": null,
+      "peso_caja": null,
+      "cantidad_disponible": null,
+      "peso_disponible": null,
+      "uso_diario_cantidad": null,
+      "uso_diario_peso": 30,
       "fecha_actualizacion": null,
       "categoria": "Quesos"
     }
   ],
   "Dulces": [
+    {
+      "nombre": "Bretzel Gloria simples",
+      "cantidad_caja": 32,
+      "peso_caja": null,
+      "cantidad_disponible": 32,
+      "peso_disponible": null,
+      "uso_diario_cantidad": 6,
+      "uso_diario_peso": null,
+      "fecha_actualizacion": null,
+      "categoria": "Dulces"
+    },
+    {
+      "nombre": "Croissant de cereales",
+      "cantidad_caja": 38,
+      "peso_caja": null,
+      "cantidad_disponible": 38,
+      "peso_disponible": null,
+      "uso_diario_cantidad": 20,
+      "uso_diario_peso": null,
+      "fecha_actualizacion": null,
+      "categoria": "Dulces"
+    },
+    {
+      "nombre": "Crujiente de manzana",
+      "cantidad_caja": 25,
+      "peso_caja": null,
+      "cantidad_disponible": 25,
+      "peso_disponible": null,
+      "uso_diario_cantidad": 5,
+      "uso_diario_peso": null,
+      "fecha_actualizacion": null,
+      "categoria": "Dulces"
+    },
+    {
+      "nombre": "Galleta de leche chocolate",
+      "cantidad_caja": 40,
+      "peso_caja": null,
+      "cantidad_disponible": 40,
+      "peso_disponible": null,
+      "uso_diario_cantidad": null,
+      "uso_diario_peso": null,
+      "fecha_actualizacion": null,
+      "categoria": "Dulces"
+    },
+    {
+      "nombre": "Galleta de chocolate blanco",
+      "cantidad_caja": 40,
+      "peso_caja": null,
+      "cantidad_disponible": 40,
+      "peso_disponible": null,
+      "uso_diario_cantidad": null,
+      "uso_diario_peso": null,
+      "fecha_actualizacion": null,
+      "categoria": "Dulces"
+    },
+    {
+      "nombre": "Palmeritas",
+      "cantidad_caja": 278,
+      "peso_caja": null,
+      "cantidad_disponible": null,
+      "peso_disponible": null,
+      "uso_diario_cantidad": null,
+      "uso_diario_peso": null,
+      "fecha_actualizacion": null,
+      "categoria": "Dulces"
+    },
+    {
+      "nombre": "Big Dots Panadero",
+      "cantidad_caja": 36,
+      "peso_caja": null,
+      "cantidad_disponible": 36,
+      "peso_disponible": null,
+      "uso_diario_cantidad": null,
+      "uso_diario_peso": null,
+      "fecha_actualizacion": null,
+      "categoria": "Dulces"
+    },
+    {
+      "nombre": "Mini Crodots",
+      "cantidad_caja": 54,
+      "peso_caja": null,
+      "cantidad_disponible": 54,
+      "peso_disponible": null,
+      "uso_diario_cantidad": null,
+      "uso_diario_peso": null,
+      "fecha_actualizacion": null,
+      "categoria": "Dulces"
+    },
+    {
+      "nombre": "Roll de canela",
+      "cantidad_caja": 48,
+      "peso_caja": null,
+      "cantidad_disponible": 48,
+      "peso_disponible": null,
+      "uso_diario_cantidad": 6,
+      "uso_diario_peso": null,
+      "fecha_actualizacion": null,
+      "categoria": "Dulces"
+    },
+    {
+      "nombre": "Ensaimadas",
+      "cantidad_caja": 80,
+      "peso_caja": null,
+      "cantidad_disponible": 80,
+      "peso_disponible": null,
+      "uso_diario_cantidad": null,
+      "uso_diario_peso": null,
+      "fecha_actualizacion": null,
+      "categoria": "Dulces"
+    },
     {
       "nombre": "Cookie vainilla",
       "cantidad_caja": null,
@@ -196,7 +340,7 @@ const productos = {
       "cantidad_disponible": null,
       "peso_disponible": null,
       "uso_diario_cantidad": null,
-      "uso_diario_peso": null,
+      "uso_diario_peso": 30,
       "fecha_actualizacion": null,
       "categoria": "Dulces"
     },
@@ -207,7 +351,7 @@ const productos = {
       "cantidad_disponible": null,
       "peso_disponible": null,
       "uso_diario_cantidad": null,
-      "uso_diario_peso": null,
+      "uso_diario_peso": 80,
       "fecha_actualizacion": null,
       "categoria": "Dulces"
     },
@@ -240,7 +384,7 @@ const productos = {
       "cantidad_disponible": null,
       "peso_disponible": null,
       "uso_diario_cantidad": null,
-      "uso_diario_peso": null,
+      "uso_diario_peso": 22,
       "fecha_actualizacion": null,
       "categoria": "Dulces"
     },
@@ -298,17 +442,39 @@ const productos = {
       "uso_diario_peso": null,
       "fecha_actualizacion": null,
       "categoria": "Dulces"
+    },
+    {
+      "nombre": "Croissant Paris Chocolate",
+      "cantidad_caja": 64,
+      "peso_caja": null,
+      "cantidad_disponible": null,
+      "peso_disponible": null,
+      "uso_diario_cantidad": 10,
+      "uso_diario_peso": null,
+      "fecha_actualizacion": null,
+      "categoria": "Dulces"
+    },
+    {
+      "nombre": "Croissant Margarina Selección",
+      "cantidad_caja": 64,
+      "peso_caja": null,
+      "cantidad_disponible": null,
+      "peso_disponible": null,
+      "uso_diario_cantidad": null,
+      "uso_diario_peso": null,
+      "fecha_actualizacion": null,
+      "categoria": "Dulces"
     }
   ],
   "Embutidos": [
     {
       "nombre": "Bacon",
       "cantidad_caja": null,
-      "peso_caja": null,
+      "peso_caja": 2000,
       "cantidad_disponible": null,
-      "peso_disponible": null,
+      "peso_disponible": 2000,
       "uso_diario_cantidad": null,
-      "uso_diario_peso": null,
+      "uso_diario_peso": 447,
       "fecha_actualizacion": null,
       "categoria": "Embutidos"
     },
@@ -319,7 +485,7 @@ const productos = {
       "cantidad_disponible": null,
       "peso_disponible": null,
       "uso_diario_cantidad": null,
-      "uso_diario_peso": null,
+      "uso_diario_peso": 1075,
       "fecha_actualizacion": null,
       "categoria": "Embutidos"
     },
@@ -330,7 +496,7 @@ const productos = {
       "cantidad_disponible": null,
       "peso_disponible": null,
       "uso_diario_cantidad": null,
-      "uso_diario_peso": null,
+      "uso_diario_peso": 405,
       "fecha_actualizacion": null,
       "categoria": "Embutidos"
     },
@@ -352,7 +518,7 @@ const productos = {
       "cantidad_disponible": null,
       "peso_disponible": null,
       "uso_diario_cantidad": null,
-      "uso_diario_peso": null,
+      "uso_diario_peso": 100,
       "fecha_actualizacion": null,
       "categoria": "Embutidos"
     },
@@ -368,50 +534,15 @@ const productos = {
       "categoria": "Embutidos"
     }
   ],
-  "Ensaladas": [
-    {
-      "nombre": "Ensalada campestre",
-      "cantidad_caja": null,
-      "peso_caja": null,
-      "cantidad_disponible": null,
-      "peso_disponible": null,
-      "uso_diario_cantidad": null,
-      "uso_diario_peso": null,
-      "fecha_actualizacion": null,
-      "categoria": "Ensaladas"
-    },
-    {
-      "nombre": "Espinacas brotes",
-      "cantidad_caja": null,
-      "peso_caja": null,
-      "cantidad_disponible": null,
-      "peso_disponible": null,
-      "uso_diario_cantidad": null,
-      "uso_diario_peso": null,
-      "fecha_actualizacion": null,
-      "categoria": "Ensaladas"
-    },
-    {
-      "nombre": "Rúcula",
-      "cantidad_caja": null,
-      "peso_caja": null,
-      "cantidad_disponible": null,
-      "peso_disponible": null,
-      "uso_diario_cantidad": null,
-      "uso_diario_peso": null,
-      "fecha_actualizacion": null,
-      "categoria": "Ensaladas"
-    }
-  ],
   "Frutas y Verduras": [
     {
-      "nombre": "Aguacate pulpa",
+      "nombre": "Pulpa de aguacate",
       "cantidad_caja": null,
-      "peso_caja": null,
+      "peso_caja": 500,
       "cantidad_disponible": null,
-      "peso_disponible": null,
+      "peso_disponible": 500,
       "uso_diario_cantidad": null,
-      "uso_diario_peso": null,
+      "uso_diario_peso": 600,
       "fecha_actualizacion": null,
       "categoria": "Frutas y Verduras"
     },
@@ -422,18 +553,18 @@ const productos = {
       "cantidad_disponible": null,
       "peso_disponible": null,
       "uso_diario_cantidad": null,
-      "uso_diario_peso": null,
+      "uso_diario_peso": 180,
       "fecha_actualizacion": null,
       "categoria": "Frutas y Verduras"
     },
     {
       "nombre": "Edamame (Mukimame)",
-      "cantidad_caja": null,
-      "peso_caja": null,
+      "cantidad_caja": 5,
+      "peso_caja": 5000,
       "cantidad_disponible": null,
       "peso_disponible": null,
       "uso_diario_cantidad": null,
-      "uso_diario_peso": null,
+      "uso_diario_peso": 40,
       "fecha_actualizacion": null,
       "categoria": "Frutas y Verduras"
     },
@@ -444,18 +575,18 @@ const productos = {
       "cantidad_disponible": null,
       "peso_disponible": null,
       "uso_diario_cantidad": null,
-      "uso_diario_peso": null,
+      "uso_diario_peso": 70,
       "fecha_actualizacion": null,
       "categoria": "Frutas y Verduras"
     },
     {
-      "nombre": "Tomate (abierto)",
+      "nombre": "Tomate Pera (triturado o fresco)",
       "cantidad_caja": null,
       "peso_caja": null,
       "cantidad_disponible": null,
       "peso_disponible": null,
       "uso_diario_cantidad": null,
-      "uso_diario_peso": null,
+      "uso_diario_peso": 605,
       "fecha_actualizacion": null,
       "categoria": "Frutas y Verduras"
     },
@@ -466,7 +597,7 @@ const productos = {
       "cantidad_disponible": null,
       "peso_disponible": null,
       "uso_diario_cantidad": null,
-      "uso_diario_peso": null,
+      "uso_diario_peso": 172,
       "fecha_actualizacion": null,
       "categoria": "Frutas y Verduras"
     },
@@ -477,7 +608,7 @@ const productos = {
       "cantidad_disponible": null,
       "peso_disponible": null,
       "uso_diario_cantidad": null,
-      "uso_diario_peso": null,
+      "uso_diario_peso": 320,
       "fecha_actualizacion": null,
       "categoria": "Frutas y Verduras"
     },
@@ -488,7 +619,7 @@ const productos = {
       "cantidad_disponible": null,
       "peso_disponible": null,
       "uso_diario_cantidad": null,
-      "uso_diario_peso": null,
+      "uso_diario_peso": 50,
       "fecha_actualizacion": null,
       "categoria": "Frutas y Verduras"
     },
@@ -521,205 +652,56 @@ const productos = {
       "cantidad_disponible": null,
       "peso_disponible": null,
       "uso_diario_cantidad": null,
-      "uso_diario_peso": null,
+      "uso_diario_peso": 30,
+      "fecha_actualizacion": null,
+      "categoria": "Frutas y Verduras"
+    },
+    {
+      "nombre": "Hierbabuena",
+      "cantidad_caja": null,
+      "peso_caja": null,
+      "cantidad_disponible": null,
+      "peso_disponible": null,
+      "uso_diario_cantidad": null,
+      "uso_diario_peso": 4,
+      "fecha_actualizacion": null,
+      "categoria": "Frutas y Verduras"
+    },
+    {
+      "nombre": "Micro Mézclum",
+      "cantidad_caja": null,
+      "peso_caja": null,
+      "cantidad_disponible": null,
+      "peso_disponible": null,
+      "uso_diario_cantidad": null,
+      "uso_diario_peso": 48,
       "fecha_actualizacion": null,
       "categoria": "Frutas y Verduras"
     }
   ],
-  "Pan": [
-    {
-      "nombre": "Pan espelta rebanado",
-      "cantidad_caja": null,
-      "peso_caja": null,
-      "cantidad_disponible": null,
-      "peso_disponible": null,
-      "uso_diario_cantidad": null,
-      "uso_diario_peso": null,
-      "fecha_actualizacion": null,
-      "categoria": "Pan"
-    },
-    {
-      "nombre": "Pan molde brioche",
-      "cantidad_caja": null,
-      "peso_caja": null,
-      "cantidad_disponible": null,
-      "peso_disponible": null,
-      "uso_diario_cantidad": null,
-      "uso_diario_peso": null,
-      "fecha_actualizacion": null,
-      "categoria": "Pan"
-    },
-    {
-      "nombre": "Pan molde wholegrain",
-      "cantidad_caja": null,
-      "peso_caja": null,
-      "cantidad_disponible": null,
-      "peso_disponible": null,
-      "uso_diario_cantidad": null,
-      "uso_diario_peso": null,
-      "fecha_actualizacion": null,
-      "categoria": "Pan"
-    },
-    {
-      "nombre": "Flautín",
-      "cantidad_caja": null,
-      "peso_caja": null,
-      "cantidad_disponible": null,
-      "peso_disponible": null,
-      "uso_diario_cantidad": null,
-      "uso_diario_peso": null,
-      "fecha_actualizacion": null,
-      "categoria": "Pan"
-    },
-    {
-      "nombre": "Base focaccia tomate cherry",
-      "cantidad_caja": null,
-      "peso_caja": null,
-      "cantidad_disponible": null,
-      "peso_disponible": null,
-      "uso_diario_cantidad": null,
-      "uso_diario_peso": null,
-      "fecha_actualizacion": null,
-      "categoria": "Pan"
-    },
-    {
-      "nombre": "Focaccia masa",
-      "cantidad_caja": null,
-      "peso_caja": null,
-      "cantidad_disponible": null,
-      "peso_disponible": null,
-      "uso_diario_cantidad": null,
-      "uso_diario_peso": null,
-      "fecha_actualizacion": null,
-      "categoria": "Pan"
-    }
-  ],
-  "Cremas y Salsas": [
-    {
-      "nombre": "Mayonesa",
-      "cantidad_caja": null,
-      "peso_caja": null,
-      "cantidad_disponible": null,
-      "peso_disponible": null,
-      "uso_diario_cantidad": null,
-      "uso_diario_peso": null,
-      "fecha_actualizacion": null,
-      "categoria": "Cremas y Salsas"
-    },
-    {
-      "nombre": "Mayonesa de trufa",
-      "cantidad_caja": null,
-      "peso_caja": null,
-      "cantidad_disponible": null,
-      "peso_disponible": null,
-      "uso_diario_cantidad": null,
-      "uso_diario_peso": null,
-      "fecha_actualizacion": null,
-      "categoria": "Cremas y Salsas"
-    },
-    {
-      "nombre": "Salsa César",
-      "cantidad_caja": null,
-      "peso_caja": null,
-      "cantidad_disponible": null,
-      "peso_disponible": null,
-      "uso_diario_cantidad": null,
-      "uso_diario_peso": null,
-      "fecha_actualizacion": null,
-      "categoria": "Cremas y Salsas"
-    },
-    {
-      "nombre": "Salsa holandesa",
-      "cantidad_caja": null,
-      "peso_caja": null,
-      "cantidad_disponible": null,
-      "peso_disponible": null,
-      "uso_diario_cantidad": null,
-      "uso_diario_peso": null,
-      "fecha_actualizacion": null,
-      "categoria": "Cremas y Salsas"
-    },
-    {
-      "nombre": "Crema pastelera saco",
-      "cantidad_caja": null,
-      "peso_caja": null,
-      "cantidad_disponible": null,
-      "peso_disponible": null,
-      "uso_diario_cantidad": null,
-      "uso_diario_peso": null,
-      "fecha_actualizacion": null,
-      "categoria": "Cremas y Salsas"
-    },
-    {
-      "nombre": "Crema pistacho",
-      "cantidad_caja": null,
-      "peso_caja": null,
-      "cantidad_disponible": null,
-      "peso_disponible": null,
-      "uso_diario_cantidad": null,
-      "uso_diario_peso": null,
-      "fecha_actualizacion": null,
-      "categoria": "Cremas y Salsas"
-    }
-  ],
-  "Tartas": [
-    {
-      "nombre": "Tarta de queso",
-      "cantidad_caja": null,
-      "peso_caja": null,
-      "cantidad_disponible": null,
-      "peso_disponible": null,
-      "uso_diario_cantidad": null,
-      "uso_diario_peso": null,
-      "fecha_actualizacion": null,
-      "categoria": "Tartas"
-    },
-    {
-      "nombre": "Tarta mouse chocolate",
-      "cantidad_caja": null,
-      "peso_caja": null,
-      "cantidad_disponible": null,
-      "peso_disponible": null,
-      "uso_diario_cantidad": null,
-      "uso_diario_peso": null,
-      "fecha_actualizacion": null,
-      "categoria": "Tartas"
-    },
-    {
-      "nombre": "Tarta red velvet",
-      "cantidad_caja": null,
-      "peso_caja": null,
-      "cantidad_disponible": null,
-      "peso_disponible": null,
-      "uso_diario_cantidad": null,
-      "uso_diario_peso": null,
-      "fecha_actualizacion": null,
-      "categoria": "Tartas"
-    },
-    {
-      "nombre": "Tarta zanahoria flor",
-      "cantidad_caja": null,
-      "peso_caja": null,
-      "cantidad_disponible": null,
-      "peso_disponible": null,
-      "uso_diario_cantidad": null,
-      "uso_diario_peso": null,
-      "fecha_actualizacion": null,
-      "categoria": "Tartas"
-    },
-    {
-      "nombre": "Brownie",
-      "cantidad_caja": null,
-      "peso_caja": null,
-      "cantidad_disponible": null,
-      "peso_disponible": null,
-      "uso_diario_cantidad": null,
-      "uso_diario_peso": null,
-      "fecha_actualizacion": null,
-      "categoria": "Tartas"
-    }
-  ],
   "Otros": [
+    {
+      "nombre": "Pollo desmenuzado",
+      "cantidad_caja": null,
+      "peso_caja": 1000,
+      "cantidad_disponible": null,
+      "peso_disponible": 1000,
+      "uso_diario_cantidad": null,
+      "uso_diario_peso": 50,
+      "fecha_actualizacion": null,
+      "categoria": "Otros"
+    },
+    {
+      "nombre": "Tortilla francesa",
+      "cantidad_caja": 75,
+      "peso_caja": null,
+      "cantidad_disponible": 75,
+      "peso_disponible": null,
+      "uso_diario_cantidad": 5,
+      "uso_diario_peso": null,
+      "fecha_actualizacion": null,
+      "categoria": "Otros"
+    },
     {
       "nombre": "Arroz integral",
       "cantidad_caja": null,
@@ -727,18 +709,7 @@ const productos = {
       "cantidad_disponible": null,
       "peso_disponible": null,
       "uso_diario_cantidad": null,
-      "uso_diario_peso": null,
-      "fecha_actualizacion": null,
-      "categoria": "Otros"
-    },
-    {
-      "nombre": "Pollo asado deshebrado",
-      "cantidad_caja": null,
-      "peso_caja": null,
-      "cantidad_disponible": null,
-      "peso_disponible": null,
-      "uso_diario_cantidad": null,
-      "uso_diario_peso": null,
+      "uso_diario_peso": 80,
       "fecha_actualizacion": null,
       "categoria": "Otros"
     },
@@ -749,29 +720,7 @@ const productos = {
       "cantidad_disponible": null,
       "peso_disponible": null,
       "uso_diario_cantidad": null,
-      "uso_diario_peso": null,
-      "fecha_actualizacion": null,
-      "categoria": "Otros"
-    },
-    {
-      "nombre": "Tortilla campera",
-      "cantidad_caja": null,
-      "peso_caja": null,
-      "cantidad_disponible": null,
-      "peso_disponible": null,
-      "uso_diario_cantidad": null,
-      "uso_diario_peso": null,
-      "fecha_actualizacion": null,
-      "categoria": "Otros"
-    },
-    {
-      "nombre": "Tortilla francesa",
-      "cantidad_caja": null,
-      "peso_caja": null,
-      "cantidad_disponible": null,
-      "peso_disponible": null,
-      "uso_diario_cantidad": null,
-      "uso_diario_peso": null,
+      "uso_diario_peso": 330,
       "fecha_actualizacion": null,
       "categoria": "Otros"
     },
@@ -782,7 +731,7 @@ const productos = {
       "cantidad_disponible": null,
       "peso_disponible": null,
       "uso_diario_cantidad": null,
-      "uso_diario_peso": null,
+      "uso_diario_peso": 130,
       "fecha_actualizacion": null,
       "categoria": "Otros"
     },
@@ -804,7 +753,7 @@ const productos = {
       "cantidad_disponible": null,
       "peso_disponible": null,
       "uso_diario_cantidad": null,
-      "uso_diario_peso": null,
+      "uso_diario_peso": 12,
       "fecha_actualizacion": null,
       "categoria": "Otros"
     },
@@ -815,7 +764,7 @@ const productos = {
       "cantidad_disponible": null,
       "peso_disponible": null,
       "uso_diario_cantidad": null,
-      "uso_diario_peso": null,
+      "uso_diario_peso": 10,
       "fecha_actualizacion": null,
       "categoria": "Otros"
     },
@@ -825,7 +774,7 @@ const productos = {
       "peso_caja": null,
       "cantidad_disponible": null,
       "peso_disponible": null,
-      "uso_diario_cantidad": null,
+      "uso_diario_cantidad": 5,
       "uso_diario_peso": null,
       "fecha_actualizacion": null,
       "categoria": "Otros"
@@ -837,7 +786,7 @@ const productos = {
       "cantidad_disponible": null,
       "peso_disponible": null,
       "uso_diario_cantidad": null,
-      "uso_diario_peso": null,
+      "uso_diario_peso": 210,
       "fecha_actualizacion": null,
       "categoria": "Otros"
     },
@@ -848,7 +797,7 @@ const productos = {
       "cantidad_disponible": null,
       "peso_disponible": null,
       "uso_diario_cantidad": null,
-      "uso_diario_peso": null,
+      "uso_diario_peso": 30,
       "fecha_actualizacion": null,
       "categoria": "Otros"
     },
@@ -859,7 +808,7 @@ const productos = {
       "cantidad_disponible": null,
       "peso_disponible": null,
       "uso_diario_cantidad": null,
-      "uso_diario_peso": null,
+      "uso_diario_peso": 27,
       "fecha_actualizacion": null,
       "categoria": "Otros"
     },
@@ -870,7 +819,7 @@ const productos = {
       "cantidad_disponible": null,
       "peso_disponible": null,
       "uso_diario_cantidad": null,
-      "uso_diario_peso": null,
+      "uso_diario_peso": 10,
       "fecha_actualizacion": null,
       "categoria": "Otros"
     },
@@ -903,7 +852,7 @@ const productos = {
       "cantidad_disponible": null,
       "peso_disponible": null,
       "uso_diario_cantidad": null,
-      "uso_diario_peso": null,
+      "uso_diario_peso": 6.5,
       "fecha_actualizacion": null,
       "categoria": "Otros"
     },
@@ -914,9 +863,394 @@ const productos = {
       "cantidad_disponible": null,
       "peso_disponible": null,
       "uso_diario_cantidad": null,
+      "uso_diario_peso": 15,
+      "fecha_actualizacion": null,
+      "categoria": "Otros"
+    },
+    {
+      "nombre": "Sal Fina",
+      "cantidad_caja": null,
+      "peso_caja": null,
+      "cantidad_disponible": null,
+      "peso_disponible": null,
+      "uso_diario_cantidad": null,
+      "uso_diario_peso": 37,
+      "fecha_actualizacion": null,
+      "categoria": "Otros"
+    },
+    {
+      "nombre": "Anagrama Choco Santagloria",
+      "cantidad_caja": null,
+      "peso_caja": null,
+      "cantidad_disponible": null,
+      "peso_disponible": null,
+      "uso_diario_cantidad": 5,
       "uso_diario_peso": null,
       "fecha_actualizacion": null,
       "categoria": "Otros"
+    },
+    {
+      "nombre": "Flor Comestible",
+      "cantidad_caja": null,
+      "peso_caja": null,
+      "cantidad_disponible": null,
+      "peso_disponible": null,
+      "uso_diario_cantidad": 15,
+      "uso_diario_peso": null,
+      "fecha_actualizacion": null,
+      "categoria": "Otros"
+    },
+    {
+      "nombre": "Leche Pascual Intense",
+      "cantidad_caja": null,
+      "peso_caja": null,
+      "cantidad_disponible": null,
+      "peso_disponible": null,
+      "uso_diario_cantidad": null,
+      "uso_diario_peso": 3,
+      "fecha_actualizacion": null,
+      "categoria": "Otros"
+    },
+    {
+      "nombre": "Pasta Rigatoni",
+      "cantidad_caja": null,
+      "peso_caja": null,
+      "cantidad_disponible": null,
+      "peso_disponible": null,
+      "uso_diario_cantidad": null,
+      "uso_diario_peso": 160,
+      "fecha_actualizacion": null,
+      "categoria": "Otros"
+    }
+  ],
+  "Pan": [
+    {
+      "nombre": "Pan molde wholegrain",
+      "cantidad_caja": 10,
+      "peso_caja": null,
+      "cantidad_disponible": 10,
+      "peso_disponible": null,
+      "uso_diario_cantidad": 20,
+      "uso_diario_peso": null,
+      "fecha_actualizacion": null,
+      "categoria": "Pan"
+    },
+    {
+      "nombre": "Croissant mantequilla",
+      "cantidad_caja": 56,
+      "peso_caja": null,
+      "cantidad_disponible": 56,
+      "peso_disponible": null,
+      "uso_diario_cantidad": 70,
+      "uso_diario_peso": null,
+      "fecha_actualizacion": null,
+      "categoria": "Pan"
+    },
+    {
+      "nombre": "Baguette gran reserva",
+      "cantidad_caja": 26,
+      "peso_caja": null,
+      "cantidad_disponible": 26,
+      "peso_disponible": null,
+      "uso_diario_cantidad": 3,
+      "uso_diario_peso": null,
+      "fecha_actualizacion": null,
+      "categoria": "Pan"
+    },
+    {
+      "nombre": "Pan Payés",
+      "cantidad_caja": 10,
+      "peso_caja": null,
+      "cantidad_disponible": 10,
+      "peso_disponible": null,
+      "uso_diario_cantidad": null,
+      "uso_diario_peso": null,
+      "fecha_actualizacion": null,
+      "categoria": "Pan"
+    },
+    {
+      "nombre": "Pan Omega",
+      "cantidad_caja": 55,
+      "peso_caja": null,
+      "cantidad_disponible": 55,
+      "peso_disponible": null,
+      "uso_diario_cantidad": 2,
+      "uso_diario_peso": null,
+      "fecha_actualizacion": null,
+      "categoria": "Pan"
+    },
+    {
+      "nombre": "Pan espelta rebanado",
+      "cantidad_caja": null,
+      "peso_caja": null,
+      "cantidad_disponible": null,
+      "peso_disponible": null,
+      "uso_diario_cantidad": 25,
+      "uso_diario_peso": null,
+      "fecha_actualizacion": null,
+      "categoria": "Pan"
+    },
+    {
+      "nombre": "Pan molde brioche",
+      "cantidad_caja": null,
+      "peso_caja": null,
+      "cantidad_disponible": null,
+      "peso_disponible": null,
+      "uso_diario_cantidad": 30,
+      "uso_diario_peso": null,
+      "fecha_actualizacion": null,
+      "categoria": "Pan"
+    },
+    {
+      "nombre": "Flautín",
+      "cantidad_caja": null,
+      "peso_caja": null,
+      "cantidad_disponible": null,
+      "peso_disponible": null,
+      "uso_diario_cantidad": 2,
+      "uso_diario_peso": null,
+      "fecha_actualizacion": null,
+      "categoria": "Pan"
+    },
+    {
+      "nombre": "Base focaccia tomate cherry",
+      "cantidad_caja": null,
+      "peso_caja": null,
+      "cantidad_disponible": null,
+      "peso_disponible": null,
+      "uso_diario_cantidad": 1,
+      "uso_diario_peso": null,
+      "fecha_actualizacion": null,
+      "categoria": "Pan"
+    },
+    {
+      "nombre": "Media Santagloria (pan normal)",
+      "cantidad_caja": 26,
+      "peso_caja": null,
+      "cantidad_disponible": null,
+      "peso_disponible": null,
+      "uso_diario_cantidad": 9,
+      "uso_diario_peso": null,
+      "fecha_actualizacion": null,
+      "categoria": "Pan"
+    },
+    {
+      "nombre": "Hogaza Whole Grain (pan integral)",
+      "cantidad_caja": null,
+      "peso_caja": null,
+      "cantidad_disponible": null,
+      "peso_disponible": null,
+      "uso_diario_cantidad": 3,
+      "uso_diario_peso": null,
+      "fecha_actualizacion": null,
+      "categoria": "Pan"
+    },
+    {
+      "nombre": "Croissant Pequeño Mantequilla (glorias)",
+      "cantidad_caja": 260,
+      "peso_caja": null,
+      "cantidad_disponible": null,
+      "peso_disponible": null,
+      "uso_diario_cantidad": 59,
+      "uso_diario_peso": null,
+      "fecha_actualizacion": null,
+      "categoria": "Pan"
+    },
+    {
+      "nombre": "Baguette Cereal",
+      "cantidad_caja": 26,
+      "peso_caja": null,
+      "cantidad_disponible": null,
+      "peso_disponible": null,
+      "uso_diario_cantidad": null,
+      "uso_diario_peso": null,
+      "fecha_actualizacion": null,
+      "categoria": "Pan"
+    },
+    {
+      "nombre": "Baguette Integral Salvado",
+      "cantidad_caja": 26,
+      "peso_caja": null,
+      "cantidad_disponible": null,
+      "peso_disponible": null,
+      "uso_diario_cantidad": null,
+      "uso_diario_peso": null,
+      "fecha_actualizacion": null,
+      "categoria": "Pan"
+    }
+  ],
+  "Carnes": [
+    {
+      "nombre": "Carne Picada",
+      "cantidad_caja": null,
+      "peso_caja": 500,
+      "cantidad_disponible": null,
+      "peso_disponible": 500,
+      "uso_diario_cantidad": null,
+      "uso_diario_peso": null,
+      "fecha_actualizacion": null,
+      "categoria": "Carnes"
+    }
+  ],
+  "Ensaladas": [
+    {
+      "nombre": "Ensalada campestre",
+      "cantidad_caja": null,
+      "peso_caja": null,
+      "cantidad_disponible": null,
+      "peso_disponible": null,
+      "uso_diario_cantidad": null,
+      "uso_diario_peso": 110,
+      "fecha_actualizacion": null,
+      "categoria": "Ensaladas"
+    },
+    {
+      "nombre": "Espinacas brotes",
+      "cantidad_caja": null,
+      "peso_caja": null,
+      "cantidad_disponible": null,
+      "peso_disponible": null,
+      "uso_diario_cantidad": null,
+      "uso_diario_peso": 105,
+      "fecha_actualizacion": null,
+      "categoria": "Ensaladas"
+    },
+    {
+      "nombre": "Rúcula",
+      "cantidad_caja": null,
+      "peso_caja": null,
+      "cantidad_disponible": null,
+      "peso_disponible": null,
+      "uso_diario_cantidad": null,
+      "uso_diario_peso": 65,
+      "fecha_actualizacion": null,
+      "categoria": "Ensaladas"
+    }
+  ],
+  "Cremas y Salsas": [
+    {
+      "nombre": "Mayonesa",
+      "cantidad_caja": null,
+      "peso_caja": null,
+      "cantidad_disponible": null,
+      "peso_disponible": null,
+      "uso_diario_cantidad": null,
+      "uso_diario_peso": 140,
+      "fecha_actualizacion": null,
+      "categoria": "Cremas y Salsas"
+    },
+    {
+      "nombre": "Mayonesa de trufa",
+      "cantidad_caja": null,
+      "peso_caja": null,
+      "cantidad_disponible": null,
+      "peso_disponible": null,
+      "uso_diario_cantidad": null,
+      "uso_diario_peso": 230,
+      "fecha_actualizacion": null,
+      "categoria": "Cremas y Salsas"
+    },
+    {
+      "nombre": "Salsa César",
+      "cantidad_caja": null,
+      "peso_caja": null,
+      "cantidad_disponible": null,
+      "peso_disponible": null,
+      "uso_diario_cantidad": null,
+      "uso_diario_peso": null,
+      "fecha_actualizacion": null,
+      "categoria": "Cremas y Salsas"
+    },
+    {
+      "nombre": "Salsa holandesa",
+      "cantidad_caja": null,
+      "peso_caja": null,
+      "cantidad_disponible": null,
+      "peso_disponible": null,
+      "uso_diario_cantidad": null,
+      "uso_diario_peso": 147,
+      "fecha_actualizacion": null,
+      "categoria": "Cremas y Salsas"
+    },
+    {
+      "nombre": "Crema pastelera saco",
+      "cantidad_caja": null,
+      "peso_caja": null,
+      "cantidad_disponible": null,
+      "peso_disponible": null,
+      "uso_diario_cantidad": null,
+      "uso_diario_peso": null,
+      "fecha_actualizacion": null,
+      "categoria": "Cremas y Salsas"
+    },
+    {
+      "nombre": "Crema pistacho",
+      "cantidad_caja": null,
+      "peso_caja": null,
+      "cantidad_disponible": null,
+      "peso_disponible": null,
+      "uso_diario_cantidad": null,
+      "uso_diario_peso": null,
+      "fecha_actualizacion": null,
+      "categoria": "Cremas y Salsas"
+    }
+  ],
+  "Tartas": [
+    {
+      "nombre": "Tarta de queso",
+      "cantidad_caja": 16,
+      "peso_caja": null,
+      "cantidad_disponible": null,
+      "peso_disponible": null,
+      "uso_diario_cantidad": null,
+      "uso_diario_peso": null,
+      "fecha_actualizacion": null,
+      "categoria": "Tartas"
+    },
+    {
+      "nombre": "Tarta mouse chocolate",
+      "cantidad_caja": 16,
+      "peso_caja": null,
+      "cantidad_disponible": null,
+      "peso_disponible": null,
+      "uso_diario_cantidad": null,
+      "uso_diario_peso": null,
+      "fecha_actualizacion": null,
+      "categoria": "Tartas"
+    },
+    {
+      "nombre": "Tarta red velvet",
+      "cantidad_caja": null,
+      "peso_caja": null,
+      "cantidad_disponible": null,
+      "peso_disponible": null,
+      "uso_diario_cantidad": null,
+      "uso_diario_peso": null,
+      "fecha_actualizacion": null,
+      "categoria": "Tartas"
+    },
+    {
+      "nombre": "Tarta zanahoria flor",
+      "cantidad_caja": 16,
+      "peso_caja": null,
+      "cantidad_disponible": null,
+      "peso_disponible": null,
+      "uso_diario_cantidad": null,
+      "uso_diario_peso": null,
+      "fecha_actualizacion": null,
+      "categoria": "Tartas"
+    },
+    {
+      "nombre": "Brownie",
+      "cantidad_caja": null,
+      "peso_caja": null,
+      "cantidad_disponible": null,
+      "peso_disponible": null,
+      "uso_diario_cantidad": null,
+      "uso_diario_peso": null,
+      "fecha_actualizacion": null,
+      "categoria": "Tartas"
     }
   ]
 }
+
