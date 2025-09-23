@@ -144,10 +144,11 @@ const productos = {
   ]
 };
 
-const obradorData = {
+ const obradorData = {
   "productos": [
     {
       "nombre": "Gloria Básica",
+      "categoria": "Bollería Dulce",
       "descongelacion": "Hornear desde congelado.",
       "horno_temp": "185°C",
       "horno_prog": "1",
@@ -158,6 +159,7 @@ const obradorData = {
     },
     {
       "nombre": "Gloria Chocolate",
+      "categoria": "Bollería Dulce",
       "descongelacion": "Usar Gloria Básica ya horneada y fría.",
       "horno_temp": "-",
       "horno_prog": "-",
@@ -168,6 +170,7 @@ const obradorData = {
     },
     {
       "nombre": "Gloria Chocolate Blanco",
+      "categoria": "Bollería Dulce",
       "descongelacion": "Usar Gloria Básica ya horneada y fría.",
       "horno_temp": "-",
       "horno_prog": "-",
@@ -178,6 +181,7 @@ const obradorData = {
     },
     {
       "nombre": "Gloria Pistacho",
+      "categoria": "Bollería Dulce",
       "descongelacion": "Usar Gloria Básica ya horneada y fría.",
       "horno_temp": "-",
       "horno_prog": "-",
@@ -188,6 +192,7 @@ const obradorData = {
     },
     {
       "nombre": "Supergloria Lotus",
+      "categoria": "Bollería Dulce",
       "descongelacion": "Usar Gloria Básica ya horneada y fría.",
       "horno_temp": "-",
       "horno_prog": "-",
@@ -198,6 +203,7 @@ const obradorData = {
     },
     {
       "nombre": "Supergloria Oreo",
+      "categoria": "Bollería Dulce",
       "descongelacion": "Usar Gloria Básica ya horneada y fría.",
       "horno_temp": "-",
       "horno_prog": "-",
@@ -207,27 +213,8 @@ const obradorData = {
       "preparacion": "Rellenar la gloria con 15g de Nocciolata. Cubrir las puntas con 5g de Nocciolata y espolvorear la galleta Oreo molida."
     },
     {
-      "nombre": "Gloria Aguacate y Pavo",
-      "descongelacion": "Usar croissant pequeño ya horneado.",
-      "horno_temp": "-",
-      "horno_prog": "-",
-      "horno_tiempo": "-",
-      "ingredientes_resumen": "Croissant pequeño (1 ud), Pechuga de pavo (5 g), Aguacate (5 g)",
-      "ingredientes": "Croissant Pequeño Mantequilla (1 ud), Pechuga Pavo (5 g, 1/2 loncha), Aguacate Hass (5 g)",
-      "preparacion": "Tomar un croissant pequeño ya horneado y abrir por la mitad. Introducir media loncha de pechuga de pavo. Cortar el aguacate en lonchas de 3mm e introducir dentro."
-    },
-    {
-      "nombre": "Gloria Jamón Ibérico y Tomate",
-      "descongelacion": "Usar croissant pequeño ya horneado.",
-      "horno_temp": "-",
-      "horno_prog": "-",
-      "horno_tiempo": "-",
-      "ingredientes_resumen": "Croissant pequeño (1 ud), Tomate triturado (5 g), Paleta Ibérica (7 g)",
-      "ingredientes": "Croissant Pequeño Mantequilla (1 ud), Tomate Pera Triturado (5 g), Paleta Ibérica Cebo (7 g)",
-      "preparacion": "Tomar un croissant pequeño ya horneado y abrir por la mitad. Servir con una cuchara el tomate triturado dentro e introducir la paletilla ibérica loncheada."
-    },
-    {
       "nombre": "Croissant 100% Mantequilla (Vienes Sophie)",
+      "categoria": "Bollería Dulce",
       "descongelacion": "Colocar sin descongelar en bandeja con separación de 5cm y dejar descongelar 20 minutos.",
       "horno_temp": "185°C",
       "horno_prog": "1",
@@ -238,6 +225,7 @@ const obradorData = {
     },
     {
       "nombre": "Croissant Chocolate",
+      "categoria": "Bollería Dulce",
       "descongelacion": "Colocar sin descongelar en bandeja con separación de 5cm y dejar descongelar 20 minutos.",
       "horno_temp": "185°C",
       "horno_prog": "1",
@@ -248,6 +236,7 @@ const obradorData = {
     },
     {
       "nombre": "Croissant Curvo Cereales",
+      "categoria": "Bollería Dulce",
       "descongelacion": "Hornear directamente desde congelado.",
       "horno_temp": "185°C",
       "horno_prog": "1",
@@ -258,6 +247,7 @@ const obradorData = {
     },
     {
       "nombre": "Croissant Crema Pistacho y Chocolate",
+      "categoria": "Bollería Dulce",
       "descongelacion": "Colocar sin descongelar en bandeja y descongelar durante 20 minutos.",
       "horno_temp": "185°C",
       "horno_prog": "1",
@@ -268,6 +258,7 @@ const obradorData = {
     },
     {
       "nombre": "Croissant Crema Avellanas con Avellana",
+      "categoria": "Bollería Dulce",
       "descongelacion": "Colocar sin descongelar en bandeja y descongelar durante 20 minutos.",
       "horno_temp": "185°C",
       "horno_prog": "1",
@@ -277,277 +268,8 @@ const obradorData = {
       "preparacion": "Descongelar el croissant 20 min y hornear a 185°C durante 15 min. Dejar enfriar. Crear un agujero con un cuchillo desde un extremo. Rellenar con la Nocciolata usando una manga. Decorar con líneas de cobertura de chocolate. Colocar dos avellanas enteras en la entrada y el resto troceado encima."
     },
     {
-      "nombre": "Croissant Ibérico y Brie",
-      "descongelacion": "Colocar sin descongelar en bandeja y descongelar durante 20 minutos.",
-      "horno_temp": "180°C",
-      "horno_prog": "1",
-      "horno_tiempo": "15 min (aprox)",
-      "ingredientes_resumen": "Croissant (1 ud), Paleta Ibérica (30 g), Queso Brie (20 g)",
-      "ingredientes": "Croissant Vienes Sophie (1 ud), Paleta Ibérica Cebo (30 g), Brie Baguette Cantorel (20 g)",
-      "preparacion": "Hornear el croissant a 180°C durante 15 min. Abrir desde los cuernos hacia atrás. Añadir el jamón ibérico con volumen y encima dos lonchas de queso brie. Cerrar. Calentar en sandwichera o Merrychef si el cliente lo desea."
-    },
-    {
-      "nombre": "Croissant Mixto",
-      "descongelacion": "Colocar sin descongelar en bandeja y descongelar durante 20 minutos.",
-      "horno_temp": "180°C",
-      "horno_prog": "1",
-      "horno_tiempo": "15 min (aprox)",
-      "ingredientes_resumen": "Croissant (1 ud), Queso mezcla (40 g), Jamón cocido (20 g)",
-      "ingredientes": "Croissant Vienes Sophie (1 ud), Queso Mezcla Semicurado (40 g, 2 lonchas), Jamón Cocido (20 g, 2 lonchas)",
-      "preparacion": "Hornear el croissant a 180°C durante 15 min. Abrir desde los cuernos hacia atrás. Cortar las lonchas de queso por la mitad y repartir. Cortar las lonchas de jamón por la mitad y repartir encima. Cerrar. Calentar en sandwichera o Merrychef si el cliente lo desea."
-    },
-    {
-      "nombre": "SW Salmon Club",
-      "descongelacion": "Pan de molde wholegrain descongelado.",
-      "horno_temp": "Merrychef",
-      "horno_prog": "2",
-      "horno_tiempo": "1.5 min",
-      "ingredientes_resumen": "Pan wholegrain (2 rebanadas), Queso crema (50 g), Tomate pera (60 g), Rúcula (6 g), Salmón ahumado (30 g), Sésamo (1 g), Pistacho granillo (3 g)",
-      "ingredientes": "Molde wholegrain ALMA (2 rebanadas), Queso Crema (50 g), Tomate Pera (60 g, 3-4 rodajas), Rúcula (6 g), Salmón Ahumado (30 g), Semillas Sésamo Blanco (1 g), Pistacho Granillo (3 g), Palillo Pinchito (2 uds)",
-      "preparacion": "Tostar ligeramente el pan en el horno (Programa 2, 1.5 min). Extender el queso crema en ambos panes. Poner las rodajas de tomate y encima la rúcula. Colocar el salmón con volumen. Poner sésamo y la mitad del pistacho en la tapa y cerrar. Cortar a la mitad en diagonal, pinchar con palillos y repartir el resto del pistacho en los lados vistos."
-    },
-    {
-      "nombre": "SW Santagloria Club",
-      "descongelacion": "Pan de molde wholegrain y tortilla francesa descongelados.",
-      "horno_temp": "Merrychef",
-      "horno_prog": "2 (pan) / Focaccias (final)",
-      "horno_tiempo": "1.5 min (pan) / 2-3 regeneraciones (final)",
-      "ingredientes_resumen": "Pan wholegrain (2 rebanadas), Mayonesa (20 g), Brie (40 g), Jamón cocido (45 g), Tortilla francesa (0,5 ud), Tomate seco (10 g), Rúcula (6 g), AOVE (5 ml), Orégano (1 pizca)",
-      "ingredientes": "Molde wholegrain ALMA (2 rebanadas), Mayonesa (20 g), Brie Baguette (40 g), Jamón Cocido (45 g, 1.5 lonchas), Tortilla Francesa Gourmet (0,5 ud), Pomodori Secchi (10 g), Rúcula (6 g), AOVE (5 ml), Orégano (1 pizca), Palillo Pinchito (2 uds)",
-      "preparacion": "Tostar ligeramente el pan (Prog. 2, 1.5 min). Untar la base con mayonesa, colocar el brie laminado y el jamón cocido con volumen. Añadir media tortilla. Colocar el tomate seco, rúcula, aceite y orégano. Cortar a la mitad en diagonal y pinchar con palillos. Al momento de servir, calentar en Merrychef (Prog. Focaccias) 2-3 veces."
-    },
-    {
-      "nombre": "Brioche Trufado",
-      "descongelacion": "Pan de molde brioche descongelado.",
-      "horno_temp": "Merrychef",
-      "horno_prog": "2 (pan) / Focaccias (final)",
-      "horno_tiempo": "1.5 min (pan) / 2 regeneraciones (final)",
-      "ingredientes_resumen": "Pan brioche (2 rebanadas), Mayonesa trufada (30 g), Queso edam (20 g), Jamón cocido (60 g), Queso brie (30 g), Espinaca (6 g), Grana padano (8 g)",
-      "ingredientes": "Pan molde brioche (2 rebanadas), Mayonesa Trufa (30 g), Queso Edam (20 g, 1 loncha), Jamón Cocido (60 g, 2 lonchas), Brie Baguette (30 g, 1.5 lonchas), Brotes Espinaca (6 g), Lascas Grana Padano (8 g), Palillo Pinchito (1 ud)",
-      "preparacion": "Tostar ligeramente el pan (Prog. 2, 1.5 min). Untar la base con mayonesa trufada. Añadir el edam, el jamón cocido con volumen y el brie. Colocar las espinacas y las lascas de grana padano. Cerrar con la tapa y un pincho. Al momento de servir, calentar en Merrychef (Prog. Focaccias) 2 veces."
-    },
-    {
-      "nombre": "Tosta Aguacate y Cherry",
-      "descongelacion": "Pan de espelta descongelado.",
-      "horno_temp": "Merrychef / Horno",
-      "horno_prog": "Tostadas",
-      "horno_tiempo": "2 min",
-      "ingredientes_resumen": "Pan espelta (1 ud), Pulpa de aguacate (40 g), Tomate cherry (40 g), Sésamo (0.5 g), Micro mezclum (3 g), AOVE (3 ml), Sal (3 g), Flor (1 ud)",
-      "ingredientes": "Pan Espelta Cortado (1 ud), Pulpa de Aguacate (40 g), Tomate Cherry Cortado (40 g), Semillas de Sésamo (0,5 g), Micro Mezclum (3 g), AOVE (3 ml), Sobre de Sal (3 g), Flor (1 ud)",
-      "preparacion": "Tostar una rebanada de pan espelta en Merry Chef (Prog. Tostadas) o en horno (2 min aprox). Extender el aguacate triturado. Añadir los tomates cherry cortados a la mitad. Espolvorear semillas de sésamo. Añadir el micro mézclum, el aceite, la flor y el sobre de sal en el plato."
-    },
-    {
-      "nombre": "Tosta Aguacate y Salmón",
-      "descongelacion": "Pan de espelta y salmón ahumado descongelados.",
-      "horno_temp": "Merrychef / Horno",
-      "horno_prog": "Tostadas",
-      "horno_tiempo": "2 min",
-      "ingredientes_resumen": "Pan espelta (1 ud), Pulpa de aguacate (40 g), Salmón ahumado (30 g), Sésamo (0.5 g), Micro mezclum (3 g), AOVE (3 ml), Sal (3 g), Flor (1 ud)",
-      "ingredientes": "Pan Espelta Cortado (1 ud), Pulpa de Aguacate (40 g), Salmón Ahumado (30 g), Semillas de Sésamo (0,5 g), Micro Mezclum (3 g), AOVE (3 ml), Sal Fina (3 g), Flor (1 ud)",
-      "preparacion": "Tostar una rebanada de pan espelta en Merry Chef (Prog. Tostadas) o en horno (2 min aprox). Extender el aguacate triturado. Añadir el salmón ahumado. Espolvorear semillas de sésamo. Añadir el micro mézclum, el aceite, la sal y por último colocar la flor."
-    },
-    {
-      "nombre": "Tosta Benedictine",
-      "descongelacion": "Pan de espelta descongelado.",
-      "horno_temp": "Merrychef / Horno",
-      "horno_prog": "1 o SW/Mixto",
-      "horno_tiempo": "2 min",
-      "ingredientes_resumen": "Pan espelta (1 ud), Queso edam (40 g), Bacon cocinado (35 g), Huevo plancha (1 ud), Salsa holandesa (30 g), Orégano (0.5 g)",
-      "ingredientes": "Pan Espelta Cortado (1 ud), Queso Edam (40 g), Bacon Cocinado (subreceta, 35 g), Huevo Plancha (1 ud), Salsa Holandesa (subreceta, 30 g), Sal Fina (0,5 g), Orégano (0,5 g)",
-      "preparacion": "En una rebanada de pan espelta, extender el queso edam, el bacon, el huevo y la salsa holandesa. Hornear en programa 1 (2 min aprox) o en programa SW/Mixto de MerryChef. Antes de servir, espolvorear orégano."
-    },
-    {
-      "nombre": "Focaccia Bacon Brie & Trufa",
-      "descongelacion": "Base de focaccia descongelada.",
-      "horno_temp": "Merrychef",
-      "horno_prog": "2 (Focaccias)",
-      "horno_tiempo": "-",
-      "ingredientes_resumen": "Base Focaccia (0,5 ud), Mozzarella (240 g), Bacon (272 g), Brie (160 g), Mayonesa trufada (80 g), Tomate seco (56 g)",
-      "ingredientes": "Base Focaccia Tomate Cherry (0,5 ud), Mozzarella Rallada (240 g), Bacon Troceado (272 g), Brie Baguette (160 g), Mayonesa Trufa (80 g), Pomodori Secchi (56 g)",
-      "preparacion": "Cortar media base de focaccia. Distribuir la mozzarella, el bacon (12 trozos/porción) y el brie (2 mitades/porción). Hornear en programa 2 (Focaccias). Cortar en 8 porciones y dejar reposar. Una vez haya perdido calor, poner la mayonesa trufada en zig-zag y repartir el tomate seco en juliana."
-    },
-    {
-      "nombre": "Focaccia Feta Cebolla Caramelizada & Pistacho",
-      "descongelacion": "Base de focaccia descongelada.",
-      "horno_temp": "Merrychef",
-      "horno_prog": "2 (Focaccias)",
-      "horno_tiempo": "-",
-      "ingredientes_resumen": "Base Focaccia (0,5 ud), Mozzarella (240 g), Cebolla caramelizada (180 g), Queso Feta (95 g), Tomate seco (56 g), Pistacho granillo (12 g), Orégano (3 g)",
-      "ingredientes": "Base Focaccia Tomate Cherry (0,5 ud), Mozzarella Rallada (240 g), Cebolla Caramelizada (180 g), Queso Feta Dados (95 g), Pomodori Secchi (56 g), Pistacho Granillo (12 g), Orégano Seco (3 g)",
-      "preparacion": "Cortar media base de focaccia. Distribuir la mozzarella y la cebolla caramelizada. Hornear en programa 2 (Focaccias) y dejar reposar. Una vez perdido el calor, repartir el queso feta desmigado, el tomate seco en juliana, el pistacho granillo y el orégano. Cortar en 8 porciones."
-    },
-    {
-      "nombre": "Flautín Mixto",
-      "descongelacion": "Hornear desde congelado.",
-      "horno_temp": "185°C",
-      "horno_prog": "10",
-      "horno_tiempo": "12 min",
-      "ingredientes_resumen": "Flautín de olivas (1 ud), Tomate triturado (45 g), Jamón cocido (30 g), Queso mezcla (30 g)",
-      "ingredientes": "Flautín de Olivas (1 ud), Tomate Pera Triturado (45 g), Jamón Cocido (30 g), Queso Mezcla Semicurado (30 g)",
-      "preparacion": "Hornear un flautín de olivas a 185°C durante 12 min. Una vez horneado, abrir y untar tomate en ambas caras. Añadir jamón cocido en tiras y queso en trozos. Cerrar y cortar en 3 trozos."
-    },
-    {
-      "nombre": "Flautín Atún",
-      "descongelacion": "Hornear desde congelado.",
-      "horno_temp": "185°C",
-      "horno_prog": "10",
-      "horno_tiempo": "12 min",
-      "ingredientes_resumen": "Flauta semillada (1 ud), Tomate triturado (45 g), Atún claro (75 g)",
-      "ingredientes": "Flauta Semillada (1 ud), Tomate Pera Triturado (45 g), Atún Claro Ac. Girasol (75 g)",
-      "preparacion": "Hornear la flauta semillada a 185°C durante 12 minutos. Una vez horneada, abrir y untar tomate rallado en ambas caras. Añadir el atún bien escurrido. Cerrar y cortar en 3 trozos."
-    },
-    {
-      "nombre": "Empanadilla Pollo al Curry",
-      "descongelacion": "Desde congelado.",
-      "horno_temp": "230°C",
-      "horno_prog": "-",
-      "horno_tiempo": "8 min",
-      "ingredientes_resumen": "Empanadilla Pollo Curry (1 ud)",
-      "ingredientes": "Empanadilla Pollo Curry SG (1 ud)",
-      "preparacion": "Sin descongelar, colocar en bandeja con papel siliconado. Pinchar alrededor de la circunferencia antes de hornear. Hornear a 230°C durante 8 minutos. (Añadir 2 min más por cada bandeja extra)."
-    },
-    {
-      "nombre": "Empanadilla Ternera",
-      "descongelacion": "Desde congelado.",
-      "horno_temp": "230°C",
-      "horno_prog": "-",
-      "horno_tiempo": "8 min",
-      "ingredientes_resumen": "Empanadilla Ternera Mechada (1 ud)",
-      "ingredientes": "Empanadilla Ternera Mechada SG (1 ud)",
-      "preparacion": "Sin descongelar, colocar en bandeja con papel siliconado. Pinchar alrededor de la circunferencia antes de hornear. Hornear a 230°C durante 8 minutos. (Añadir 2 min más por cada bandeja extra)."
-    },
-    {
-      "nombre": "Ensalada Italiana",
-      "descongelacion": "-",
-      "horno_temp": "-",
-      "horno_prog": "-",
-      "horno_tiempo": "-",
-      "ingredientes_resumen": "Espinaca (15 g), Rúcula (5 g), Pasta Rigatoni (160 g), Atún (70 g), Tomate seco (10 g), Grana Padano (10 g), Mozzarella fresca (30 g), Tomate cherry (40 g)",
-      "ingredientes": "Brotes Espinaca (15 g), Rúcula (5 g), Pasta Rigatoni cocida (160 g), AOVE (10 ml), Atún Claro (70 g), Pomodori Secchi (10 g), Lascas Grana Padano (10 g), Mozzarella Fresca Minibol (30 g), Tomate Cherry (40 g, 4 uds)",
-      "preparacion": "En la mitad de un bowl, repartir la espinaca y rúcula. En la otra mitad, la pasta mezclada con AOVE. Colocar el atún escurrido sobre la pasta, a su lado los tomates cherry cortados, y junto a estos el tomate seco cortado. Finalizar con las lascas de grana padano y las perlas de mozzarella. Se recomienda vinagreta de pesto."
-    },
-    {
-      "nombre": "Ensalada de Pollo",
-      "descongelacion": "-",
-      "horno_temp": "-",
-      "horno_prog": "-",
-      "horno_tiempo": "-",
-      "ingredientes_resumen": "Ensalada campestre (50 g), Espinaca (20 g), Edamame (40 g), Pollo asado (50 g), Queso Feta (30 g), Nueces (15 g), Tomate cherry (40 g), Fresón (30 g), Hierbabuena (2 g)",
-      "ingredientes": "Ensalada Campestre (50 g), Brotes Espinaca (20 g), Tomate Cherry (40 g, 4 uds), Fresón (30 g), Mukimame (Edamame, 40 g), Pollo Asado Desmigado (50 g), Queso Feta (30 g), Nueces (15 g), Hierbabuena (2 g)",
-      "preparacion": "En un bowl, poner la ensalada campestre y espinacas. Colocar los cherrys en mitades en un lado y los fresones en mitades/cuartos en el otro. Poner el edamame junto a los fresones y el pollo al otro lado. Colocar los dados de feta junto a los cherrys, y luego las nueces. Terminar con la hierbabuena en juliana por encima. Se recomienda vinagreta asiática."
-    },
-    {
-      "nombre": "Ensalada de Salmón",
-      "descongelacion": "-",
-      "horno_temp": "-",
-      "horno_prog": "-",
-      "horno_tiempo": "-",
-      "ingredientes_resumen": "Ensalada campestre (30 g), Espinaca (40 g), Arroz integral (80 g), Mango (50 g), Salmón ahumado (30 g), Nueces (15 g), Tomate cherry (40 g), Hierbabuena (2 g)",
-      "ingredientes": "Ensalada Campestre (30 g), Brotes Espinaca (40 g), Arroz Integral (80 g), Mango (50 g), Salmón Ahumado (30 g), Nueces (15 g), Tomate Cherry (40 g, 4 uds), Micromezclum (3 g), Hierbabuena (2 g)",
-      "preparacion": "En un bowl, poner espinacas y ensalada campestre. Colocar a un lado el arroz integral y al lado el mango en dados. Continuar con el salmón ahumado (en tiras de 0.5 cm) y las nueces. Poner los 4 tomates cherry en mitades. Finalmente, poner el micro mézclum en el centro y la hierbabuena en juliana sobre el mango. Se recomienda vinagreta asiática."
-    },
-    {
-      "nombre": "Tortitas Frutos Rojos",
-      "descongelacion": "Descongelar 1h a temperatura ambiente o el día anterior en frigorífico.",
-      "horno_temp": "Merrychef / Horno",
-      "horno_prog": "Croissant (Merrychef) / 7 (Horno)",
-      "horno_tiempo": "25 seg (Merrychef) / 2 min (Horno a 200°C)",
-      "ingredientes_resumen": "Pancakes (3 ud), Mermelada frutos del bosque (60 g), Frutos rojos frescos (30 g), Nata montada (35 g)",
-      "ingredientes": "Pancake Americano (3 uds), Mermelada Frutos del Bosque (60 g), Frambuesa (10 g), Arándanos (8 g), Fresón (12 g), Nata Spray (35 g)",
-      "preparacion": "Calentar las tortitas. Poner una tortita en un plato, repartir mermelada en zigzag. Repetir con la segunda y tercera tortita. Repartir las frambuesas, arándanos y fresón por encima. Añadir la nata montada a un lado."
-    },
-    {
-      "nombre": "Tortitas Chocoavellana",
-      "descongelacion": "Descongelar 1h a temperatura ambiente o el día anterior en frigorífico.",
-      "horno_temp": "Merrychef / Horno",
-      "horno_prog": "Croissant (Merrychef) / 7 (Horno)",
-      "horno_tiempo": "25 seg (Merrychef) / 2 min (Horno a 200°C)",
-      "ingredientes_resumen": "Pancakes (3 ud), Nocciolata (54 g), Filipino blanco triturado (6 g), Nata montada (35 g)",
-      "ingredientes": "Pancake Americano (3 uds), Nocciolata (54 g), Filipino Blanco Triturado (6 g), Nata Spray (35 g)",
-      "preparacion": "Calentar las tortitas. Poner una tortita en un plato, repartir Nocciolata en zigzag. Repetir con la segunda y tercera tortita. Espolvorear los filipinos troceados por encima. Añadir la nata montada a un lado."
-    },
-    {
-      "nombre": "Crujiente de Manzana",
-      "descongelacion": "3 minutos a temperatura ambiente.",
-      "horno_temp": "170°C",
-      "horno_prog": "3",
-      "horno_tiempo": "35 min",
-      "ingredientes_resumen": "Crujiente Manzana (1 ud), Azúcar (2 g), Gelatina (2 g), Anagrama de chocolate (1 ud)",
-      "ingredientes": "Crujiente Manzana Obrador (1 ud), Azúcar (2 g), Gelatina Miroir (2 g), Anagrama Choco Santagloria (1 ud)",
-      "preparacion": "Descongelar 3 min. Rebozar la base de hojaldre con azúcar (pulverizar con agua antes para que se adhiera). Hornear a 170°C durante 35 minutos (Prog. 3), hasta que la manzana esté dorada. Pintar la manzana con gelatina y añadir el anagrama."
-    },
-    {
-      "nombre": "Pastel Belem Caprice",
-      "descongelacion": "Tomar desde congelado. Descongelar 45 minutos a temperatura ambiente.",
-      "horno_temp": "250°C",
-      "horno_prog": "-",
-      "horno_tiempo": "8-10 min",
-      "ingredientes_resumen": "Pastel de Nata (1 ud), Gelatina (1 g)",
-      "ingredientes": "Pastel de Nata Caprice (1 ud), Gelatina Miroir (1 g)",
-      "preparacion": "Descongelar el pastel 45 minutos a temperatura ambiente. Cocer 8-10 minutos a 250°C. Desmoldar y pintar con gelatina."
-    },
-    {
-      "nombre": "Brownie",
-      "descongelacion": "Descongelar sobre la bandeja a temperatura ambiente.",
-      "horno_temp": "-",
-      "horno_prog": "-",
-      "horno_tiempo": "-",
-      "ingredientes_resumen": "Brownie (1 ud), Cobertura de chocolate (10 g), Nueces (3 g), Avellanas (4 g), Anagrama de chocolate (1 ud)",
-      "ingredientes": "Brownie (1 ud), Cobertura Vegetal Choc (10 g), Nueces Cuartos (3 g, 1 ud), Avellana Tostada (4 g, 2 uds), Anagrama Choco Santagloria (1 ud)",
-      "preparacion": "Descongelar el brownie. Bañar la parte superior con la cobertura de chocolate caliente (aprox 0,5 cm). Colocar inmediatamente la nuez partida y las avellanas partidas. Colocar el logo de Santagloria."
-    },
-    {
-      "nombre": "Tarta de Queso",
-      "descongelacion": "Descongelar en refrigeración.",
-      "horno_temp": "-",
-      "horno_prog": "-",
-      "horno_tiempo": "-",
-      "ingredientes_resumen": "Tarta Cremosa de Queso (1 ud), Mermelada Frutos del Bosque (170 g), Anagramas de chocolate (10 uds)",
-      "ingredientes": "Tarta Cremosa de Queso (1 ud), Mermelada Frutos del Bosque (170 g), Anagrama Choco Santagloria (10 uds)",
-      "preparacion": "Descongelar la tarta en refrigeración. Marcar 10 porciones y cortar (limpiando el cuchillo en cada corte). Cubrir con la mermelada. Apoyar un anagrama de SG en cada porción."
-    },
-    {
-      "nombre": "Banda de Hojaldre con Frutas",
-      "descongelacion": "Placa de hojaldre descongelada.",
-      "horno_temp": "170°C",
-      "horno_prog": "3",
-      "horno_tiempo": "-",
-      "ingredientes_resumen": "Placa Hojaldre (200g), Crema Pastelera (245g), Frutas frescas variadas (Manzana, Kiwi, Fresón, Frambuesa, Moras, Arándanos), Gelatina (40g)",
-      "ingredientes": "Placa Hojaldre Mantequilla (200 g, 1/5 de placa), Crema Pastelera (subreceta, 245 g), Manzana Golden (130 g), Kiwi (53 g), Fresón (63 g), Frambuesa (25 g), Moras (31 g), Arándanos (21 g), Gelatina Miroir (40 g), Anagrama Choco Santagloria (1 ud)",
-      "preparacion": "Coger 1/5 de placa de hojaldre y pinchar. Colocar crema pastelera en la base. Repartir la manzana en una mitad y hornear (Prog. 3). Añadir el resto de crema en zigzag. Colocar kiwi, fresones. Pintar con gelatina (excepto moras, frambuesas y arándanos). Distribuir el resto de frutos rojos y colocar el anagrama. Cortar en 4 trozos."
-    },
-    {
-      "nombre": "Muffin Blueberry",
-      "descongelacion": "Descongelar a temperatura ambiente.",
-      "horno_temp": "-",
-      "horno_prog": "-",
-      "horno_tiempo": "-",
-      "ingredientes_resumen": "Muffin Filly Blueberry (1 ud)",
-      "ingredientes": "Muffin Filly Blueberry (Arándanos) (1 ud)",
-      "preparacion": "Descongelar a temperatura ambiente y exponer."
-    },
-    {
-      "nombre": "Muffin Chocolate con Avellana",
-      "descongelacion": "Descongelar a temperatura ambiente.",
-      "horno_temp": "-",
-      "horno_prog": "-",
-      "horno_tiempo": "-",
-      "ingredientes_resumen": "Muffin Choco Nougat (1 ud)",
-      "ingredientes": "Muffin Choco Nougat (1 ud)",
-      "preparacion": "Descongelar a temperatura ambiente y exponer."
-    },
-    {
-      "nombre": "Muffin Chocolate Sin Gluten",
-      "descongelacion": "Descongelar a temperatura ambiente.",
-      "horno_temp": "-",
-      "horno_prog": "-",
-      "horno_tiempo": "-",
-      "ingredientes_resumen": "Muffin Choco Sin Gluten (1 ud)",
-      "ingredientes": "Muffin Choco Sin Gluten (1 ud)",
-      "preparacion": "Descongelar a temperatura ambiente y exponer."
-    },
-    {
       "nombre": "Flat Croissant Choco Pistacho",
+      "categoria": "Bollería Dulce",
       "descongelacion": "Descongelar 30 minutos a temperatura ambiente sobre bandeja.",
       "horno_temp": "185°C",
       "horno_prog": "1",
@@ -558,6 +280,7 @@ const obradorData = {
     },
     {
       "nombre": "Flat Croissant Choco Blanco Lotus",
+      "categoria": "Bollería Dulce",
       "descongelacion": "Descongelar 30 minutos a temperatura ambiente sobre bandeja.",
       "horno_temp": "185°C",
       "horno_prog": "1",
@@ -567,7 +290,404 @@ const obradorData = {
       "preparacion": "Descongelar 30 min. Poner papel de horno encima y aplastar con una placa con la mayor presión posible. Hornear en Prog. 1 con la placa encima. Al sacar del horno, presionar de nuevo con fuerza. Dejar atemperar. Bañar la mitad del croissant con cobertura de chocolate blanco y repartir la galleta lotus por encima antes de que solidifique."
     },
     {
+      "nombre": "Bocadillo Mixto",
+      "categoria": "Salado",
+      "descongelacion": "Usar pan 'Media Santagloria' ya cocido.",
+      "horno_temp": "-",
+      "horno_prog": "-",
+      "horno_tiempo": "-",
+      "ingredientes_resumen": "Media Santagloria (1 ud), Queso mezcla (54 g), Jamón cocido (40 g)",
+      "ingredientes": "Media Santagloria (Bello Cocido) (1 ud), Queso Mezcla Semicurado (54 g, 3 lonchas), Jamón Cocido (40 g, 2 lonchas)",
+      "preparacion": "Abrir el pan y colocar las 3 lonchas de queso partidas a la mitad. Poner encima las 2 lonchas de jamón york partidas a la mitad. Cerrar y exponer."
+    },
+    {
+      "nombre": "Bocadillo Ibérico",
+      "categoria": "Salado",
+      "descongelacion": "Usar pan 'Media Santagloria' ya cocido.",
+      "horno_temp": "-",
+      "horno_prog": "-",
+      "horno_tiempo": "-",
+      "ingredientes_resumen": "Media Santagloria (1 ud), Tomate triturado (25 g), Paleta Ibérica (35 g)",
+      "ingredientes": "Media Santagloria (Bello Cocido) (1 ud), Tomate Pera (Triturado) (25 g), Paleta Ibérica Cebo (35 g)",
+      "preparacion": "Coger el pan y abrir a la mitad. Untar el tomate en una de las dos caras. Colocar las lonchas de paletilla con ondulación. Cerrar y exponer."
+    },
+    {
+      "nombre": "Bocadillo Tortilla",
+      "categoria": "Salado",
+      "descongelacion": "Descongelar tortilla 24h en refrigeración. Usar pan ya cocido.",
+      "horno_temp": "180°C",
+      "horno_prog": "-",
+      "horno_tiempo": "20 min (para la tortilla)",
+      "ingredientes_resumen": "Media Santagloria (1 ud), Tomate triturado (25 g), Tortilla Campera (1/6 ud)",
+      "ingredientes": "Media Santagloria (Bello Cocido) (1 ud), Tomate Pera (Triturado) (25 g), Tortilla Campera (1/6 ud)",
+      "preparacion": "Hornear la tortilla descongelada a 180°C durante 20 min. Untar la base del pan con tomate triturado. Colocar encima 1/6 de tortilla partida en 2 cuñas. Cerrar y exponer."
+    },
+    {
+      "nombre": "Bocadillo Pollo César",
+      "categoria": "Salado",
+      "descongelacion": "Barra descongelada (30-40min).",
+      "horno_temp": "200°C (pan) / Merrychef (final)",
+      "horno_prog": "-",
+      "horno_tiempo": "1 min (pan)",
+      "ingredientes_resumen": "Media Santagloria (1 ud), Pollo asado (50 g), Cebolla caramelizada (14 g), Espinaca (4 g), Rúcula (4 g), Tomate (50 g), Grana Padano (8 g), Salsa César (30 g)",
+      "ingredientes": "Media Santagloria (Bello Cocido) (1 ud), Pollo Asado Deshebrado (50 g), Cebolla Caramelizada (14 g), Brotes Espinaca (4 g), Ensalada Rucula (4 g), Tomate Pera (50 g), Lascas Grana Padano (8 g), Salsa Cesar (30 g)",
+      "preparacion": "Descongelar la barra 30-40min y hornearla 1 min a 200°C. Abrir por el lateral. Repartir el pollo desmigado. Poner encima cebolla caramelizada, espinaca y rúcula. Colocar rodajas de tomate y lascas de Grana Padano. Cerrar. Al pedir, añadir salsa César y calentar en Merrychef o parrilla."
+    },
+    {
+      "nombre": "Bocadillo Ibérico y Brie",
+      "categoria": "Salado",
+      "descongelacion": "Barra descongelada (30-40min).",
+      "horno_temp": "200°C",
+      "horno_prog": "-",
+      "horno_tiempo": "1 min (para el pan)",
+      "ingredientes_resumen": "Media Santagloria (1 ud), Queso Brie (30 g), Paleta Ibérica (35 g)",
+      "ingredientes": "Media Santagloria (Bello Cocido) (1 ud), Brie Baguette Cantorel (30 g), Paleta Ibérica Cebo (35 g)",
+      "preparacion": "Descongelar la barra 30-40min y hornearla 1 min a 200°C. Abrir por el lateral. Cortar dos lonchas de queso brie de 15g cada una y colocar en la base. Poner la paleta ibérica encima. Cerrar y exponer."
+    },
+    {
+      "nombre": "Delicia Integral Hummus y Feta",
+      "categoria": "Salado",
+      "descongelacion": "Usar hogaza 'Whole Grain' ya horneada.",
+      "horno_temp": "-",
+      "horno_prog": "-",
+      "horno_tiempo": "Tostar rebanadas",
+      "ingredientes_resumen": "Hogaza Wholegrain (2 rebanadas), Hummus (30 g), Queso Feta (10 g), Tomate (25 g), Rúcula (4 g), Sésamo (0.5 g), AOVE (3 ml)",
+      "ingredientes": "Hogaza Wholegrain (2 rebanadas), Hummus de pimentón (30 g), Queso Feta Dados (10 g), Tomate Pera (25 g), Rúcula (4 g), Semillas Sésamo Blanco (0,5 g), AOVE (3 ml)",
+      "preparacion": "Tostar las rebanadas de hogaza. Poner el hummus sobre la base y repartir el queso feta desmigado. Colocar dos rodajas de tomate y encima la rúcula. Repartir el AOVE y el sésamo. Cerrar."
+    },
+    {
+      "nombre": "Delicia Integral Mortadela Italiana",
+      "categoria": "Salado",
+      "descongelacion": "Usar hogaza 'Whole Grain' ya horneada.",
+      "horno_temp": "-",
+      "horno_prog": "-",
+      "horno_tiempo": "Tostar rebanadas",
+      "ingredientes_resumen": "Hogaza Wholegrain (2 rebanadas), Mayonesa (10 ml), Queso Edam (20 g), Mortadela (20 g), Espinaca (3 g), Cebolla caramelizada (6 g), Tomate seco (2 g)",
+      "ingredientes": "Hogaza Wholegrain (2 rebanadas), Mayonesa (10 ml), Queso Edam (20 g, 1 loncha), Mortadela Bologna (20 g, 1 loncha), Brotes Espinaca (3 g), Cebolla Caramelizada (6 g), Pomodori Secchi (2 g)",
+      "preparacion": "Tostar las rebanadas. Untar la base con mayonesa y colocar la loncha de queso edam en dos triángulos. Doblar la loncha de mortadela y colocar. Poner las hojas de espinaca, la cebolla caramelizada y el tomate seco en juliana. Cerrar."
+    },
+    {
+      "nombre": "Croissant Ibérico y Brie",
+      "categoria": "Salado",
+      "descongelacion": "Colocar sin descongelar en bandeja y descongelar durante 20 minutos.",
+      "horno_temp": "180°C",
+      "horno_prog": "1",
+      "horno_tiempo": "15 min (aprox)",
+      "ingredientes_resumen": "Croissant (1 ud), Paleta Ibérica (30 g), Queso Brie (20 g)",
+      "ingredientes": "Croissant Vienes Sophie (1 ud), Paleta Ibérica Cebo (30 g), Brie Baguette Cantorel (20 g)",
+      "preparacion": "Hornear el croissant a 180°C durante 15 min. Abrir desde los cuernos hacia atrás. Añadir el jamón ibérico con volumen y encima dos lonchas de queso brie. Cerrar. Calentar en sandwichera o Merrychef si el cliente lo desea."
+    },
+    {
+      "nombre": "Croissant Mixto",
+      "categoria": "Salado",
+      "descongelacion": "Colocar sin descongelar en bandeja y descongelar durante 20 minutos.",
+      "horno_temp": "180°C",
+      "horno_prog": "1",
+      "horno_tiempo": "15 min (aprox)",
+      "ingredientes_resumen": "Croissant (1 ud), Queso mezcla (40 g), Jamón cocido (20 g)",
+      "ingredientes": "Croissant Vienes Sophie (1 ud), Queso Mezcla Semicurado (40 g, 2 lonchas), Jamón Cocido (20 g, 2 lonchas)",
+      "preparacion": "Hornear el croissant a 180°C durante 15 min. Abrir desde los cuernos hacia atrás. Cortar las lonchas de queso por la mitad y repartir. Cortar las lonchas de jamón por la mitad y repartir encima. Cerrar. Calentar en sandwichera o Merrychef si el cliente lo desea."
+    },
+    {
+      "nombre": "SW Salmon Club",
+      "categoria": "Salado",
+      "descongelacion": "Pan de molde wholegrain descongelado.",
+      "horno_temp": "Merrychef",
+      "horno_prog": "2",
+      "horno_tiempo": "1.5 min",
+      "ingredientes_resumen": "Pan wholegrain (2 rebanadas), Queso crema (50 g), Tomate pera (60 g), Rúcula (6 g), Salmón ahumado (30 g), Sésamo (1 g), Pistacho granillo (3 g)",
+      "ingredientes": "Molde wholegrain ALMA (2 rebanadas), Queso Crema (50 g), Tomate Pera (60 g, 3-4 rodajas), Rúcula (6 g), Salmón Ahumado (30 g), Semillas Sésamo Blanco (1 g), Pistacho Granillo (3 g), Palillo Pinchito (2 uds)",
+      "preparacion": "Tostar ligeramente el pan en el horno (Programa 2, 1.5 min). Extender el queso crema en ambos panes. Poner las rodajas de tomate y encima la rúcula. Colocar el salmón con volumen. Poner sésamo y la mitad del pistacho en la tapa y cerrar. Cortar a la mitad en diagonal, pinchar con palillos y repartir el resto del pistacho en los lados vistos."
+    },
+    {
+      "nombre": "SW Santagloria Club",
+      "categoria": "Salado",
+      "descongelacion": "Pan de molde wholegrain y tortilla francesa descongelados.",
+      "horno_temp": "Merrychef",
+      "horno_prog": "2 (pan) / Focaccias (final)",
+      "horno_tiempo": "1.5 min (pan) / 2-3 regeneraciones (final)",
+      "ingredientes_resumen": "Pan wholegrain (2 rebanadas), Mayonesa (20 g), Brie (40 g), Jamón cocido (45 g), Tortilla francesa (0,5 ud), Tomate seco (10 g), Rúcula (6 g), AOVE (5 ml), Orégano (1 pizca)",
+      "ingredientes": "Molde wholegrain ALMA (2 rebanadas), Mayonesa (20 g), Brie Baguette (40 g), Jamón Cocido (45 g, 1.5 lonchas), Tortilla Francesa Gourmet (0,5 ud), Pomodori Secchi (10 g), Rúcula (6 g), AOVE (5 ml), Orégano (1 pizca), Palillo Pinchito (2 uds)",
+      "preparacion": "Tostar ligeramente el pan (Prog. 2, 1.5 min). Untar la base con mayonesa, colocar el brie laminado y el jamón cocido con volumen. Añadir media tortilla. Colocar el tomate seco, rúcula, aceite y orégano. Cortar a la mitad en diagonal y pinchar con palillos. Al momento de servir, calentar en Merrychef (Prog. Focaccias) 2-3 veces."
+    },
+    {
+      "nombre": "Brioche Trufado",
+      "categoria": "Salado",
+      "descongelacion": "Pan de molde brioche descongelado.",
+      "horno_temp": "Merrychef",
+      "horno_prog": "2 (pan) / Focaccias (final)",
+      "horno_tiempo": "1.5 min (pan) / 2 regeneraciones (final)",
+      "ingredientes_resumen": "Pan brioche (2 rebanadas), Mayonesa trufada (30 g), Queso edam (20 g), Jamón cocido (60 g), Queso brie (30 g), Espinaca (6 g), Grana padano (8 g)",
+      "ingredientes": "Pan molde brioche (2 rebanadas), Mayonesa Trufa (30 g), Queso Edam (20 g, 1 loncha), Jamón Cocido (60 g, 2 lonchas), Brie Baguette (30 g, 1.5 lonchas), Brotes Espinaca (6 g), Lascas Grana Padano (8 g), Palillo Pinchito (1 ud)",
+      "preparacion": "Tostar ligeramente el pan (Prog. 2, 1.5 min). Untar la base con mayonesa trufada. Añadir el edam, el jamón cocido con volumen y el brie. Colocar las espinacas y las lascas de grana padano. Cerrar con la tapa y un pincho. Al momento de servir, calentar en Merrychef (Prog. Focaccias) 2 veces."
+    },
+    {
+      "nombre": "Tosta Aguacate y Cherry",
+      "categoria": "Salado",
+      "descongelacion": "Pan de espelta descongelado.",
+      "horno_temp": "Merrychef / Horno",
+      "horno_prog": "Tostadas",
+      "horno_tiempo": "2 min",
+      "ingredientes_resumen": "Pan espelta (1 ud), Pulpa de aguacate (40 g), Tomate cherry (40 g), Sésamo (0.5 g), Micro mezclum (3 g), AOVE (3 ml), Sal (3 g), Flor (1 ud)",
+      "ingredientes": "Pan Espelta Cortado (1 ud), Pulpa de Aguacate (40 g), Tomate Cherry Cortado (40 g), Semillas de Sésamo (0,5 g), Micro Mezclum (3 g), AOVE (3 ml), Sobre de Sal (3 g), Flor (1 ud)",
+      "preparacion": "Tostar una rebanada de pan espelta en Merry Chef (Prog. Tostadas) o en horno (2 min aprox). Extender el aguacate triturado. Añadir los tomates cherry cortados a la mitad. Espolvorear semillas de sésamo. Añadir el micro mézclum, el aceite, la flor y el sobre de sal en el plato."
+    },
+    {
+      "nombre": "Tosta Aguacate y Salmón",
+      "categoria": "Salado",
+      "descongelacion": "Pan de espelta y salmón ahumado descongelados.",
+      "horno_temp": "Merrychef / Horno",
+      "horno_prog": "Tostadas",
+      "horno_tiempo": "2 min",
+      "ingredientes_resumen": "Pan espelta (1 ud), Pulpa de aguacate (40 g), Salmón ahumado (30 g), Sésamo (0.5 g), Micro mezclum (3 g), AOVE (3 ml), Sal (3 g), Flor (1 ud)",
+      "ingredientes": "Pan Espelta Cortado (1 ud), Pulpa de Aguacate (40 g), Salmón Ahumado (30 g), Semillas de Sésamo (0,5 g), Micro Mezclum (3 g), AOVE (3 ml), Sal Fina (3 g), Flor (1 ud)",
+      "preparacion": "Tostar una rebanada de pan espelta en Merry Chef (Prog. Tostadas) o en horno (2 min aprox). Extender el aguacate triturado. Añadir el salmón ahumado. Espolvorear semillas de sésamo. Añadir el micro mézclum, el aceite, la sal y por último colocar la flor."
+    },
+    {
+      "nombre": "Tosta Benedictine",
+      "categoria": "Salado",
+      "descongelacion": "Pan de espelta descongelado.",
+      "horno_temp": "Merrychef / Horno",
+      "horno_prog": "1 o SW/Mixto",
+      "horno_tiempo": "2 min",
+      "ingredientes_resumen": "Pan espelta (1 ud), Queso edam (40 g), Bacon cocinado (35 g), Huevo plancha (1 ud), Salsa holandesa (30 g), Orégano (0.5 g)",
+      "ingredientes": "Pan Espelta Cortado (1 ud), Queso Edam (40 g), Bacon Cocinado (subreceta, 35 g), Huevo Plancha (1 ud), Salsa Holandesa (subreceta, 30 g), Sal Fina (0,5 g), Orégano (0,5 g)",
+      "preparacion": "En una rebanada de pan espelta, extender el queso edam, el bacon, el huevo y la salsa holandesa. Hornear en programa 1 (2 min aprox) o en programa SW/Mixto de MerryChef. Antes de servir, espolvorear orégano."
+    },
+    {
+      "nombre": "Focaccia Bacon Brie & Trufa",
+      "categoria": "Salado",
+      "descongelacion": "Base de focaccia descongelada.",
+      "horno_temp": "Merrychef",
+      "horno_prog": "2 (Focaccias)",
+      "horno_tiempo": "-",
+      "ingredientes_resumen": "Base Focaccia (0,5 ud), Mozzarella (240 g), Bacon (272 g), Brie (160 g), Mayonesa trufada (80 g), Tomate seco (56 g)",
+      "ingredientes": "Base Focaccia Tomate Cherry (0,5 ud), Mozzarella Rallada (240 g), Bacon Troceado (272 g), Brie Baguette (160 g), Mayonesa Trufa (80 g), Pomodori Secchi (56 g)",
+      "preparacion": "Cortar media base de focaccia. Distribuir la mozzarella, el bacon (12 trozos/porción) y el brie (2 mitades/porción). Hornear en programa 2 (Focaccias). Cortar en 8 porciones y dejar reposar. Una vez haya perdido calor, poner la mayonesa trufada en zig-zag y repartir el tomate seco en juliana."
+    },
+    {
+      "nombre": "Focaccia Feta Cebolla Caramelizada & Pistacho",
+      "categoria": "Salado",
+      "descongelacion": "Base de focaccia descongelada.",
+      "horno_temp": "Merrychef",
+      "horno_prog": "2 (Focaccias)",
+      "horno_tiempo": "-",
+      "ingredientes_resumen": "Base Focaccia (0,5 ud), Mozzarella (240 g), Cebolla caramelizada (180 g), Queso Feta (95 g), Tomate seco (56 g), Pistacho granillo (12 g), Orégano (3 g)",
+      "ingredientes": "Base Focaccia Tomate Cherry (0,5 ud), Mozzarella Rallada (240 g), Cebolla Caramelizada (180 g), Queso Feta Dados (95 g), Pomodori Secchi (56 g), Pistacho Granillo (12 g), Orégano Seco (3 g)",
+      "preparacion": "Cortar media base de focaccia. Distribuir la mozzarella y la cebolla caramelizada. Hornear en programa 2 (Focaccias) y dejar reposar. Una vez perdido el calor, repartir el queso feta desmigado, el tomate seco en juliana, el pistacho granillo y el orégano. Cortar en 8 porciones."
+    },
+    {
+      "nombre": "Flautín Mixto",
+      "categoria": "Salado",
+      "descongelacion": "Hornear desde congelado.",
+      "horno_temp": "185°C",
+      "horno_prog": "10",
+      "horno_tiempo": "12 min",
+      "ingredientes_resumen": "Flautín de olivas (1 ud), Tomate triturado (45 g), Jamón cocido (30 g), Queso mezcla (30 g)",
+      "ingredientes": "Flautín de Olivas (1 ud), Tomate Pera Triturado (45 g), Jamón Cocido (30 g), Queso Mezcla Semicurado (30 g)",
+      "preparacion": "Hornear un flautín de olivas a 185°C durante 12 min. Una vez horneado, abrir y untar tomate en ambas caras. Añadir jamón cocido en tiras y queso en trozos. Cerrar y cortar en 3 trozos."
+    },
+    {
+      "nombre": "Flautín Atún",
+      "categoria": "Salado",
+      "descongelacion": "Hornear desde congelado.",
+      "horno_temp": "185°C",
+      "horno_prog": "10",
+      "horno_tiempo": "12 min",
+      "ingredientes_resumen": "Flauta semillada (1 ud), Tomate triturado (45 g), Atún claro (75 g)",
+      "ingredientes": "Flauta Semillada (1 ud), Tomate Pera Triturado (45 g), Atún Claro Ac. Girasol (75 g)",
+      "preparacion": "Hornear la flauta semillada a 185°C durante 12 minutos. Una vez horneada, abrir y untar tomate rallado en ambas caras. Añadir el atún bien escurrido. Cerrar y cortar en 3 trozos."
+    },
+    {
+      "nombre": "Flautín de Queso",
+      "categoria": "Salado",
+      "descongelacion": "Hornear desde congelado.",
+      "horno_temp": "185°C",
+      "horno_prog": "10",
+      "horno_tiempo": "10-12 min",
+      "ingredientes_resumen": "Flautín tradición (1 ud), Tomate triturado (45 g), Queso mezcla (54 g)",
+      "ingredientes": "Flautín Tradición (1 ud), Tomate Pera (Triturado) (45 g), Queso Mezcla Semicurado (54 g)",
+      "preparacion": "Hornear el flautín a 185°C durante 10-12 minutos. Cortar un tercio del flautín, abrir por la mitad y untar con tomate. Repartir el queso cortado en seis rectángulos en la parte inferior. Cerrar y exponer."
+    },
+    {
+      "nombre": "Flautín Jamón Ibérico",
+      "categoria": "Salado",
+      "descongelacion": "Hornear desde congelado.",
+      "horno_temp": "185°C",
+      "horno_prog": "10",
+      "horno_tiempo": "10-12 min",
+      "ingredientes_resumen": "Flautín tradición (1 ud), Tomate triturado (30 g), Paleta Ibérica (45 g), AOVE y sal",
+      "ingredientes": "Flautín Tradición (1 ud), Tomate Pera (Triturado) (30 g), Sal Fina (0.5 g), Aceite Oliva Virgen (1 ud monodosis), Paleta Ibérica Cebo (45 g)",
+      "preparacion": "Hornear el flautín a 185°C durante 10-12 minutos. Abrir, untar tomate en ambas caras y aderezar con sal y AOVE. Añadir la paletilla en trozos con volumen. Cerrar y cortar en 3 trozos."
+    },
+    {
+      "nombre": "Empanadilla Pollo al Curry",
+      "categoria": "Salado",
+      "descongelacion": "Desde congelado.",
+      "horno_temp": "230°C",
+      "horno_prog": "-",
+      "horno_tiempo": "8 min",
+      "ingredientes_resumen": "Empanadilla Pollo Curry (1 ud)",
+      "ingredientes": "Empanadilla Pollo Curry SG (1 ud)",
+      "preparacion": "Sin descongelar, colocar en bandeja con papel siliconado. Pinchar alrededor de la circunferencia antes de hornear. Hornear a 230°C durante 8 minutos. (Añadir 2 min más por cada bandeja extra)."
+    },
+    {
+      "nombre": "Empanadilla Ternera",
+      "categoria": "Salado",
+      "descongelacion": "Desde congelado.",
+      "horno_temp": "230°C",
+      "horno_prog": "-",
+      "horno_tiempo": "8 min",
+      "ingredientes_resumen": "Empanadilla Ternera Mechada (1 ud)",
+      "ingredientes": "Empanadilla Ternera Mechada SG (1 ud)",
+      "preparacion": "Sin descongelar, colocar en bandeja con papel siliconado. Pinchar alrededor de la circunferencia antes de hornear. Hornear a 230°C durante 8 minutos. (Añadir 2 min más por cada bandeja extra)."
+    },
+    {
+      "nombre": "Ensalada Italiana",
+      "categoria": "Ensaladas",
+      "descongelacion": "-",
+      "horno_temp": "-",
+      "horno_prog": "-",
+      "horno_tiempo": "-",
+      "ingredientes_resumen": "Espinaca (15 g), Rúcula (5 g), Pasta Rigatoni (160 g), Atún (70 g), Tomate seco (10 g), Grana Padano (10 g), Mozzarella fresca (30 g), Tomate cherry (40 g)",
+      "ingredientes": "Brotes Espinaca (15 g), Rúcula (5 g), Pasta Rigatoni cocida (160 g), AOVE (10 ml), Atún Claro (70 g), Pomodori Secchi (10 g), Lascas Grana Padano (10 g), Mozzarella Fresca Minibol (30 g), Tomate Cherry (40 g, 4 uds)",
+      "preparacion": "En la mitad de un bowl, repartir la espinaca y rúcula. En la otra mitad, la pasta mezclada con AOVE. Colocar el atún escurrido sobre la pasta, a su lado los tomates cherry cortados, y junto a estos el tomate seco cortado. Finalizar con las lascas de grana padano y las perlas de mozzarella. Se recomienda vinagreta de pesto."
+    },
+    {
+      "nombre": "Ensalada de Pollo",
+      "categoria": "Ensaladas",
+      "descongelacion": "-",
+      "horno_temp": "-",
+      "horno_prog": "-",
+      "horno_tiempo": "-",
+      "ingredientes_resumen": "Ensalada campestre (50 g), Espinaca (20 g), Edamame (40 g), Pollo asado (50 g), Queso Feta (30 g), Nueces (15 g), Tomate cherry (40 g), Fresón (30 g), Hierbabuena (2 g)",
+      "ingredientes": "Ensalada Campestre (50 g), Brotes Espinaca (20 g), Tomate Cherry (40 g, 4 uds), Fresón (30 g), Mukimame (Edamame, 40 g), Pollo Asado Desmigado (50 g), Queso Feta (30 g), Nueces (15 g), Hierbabuena (2 g)",
+      "preparacion": "En un bowl, poner la ensalada campestre y espinacas. Colocar los cherrys en mitades en un lado y los fresones en mitades/cuartos en el otro. Poner el edamame junto a los fresones y el pollo al otro lado. Colocar los dados de feta junto a los cherrys, y luego las nueces. Terminar con la hierbabuena en juliana por encima. Se recomienda vinagreta asiática."
+    },
+    {
+      "nombre": "Ensalada de Salmón",
+      "categoria": "Ensaladas",
+      "descongelacion": "-",
+      "horno_temp": "-",
+      "horno_prog": "-",
+      "horno_tiempo": "-",
+      "ingredientes_resumen": "Ensalada campestre (30 g), Espinaca (40 g), Arroz integral (80 g), Mango (50 g), Salmón ahumado (30 g), Nueces (15 g), Tomate cherry (40 g), Hierbabuena (2 g)",
+      "ingredientes": "Ensalada Campestre (30 g), Brotes Espinaca (40 g), Arroz Integral (80 g), Mango (50 g), Salmón Ahumado (30 g), Nueces (15 g), Tomate Cherry (40 g, 4 uds), Micromezclum (3 g), Hierbabuena (2 g)",
+      "preparacion": "En un bowl, poner espinacas y ensalada campestre. Colocar a un lado el arroz integral y al lado el mango en dados. Continuar con el salmón ahumado (en tiras de 0.5 cm) y las nueces. Poner los 4 tomates cherry en mitades. Finalmente, poner el micro mézclum en el centro y la hierbabuena en juliana sobre el mango. Se recomienda vinagreta asiática."
+    },
+    {
+      "nombre": "Tortitas Frutos Rojos",
+      "categoria": "Postres",
+      "descongelacion": "Descongelar 1h a temperatura ambiente o el día anterior en frigorífico.",
+      "horno_temp": "Merrychef / Horno",
+      "horno_prog": "Croissant (Merrychef) / 7 (Horno)",
+      "horno_tiempo": "25 seg (Merrychef) / 2 min (Horno a 200°C)",
+      "ingredientes_resumen": "Pancakes (3 ud), Mermelada frutos del bosque (60 g), Frutos rojos frescos (30 g), Nata montada (35 g)",
+      "ingredientes": "Pancake Americano (3 uds), Mermelada Frutos del Bosque (60 g), Frambuesa (10 g), Arándanos (8 g), Fresón (12 g), Nata Spray (35 g)",
+      "preparacion": "Calentar las tortitas. Poner una tortita en un plato, repartir mermelada en zigzag. Repetir con la segunda y tercera tortita. Repartir las frambuesas, arándanos y fresón por encima. Añadir la nata montada a un lado."
+    },
+    {
+      "nombre": "Tortitas Chocoavellana",
+      "categoria": "Postres",
+      "descongelacion": "Descongelar 1h a temperatura ambiente o el día anterior en frigorífico.",
+      "horno_temp": "Merrychef / Horno",
+      "horno_prog": "Croissant (Merrychef) / 7 (Horno)",
+      "horno_tiempo": "25 seg (Merrychef) / 2 min (Horno a 200°C)",
+      "ingredientes_resumen": "Pancakes (3 ud), Nocciolata (54 g), Filipino blanco triturado (6 g), Nata montada (35 g)",
+      "ingredientes": "Pancake Americano (3 uds), Nocciolata (54 g), Filipino Blanco Triturado (6 g), Nata Spray (35 g)",
+      "preparacion": "Calentar las tortitas. Poner una tortita en un plato, repartir Nocciolata en zigzag. Repetir con la segunda y tercera tortita. Espolvorear los filipinos troceados por encima. Añadir la nata montada a un lado."
+    },
+    {
+      "nombre": "Crujiente de Manzana",
+      "categoria": "Pastelería",
+      "descongelacion": "3 minutos a temperatura ambiente.",
+      "horno_temp": "170°C",
+      "horno_prog": "3",
+      "horno_tiempo": "35 min",
+      "ingredientes_resumen": "Crujiente Manzana (1 ud), Azúcar (2 g), Gelatina (2 g), Anagrama de chocolate (1 ud)",
+      "ingredientes": "Crujiente Manzana Obrador (1 ud), Azúcar (2 g), Gelatina Miroir (2 g), Anagrama Choco Santagloria (1 ud)",
+      "preparacion": "Descongelar 3 min. Rebozar la base de hojaldre con azúcar (pulverizar con agua antes para que se adhiera). Hornear a 170°C durante 35 minutos (Prog. 3), hasta que la manzana esté dorada. Pintar la manzana con gelatina y añadir el anagrama."
+    },
+    {
+      "nombre": "Pastel Belem Caprice",
+      "categoria": "Pastelería",
+      "descongelacion": "Tomar desde congelado. Descongelar 45 minutos a temperatura ambiente.",
+      "horno_temp": "250°C",
+      "horno_prog": "-",
+      "horno_tiempo": "8-10 min",
+      "ingredientes_resumen": "Pastel de Nata (1 ud), Gelatina (1 g)",
+      "ingredientes": "Pastel de Nata Caprice (1 ud), Gelatina Miroir (1 g)",
+      "preparacion": "Descongelar el pastel 45 minutos a temperatura ambiente. Cocer 8-10 minutos a 250°C. Desmoldar y pintar con gelatina."
+    },
+    {
+      "nombre": "Brownie",
+      "categoria": "Pastelería",
+      "descongelacion": "Descongelar sobre la bandeja a temperatura ambiente.",
+      "horno_temp": "-",
+      "horno_prog": "-",
+      "horno_tiempo": "-",
+      "ingredientes_resumen": "Brownie (1 ud), Cobertura de chocolate (10 g), Nueces (3 g), Avellanas (4 g), Anagrama de chocolate (1 ud)",
+      "ingredientes": "Brownie (1 ud), Cobertura Vegetal Choc (10 g), Nueces Cuartos (3 g, 1 ud), Avellana Tostada (4 g, 2 uds), Anagrama Choco Santagloria (1 ud)",
+      "preparacion": "Descongelar el brownie. Bañar la parte superior con la cobertura de chocolate caliente (aprox 0,5 cm). Colocar inmediatamente la nuez partida y las avellanas partidas. Colocar el logo de Santagloria."
+    },
+    {
+      "nombre": "Tarta de Queso",
+      "categoria": "Pastelería",
+      "descongelacion": "Descongelar en refrigeración.",
+      "horno_temp": "-",
+      "horno_prog": "-",
+      "horno_tiempo": "-",
+      "ingredientes_resumen": "Tarta Cremosa de Queso (1 ud), Mermelada Frutos del Bosque (170 g), Anagramas de chocolate (10 uds)",
+      "ingredientes": "Tarta Cremosa de Queso (1 ud), Mermelada Frutos del Bosque (170 g), Anagrama Choco Santagloria (10 uds)",
+      "preparacion": "Descongelar la tarta en refrigeración. Marcar 10 porciones y cortar (limpiando el cuchillo en cada corte). Cubrir con la mermelada. Apoyar un anagrama de SG en cada porción."
+    },
+    {
+      "nombre": "Banda de Hojaldre con Frutas",
+      "categoria": "Pastelería",
+      "descongelacion": "Placa de hojaldre descongelada.",
+      "horno_temp": "170°C",
+      "horno_prog": "3",
+      "horno_tiempo": "-",
+      "ingredientes_resumen": "Placa Hojaldre (200g), Crema Pastelera (245g), Frutas frescas variadas (Manzana, Kiwi, Fresón, Frambuesa, Moras, Arándanos), Gelatina (40g)",
+      "ingredientes": "Placa Hojaldre Mantequilla (200 g, 1/5 de placa), Crema Pastelera (subreceta, 245 g), Manzana Golden (130 g), Kiwi (53 g), Fresón (63 g), Frambuesa (25 g), Moras (31 g), Arándanos (21 g), Gelatina Miroir (40 g), Anagrama Choco Santagloria (1 ud)",
+      "preparacion": "Coger 1/5 de placa de hojaldre y pinchar. Colocar crema pastelera en la base. Repartir la manzana en una mitad y hornear (Prog. 3). Añadir el resto de crema en zigzag. Colocar kiwi, fresones. Pintar con gelatina (excepto moras, frambuesas y arándanos). Distribuir el resto de frutos rojos y colocar el anagrama. Cortar en 4 trozos."
+    },
+    {
+      "nombre": "Muffin Blueberry",
+      "categoria": "Bollería Dulce",
+      "descongelacion": "Descongelar a temperatura ambiente.",
+      "horno_temp": "-",
+      "horno_prog": "-",
+      "horno_tiempo": "-",
+      "ingredientes_resumen": "Muffin Filly Blueberry (1 ud)",
+      "ingredientes": "Muffin Filly Blueberry (Arándanos) (1 ud)",
+      "preparacion": "Descongelar a temperatura ambiente y exponer."
+    },
+    {
+      "nombre": "Muffin Chocolate con Avellana",
+      "categoria": "Bollería Dulce",
+      "descongelacion": "Descongelar a temperatura ambiente.",
+      "horno_temp": "-",
+      "horno_prog": "-",
+      "horno_tiempo": "-",
+      "ingredientes_resumen": "Muffin Choco Nougat (1 ud)",
+      "ingredientes": "Muffin Choco Nougat (1 ud)",
+      "preparacion": "Descongelar a temperatura ambiente y exponer."
+    },
+    {
+      "nombre": "Muffin Chocolate Sin Gluten",
+      "categoria": "Bollería Dulce",
+      "descongelacion": "Descongelar a temperatura ambiente.",
+      "horno_temp": "-",
+      "horno_prog": "-",
+      "horno_tiempo": "-",
+      "ingredientes_resumen": "Muffin Choco Sin Gluten (1 ud)",
+      "ingredientes": "Muffin Choco Sin Gluten (1 ud)",
+      "preparacion": "Descongelar a temperatura ambiente y exponer."
+    },
+    {
       "nombre": "Subreceta Crema Pastelera",
+      "categoria": "Subreceta",
       "descongelacion": "-",
       "horno_temp": "-",
       "horno_prog": "-",
@@ -578,6 +698,7 @@ const obradorData = {
     },
     {
       "nombre": "Subreceta Aguacate Tostas",
+      "categoria": "Subreceta",
       "descongelacion": "-",
       "horno_temp": "-",
       "horno_prog": "-",
@@ -588,6 +709,7 @@ const obradorData = {
     },
     {
       "nombre": "Subreceta Bacon Cocinado",
+      "categoria": "Subreceta",
       "descongelacion": "-",
       "horno_temp": "200°C",
       "horno_prog": "Focaccia",
@@ -598,6 +720,7 @@ const obradorData = {
     },
     {
       "nombre": "Subreceta Salsa Holandesa",
+      "categoria": "Subreceta",
       "descongelacion": "-",
       "horno_temp": "-",
       "horno_prog": "-",
@@ -608,6 +731,7 @@ const obradorData = {
     },
     {
       "nombre": "Baguette Antiga",
+      "categoria": "Panes",
       "descongelacion": "-",
       "horno_temp": "185°C",
       "horno_prog": "1",
@@ -618,6 +742,7 @@ const obradorData = {
     },
     {
       "nombre": "Barra Santagloria",
+      "categoria": "Panes",
       "descongelacion": "-",
       "horno_temp": "180°C",
       "horno_prog": "8",
@@ -628,6 +753,7 @@ const obradorData = {
     },
     {
       "nombre": "Barra Gallega",
+      "categoria": "Panes",
       "descongelacion": "-",
       "horno_temp": "185°C",
       "horno_prog": "10",
@@ -638,6 +764,7 @@ const obradorData = {
     },
     {
       "nombre": "Hogaza de Espelta y Sésamo",
+      "categoria": "Panes",
       "descongelacion": "-",
       "horno_temp": "180°C",
       "horno_prog": "8",
@@ -648,6 +775,7 @@ const obradorData = {
     },
     {
       "nombre": "Pan de Payés",
+      "categoria": "Panes",
       "descongelacion": "-",
       "horno_temp": "180°C",
       "horno_prog": "8",
