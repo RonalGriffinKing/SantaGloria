@@ -1,0 +1,86 @@
+body {
+  font-family: Arial, sans-serif;
+  margin:0;
+  background:#f9f9fb;
+  color:#000;
+  padding-bottom:50px;
+}
+
+header {
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(8px);
+  color:#000;
+  text-align:center;
+  padding:12px;
+  font-size:1.1em;
+  font-weight:bold;
+  position:sticky;
+  top:0;
+  z-index:999;
+}
+
+.nav-buttons {
+  margin-top:8px;
+}
+.nav-buttons button {
+  margin:4px 4px 4px 0;
+  padding:6px 12px;
+  border:none;
+  border-radius:6px;
+  background:#000;
+  color:#fff;
+  cursor:pointer;
+  font-size:0.9em;
+}
+.nav-buttons button:hover { background:#333; }
+
+.obrador-container {
+  padding:15px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap:12px;
+}
+
+.card {
+  background:#fff;
+  border-radius:8px;
+  padding:12px;
+  box-shadow:0 2px 6px rgba(0,0,0,0.1);
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+
+.card h3 {
+  margin:0;
+  font-size:1.1em;
+}
+
+.card .dias {
+  position:absolute;
+  top:12px;
+  right:12px;
+  background:#000;
+  color:#fff;
+  padding:4px 8px;
+  border-radius:50%;
+  font-weight:bold;
+}
+
+.card .uso-diario {
+  font-size:0.85em;
+  color:#555;
+}
+
+.card button {
+  padding:6px 12px;
+  border:none;
+  border-radius:6px;
+  background:#000;
+  color:#fff;
+  cursor:pointer;
+  font-size:0.85em;
+  margin-top:6px;
+}
+.card button:hover { background:#333; }
