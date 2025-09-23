@@ -5,17 +5,34 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Inventario</title>
 <link rel="stylesheet" href="style.css">
+<style>
+  body { font-family: Arial, sans-serif; padding: 0; margin: 0; background-color: #f9f9f9; }
+  header { background-color: #ff6f61; color: white; padding: 15px; display: flex; flex-direction: column; align-items: flex-start; }
+  .nav-buttons { margin-top: 10px; display: flex; gap: 10px; flex-wrap: wrap; }
+  button { padding: 5px 10px; border: none; border-radius: 5px; cursor: pointer; }
+  button:hover { opacity: 0.9; }
+  input#buscador { padding: 8px; width: 250px; border-radius: 5px; border: none; margin-bottom: 15px; }
+  .obrador-container { display: flex; flex-wrap: wrap; gap: 15px; padding: 15px; }
+  .producto-card { background: white; padding: 10px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); width: 200px; }
+  .producto-card button { margin-top: 5px; background-color: #ff6f61; color: white; width: 100%; }
+</style>
 </head>
 <body>
 
 <header>
   Inventario – Santa Gloria Russafa
+  <input type="text" id="buscador" placeholder="Buscar producto...">
   <div class="nav-buttons">
     <button onclick="filtrarCategoria('')">Todos</button>
-    <button onclick="filtrarCategoria('Congelado')">Congelado</button>
-    <button onclick="filtrarCategoria('Refrigerado')">Refrigerado</button>
-    <button onclick="filtrarCategoria('Elaborado')">Elaborado</button>
-    <button onclick="filtrarCategoria('Seco')">Seco</button>
+    <button onclick="filtrarCategoria('Quesos')">Quesos</button>
+    <button onclick="filtrarCategoria('Dulces')">Dulces</button>
+    <button onclick="filtrarCategoria('Embutidos')">Embutidos</button>
+    <button onclick="filtrarCategoria('Ensaladas')">Ensaladas</button>
+    <button onclick="filtrarCategoria('Frutas y Verduras')">Frutas y Verduras</button>
+    <button onclick="filtrarCategoria('Pan')">Pan</button>
+    <button onclick="filtrarCategoria('Cremas y Salsas')">Cremas y Salsas</button>
+    <button onclick="filtrarCategoria('Tartas')">Tartas</button>
+    <button onclick="filtrarCategoria('Otros')">Otros</button>
     <button onclick="agregarProducto()">➕ Agregar</button>
     <button onclick="descargarJSON()">⬇️ Descargar JSON</button>
   </div>
@@ -25,5 +42,60 @@
 
 <script src="inventario.js"></script>
 <script src="app.js"></script>
+<script>
+const buscador = document.getElementById('buscador');
+
+buscador.addEventListener('input', () => {
+  filtrarCategoria(currentCategoria, buscador.value);
+});
+
+// Modifica tu función de filtrar para aceptar filtro de búsqueda
+let currentCategoria = '';
+
+function filtrarCategoria(categoria, filtro = '') {
+  currentCategoria = categoria;
+  const grid = document.getElementById('grid');
+  grid.innerHTML = '';
+
+  const categorias = categoria ? { [categoria]: data[categoria] } : data;
+  const filtroLower = filtro.toLowerCase();
+
+  for (const cat in categorias) {
+    categorias[cat].forEach(p => {
+      if (!filtro || p.nombre.toLowerCase().includes(filtroLower)) {
+        const div = document.createElement('div');
+        div.className = 'producto-card';
+        div.innerHTML = `
+          <strong>${p.nombre}</strong><br>
+          Cantidad caja: ${p.cantidad_caja ?? '-'}<br>
+          Peso caja: ${p.peso_caja ?? '-'}<br>
+          Disponible: ${p.cantidad_disponible ?? '-'} / ${p.peso_disponible ?? '-'}<br>
+          <button onclick="editarProducto('${cat}','${p.nombre}')">✏️ Editar</button>
+        `;
+        grid.appendChild(div);
+      }
+    });
+  }
+}
+
+// Función de edición que abre prompt para actualizar datos
+function editarProducto(categoria, nombre) {
+  const producto = data[categoria].find(p => p.nombre === nombre);
+  if (!producto) return;
+
+  const cantidadCaja = prompt("Cantidad caja:", producto.cantidad_caja ?? '');
+  const pesoCaja = prompt("Peso caja:", producto.peso_caja ?? '');
+  const cantidadDisp = prompt("Cantidad disponible:", producto.cantidad_disponible ?? '');
+  const pesoDisp = prompt("Peso disponible:", producto.peso_disponible ?? '');
+
+  producto.cantidad_caja = cantidadCaja || producto.cantidad_caja;
+  producto.peso_caja = pesoCaja || producto.peso_caja;
+  producto.cantidad_disponible = cantidadDisp || producto.cantidad_disponible;
+  producto.peso_disponible = pesoDisp || producto.peso_disponible;
+
+  filtrarCategoria(currentCategoria, buscador.value);
+}
+</script>
+
 </body>
 </html>
