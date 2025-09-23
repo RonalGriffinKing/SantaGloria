@@ -227,6 +227,76 @@ const obradorData = {
       "preparacion": "Tomar un croissant pequeño ya horneado y abrir por la mitad. Servir con una cuchara el tomate triturado dentro e introducir la paletilla ibérica loncheada."
     },
     {
+      "nombre": "Croissant 100% Mantequilla (Vienes Sophie)",
+      "descongelacion": "Colocar sin descongelar en bandeja con separación de 5cm y dejar descongelar 20 minutos.",
+      "horno_temp": "185°C",
+      "horno_prog": "1",
+      "horno_tiempo": "15 min (aprox)",
+      "ingredientes_resumen": "Croissant Vienes Sophie (1 ud)",
+      "ingredientes": "Croissant Vienes Sophie (1 ud)",
+      "preparacion": "Colocar los croissants en bandeja con papel siliconado y 5cm de separación. Dejar descongelar 20 minutos. Hornear a 185°C durante 15 minutos (aprox) hasta obtener un color dorado. Exponer sin añadir ningún otro ingrediente."
+    },
+    {
+      "nombre": "Croissant Chocolate",
+      "descongelacion": "Colocar sin descongelar en bandeja con separación de 5cm y dejar descongelar 20 minutos.",
+      "horno_temp": "185°C",
+      "horno_prog": "1",
+      "horno_tiempo": "15 min (aprox)",
+      "ingredientes_resumen": "Croissant Paris Choco (1 ud), Cobertura de chocolate (8 g)",
+      "ingredientes": "Croissant Paris Choco S/DEC (1 ud), Cobertura Vegetal Choc (8 g)",
+      "preparacion": "Colocar los croissants en bandeja con separación y descongelar 20 min. Hornear a 185°C por 15 min (Prog. 1) y dejar enfriar. Fundir la cobertura y pintar ambas puntas del croissant. Dejar cristalizar."
+    },
+    {
+      "nombre": "Croissant Curvo Cereales",
+      "descongelacion": "Hornear directamente desde congelado.",
+      "horno_temp": "185°C",
+      "horno_prog": "1",
+      "horno_tiempo": "15 min (aprox)",
+      "ingredientes_resumen": "Croissant Curvo Cereales (1 ud)",
+      "ingredientes": "Croissant Curvo Cereales/Tostado (1 ud)",
+      "preparacion": "Colocar los croissants sin descongelar sobre papel de horno con una separación de 5cm. Hornear a 185°C durante 15 minutos (aprox). Servir en mostrador sin añadir nada más."
+    },
+    {
+      "nombre": "Croissant Crema Pistacho y Chocolate",
+      "descongelacion": "Colocar sin descongelar en bandeja y descongelar durante 20 minutos.",
+      "horno_temp": "185°C",
+      "horno_prog": "1",
+      "horno_tiempo": "15 min (aprox)",
+      "ingredientes_resumen": "Croissant (1 ud), Crema de pistacho (30 g), Glaseado (5 g), Pistacho granillo (3 g)",
+      "ingredientes": "Croissant Vienes Sophie (1 ud), Choco Cream Pistacho (30 g), Glaseado (subreceta, 5 g), Pistacho Granillo (3 g)",
+      "preparacion": "Descongelar el croissant 20 min y hornear a 185°C durante 15 min. Dejar enfriar. Crear un agujero con un cuchillo desde un extremo. Rellenar con la crema de pistacho usando una manga. Decorar el exterior con glaseado y repartir pistacho troceado encima."
+    },
+    {
+      "nombre": "Croissant Crema Avellanas con Avellana",
+      "descongelacion": "Colocar sin descongelar en bandeja y descongelar durante 20 minutos.",
+      "horno_temp": "185°C",
+      "horno_prog": "1",
+      "horno_tiempo": "15 min (aprox)",
+      "ingredientes_resumen": "Croissant (1 ud), Nocciolata (50 g), Cobertura de chocolate (8 g), Avellana tostada (5 g)",
+      "ingredientes": "Croissant Vienes Sophie (1 ud), Nocciolata (50 g), Cobertura Vegetal Choc (8 g), Avellana Tostada (5 g)",
+      "preparacion": "Descongelar el croissant 20 min y hornear a 185°C durante 15 min. Dejar enfriar. Crear un agujero con un cuchillo desde un extremo. Rellenar con la Nocciolata usando una manga. Decorar con líneas de cobertura de chocolate. Colocar dos avellanas enteras en la entrada y el resto troceado encima."
+    },
+    {
+      "nombre": "Croissant Ibérico y Brie",
+      "descongelacion": "Colocar sin descongelar en bandeja y descongelar durante 20 minutos.",
+      "horno_temp": "180°C",
+      "horno_prog": "1",
+      "horno_tiempo": "15 min (aprox)",
+      "ingredientes_resumen": "Croissant (1 ud), Paleta Ibérica (30 g), Queso Brie (20 g)",
+      "ingredientes": "Croissant Vienes Sophie (1 ud), Paleta Ibérica Cebo (30 g), Brie Baguette Cantorel (20 g)",
+      "preparacion": "Hornear el croissant a 180°C durante 15 min. Abrir desde los cuernos hacia atrás. Añadir el jamón ibérico con volumen y encima dos lonchas de queso brie. Cerrar. Calentar en sandwichera o Merrychef si el cliente lo desea."
+    },
+    {
+      "nombre": "Croissant Mixto",
+      "descongelacion": "Colocar sin descongelar en bandeja y descongelar durante 20 minutos.",
+      "horno_temp": "180°C",
+      "horno_prog": "1",
+      "horno_tiempo": "15 min (aprox)",
+      "ingredientes_resumen": "Croissant (1 ud), Queso mezcla (40 g), Jamón cocido (20 g)",
+      "ingredientes": "Croissant Vienes Sophie (1 ud), Queso Mezcla Semicurado (40 g, 2 lonchas), Jamón Cocido (20 g, 2 lonchas)",
+      "preparacion": "Hornear el croissant a 180°C durante 15 min. Abrir desde los cuernos hacia atrás. Cortar las lonchas de queso por la mitad y repartir. Cortar las lonchas de jamón por la mitad y repartir encima. Cerrar. Calentar en sandwichera o Merrychef si el cliente lo desea."
+    },
+    {
       "nombre": "SW Salmon Club",
       "descongelacion": "Pan de molde wholegrain descongelado.",
       "horno_temp": "Merrychef",
@@ -407,6 +477,16 @@ const obradorData = {
       "preparacion": "Descongelar 3 min. Rebozar la base de hojaldre con azúcar (pulverizar con agua antes para que se adhiera). Hornear a 170°C durante 35 minutos (Prog. 3), hasta que la manzana esté dorada. Pintar la manzana con gelatina y añadir el anagrama."
     },
     {
+      "nombre": "Pastel Belem Caprice",
+      "descongelacion": "Tomar desde congelado. Descongelar 45 minutos a temperatura ambiente.",
+      "horno_temp": "250°C",
+      "horno_prog": "-",
+      "horno_tiempo": "8-10 min",
+      "ingredientes_resumen": "Pastel de Nata (1 ud), Gelatina (1 g)",
+      "ingredientes": "Pastel de Nata Caprice (1 ud), Gelatina Miroir (1 g)",
+      "preparacion": "Descongelar el pastel 45 minutos a temperatura ambiente. Cocer 8-10 minutos a 250°C. Desmoldar y pintar con gelatina."
+    },
+    {
       "nombre": "Brownie",
       "descongelacion": "Descongelar sobre la bandeja a temperatura ambiente.",
       "horno_temp": "-",
@@ -437,6 +517,56 @@ const obradorData = {
       "preparacion": "Coger 1/5 de placa de hojaldre y pinchar. Colocar crema pastelera en la base. Repartir la manzana en una mitad y hornear (Prog. 3). Añadir el resto de crema en zigzag. Colocar kiwi, fresones. Pintar con gelatina (excepto moras, frambuesas y arándanos). Distribuir el resto de frutos rojos y colocar el anagrama. Cortar en 4 trozos."
     },
     {
+      "nombre": "Muffin Blueberry",
+      "descongelacion": "Descongelar a temperatura ambiente.",
+      "horno_temp": "-",
+      "horno_prog": "-",
+      "horno_tiempo": "-",
+      "ingredientes_resumen": "Muffin Filly Blueberry (1 ud)",
+      "ingredientes": "Muffin Filly Blueberry (Arándanos) (1 ud)",
+      "preparacion": "Descongelar a temperatura ambiente y exponer."
+    },
+    {
+      "nombre": "Muffin Chocolate con Avellana",
+      "descongelacion": "Descongelar a temperatura ambiente.",
+      "horno_temp": "-",
+      "horno_prog": "-",
+      "horno_tiempo": "-",
+      "ingredientes_resumen": "Muffin Choco Nougat (1 ud)",
+      "ingredientes": "Muffin Choco Nougat (1 ud)",
+      "preparacion": "Descongelar a temperatura ambiente y exponer."
+    },
+    {
+      "nombre": "Muffin Chocolate Sin Gluten",
+      "descongelacion": "Descongelar a temperatura ambiente.",
+      "horno_temp": "-",
+      "horno_prog": "-",
+      "horno_tiempo": "-",
+      "ingredientes_resumen": "Muffin Choco Sin Gluten (1 ud)",
+      "ingredientes": "Muffin Choco Sin Gluten (1 ud)",
+      "preparacion": "Descongelar a temperatura ambiente y exponer."
+    },
+    {
+      "nombre": "Flat Croissant Choco Pistacho",
+      "descongelacion": "Descongelar 30 minutos a temperatura ambiente sobre bandeja.",
+      "horno_temp": "185°C",
+      "horno_prog": "1",
+      "horno_tiempo": "18 min",
+      "ingredientes_resumen": "Croissant (1 ud), Cobertura de chocolate (15 g), Pistacho granillo (3 g)",
+      "ingredientes": "Croissant Selection D'or (1 ud), Cobertura Vegetal Choc (15 g), Pistacho Granillo (3 g)",
+      "preparacion": "Descongelar 30 min. Poner papel de horno encima y aplastar con una placa con la mayor presión posible. Hornear en Prog. 1 con la placa encima. Al sacar del horno, presionar de nuevo con fuerza. Dejar atemperar. Bañar la mitad del croissant con cobertura de chocolate y repartir el pistacho granillo antes de que solidifique."
+    },
+    {
+      "nombre": "Flat Croissant Choco Blanco Lotus",
+      "descongelacion": "Descongelar 30 minutos a temperatura ambiente sobre bandeja.",
+      "horno_temp": "185°C",
+      "horno_prog": "1",
+      "horno_tiempo": "18 min",
+      "ingredientes_resumen": "Croissant (1 ud), Cobertura blanca (15 g), Galleta molida Lotus (3 g)",
+      "ingredientes": "Croissant Selection D'or (1 ud), Cobertura Blanca (15 g), Galleta Molida Lotus (3 g)",
+      "preparacion": "Descongelar 30 min. Poner papel de horno encima y aplastar con una placa con la mayor presión posible. Hornear en Prog. 1 con la placa encima. Al sacar del horno, presionar de nuevo con fuerza. Dejar atemperar. Bañar la mitad del croissant con cobertura de chocolate blanco y repartir la galleta lotus por encima antes de que solidifique."
+    },
+    {
       "nombre": "Subreceta Crema Pastelera",
       "descongelacion": "-",
       "horno_temp": "-",
@@ -455,6 +585,26 @@ const obradorData = {
       "ingredientes_resumen": "Pulpa de aguacate (250g), Aguacate natural (350g), AOVE (20ml), Sal (2g)",
       "ingredientes": "Pulpa de Aguacate (250 g), Aguacate Natural (350 g, peso limpio), AOVE (20 ml, 1 tarrina), Sal Fina (2 g, 2 sobres)",
       "preparacion": "Tomar 250g de pulpa de aguacate. Añadir 350g de aguacate natural limpio (hacerle cuadrículas antes para facilitar la mezcla). Añadir 20ml de AOVE y 2g de sal. Mezclar bien y reservar tapado en refrigeración. Caducidad: 24h en refrigeración."
+    },
+    {
+      "nombre": "Subreceta Bacon Cocinado",
+      "descongelacion": "-",
+      "horno_temp": "200°C",
+      "horno_prog": "Focaccia",
+      "horno_tiempo": "4 min",
+      "ingredientes_resumen": "Bacon troceado (300 g)",
+      "ingredientes": "Bacon Troceado (300 g)",
+      "preparacion": "Colocar en una bandeja el bacon troceado y hornear en el programa Focaccia durante 4 minutos a 200°C. Caducidad secundaria: 48h en refrigeración."
+    },
+    {
+      "nombre": "Subreceta Salsa Holandesa",
+      "descongelacion": "-",
+      "horno_temp": "-",
+      "horno_prog": "-",
+      "horno_tiempo": "-",
+      "ingredientes_resumen": "Salsa Holandesa (500 g), Leche (10 ml)",
+      "ingredientes": "Salsa Holandesa (500 g), Leche Pascual Intense (10 ml)",
+      "preparacion": "Mezclar la salsa holandesa y la leche. Pasar a una manga pastelera."
     },
     {
       "nombre": "Baguette Antiga",
@@ -508,4 +658,5 @@ const obradorData = {
     }
   ]
 };
+
 
