@@ -14,20 +14,59 @@ header { background: rgba(255,255,255,0.9); color:#000; text-align:center; paddi
 #buscador { width:90%; margin:10px auto; display:block; padding:8px 12px; border-radius:6px; border:2px solid #000; font-size:1em; }
 #grid { display:grid; grid-template-columns: repeat(auto-fill,minmax(280px,1fr)); gap:12px; padding:15px; }
 
-.obrador-item { border:1px solid #000; border-radius:8px; padding:12px; background:#fff; position:relative; display:flex; flex-direction:column; justify-content:space-between; }
+.obrador-item { 
+  border:1px solid #000; 
+  border-radius:8px; 
+  padding:12px; 
+  background:#fff; 
+  position:relative; 
+  display:flex; 
+  flex-direction:column; 
+  justify-content:space-between; 
+  overflow:hidden;
+}
 .obrador-item h3 { margin:0 0 6px 0; font-size:1.1em; }
 .obrador-item p { margin:2px 0; font-size:0.9em; }
-.obrador-item .dias-restantes { position:absolute; top:8px; right:8px; font-weight:bold; font-size:0.9em; }
-.obrador-item button { background:#000; color:#fff; border:none; padding:6px 10px; border-radius:4px; cursor:pointer; font-size:0.85em; margin-top:8px; }
+.obrador-item .dias-restantes { 
+  position:absolute; 
+  top:8px; 
+  right:8px; 
+  font-weight:bold; 
+  font-size:0.9em; 
+  background:#000; 
+  color:#fff; 
+  padding:2px 6px; 
+  border-radius:4px;
+}
+.obrador-item button { 
+  background:#000; 
+  color:#fff; 
+  border:none; 
+  padding:6px 10px; 
+  border-radius:4px; 
+  cursor:pointer; 
+  font-size:0.85em; 
+  margin-top:8px; 
+}
 .obrador-item button:hover { background:#333; }
 
-/* Borde izquierdo para urgencia */
-.obrador-item::before { content:''; position:absolute; left:0; top:0; width:8px; height:100%; border-radius:0 0 0 8px; background:#ccc; }
+/* Borde izquierdo visible y grueso */
+.obrador-item::before { 
+  content:''; 
+  position:absolute; 
+  left:0; 
+  top:0; 
+  width:14px; 
+  height:100%; 
+  border-radius:0 8px 8px 0; 
+  background:#ccc; 
+}
 
+/* Modal */
 #modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.4); align-items:center; justify-content:center; z-index:1000; }
-.modal-content { background:#fff; padding:20px; border-radius:8px; width:90%; max-width:400px; box-shadow:0 3px 6px rgba(0,0,0,0.2); display:flex; flex-direction:column; gap:10px; }
+.modal-content { background:#fff; padding:20px; border-radius:8px; width:90%; max-width:420px; box-shadow:0 3px 6px rgba(0,0,0,0.2); display:flex; flex-direction:column; gap:10px; }
 .modal-content h2 { margin:0; text-align:center; }
-.modal-content label { font-weight:bold; }
+.modal-content label { font-weight:bold; font-size:0.9em; }
 .modal-content input { padding:8px; border:1px solid #000; border-radius:6px; width:100%; }
 .modal-content button { background:#000; color:#fff; border:none; padding:10px; border-radius:6px; cursor:pointer; margin-top:10px; }
 .modal-content button:hover { background:#333; }
@@ -59,12 +98,16 @@ header { background: rgba(255,255,255,0.9); color:#000; text-align:center; paddi
   <div class="modal-content">
     <h2 id="modalNombre"></h2>
     <label>Cantidad total</label>
-    <input type="number" id="modalCantidad">
-    <label>Uso diario cantidad</label>
-    <input type="number" id="modalUso">
+    <input type="number" id="modalCantidadTotal">
     <label>Peso total</label>
-    <input type="number" id="modalPeso">
-    <label>Uso diario peso</label>
+    <input type="number" id="modalPesoTotal">
+    <label>Cantidad disponible</label>
+    <input type="number" id="modalCantidadDisponible">
+    <label>Peso disponible</label>
+    <input type="number" id="modalPesoDisponible">
+    <label>Uso diario (cantidad)</label>
+    <input type="number" id="modalUsoCantidad">
+    <label>Uso diario (peso)</label>
     <input type="number" id="modalUsoPeso">
     <button onclick="guardarCambios()">Guardar</button>
   </div>
@@ -72,10 +115,9 @@ header { background: rgba(255,255,255,0.9); color:#000; text-align:center; paddi
 
 <script src="inventario.js"></script>
 <script>
-// ====== Inicializar inventario en localStorage ======
 let inventario = JSON.parse(localStorage.getItem('inventario'));
 if(!inventario){
-    inventario = productos; // del JSON original
+    inventario = productos; 
     localStorage.setItem('inventario', JSON.stringify(inventario));
 }
 
@@ -107,15 +149,18 @@ function renderizarInventario(filtroCategoria='', busqueda=''){
 
         const div = document.createElement('div');
         div.className = 'obrador-item';
-        div.style.borderLeftColor = colorBorde;
+        div.style.setProperty('--colorBorde', colorBorde);
+        div.style.setProperty('border-left', `14px solid ${colorBorde}`);
 
         div.innerHTML = `
             <h3>${item.nombre}</h3>
             <span class="dias-restantes">${dias !== null ? dias.toFixed(1)+' días':'N/A'}</span>
-            <p>Cantidad: ${item.cantidad_disponible ?? '-'}</p>
-            <p>Uso diario: ${item.uso_diario_cantidad ?? '-'}</p>
-            <p>Peso: ${item.peso_disponible ?? '-'}</p>
-            <p>Uso diario peso: ${item.uso_diario_peso ?? '-'}</p>
+            <p><b>Cant. total:</b> ${item.cantidad_caja ?? '-'}</p>
+            <p><b>Peso total:</b> ${item.peso_caja ?? '-'}</p>
+            <p><b>Cant. disponible:</b> ${item.cantidad_disponible ?? '-'}</p>
+            <p><b>Peso disponible:</b> ${item.peso_disponible ?? '-'}</p>
+            <p><b>Uso diario (cant):</b> ${item.uso_diario_cantidad ?? '-'}</p>
+            <p><b>Uso diario (peso):</b> ${item.uso_diario_peso ?? '-'}</p>
             <button onclick="abrirModal('${item.nombre}')">Actualizar</button>
         `;
         grid.appendChild(div);
@@ -126,19 +171,24 @@ function abrirModal(nombre){
     productoActual = Object.values(inventario).flat().find(i=>i.nombre===nombre);
     if(!productoActual) return;
     document.getElementById('modalNombre').textContent = productoActual.nombre;
-    document.getElementById('modalCantidad').value = productoActual.cantidad_disponible ?? '';
-    document.getElementById('modalUso').value = productoActual.uso_diario_cantidad ?? '';
-    document.getElementById('modalPeso').value = productoActual.peso_disponible ?? '';
+    document.getElementById('modalCantidadTotal').value = productoActual.cantidad_caja ?? '';
+    document.getElementById('modalPesoTotal').value = productoActual.peso_caja ?? '';
+    document.getElementById('modalCantidadDisponible').value = productoActual.cantidad_disponible ?? '';
+    document.getElementById('modalPesoDisponible').value = productoActual.peso_disponible ?? '';
+    document.getElementById('modalUsoCantidad').value = productoActual.uso_diario_cantidad ?? '';
     document.getElementById('modalUsoPeso').value = productoActual.uso_diario_peso ?? '';
     document.getElementById('modal').style.display = 'flex';
 }
 
 function guardarCambios(){
     if(!productoActual) return;
-    productoActual.cantidad_disponible = Number(document.getElementById('modalCantidad').value);
-    productoActual.uso_diario_cantidad = Number(document.getElementById('modalUso').value);
-    productoActual.peso_disponible = Number(document.getElementById('modalPeso').value);
-    productoActual.uso_diario_peso = Number(document.getElementById('modalUsoPeso').value);
+    productoActual.cantidad_caja = Number(document.getElementById('modalCantidadTotal').value) || null;
+    productoActual.peso_caja = Number(document.getElementById('modalPesoTotal').value) || null;
+    productoActual.cantidad_disponible = Number(document.getElementById('modalCantidadDisponible').value) || null;
+    productoActual.peso_disponible = Number(document.getElementById('modalPesoDisponible').value) || null;
+    productoActual.uso_diario_cantidad = Number(document.getElementById('modalUsoCantidad').value) || null;
+    productoActual.uso_diario_peso = Number(document.getElementById('modalUsoPeso').value) || null;
+
     localStorage.setItem('inventario', JSON.stringify(inventario));
     document.getElementById('modal').style.display = 'none';
     renderizarInventario(document.querySelector('.nav-buttons .active')?.textContent || '', document.getElementById('buscador').value);
@@ -154,14 +204,11 @@ document.getElementById('buscador').addEventListener('input', e=>{
     renderizarInventario(document.querySelector('.nav-buttons .active')?.textContent || '', e.target.value);
 });
 
-// Cerrar modal al click fuera
 document.getElementById('modal').addEventListener('click', e=>{
     if(e.target.id==='modal') document.getElementById('modal').style.display='none';
 });
 
-// Render inicial
 renderizarInventario();
 </script>
-
 </body>
 </html>
