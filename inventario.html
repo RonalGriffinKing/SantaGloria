@@ -1,161 +1,29 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Inventario</title>
-  <style>
-    body {
-      font-family: 'Arial', sans-serif;
-      background-color: #fdf6f0;
-      margin: 0;
-      padding: 0;
-    }
-
-    header {
-      background-color: #ffd6d6;
-      color: #333;
-      padding: 20px;
-      text-align: center;
-      font-size: 1.8rem;
-      font-weight: bold;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-
-    main {
-      padding: 20px;
-      max-width: 1000px;
-      margin: auto;
-    }
-
-    h2 {
-      color: #ff7f7f;
-      margin-top: 40px;
-      border-bottom: 2px solid #ffb3b3;
-      padding-bottom: 5px;
-    }
-
-    .producto {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-      gap: 10px;
-      padding: 10px;
-      background-color: #fff0f0;
-      margin-bottom: 10px;
-      border-radius: 8px;
-      align-items: center;
-    }
-
-    .producto div {
-      text-align: center;
-    }
-
-    .producto input[type="number"] {
-      width: 80px;
-      padding: 5px;
-      border-radius: 4px;
-      border: 1px solid #ccc;
-      text-align: center;
-    }
-
-    button {
-      background-color: #ff7f7f;
-      color: #fff;
-      border: none;
-      padding: 5px 10px;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    button:hover {
-      background-color: #ff4d4d;
-    }
-
-    .grid-header {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-      gap: 10px;
-      font-weight: bold;
-      padding: 10px 0;
-      border-bottom: 2px solid #ffb3b3;
-      margin-bottom: 10px;
-    }
-
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inventario</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>Inventario</header>
-  <main id="inventario">
-    <!-- Aquí se cargarán los productos -->
-  </main>
 
-  <script src="productos.js"></script>
-  <script>
-    const inventarioContainer = document.getElementById("inventario");
+<header>
+  Inventario – Santa Gloria Russafa
+  <div class="nav-buttons">
+    <button onclick="filtrarCategoria('')">Todos</button>
+    <button onclick="filtrarCategoria('Congelado')">Congelado</button>
+    <button onclick="filtrarCategoria('Refrigerado')">Refrigerado</button>
+    <button onclick="filtrarCategoria('Elaborado')">Elaborado</button>
+    <button onclick="filtrarCategoria('Seco')">Seco</button>
+    <button onclick="agregarProducto()">➕ Agregar</button>
+    <button onclick="descargarJSON()">⬇️ Descargar JSON</button>
+  </div>
+</header>
 
-    function crearProductoHTML(nombre, inventario) {
-      const div = document.createElement("div");
-      div.classList.add("producto");
+<main class="obrador-container" id="grid"></main>
 
-      div.innerHTML = `
-        <div>${nombre}</div>
-        <div>${inventario.tipo === "unidad" ? "Unidades" : "Peso (g)"}</div>
-        <div><input type="number" min="0" value="${inventario.tipo === "unidad" ? inventario.cantidad_disponible || '' : inventario.peso_disponible || ''}" /></div>
-        <div>${inventario.tipo === "unidad" ? inventario.cantidad_caja || '' : inventario.peso_caja || ''}</div>
-        <div><button>Actualizar</button></div>
-      `;
-
-      const input = div.querySelector("input");
-      const button = div.querySelector("button");
-
-      button.addEventListener("click", () => {
-        if (inventario.tipo === "unidad") {
-          inventario.cantidad_disponible = parseInt(input.value) || 0;
-        } else if (inventario.tipo === "peso") {
-          inventario.peso_disponible = parseFloat(input.value) || 0;
-        }
-        inventario.fecha_actualizacion = new Date().toISOString();
-        alert(`Inventario actualizado: ${nombre}`);
-      });
-
-      return div;
-    }
-
-    function cargarInventario() {
-      for (const categoria in productos) {
-        const h2 = document.createElement("h2");
-        h2.textContent = categoria;
-        inventarioContainer.appendChild(h2);
-
-        // Cabecera de columnas
-        const header = document.createElement("div");
-        header.classList.add("grid-header");
-        header.innerHTML = `
-          <div>Producto</div>
-          <div>Tipo</div>
-          <div>Disponible</div>
-          <div>Caja</div>
-          <div>Acción</div>
-        `;
-        inventarioContainer.appendChild(header);
-
-        productos[categoria].forEach(producto => {
-          // Si no tiene inventario, inicializamos vacío
-          if (!producto.inventario) {
-            producto.inventario = {
-              tipo: "", cantidad_caja: null, cantidad_disponible: null, 
-              peso_caja: null, peso_disponible: null, fecha_actualizacion: ""
-            };
-          }
-
-          const productoHTML = crearProductoHTML(producto.nombre, producto.inventario);
-          inventarioContainer.appendChild(productoHTML);
-        });
-      }
-    }
-
-    cargarInventario();
-  </script>
+<script src="inventario.js"></script>
+<script src="app.js"></script>
 </body>
 </html>
