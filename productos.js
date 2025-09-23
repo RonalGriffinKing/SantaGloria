@@ -144,9 +144,7 @@ const productos = {
   ]
 };
 
-De acuerdo. He procesado todos los documentos y recetas que has proporcionado, incluyendo los recetarios en PDF, la guía de panes y las tablas de programación del horno. A continuación, te presento el objeto obradorData completo y actualizado, fusionando la información inicial con todas las recetas adicionales, subrecetas y panes.
-Se ha seguido la estructura solicitada, extrayendo los ingredientes, cantidades, pasos de preparación y parámetros de horneado para cada producto.
-Const obradorData = {
+const obradorData = {
   "productos": [
     {
       "nombre": "Gloria Básica",
