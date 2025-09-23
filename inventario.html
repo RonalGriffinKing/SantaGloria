@@ -15,7 +15,6 @@ header { background: rgba(255,255,255,0.9); color:#000; text-align:center; paddi
 #grid { display:grid; grid-template-columns: repeat(auto-fill,minmax(280px,1fr)); gap:12px; padding:15px; }
 
 .obrador-item { 
-  border:1px solid #000; 
   border-radius:8px; 
   padding:12px; 
   background:#fff; 
@@ -24,6 +23,7 @@ header { background: rgba(255,255,255,0.9); color:#000; text-align:center; paddi
   flex-direction:column; 
   justify-content:space-between; 
   overflow:hidden;
+  border:1px solid #000;
 }
 .obrador-item h3 { margin:0 0 6px 0; font-size:1.1em; }
 .obrador-item p { margin:2px 0; font-size:0.9em; }
@@ -38,6 +38,17 @@ header { background: rgba(255,255,255,0.9); color:#000; text-align:center; paddi
   padding:2px 6px; 
   border-radius:4px;
 }
+/* Borde izquierdo grueso con color según urgencia */
+.obrador-item::before { 
+  content:''; 
+  position:absolute; 
+  left:0; 
+  top:0; 
+  width:14px; 
+  height:100%; 
+  background:var(--colorBorde, #ccc); 
+  border-radius:0 8px 8px 0;
+}
 .obrador-item button { 
   background:#000; 
   color:#fff; 
@@ -49,18 +60,6 @@ header { background: rgba(255,255,255,0.9); color:#000; text-align:center; paddi
   margin-top:8px; 
 }
 .obrador-item button:hover { background:#333; }
-
-/* Borde izquierdo visible y grueso */
-.obrador-item::before { 
-  content:''; 
-  position:absolute; 
-  left:0; 
-  top:0; 
-  width:14px; 
-  height:100%; 
-  border-radius:0 8px 8px 0; 
-  background:#ccc; 
-}
 
 /* Modal */
 #modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.4); align-items:center; justify-content:center; z-index:1000; }
@@ -135,10 +134,29 @@ function calcularDias(item){
 function renderizarInventario(filtroCategoria='', busqueda=''){
     const grid = document.getElementById('grid');
     grid.innerHTML = '';
-    Object.values(inventario).flat().forEach(item=>{
-        if(filtroCategoria && item.categoria!==filtroCategoria) return;
-        if(busqueda && !item.nombre.toLowerCase().includes(busqueda.toLowerCase())) return;
+    let items = Object.values(inventario).flat();
 
+    // Filtrado por categoría y búsqueda
+    items = items.filter(item=>{
+        if(filtroCategoria && item.categoria!==filtroCategoria) return false;
+        if(busqueda && !item.nombre.toLowerCase().includes(busqueda.toLowerCase())) return false;
+        return true;
+    });
+
+    // Ordenar por prioridad: rojo -> amarillo -> verde -> N/A
+    items.sort((a,b)=>{
+        const diasA = calcularDias(a);
+        const diasB = calcularDias(b);
+        const prioridad = d => {
+            if(d === null) return 3;
+            if(d < 2) return 0;
+            if(d <= 3) return 1;
+            return 2;
+        };
+        return prioridad(diasA) - prioridad(diasB);
+    });
+
+    items.forEach(item=>{
         const dias = calcularDias(item);
         let colorBorde = '#ccc';
         if(dias !== null){
@@ -150,8 +168,6 @@ function renderizarInventario(filtroCategoria='', busqueda=''){
         const div = document.createElement('div');
         div.className = 'obrador-item';
         div.style.setProperty('--colorBorde', colorBorde);
-        div.style.setProperty('border-left', `14px solid ${colorBorde}`);
-
         div.innerHTML = `
             <h3>${item.nombre}</h3>
             <span class="dias-restantes">${dias !== null ? dias.toFixed(1)+' días':'N/A'}</span>
