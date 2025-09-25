@@ -66,6 +66,9 @@ select:focus, input[type="text"]:focus, input[type="date"]:focus { border-color:
 .obrador-container, .consulta-container { padding:15px; }
 .resultado-producto { border:2px dashed #000; border-radius:12px; padding:15px; margin-bottom:10px; background:#f8f8f8; font-size:0.9em; }
 .resultado-producto p { margin: 8px 0; }
+.simulador-fecha { display: flex; gap: 10px; align-items: center; margin-top: 10px; }
+.simulador-fecha input { margin-top: 0; }
+.simulador-fecha button { background: #555; color: white; border: none; padding: 6px 10px; font-size: 0.8em; border-radius: 6px; cursor: pointer;}
 .obrador-item { border:1px solid #ccc; border-radius:8px; padding:10px; margin-bottom:10px; background-color:#fff; }
 .obrador-details { margin-top:10px; padding-top:10px; border-top:1px dashed #ccc; display:none; }
 .quick-filters { display:flex; flex-wrap:wrap; justify-content:space-around; gap:10px; margin-top:15px; }
@@ -122,8 +125,19 @@ select:focus, input[type="text"]:focus, input[type="date"]:focus { border-color:
   <div id="resultadoConsulta" style="margin-top:15px; font-size:1em;"></div>
 </div>
 
-<div id="vista-obrador" style="display:none;">
+<div id="vista-obrador" style="display:none;" class="obrador-container">
+  <h1>🔪 Obrador</h1>
+  <label for="buscadorObrador">🔍 Buscar producto</label>
+  <input type="text" id="buscadorObrador" placeholder="Escribe para buscar...">
+  <div class="quick-filters">
+    <button onclick="cargarProductosObradorConFiltro('croissant')">🥐 Croissants</button>
+    <button onclick="cargarProductosObradorConFiltro('ensalada')">🥗 Ensaladas</button>
+    <button onclick="cargarProductosObradorConFiltro('focaccia')">🥖 Focaccias</button>
+    <button onclick="cargarProductosObradorConFiltro('gloria')">✨ Glorias</button>
+    <button onclick="cargarProductosObradorConFiltro('sandwich')">🥪 Sandwiches</button>
   </div>
+  <div id="obradorLista" style="margin-top:15px;"></div>
+</div>
 
 <div class="fab-container">
   <div class="fab-group">
@@ -224,6 +238,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+// --- LÓGICA DE DATOS ---
+function getProductoConStorage(nombreProducto) {
+    const original = Object.values(productos).flat().find(p => p.nombre === nombreProducto);
+    if (!original) return null;
+    const datosGuardados = JSON.parse(localStorage.getItem('datosProductos')) || {};
+    const guardado = datosGuardados[nombreProducto] || {};
+    return { ...original, ...guardado };
+}
+
 // --- LÓGICA DE PRODUCTOS Y SUGERENCIAS ---
 function actualizarSugerencias() {
     productoLista.innerHTML = "";
@@ -233,19 +256,16 @@ function actualizarSugerencias() {
     
     let filtrados = texto ? todosLosProductos.filter(p => p.nombre.toLowerCase().includes(texto)) : todosLosProductos;
     const sugerencias = filtrados.slice(0, 5);
-    const datosGuardados = JSON.parse(localStorage.getItem('datosProductos')) || {};
-
+    
     sugerencias.forEach(p => {
+        const prodConStorage = getProductoConStorage(p.nombre);
         const btn = document.createElement("div");
         btn.className = "producto-btn";
         if (productosSeleccionados.has(p.nombre)) btn.classList.add("active");
         
-        const infoGuardada = datosGuardados[p.nombre] || {};
         let infoText = "Sin Lote/Cad.";
-        if (infoGuardada.lote || infoGuardada.caducidad_primaria || p.lote || p.caducidad_primaria) {
-            const lote = infoGuardada.lote || p.lote;
-            const cad = infoGuardada.caducidad_primaria || p.caducidad_primaria;
-            infoText = `${lote ? `L: ${lote}` : ''} ${cad ? `C: ${cad}` : ''}`.trim();
+        if (prodConStorage.lote || prodConStorage.caducidad_primaria) {
+            infoText = `${prodConStorage.lote ? `L: ${prodConStorage.lote}` : ''} ${prodConStorage.caducidad_primaria ? `C: ${prodConStorage.caducidad_primaria}` : ''}`.trim();
         }
         btn.innerHTML = `<span>${p.nombre}</span><span class="producto-info">${infoText}</span>`;
         btn.dataset.nombre = p.nombre;
@@ -261,7 +281,6 @@ function actualizarSugerencias() {
 function generarEtiquetas(){
     printArea.innerHTML = "";
     if (productosSeleccionados.size === 0) return;
-    const datosGuardados = JSON.parse(localStorage.getItem('datosProductos')) || {};
     const empleado = empleadoSelect.value;
     const ahora = new Date();
     const fechaHora = ahora.toLocaleDateString("es-ES") + " " + ahora.toLocaleTimeString("es-ES", {hour: "2-digit", minute: "2-digit"});
@@ -270,7 +289,8 @@ function generarEtiquetas(){
         const p = getProductoConStorage(nombreProd);
         if (!p) return;
         const caducidadPrimaria = p.caducidad_primaria;
-        let dias = p.dias_abierto || p.dias_descongelado || 0;
+        let dias = p.dias_abierto ?? p.dias_descongelado ?? 0;
+
         let caducidadMostrada, etiquetaCaducidad;
         if (caducidadPrimaria) {
             caducidadMostrada = caducidadPrimaria;
@@ -278,7 +298,7 @@ function generarEtiquetas(){
         } else {
             let cad = new Date(ahora);
             cad.setDate(cad.getDate() + dias);
-            caducidadMostrada = dias === 0 ? "No aplica" : cad.toLocaleDateString("es-ES") + " " + cad.toLocaleTimeString("es-ES", {hour:"2-digit", minute:"2-digit"});
+            caducidadMostrada = dias > 0 ? cad.toLocaleDateString("es-ES") + " " + cad.toLocaleTimeString("es-ES", {hour:"2-digit", minute:"2-digit"}) : "No aplica";
             etiquetaCaducidad = 'Caducidad:';
         }
         
@@ -305,16 +325,13 @@ function abrirModalEdicion(origen, nombreProducto) {
     modalTitle.textContent = `Editar: ${nombreProducto}`;
     modalProductoNombre.value = nombreProducto;
     const p = getProductoConStorage(nombreProducto);
-
     modalLote.value = p.lote || '';
-    
     if (p.caducidad_primaria && p.caducidad_primaria.includes('/')) {
         const partes = p.caducidad_primaria.split('/');
         modalCaducidadPrimaria.value = `${partes[2].length === 2 ? '20' + partes[2] : partes[2]}-${partes[1]}-${partes[0]}`;
     } else {
         modalCaducidadPrimaria.value = '';
     }
-
     if (origen === 'consulta') {
         aperturaContainer.style.display = 'block';
         btnReset.style.display = 'block';
@@ -355,28 +372,22 @@ function resetProducto(nombreProducto) {
     if (datosGuardados[nombreProducto]) {
         delete datosGuardados[nombreProducto];
         localStorage.setItem('datosProductos', JSON.stringify(datosGuardados));
-        editModal.style.display = 'none';
-        consultarCaducidades();
-        actualizarSugerencias();
         alert(`El producto "${nombreProducto}" ha sido reseteado.`);
+    } else {
+        alert("Este producto no tiene datos guardados para resetear.");
     }
+    editModal.style.display = 'none';
+    consultarCaducidades();
+    actualizarSugerencias();
 }
 
-// --- LÓGICA DE CONSULTA (REDISEÑADA) ---
-function getProductoConStorage(nombreProducto) {
-    const original = Object.values(productos).flat().find(p => p.nombre === nombreProducto);
-    const datosGuardados = JSON.parse(localStorage.getItem('datosProductos')) || {};
-    const guardado = datosGuardados[nombreProducto] || {};
-    return { ...original, ...guardado };
-}
-
+// --- LÓGICA DE CONSULTA ---
 function consultarCaducidades() {
     const texto = busquedaProducto.value.toLowerCase();
     resultadoConsulta.innerHTML = "";
     if (!texto) return;
 
     const coincidencias = Object.values(productos).flat().filter(p => p.nombre.toLowerCase().includes(texto));
-
     if (coincidencias.length === 0) {
         resultadoConsulta.innerHTML = "<p>❌ Producto no encontrado</p>";
         return;
@@ -384,36 +395,56 @@ function consultarCaducidades() {
 
     coincidencias.forEach(prodOriginal => {
         const prod = getProductoConStorage(prodOriginal.nombre);
-        const fechaBase = new Date();
-        
-        let cadSecundariaDescongelado = 'N/A';
-        if (prod.dias_descongelado) {
-            let cad = new Date(fechaBase);
-            cad.setDate(cad.getDate() + prod.dias_descongelado);
-            cadSecundariaDescongelado = cad.toLocaleDateString("es-ES");
-        }
-
-        let cadSecundariaAbierto = 'N/A';
-        if (prod.dias_abierto) {
-            let cad = new Date(fechaBase);
-            cad.setDate(cad.getDate() + prod.dias_abierto);
-            cadSecundariaAbierto = cad.toLocaleDateString("es-ES");
-        }
-        
         const div = document.createElement("div");
         div.className = "resultado-producto";
+        const idUnica = prod.nombre.replace(/\s/g, '');
+
+        let htmlCaducidades = '';
+        if (prod.dias_descongelado) {
+            htmlCaducidades += `<p><strong>Cad. Descongelado (sin abrir):</strong> <span id="cad-desc-${idUnica}"></span> (${prod.dias_descongelado} días)</p>`;
+        }
+        if (prod.dias_abierto) {
+            htmlCaducidades += `<p><strong>Cad. Abierto:</strong> <span id="cad-abierto-${idUnica}"></span> (${prod.dias_abierto} días)</p>`;
+        }
+        
         div.innerHTML = `
             <p><strong>Producto:</strong> ${prod.nombre}</p>
+            <div class="simulador-fecha">
+                <input type="date" id="sim-date-${idUnica}" value="${new Date().toISOString().split('T')[0]}">
+                <button onclick="simularCaducidad('${prod.nombre}')">Simular</button>
+            </div>
             <p><strong>Lote:</strong> ${prod.lote || 'No definido'}</p>
             <p><strong>Cad. Primaria:</strong> ${prod.caducidad_primaria || 'No definida'}</p>
-            ${prod.dias_descongelado ? `<p><strong>Cad. Descongelado (sin abrir):</strong> ${cadSecundariaDescongelado}</p>` : ''}
-            ${prod.dias_abierto ? `<p><strong>Cad. Abierto:</strong> ${cadSecundariaAbierto}</p>` : ''}
+            ${htmlCaducidades}
             <div class="boton-actualizar-contenedor">
                 <button class="actualizar-btn" onclick="abrirModalEdicion('consulta', '${prod.nombre}')">Actualizar</button>
             </div>
         `;
         resultadoConsulta.appendChild(div);
+        simularCaducidad(prod.nombre); // Calcular con la fecha de hoy al cargar
     });
+}
+
+function simularCaducidad(nombreProducto) {
+    const idUnica = nombreProducto.replace(/\s/g, '');
+    const prod = getProductoConStorage(nombreProducto);
+    const fechaBaseInput = document.getElementById(`sim-date-${idUnica}`);
+    if (!fechaBaseInput) return;
+    
+    // Sumar 1 día a la fecha del input para evitar problemas de zona horaria
+    const fechaBase = new Date(fechaBaseInput.value);
+    fechaBase.setMinutes(fechaBase.getMinutes() + fechaBase.getTimezoneOffset());
+
+    if (prod.dias_descongelado) {
+        let cad = new Date(fechaBase);
+        cad.setDate(cad.getDate() + prod.dias_descongelado);
+        document.getElementById(`cad-desc-${idUnica}`).textContent = cad.toLocaleDateString("es-ES");
+    }
+    if (prod.dias_abierto) {
+        let cad = new Date(fechaBase);
+        cad.setDate(cad.getDate() + prod.dias_abierto);
+        document.getElementById(`cad-abierto-${idUnica}`).textContent = cad.toLocaleDateString("es-ES");
+    }
 }
 
 
@@ -459,7 +490,7 @@ function mostrarVista(vista) {
 // --- LÓGICA DE OBRADOR (CORREGIDA Y COMPLETA) ---
 function cargarProductosObrador(productosACargar) {
     const vistaObrador = document.getElementById('vista-obrador');
-    if (!obradorLista) { // Crear elementos si no existen
+    if (!obradorLista) { 
         vistaObrador.innerHTML = `
             <div class="obrador-container">
                 <h1>🔪 Obrador</h1>
@@ -515,3 +546,4 @@ function cargarProductosObradorConFiltro(filtro) {
 </script>
 </body>
 </html>
+
