@@ -1,13 +1,3 @@
-¡Por supuesto! He analizado el JSON que me has enviado y tienes toda la razón. El problema era exactamente el que intuías: el código anterior no estaba preparado para la estructura específica de tu objeto productos.
-El error principal era que el código buscaba las propiedades dias_abierto o dias_descongelado para calcular la caducidad, pero en tu JSON real, esta propiedad se llama simplemente dias.
-He corregido el código para que sea totalmente compatible con tu JSON. Además, he mejorado la función que interpreta las fechas para que pueda entender formatos como "DD/MM/YY" o "MM/YYYY" que aparecen en tus datos.
-¿Qué he corregido?
- * Integración de tu JSON: He insertado tus objetos productos y obradorData completos y correctos directamente en el código.
- * Lógica de Caducidad Arreglada: La función generarEtiquetas ahora busca correctamente la propiedad dias para calcular las fechas de caducidad secundarias.
- * Intérprete de Fechas Mejorado: La función parseSpanishDate ahora es más robusta y puede leer correctamente todos los formatos de caducidad_primaria de tu JSON.
-Ahora, al seleccionar los productos, deberían aparecer en la lista de "Etiquetas listas" sin ningún problema.
-Código HTML Completo y Corregido
-Aquí tienes el código final. Cópialo y pégalo en tu archivo .html. Con esto, tu aplicación debería funcionar perfectamente con tus datos reales.
 <!DOCTYPE html>
 <html lang="es">
 <head>
