@@ -23,10 +23,13 @@ const productos = {
     { "nombre": "Tortilla francesa (Congelada)", "tipo": "C", "lote": "03082501", "caducidad_primaria": "18/10/2025" }
   ],
   "Refrigerados": [
+    // Productos con dos caducidades secundarias
     { "nombre": "Aguacate pulpa (En descongelación)", "dias_descongelado": 2, "dias_abierto": 1, "tipo": "R", "estado": "Descongelado sin abrir" },
-    { "nombre": "Cebolla caramelizada (En descongelación)", "dias_descongelado": 20, "dias_abierto": 5, "tipo": "R", "estado": "Descongelado sin abrir" },
+    { "nombre": "Cebolla caramelizada (En descongelación)", "dias_descongelado": 20, "dias_abierto": 3, "tipo": "R", "estado": "Descongelado sin abrir" },
     { "nombre": "Pollo asado deshebrado (En descongelación)", "dias_descongelado": 3, "dias_abierto": 2, "tipo": "R", "estado": "Descongelado sin abrir" },
     { "nombre": "Salmón ahumado (En descongelación)", "dias_descongelado": 2, "dias_abierto": 2, "tipo": "R", "estado": "Descongelado sin abrir", "lote": "M250901L01" },
+
+    // Productos que se abren (con una sola caducidad secundaria)
     { "nombre": "Bacon (Abierto)", "dias_abierto": 5, "tipo": "R", "estado": "Refrigerado y abierto" },
     { "nombre": "Jamón cocido (Abierto)", "dias_abierto": 3, "tipo": "R", "estado": "Refrigerado y abierto" },
     { "nombre": "Pechuga de pavo (Abierto)", "dias_abierto": 3, "tipo": "R", "estado": "Refrigerado y abierto" },
@@ -48,10 +51,11 @@ const productos = {
     { "nombre": "Pesto (Abierto)", "dias_abierto": 3, "tipo": "R", "estado": "Refrigerado y abierto" },
     { "nombre": "Salsa César (Abierta)", "dias_abierto": 4, "tipo": "R", "estado": "Refrigerado y abierto" },
     { "nombre": "Salsa holandesa (Abierta)", "dias_abierto": 5, "tipo": "R", "estado": "Refrigerado y abierto" },
-    { "nombre": "Sobrasada (Abierta)", "dias_abierto": 2, "tipo": "R", "estado": "Refrigerado y abierto" },
-    { "nombre": "Secallona (Abierta)", "dias_abierto": 4, "tipo": "R", "estado": "Refrigerado y abierto" },
+    { "nombre": "Sobrasada (Abierto)", "dias_abierto": 2, "tipo": "R", "estado": "Refrigerado y abierto" },
+    { "nombre": "Secallona (Abierto)", "dias_abierto": 4, "tipo": "R", "estado": "Refrigerado y abierto" },
     { "nombre": "Tomate seco (Abierto)", "dias_abierto": 15, "tipo": "R", "estado": "Refrigerado y abierto" },
     { "nombre": "Zumo limón exprimido (Abierto)", "dias_abierto": 40, "tipo": "R", "estado": "Refrigerado y abierto" },
+    // Productos frescos
     { "nombre": "Aguacate (entero)", "dias_abierto": 1, "tipo": "R", "estado": "Fresco" },
     { "nombre": "Ensalada campestre", "dias_abierto": 3, "tipo": "R", "estado": "Fresco" },
     { "nombre": "Espinacas brotes", "dias_abierto": 2, "tipo": "R", "estado": "Fresco" },
