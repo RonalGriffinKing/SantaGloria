@@ -15,35 +15,32 @@ label { display:block; margin-top:15px; font-weight:bold; color:#000; font-size:
 select, input[type="text"] { width:100%; padding:12px; margin-top:6px; border-radius:8px; border:2px solid #ccc; font-size:1em; background:#fff; color:#000; box-sizing: border-box; transition: border-color 0.2s; }
 select:focus, input[type="text"]:focus { border-color: #000; outline: none; }
 
-/* --- SECCIÓN DE FORMULARIO Y LISTA DE SUGERENCIAS --- */
+/* --- FORMULARIO Y SUGERENCIAS --- */
 .fila-inputs { display: flex; gap: 10px; }
 .fila-inputs > div { flex: 1; }
 #productoLista { display:flex; flex-direction: column; gap:0; margin-top:10px; border-radius: 8px; overflow: hidden; max-height: 220px; overflow-y: auto; border: 1px solid #ddd; }
-.producto-btn { display: flex; justify-content: space-between; align-items: center; width: 100%; background:#fff; color:#000; padding:12px; text-align:left; font-size:0.9em; cursor:pointer; user-select:none; border-bottom: 1px solid #ddd; transition: background-color 0.2s, color 0.2s; }
+.producto-btn { display: flex; justify-content: space-between; align-items: center; width: 100%; background:#fff; color:#000; padding:12px; text-align:left; font-size:0.9em; cursor:pointer; user-select:none; border-bottom: 1px solid #ddd; }
 .producto-btn:last-child { border-bottom: none; }
 .producto-info { font-size: 0.8em; color: #555; background-color: #eee; padding: 3px 7px; border-radius: 6px; white-space: nowrap; }
 .producto-btn.active { background:#000; color:#fff; font-weight:bold; }
-.producto-btn.active .producto-info { color: #000; background-color: #ccc; }
 
 /* --- ÁREA DE ETIQUETAS GENERADAS --- */
 .print-area { display: flex; flex-wrap: wrap; gap: 15px; padding: 0 15px; justify-content: center; }
 .etiqueta {
   width: 50mm;
-  height: 38mm; /* --- ALTURA AUMENTADA --- */
+  height: 40mm; /* --- ALTURA AUMENTADA --- */
   display: flex;
   flex-direction: column;
-  justify-content: space-around; /* Cambiado para mejor distribución */
-  font-size: 11pt; /* Letra ajustada para caber mejor */
-  padding: 2mm;
+  font-size: 10.5pt; /* Letra más pequeña para asegurar que todo quepa */
+  padding: 3mm;
   box-sizing: border-box;
   border: 1px dashed #999;
   background: white;
-  overflow: hidden;
   border-radius: 4px;
 }
-.etiqueta div { text-align: left; line-height: 1.3; } /* --- TEXTO A LA IZQUIERDA --- */
-.etiqueta .nombre-producto { font-weight: bold; font-size: 12pt; text-align: center; }
-.boton-actualizar-contenedor { text-align: center; margin: 2px 0; } /* --- CONTENEDOR PARA CENTRAR BOTÓN --- */
+.etiqueta div { text-align: left; line-height: 1.4; }
+.etiqueta .nombre-producto { font-weight: bold; font-size: 12pt; text-align: center; margin-bottom: 4px; }
+.boton-actualizar-contenedor { text-align: center; margin: 4px 0; }
 .actualizar-btn { background: #000; color: white; border: none; border-radius: 6px; padding: 5px 12px; font-size: 10pt; cursor: pointer; display: inline-block; }
 
 /* --- BOTONES FLOTANTES (FAB) --- */
@@ -66,10 +63,10 @@ select:focus, input[type="text"]:focus { border-color: #000; outline: none; }
 /* --- IMPRESIÓN --- */
 @media print {
   @page{size:50mm 30mm; margin:0;} body, html { margin:0; padding:0; }
-  body * { visibility:hidden; } .actualizar-btn, .boton-actualizar-contenedor { display: none !important; }
+  body * { visibility:hidden; } .boton-actualizar-contenedor { display: none !important; }
   .print-area, .print-area * { visibility:visible; }
   .print-area { position:absolute; top:0; left:0; }
-  .etiqueta { height: 30mm; border:none; font-size:13pt; justify-content: space-around; } /* Altura y justificado para impresión */
+  .etiqueta { height: 30mm; border:none; font-size:13pt; justify-content: space-around; }
   .etiqueta .nombre-producto { font-size: 14pt; }
 }
 </style>
@@ -251,6 +248,7 @@ function generarEtiquetas(){
         const etiqueta = document.createElement("div");
         etiqueta.className = "etiqueta";
         etiqueta.dataset.nombre = nombreProd;
+        // --- HTML DE LA ETIQUETA MODIFICADO ---
         etiqueta.innerHTML = `
             <div class="nombre-producto">${nombreProd}</div>
             <div>${productoOriginal.tipo} / ${empleado}</div>
@@ -311,12 +309,7 @@ function imprimirSecuencial(){
     const etiquetas = [...document.querySelectorAll(".etiqueta")];
     if(etiquetas.length === 0) return;
     let i = 0;
-    function imprimirUna() {
-        if(i >= etiquetas.length) return;
-        imprimirEtiqueta(etiquetas[i].outerHTML);
-        i++;
-        setTimeout(imprimirUna, 700);
-    }
+    function imprimirUna() { if(i >= etiquetas.length) return; imprimirEtiqueta(etiquetas[i].outerHTML); i++; setTimeout(imprimirUna, 700); }
     imprimirUna();
 }
 
@@ -336,14 +329,7 @@ function exportarXLSX(){
         const apertura = e.querySelector('div:nth-child(4)').textContent.replace("Apertura: ","");
         const caducidad = e.querySelector('[data-tipo="caducidad"]').textContent.replace(/Cad\. Primaria:|Caducidad:/g,"").trim();
         const tipoEmpleado = (tipoEmpleadoText || ' / ').split(" / ");
-        return {
-            Producto: nombre,
-            Tipo: tipoEmpleado[0].trim() || '',
-            Empleado: tipoEmpleado[1].trim() || '',
-            Lote: lote,
-            Apertura: apertura,
-            Caducidad: caducidad
-        };
+        return { Producto: nombre, Tipo: tipoEmpleado[0].trim() || '', Empleado: tipoEmpleado[1].trim() || '', Lote: lote, Apertura: apertura, Caducidad: caducidad };
     });
     const ws = XLSX.utils.json_to_sheet(data);
     const wb = XLSX.utils.book_new();
