@@ -15,7 +15,7 @@ const productos = {
     { "nombre": "Pasta rigatoni (Congelada)", "dias": 365, "tipo": "C", "estado": "Congelado (ver fecha envase)" },
     { "nombre": "Pollo asado deshebrado (Congelado)", "dias": 180, "tipo": "C", "estado": "Congelado (ver fecha envase)" },
     { "nombre": "Pop dots (Congelados)", "dias": 180, "tipo": "C", "estado": "Congelado (ver fecha envase)" },
-    { "nombre": "Salmón ahumado (Congelado)", "dias": 0, "tipo": "C", "estado": "Congelado (ver fecha envase)", "lote": "M250901L01", "caducidad_primaria": "03.09.26" },
+    { "nombre": "Salmón ahumado (Congelado)", "dias": 0, "tipo": "C", "estado": "Congelado (ver fecha envase)", "lote": "M250901L01", "caducidad_primaria": "03/09/26" },
     { "nombre": "Tarta (todas) (Congelada)", "dias": 180, "tipo": "C", "estado": "Congelado (ver fecha envase)" },
     { "nombre": "Tortitas (Congeladas)", "dias": 180, "tipo": "C", "estado": "Congelado (ver fecha envase)" },
     { "nombre": "Tortilla campera (Congelada)", "dias": 180, "tipo": "C", "estado": "Congelado (ver fecha envase)" },
@@ -41,7 +41,7 @@ const productos = {
     { "nombre": "Espinacas brotes", "dias": 2, "tipo": "R", "estado": "Fresco" },
     { "nombre": "Fresón", "dias": 1, "tipo": "R", "estado": "Fresco" },
     { "nombre": "Huevo plancha", "dias": 2, "tipo": "R", "estado": "Cocinado y refrigerado", "lote": "03082501", "caducidad_primaria": "18/10/2025" },
-    { "nombre": "Jamón cocido (Sin abrir)", "dias": 0, "tipo": "R", "estado": "Sin abrir (ver fecha envase)", "lote": "50503-10-10-2025", "caducidad_primaria": "10-10-2025" },
+    { "nombre": "Jamón cocido (Sin abrir)", "dias": 0, "tipo": "R", "estado": "Sin abrir (ver fecha envase)", "lote": "50503-10-10-2025", "caducidad_primaria": "10/10/2025" },
     { "nombre": "Jamón cocido (Abierto)", "dias": 3, "tipo": "R", "estado": "Refrigerado y abierto", "lote": "50503-10-10-2025" },
     { "nombre": "Kiwi", "dias": 1, "tipo": "R", "estado": "Fresco" },
     { "nombre": "Leche (Abierto)", "dias": 2, "tipo": "R", "estado": "Refrigerado y abierto" },
@@ -50,26 +50,26 @@ const productos = {
     { "nombre": "Mayonesa de trufa (Abierta)", "dias": 10, "tipo": "R", "estado": "Refrigerado y abierto" },
     { "nombre": "Nata spray (Abierta)", "dias": 15, "tipo": "R", "estado": "Refrigerado y abierto" },
     { "nombre": "Paleta ibérica (Sin abrir)", "dias": 0, "tipo": "R", "estado": "Sin abrir (ver fecha envase)", "lote": "L-3265", "caducidad_primaria": "18/03/2026" },
-    { "nombre": "Paleta ibérica (Abierta)", "dias": 14, "tipo": "R", "estado": "Refrigerado y abierto", "lote": "L-3265" },
+    { "nombre": "Paleta ibérica (Abierto)", "dias": 14, "tipo": "R", "estado": "Refrigerado y abierto", "lote": "L-3265" },
     { "nombre": "Pechuga de pavo (Sin abrir)", "dias": 0, "tipo": "R", "estado": "Sin abrir (ver fecha envase)" },
-    { "nombre": "Pechuga de pavo (Abierta)", "dias": 3, "tipo": "R", "estado": "Refrigerado y abierto" },
+    { "nombre": "Pechuga de pavo (Abierto)", "dias": 3, "tipo": "R", "estado": "Refrigerado y abierto" },
     { "nombre": "Pesto (Abierto)", "dias": 3, "tipo": "R", "estado": "Refrigerado y abierto" },
-    { "nombre": "Queso Brie (Sin abrir)", "dias": 0, "tipo": "R", "estado": "Sin abrir (ver fecha envase)", "lote": "024723725", "caducidad_primaria": "13.11.25" },
+    { "nombre": "Queso Brie (Sin abrir)", "dias": 0, "tipo": "R", "estado": "Sin abrir (ver fecha envase)", "lote": "024723725", "caducidad_primaria": "13/11/25" },
     { "nombre": "Queso Brie (Abierto)", "dias": 10, "tipo": "R", "estado": "Refrigerado y abierto", "lote": "024723725" },
     { "nombre": "Queso crema (Sin abrir)", "dias": 0, "tipo": "R", "estado": "Sin abrir (ver fecha envase)" },
     { "nombre": "Queso crema (Abierto)", "dias": 7, "tipo": "R", "estado": "Refrigerado y abierto" },
-    { "nombre": "Queso Edam (Sin abrir)", "dias": 0, "tipo": "R", "estado": "Sin abrir (ver fecha envase)", "lote": "11436055", "caducidad_primaria": "14-11-2025" },
+    { "nombre": "Queso Edam (Sin abrir)", "dias": 0, "tipo": "R", "estado": "Sin abrir (ver fecha envase)", "lote": "11436055", "caducidad_primaria": "14/11/2025" },
     { "nombre": "Queso Edam (Abierto)", "dias": 4, "tipo": "R", "estado": "Refrigerado y abierto", "lote": "11436055" },
     { "nombre": "Queso feta (Sin abrir)", "dias": 0, "tipo": "R", "estado": "Sin abrir (ver fecha envase)" },
     { "nombre": "Queso feta (Abierto)", "dias": 3, "tipo": "R", "estado": "Refrigerado y abierto" },
     { "nombre": "Queso lascas (Sin abrir)", "dias": 0, "tipo": "R", "estado": "Sin abrir (ver fecha envase)" },
     { "nombre": "Queso lascas (Abierto)", "dias": 5, "tipo": "R", "estado": "Refrigerado y abierto" },
-    { "nombre": "Queso mezcla semicurado (Sin abrir)", "dias": 0, "tipo": "R", "estado": "Sin abrir (ver fecha envase)", "lote": "25140247", "caducidad_primaria": "28.03.26" },
+    { "nombre": "Queso mezcla semicurado (Sin abrir)", "dias": 0, "tipo": "R", "estado": "Sin abrir (ver fecha envase)", "lote": "25140247", "caducidad_primaria": "28/03/26" },
     { "nombre": "Queso mezcla semicurado (Abierto)", "dias": 5, "tipo": "R", "estado": "Refrigerado y abierto", "lote": "25140247" },
     { "nombre": "Queso mozzarella perlas (Sin abrir)", "dias": 0, "tipo": "R", "estado": "Sin abrir (ver fecha envase)" },
     { "nombre": "Queso mozzarella perlas (Abierto)", "dias": 4, "tipo": "R", "estado": "Refrigerado y abierto" },
     { "nombre": "Queso mozzarella rallada (Sin abrir)", "dias": 0, "tipo": "R", "estado": "Sin abrir (ver fecha envase)" },
-    { "nombre": "Queso mozzarella rallada (Abierta)", "dias": 3, "tipo": "R", "estado": "Refrigerado y abierto" },
+    { "nombre": "Queso mozzarella rallada (Abierto)", "dias": 3, "tipo": "R", "estado": "Refrigerado y abierto" },
     { "nombre": "Rúcula", "dias": 3, "tipo": "R", "estado": "Fresco" },
     { "nombre": "Salsa César (Abierta)", "dias": 4, "tipo": "R", "estado": "Refrigerado y abierto" },
     { "nombre": "Salsa holandesa (Abierta)", "dias": 5, "tipo": "R", "estado": "Refrigerado y abierto" },
@@ -82,7 +82,7 @@ const productos = {
     { "nombre": "Zumo limón exprimido (Abierto)", "dias": 40, "tipo": "R", "estado": "Refrigerado y abierto" }
   ],
   "Secos": [
-    { "nombre": "Atún claro (Sin abrir)", "dias": 0, "tipo": "S", "estado": "Sin abrir (ver fecha envase)", "lote": "L1251CH", "caducidad_primaria": "30.06.2028" },
+    { "nombre": "Atún claro (Sin abrir)", "dias": 0, "tipo": "S", "estado": "Sin abrir (ver fecha envase)", "lote": "L1251CH", "caducidad_primaria": "30/06/2028" },
     { "nombre": "Bebida vegetal (Sin abrir)", "dias": 0, "tipo": "S", "estado": "Sin abrir (ver fecha envase)" },
     { "nombre": "Leche (Sin abrir)", "dias": 0, "tipo": "S", "estado": "Sin abrir (ver fecha envase)" },
     { "nombre": "Mayonesa (Sin abrir)", "dias": 0, "tipo": "S", "estado": "Sin abrir (ver fecha envase)", "lote": "L-19125 00:01", "caducidad_primaria": "07/2026" },
@@ -110,7 +110,7 @@ const productos = {
     { "nombre": "Cobertura chocolate", "dias": 0, "tipo": "S", "estado": "No perecedero" },
     { "nombre": "Coco rallado", "dias": 0, "tipo": "S", "estado": "No perecedero" },
     { "nombre": "Crema pastelera saco", "dias": 0, "tipo": "S", "estado": "No perecedero" },
-    { "nombre": "Crema pistacho", "dias": 0, "tipo": "S", "estado": "No perecedero", "lote": "A210058", "caducidad_primaria": "16.06.26" },
+    { "nombre": "Crema pistacho", "dias": 0, "tipo": "S", "estado": "No perecedero", "lote": "A210058", "caducidad_primaria": "16/06/26" },
     { "nombre": "Frappé vainilla", "dias": 0, "tipo": "S", "estado": "No perecedero" },
     { "nombre": "Gelatina miroir cubo", "dias": 0, "tipo": "S", "estado": "No perecedero" },
     { "nombre": "Granos de chía", "dias": 0, "tipo": "S", "estado": "No perecedero" },
@@ -154,7 +154,6 @@ const productos = {
     { "nombre": "Tortitas frutos rojos", "dias": 1, "tipo": "E", "estado": "Listo para consumir" }
   ]
 };
-
 
 
 const obradorData = {
