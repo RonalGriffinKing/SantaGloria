@@ -20,30 +20,28 @@ select, input[type="text"] { width:100%; padding:12px; margin-top:6px; border-ra
 .producto-btn.active { background:#000; color:#fff; font-weight:bold; border:1px solid #333; }
 .producto-btn.active .producto-info { color: #000; background-color: #ccc; }
 
-/* --- CAMBIOS PARA VISUALIZACIÓN DE ETIQUETAS --- */
 .print-area {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  padding: 0 15px; /* Alineado con el resto del contenido */
+  padding: 0 15px;
 }
 .etiqueta {
   width: 50mm;
   height: 30mm;
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* Espaciado vertical mejorado */
-  font-size: 13pt; /* Tamaño de letra reducido para mejor ajuste */
-  line-height: 1.2; /* Altura de línea para evitar solapamiento */
+  justify-content: space-between;
+  font-size: 13pt;
+  line-height: 1.2;
   padding: 2mm;
   box-sizing: border-box;
   page-break-inside: avoid;
-  border: 1px dashed #999; /* Borde para ver los límites en pantalla */
+  border: 1px dashed #999;
   background: white;
-  overflow: hidden; /* Evita que el texto se salga */
+  overflow: hidden;
 }
-.etiqueta div { word-break: break-word; } /* Evita desbordamiento de texto largo */
-/* --- FIN DE CAMBIOS --- */
+.etiqueta div { word-break: break-word; }
 
 .fab-container { position:fixed; bottom:15px; right:15px; display:flex; flex-direction:column; gap:16px; z-index:999; align-items:center; }
 .fab { color:#fff; border:none; border-radius:50%; width:60px; height:60px; font-size:24px; display:flex; align-items:center; justify-content:center; cursor:pointer; box-shadow:0 3px 6px rgba(0,0,0,0.3); }
@@ -150,8 +148,265 @@ select, input[type="text"] { width:100%; padding:12px; margin-top:6px; border-ra
 <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
 <script src="productos.js"></script>
 <script>
-// El resto del script se mantiene igual, ya que los cambios de lógica no son necesarios, solo los de datos (productos.js) y visuales (CSS)
-// ... (pega aquí el script de tu archivo original sin cambios)
+// Variables globales
+const empleados = ["Ronald","Lorena","Johnny","Sofía","Claudia","Pamela","Abril","Gloria","Steven"];
+const empleadoSelect = document.getElementById("empleado");
+const categoriaSelect = document.getElementById("categoria");
+const productoLista = document.getElementById("productoLista");
+const buscadorInput = document.getElementById("buscador");
+const printArea = document.getElementById("printArea");
+const busquedaProducto = document.getElementById("busquedaProducto");
+const resultadoConsulta = document.getElementById("resultadoConsulta");
+const buscadorObrador = document.getElementById("buscadorObrador");
+const obradorLista = document.getElementById("obradorLista");
+
+// Cargar empleados
+empleados.forEach(e=>{ let opt=document.createElement("option"); opt.value=e; opt.textContent=e; empleadoSelect.appendChild(opt); });
+if(localStorage.getItem("ultimoEmpleado")) empleadoSelect.value=localStorage.getItem("ultimoEmpleado");
+empleadoSelect.addEventListener("change",()=>{ localStorage.setItem("ultimoEmpleado",empleadoSelect.value); });
+
+// Cargar categorías
+let categorias = Object.keys(productos);
+categoriaSelect.appendChild(new Option("Todo","Todo"));
+categorias.forEach(cat=>{ let opt=document.createElement("option"); opt.value=cat; opt.textContent=cat; categoriaSelect.appendChild(opt); });
+
+// PRODUCTOS
+let productButtons=[];
+function cargarProductos(){
+  productoLista.innerHTML=""; productButtons=[];
+  const categoria=categoriaSelect.value;
+  let productosMostrar=[];
+  if(categoria==="Todo"){ Object.values(productos).forEach(arr=>productosMostrar=productosMostrar.concat(arr)); }
+  else productosMostrar=productos[categoria]||[];
+
+  productosMostrar.forEach(p=>{
+    let btn=document.createElement("div");
+    btn.className="producto-btn";
+
+    const nombreSpan = document.createElement("span");
+    nombreSpan.textContent = p.nombre;
+
+    const infoSpan = document.createElement("span");
+    infoSpan.className = "producto-info";
+
+    if (p.lote || p.caducidad_primaria) {
+      const lote = p.lote ? `L: ${p.lote}` : '';
+      const cad = p.caducidad_primaria ? ` C: ${p.caducidad_primaria}` : '';
+      infoSpan.textContent = `${lote}${cad}`.trim();
+    } else {
+      infoSpan.textContent = "Sin Lote/Cad.";
+    }
+
+    btn.appendChild(nombreSpan);
+    btn.appendChild(infoSpan);
+
+    btn.dataset.nombre=p.nombre;
+    btn.dataset.dias=p.dias;
+    btn.dataset.tipo=(p.tipo === "C") ? "C" : "R";
+    btn.onclick=()=>btn.classList.toggle("active");
+    productoLista.appendChild(btn);
+    productButtons.push(btn);
+  });
+}
+cargarProductos();
+function seleccionarTodos(){ productButtons.forEach(btn=>btn.classList.add("active")); }
+buscadorInput.addEventListener("input",()=>{
+  const texto=buscadorInput.value.toLowerCase();
+  productButtons.forEach(btn=>{ btn.style.display=btn.dataset.nombre.toLowerCase().includes(texto)?"flex":"none"; });
+});
+
+// ETIQUETAS
+function generarEtiquetas(){
+  buscadorInput.value="";
+  productButtons.forEach(btn=>btn.style.display="flex");
+  printArea.innerHTML="";
+  const empleado=empleadoSelect.value;
+  const seleccionados=document.querySelectorAll(".producto-btn.active");
+  if(seleccionados.length===0) return;
+
+  seleccionados.forEach(btn=>{
+    const nombreProd=btn.dataset.nombre;
+    const dias=parseInt(btn.dataset.dias);
+    const tipo=btn.dataset.tipo;
+
+    let productoEncontrado = null;
+    for (const categoria in productos) {
+        const producto = productos[categoria].find(p => p.nombre === nombreProd);
+        if (producto) {
+            productoEncontrado = producto;
+            break;
+        }
+    }
+
+    const ahora=new Date();
+    const fechaHora=ahora.toLocaleDateString("es-ES")+" "+ahora.toLocaleTimeString("es-ES",{hour:"2-digit",minute:"2-digit"});
+
+    const loteFinal = (productoEncontrado && productoEncontrado.lote) ? productoEncontrado.lote : '________';
+    let caducidadFinal = '';
+    let etiquetaCaducidad = 'Caducidad:';
+
+    if (productoEncontrado && productoEncontrado.caducidad_primaria) {
+      caducidadFinal = productoEncontrado.caducidad_primaria;
+      etiquetaCaducidad = 'Cad. Primaria:';
+    } else {
+      let cad = new Date(ahora);
+      cad.setDate(cad.getDate() + dias);
+      caducidadFinal = dias === 0 ? "No aplica" : cad.toLocaleDateString("es-ES")+" "+cad.toLocaleTimeString("es-ES",{hour:"2-digit",minute:"2-digit"});
+    }
+
+    const etiqueta=document.createElement("div");
+    etiqueta.className="etiqueta";
+    etiqueta.innerHTML=`
+      <div><strong>${nombreProd}</strong></div>
+      <div>${tipo} / ${empleado}</div>
+      <div>Lote: ${loteFinal}</div>
+      <div>Apertura: ${fechaHora}</div>
+      <div><strong>${etiquetaCaducidad} ${caducidadFinal}</strong></div>
+    `;
+    printArea.appendChild(etiqueta);
+  });
+  printArea.scrollIntoView({behavior:"smooth"});
+}
+
+// IMPRIMIR
+function imprimirEtiqueta(etiquetaHTML){
+  const ventana=window.open('','width=400,height=400');
+  ventana.document.write(`
+    <html>
+      <head><title>Etiqueta</title>
+      <style>@page{size:50mm 30mm;margin:0;}body{margin:0;font-family:sans-serif;}div{width:50mm;height:30mm;padding:2mm;box-sizing:border-box;font-size:13pt;display:flex;flex-direction:column;justify-content:space-between;}</style>
+      </head>
+      <body onload="window.print();window.onafterprint=function(){window.close();}">
+        ${etiquetaHTML}
+      </body>
+    </html>
+  `);
+  ventana.document.close();
+}
+function imprimirSecuencial(){
+  const etiquetas=[...document.querySelectorAll(".etiqueta")];
+  if(etiquetas.length===0) return;
+  let i=0;
+  function imprimirUna(){ if(i>=etiquetas.length) return; imprimirEtiqueta(etiquetas[i].outerHTML); i++; setTimeout(imprimirUna,700); }
+  imprimirUna();
+}
+
+// EXPORTAR XLSX
+function exportarXLSX(){
+  const etiquetas=[...document.querySelectorAll(".etiqueta")];
+  if(etiquetas.length===0) return;
+
+  const data = etiquetas.map(e => {
+    const filas = e.innerText.trim().split("\n");
+    const producto = filas[0] || '';
+    const tipoEmpleado = (filas[1] || ' / ').split(" / ");
+    const tipo = tipoEmpleado[0] || '';
+    const empleado = tipoEmpleado[1] || '';
+    const lote = (filas[2] || '').replace("Lote: ","");
+    const apertura = (filas[3] || '').replace("Apertura: ","");
+    const cad = (filas[4] || '').replace("Cad. Primaria: ","").replace("Caducidad: ","");
+    return { Producto: producto, Tipo: tipo, Empleado: empleado, Lote: lote, Apertura: apertura, Caducidad: cad };
+  });
+
+  const ws = XLSX.utils.json_to_sheet(data);
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, "Etiquetas");
+  XLSX.writeFile(wb, "etiquetas_niimbot.xlsx");
+}
+
+// VISTAS
+function mostrarVista(vista){
+  document.getElementById("vista-etiquetas").style.display=(vista==="etiquetas")?"block":"none";
+  document.getElementById("vista-consultar").style.display=(vista==="consultar")?"block":"none";
+  document.getElementById("vista-obrador").style.display=(vista==="obrador")?"block":"none";
+}
+
+// CONSULTAR
+busquedaProducto.addEventListener("input",()=>{
+  const texto=busquedaProducto.value.toLowerCase();
+  resultadoConsulta.innerHTML="";
+  if(!texto) return;
+  let coincidencias=[];
+  for(let cat in productos){
+    productos[cat].forEach(p=>{
+      if(p.nombre.toLowerCase().includes(texto)) coincidencias.push({...p,categoria:cat});
+    });
+  }
+  if(coincidencias.length===0){ resultadoConsulta.innerHTML="<p>❌ Producto no encontrado</p>"; return; }
+  coincidencias.forEach(prod=>{
+    const ahora=new Date();
+    const apertura=ahora.toLocaleDateString("es-ES");
+    let cad=new Date(ahora); cad.setDate(cad.getDate()+prod.dias);
+    const caducidad=prod.dias===0?"No caduca":cad.toLocaleDateString("es-ES");
+    const div=document.createElement("div");
+    div.className="resultado-producto";
+    div.innerHTML=`
+      <p><strong>Producto:</strong> ${prod.nombre}</p>
+      <p><strong>Categoría:</strong> ${prod.categoria}</p>
+      <p><strong>Duración:</strong> <strong>${prod.dias===0?"No caduca":prod.dias+(prod.dias===1?" día":" días")}</strong></p>
+      <p><strong>Apertura:</strong> ${apertura}</p>
+      <p><strong>Caducidad:</strong> ${caducidad}</p>
+      ${prod.caducidad_primaria ? `<p><strong>Cad. Primaria:</strong> ${prod.caducidad_primaria}</p>` : ''}
+    `;
+    resultadoConsulta.appendChild(div);
+  });
+});
+
+// OBRADOR (Asumiendo que tienes un objeto obradorData en otro archivo)
+function cargarProductosObrador(productosACargar){
+  obradorLista.innerHTML='';
+  if(!productosACargar || productosACargar.length===0){ obradorLista.innerHTML='<p>❌ Producto no encontrado</p>'; return; }
+  productosACargar.forEach(producto=>{
+    const item=document.createElement('div'); item.className='obrador-item';
+    let detallesHtml='';
+    if(producto.preparacion || producto.ingredientes_resumen){
+      detallesHtml+=`<p><strong>Ingredientes (resumen):</strong> ${producto.ingredientes_resumen || 'No especificado'}</p>`;
+      detallesHtml+=`<button onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='block'?'none':'block';">Ver más</button>`;
+      detallesHtml+=`<div class="obrador-details">`;
+      if(producto.ingredientes){ detallesHtml+=`<h4>Ingredientes:</h4><p>${producto.ingredientes}</p>`; }
+      if(producto.preparacion){ detallesHtml+=`<h4>Preparación:</h4><p>${producto.preparacion}</p>`; }
+      detallesHtml+=`</div>`;
+    }
+    item.innerHTML=`
+      <h3>${producto.nombre}</h3>
+      <p><strong>Descongelación:</strong> ${producto.descongelacion || 'N/A'}</p>
+      <p><strong>Horno:</strong> ${producto.horno_temp ? `${producto.horno_temp}, Prog. ${producto.horno_prog}, ${producto.horno_tiempo}` : 'N/A'}</p>
+      ${detallesHtml}
+    `;
+    obradorLista.appendChild(item);
+  });
+}
+
+function cargarProductosObradorConFiltro(filtro){
+  if (typeof obradorData === 'undefined') return;
+  buscadorObrador.value='';
+  let productosFiltrados=[];
+  if(filtro==='croissants'){ productosFiltrados=obradorData.productos.filter(p=>p.nombre.toLowerCase().includes('croissant')); }
+  else if(filtro==='ensaladas'){ productosFiltrados=obradorData.productos.filter(p=>p.nombre.toLowerCase().includes('ensalada')); }
+  else if(filtro==='focaccias'){ productosFiltrados=obradorData.productos.filter(p=>p.nombre.toLowerCase().includes('focaccia')); }
+  else if(filtro==='glorias'){ productosFiltrados=obradorData.productos.filter(p=>p.nombre.toLowerCase().includes('gloria')); }
+  else if(filtro==='sandwiches'){ productosFiltrados=obradorData.productos.filter(p=>p.nombre.toLowerCase().includes('sw')); }
+  else if(filtro==='bocadillos'){ productosFiltrados=obradorData.productos.filter(p=>p.nombre.toLowerCase().includes('bocadillo')); }
+  else{ productosFiltrados=obradorData.productos; }
+  cargarProductosObrador(productosFiltrados);
+}
+
+buscadorObrador.addEventListener('input',()=>{
+  if (typeof obradorData === 'undefined') return;
+  const texto=buscadorObrador.value.toLowerCase();
+  const productosFiltrados=obradorData.productos.filter(p=>
+    p.nombre.toLowerCase().includes(texto) ||
+    (p.ingredientes && p.ingredientes.toLowerCase().includes(texto)) ||
+    (p.preparacion && p.preparacion.toLowerCase().includes(texto))
+  );
+  cargarProductosObrador(productosFiltrados);
+});
+
+document.addEventListener('DOMContentLoaded',()=>{
+    if (typeof obradorData !== 'undefined' && obradorData.productos) {
+        cargarProductosObrador(obradorData.productos);
+    }
+});
 </script>
 </body>
 </html>
