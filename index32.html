@@ -209,16 +209,17 @@ const productos = {
     { "nombre": "Tortilla francesa (Congelada)", "tipo": "C", "lote": "03082501", "caducidad_primaria": "18/10/2025" }
   ],
   "Refrigerados": [
+    // <<-- CORREGIDO -->> Se añade caducidad primaria donde corresponde para que se muestre en la etiqueta
     { "nombre": "Aguacate pulpa (En descongelación)", "dias": 2, "tipo": "R", "estado": "Descongelado sin abrir" },
     { "nombre": "Aguacate pulpa (Abierto)", "dias": 2, "tipo": "R", "estado": "Refrigerado y abierto" },
     { "nombre": "Cebolla caramelizada (En descongelación)", "dias": 20, "tipo": "R", "estado": "Descongelado sin abrir" },
     { "nombre": "Cebolla caramelizada (Abierto)", "dias": 3, "tipo": "R", "estado": "Refrigerado y abierto" },
     { "nombre": "Pollo asado deshebrado (En descongelación)", "dias": 2, "tipo": "R", "estado": "Descongelado sin abrir" },
     { "nombre": "Pollo asado deshebrado (Abierto)", "dias": 2, "tipo": "R", "estado": "Refrigerado y abierto" },
-    { "nombre": "Salmón ahumado (En descongelación)", "dias": 2, "tipo": "R", "estado": "Descongelado sin abrir" },
-    { "nombre": "Salmón ahumado (Abierto)", "dias": 2, "tipo": "R", "estado": "Refrigerado y abierto", "lote": "M250901L01" },
+    { "nombre": "Salmón ahumado (En descongelación)", "dias": 2, "tipo": "R", "estado": "Descongelado sin abrir", "lote": "M250901L01", "caducidad_primaria": "03/09/26" },
+    { "nombre": "Salmón ahumado (Abierto)", "dias": 2, "tipo": "R", "estado": "Refrigerado y abierto", "lote": "M250901L01", "caducidad_primaria": "03/09/26" },
     { "nombre": "Tortilla campera (En descongelación)", "dias": 2, "tipo": "R", "estado": "Descongelado sin abrir" },
-    { "nombre": "Tortilla francesa (En descongelación)", "dias": 1, "tipo": "R", "estado": "Descongelado sin abrir" },
+    { "nombre": "Tortilla francesa (En descongelación)", "dias": 1, "tipo": "R", "estado": "Descongelado sin abrir", "lote": "03082501", "caducidad_primaria": "18/10/2025" },
     { "nombre": "Bacon (Abierto)", "dias": 5, "tipo": "R", "estado": "Refrigerado y abierto" },
     { "nombre": "Jamón cocido (Abierto)", "dias": 3, "tipo": "R", "estado": "Refrigerado y abierto" },
     { "nombre": "Pechuga de pavo (Abierto)", "dias": 3, "tipo": "R", "estado": "Refrigerado y abierto" },
@@ -403,7 +404,7 @@ function actualizarSugerencias() {
     const todosLosProductos = (categoria === "Todo") ? Object.values(productos).flat() : productos[categoria] || [];
     
     let filtrados = texto ? todosLosProductos.filter(p => p.nombre.toLowerCase().includes(texto)) : todosLosProductos;
-    const sugerencias = filtrados.slice(0, 10); // Aumentado a 10 sugerencias
+    const sugerencias = filtrados.slice(0, 10);
     
     sugerencias.forEach(p => {
         const prodConStorage = getProductoConStorage(p.nombre);
@@ -440,8 +441,7 @@ function generarEtiquetas(){
         if (!p) return;
         
         const caducidadPrimaria = p.caducidad_primaria;
-        // <<-- CORREGIDO -->> Ahora busca 'dias' primero, que es la propiedad correcta en tu JSON.
-        let dias = p.dias ?? p.dias_abierto ?? p.dias_descongelado ?? 0;
+        let dias = p.dias ?? 0;
         let caducidadMostrada, etiquetaCaducidad, caducidadDateObj;
 
         if (caducidadPrimaria) {
@@ -494,7 +494,7 @@ function generarEtiquetas(){
     printArea.scrollIntoView({behavior:"smooth"});
 }
 
-// --- NUEVA FUNCIÓN Para programar la siguiente etiqueta ---
+// --- Para programar la siguiente etiqueta ---
 function programarSiguienteEtiqueta(boton, etiquetaId) {
     const etiquetaOriginalData = etiquetasParaExportar.find(e => e.id === etiquetaId);
     if (!etiquetaOriginalData) return;
@@ -525,7 +525,7 @@ function programarSiguienteEtiqueta(boton, etiquetaId) {
     alert(`Siguiente etiqueta para "${etiquetaOriginalData.Producto}" programada para el ${siguienteEtiquetaData.Caducidad}.\nSe incluirá en el Excel.`);
 }
 
-// --- FUNCIONES AUXILIARES DE FECHA (MEJORADAS) ---
+// --- FUNCIONES AUXILIARES DE FECHA ---
 function parseSpanishDate(dateStr) {
     if (!dateStr || typeof dateStr !== 'string') return null;
     try {
@@ -544,7 +544,7 @@ function parseSpanishDate(dateStr) {
             month = parseInt(dateParts[0], 10) - 1;
             year = parseInt(dateParts[1], 10);
         } else {
-            return null; // Formato no reconocido
+            return null;
         }
 
         let hour = 0, minute = 0;
@@ -653,7 +653,6 @@ function consultarCaducidades() {
         const idUnica = prod.nombre.replace(/\s/g, '');
 
         let htmlCaducidades = '';
-        // CORREGIDO para usar 'dias'
         if (prod.dias) {
             htmlCaducidades += `<p><strong>Cad. Secundaria:</strong> <span id="cad-secundaria-${idUnica}"></span> (${prod.dias} días)</p>`;
         }
@@ -756,14 +755,26 @@ function cargarProductosObrador(productosACargar) {
     });
 }
 
+// <<-- CORREGIDO -->> La función de filtro ahora es más inteligente
 function cargarProductosObradorConFiltro(filtro) {
     if (typeof obradorData === 'undefined' || !obradorData.productos) return;
+    
     const buscador = document.getElementById('buscadorObrador');
     if(buscador) buscador.value = '';
-    const productosFiltrados = obradorData.productos.filter(p => p.nombre.toLowerCase().includes(filtro));
+
+    let productosFiltrados;
+
+    if (filtro === 'sandwich') {
+        const sandwichKeywords = ['sandwich', 'sw', 'bikini', 'brioche', 'tosta', 'bocadillo', 'flautín', 'delicia integral'];
+        productosFiltrados = obradorData.productos.filter(p =>
+            sandwichKeywords.some(keyword => p.nombre.toLowerCase().includes(keyword))
+        );
+    } else {
+        productosFiltrados = obradorData.productos.filter(p => p.nombre.toLowerCase().includes(filtro));
+    }
+    
     cargarProductosObrador(productosFiltrados);
 }
 </script>
 </body>
 </html>
-
