@@ -261,19 +261,16 @@ function actualizarSugerencias() {
 function generarEtiquetas(){
     printArea.innerHTML = "";
     if (productosSeleccionados.size === 0) return;
-
     const datosGuardados = JSON.parse(localStorage.getItem('datosProductos')) || {};
     const empleado = empleadoSelect.value;
     const ahora = new Date();
     const fechaHora = ahora.toLocaleDateString("es-ES") + " " + ahora.toLocaleTimeString("es-ES", {hour: "2-digit", minute: "2-digit"});
 
     productosSeleccionados.forEach(nombreProd => {
-        const p = getProductoConStorage(nombreProd); // Usar siempre la versión con localStorage
+        const p = getProductoConStorage(nombreProd);
         if (!p) return;
-
         const caducidadPrimaria = p.caducidad_primaria;
-        let dias = p.dias_abierto || p.dias_descongelado || 0; // Prioridad a días abierto
-
+        let dias = p.dias_abierto || p.dias_descongelado || 0;
         let caducidadMostrada, etiquetaCaducidad;
         if (caducidadPrimaria) {
             caducidadMostrada = caducidadPrimaria;
@@ -324,7 +321,7 @@ function abrirModalEdicion(origen, nombreProducto) {
         btnReset.onclick = () => resetProducto(nombreProducto);
         btnGuardar.onclick = () => guardarCambiosModal('consulta');
         modalFechaApertura.value = new Date().toISOString().split('T')[0];
-    } else { // Origen 'etiqueta'
+    } else {
         aperturaContainer.style.display = 'none';
         btnReset.style.display = 'none';
         btnGuardar.onclick = () => guardarCambiosModal('etiqueta');
@@ -340,7 +337,6 @@ function guardarCambiosModal(origen) {
         const partes = modalCaducidadPrimaria.value.split('-');
         caducidadPrimaria = `${partes[2]}/${partes[1]}/${partes[0]}`;
     }
-
     const datosGuardados = JSON.parse(localStorage.getItem('datosProductos')) || {};
     datosGuardados[nombre] = { lote: lote, caducidad_primaria: caducidadPrimaria };
     localStorage.setItem('datosProductos', JSON.stringify(datosGuardados));
@@ -379,8 +375,7 @@ function consultarCaducidades() {
     resultadoConsulta.innerHTML = "";
     if (!texto) return;
 
-    const todosLosProductos = Object.values(productos).flat();
-    const coincidencias = todosLosProductos.filter(p => p.nombre.toLowerCase().includes(texto));
+    const coincidencias = Object.values(productos).flat().filter(p => p.nombre.toLowerCase().includes(texto));
 
     if (coincidencias.length === 0) {
         resultadoConsulta.innerHTML = "<p>❌ Producto no encontrado</p>";
@@ -389,9 +384,8 @@ function consultarCaducidades() {
 
     coincidencias.forEach(prodOriginal => {
         const prod = getProductoConStorage(prodOriginal.nombre);
+        const fechaBase = new Date();
         
-        const fechaBase = modalFechaApertura.value ? new Date(modalFechaApertura.value) : new Date();
-
         let cadSecundariaDescongelado = 'N/A';
         if (prod.dias_descongelado) {
             let cad = new Date(fechaBase);
@@ -421,6 +415,7 @@ function consultarCaducidades() {
         resultadoConsulta.appendChild(div);
     });
 }
+
 
 // --- IMPRESIÓN Y EXPORTACIÓN ---
 function imprimirSecuencial(){
@@ -461,12 +456,31 @@ function mostrarVista(vista) {
     document.getElementById(`vista-${vista}`).style.display = 'block';
 }
 
-// --- LÓGICA DE OBRADOR ---
+// --- LÓGICA DE OBRADOR (CORREGIDA Y COMPLETA) ---
 function cargarProductosObrador(productosACargar) {
-    if (!obradorLista) return;
-    obradorLista.innerHTML = '';
+    const vistaObrador = document.getElementById('vista-obrador');
+    if (!obradorLista) { // Crear elementos si no existen
+        vistaObrador.innerHTML = `
+            <div class="obrador-container">
+                <h1>🔪 Obrador</h1>
+                <label for="buscadorObrador">🔍 Buscar producto</label>
+                <input type="text" id="buscadorObrador" placeholder="Escribe para buscar...">
+                <div class="quick-filters">
+                    <button onclick="cargarProductosObradorConFiltro('croissant')">🥐 Croissants</button>
+                    <button onclick="cargarProductosObradorConFiltro('ensalada')">🥗 Ensaladas</button>
+                    <button onclick="cargarProductosObradorConFiltro('focaccia')">🥖 Focaccias</button>
+                    <button onclick="cargarProductosObradorConFiltro('gloria')">✨ Glorias</button>
+                    <button onclick="cargarProductosObradorConFiltro('sandwich')">🥪 Sandwiches</button>
+                </div>
+                <div id="obradorLista" style="margin-top:15px;"></div>
+            </div>`;
+    }
+    
+    const obradorListaElem = document.getElementById('obradorLista');
+    obradorListaElem.innerHTML = '';
+    
     if (!productosACargar || productosACargar.length === 0) {
-        obradorLista.innerHTML = '<p>No se encontraron productos.</p>';
+        obradorListaElem.innerHTML = '<p>No se encontraron productos.</p>';
         return;
     }
     productosACargar.forEach(producto => {
@@ -487,13 +501,14 @@ function cargarProductosObrador(productosACargar) {
             <p><strong>Horno:</strong> ${producto.horno_temp ? `${producto.horno_temp}, Prog. ${producto.horno_prog}, ${producto.horno_tiempo}` : 'N/A'}</p>
             ${detallesHtml}
         `;
-        obradorLista.appendChild(item);
+        obradorListaElem.appendChild(item);
     });
 }
 
 function cargarProductosObradorConFiltro(filtro) {
     if (typeof obradorData === 'undefined' || !obradorData.productos) return;
-    buscadorObrador.value = '';
+    const buscador = document.getElementById('buscadorObrador');
+    if(buscador) buscador.value = '';
     const productosFiltrados = obradorData.productos.filter(p => p.nombre.toLowerCase().includes(filtro));
     cargarProductosObrador(productosFiltrados);
 }
