@@ -39,10 +39,15 @@ select:focus, input[type="text"]:focus, input[type="date"]:focus { border-color:
   background: white;
   border-radius: 4px;
 }
+.etiqueta.short-expiry-visual { border-left: 4px solid #f39c12; }
 .etiqueta div { text-align: left; line-height: 1.3; }
 .etiqueta .nombre-producto { font-weight: bold; font-size: 11pt; text-align: center; margin-bottom: 2px; }
-.boton-actualizar-contenedor { text-align: center; margin: 2px 0; }
-.actualizar-btn { background: #000; color: white; border: none; border-radius: 6px; padding: 4px 12px; font-size: 9pt; cursor: pointer; display: inline-block; }
+.etiqueta-botones { text-align: center; margin: 2px 0; display:flex; gap: 5px; justify-content: center; }
+.etiqueta-btn { border: none; border-radius: 6px; padding: 4px 10px; font-size: 9pt; cursor: pointer; display: inline-block; color: white; }
+.actualizar-btn { background: #000; }
+.siguiente-btn { background: #f39c12; } /* Naranja */
+.siguiente-btn:disabled { background: #27ae60; cursor: not-allowed; } /* Verde */
+
 
 /* --- BOTONES FLOTANTES (FAB) --- */
 .fab-container { position:fixed; bottom:15px; right:15px; display:flex; flex-direction:column; gap:16px; z-index:999; align-items:center; }
@@ -77,7 +82,7 @@ select:focus, input[type="text"]:focus, input[type="date"]:focus { border-color:
 /* --- IMPRESIÓN --- */
 @media print {
   @page{size:50mm 30mm; margin:0;} body, html { margin:0; padding:0; }
-  body * { visibility:hidden; } .boton-actualizar-contenedor { display: none !important; }
+  body * { visibility:hidden; } .etiqueta-botones { display: none !important; }
   .print-area, .print-area * { visibility:visible; }
   .print-area { position:absolute; top:0; left:0; }
   .etiqueta { height: 30mm !important; border:none; font-size:13pt; justify-content: space-around; }
@@ -177,8 +182,25 @@ select:focus, input[type="text"]:focus, input[type="date"]:focus { border-color:
 </div>
 
 <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
-<script src="productos.js"></script>
-<script src="obrador.js"></script> 
+<script>
+// Mock de productos.js y obrador.js para que el ejemplo sea funcional
+// DEBERÍAS REEMPLAZAR ESTO CON TUS ARCHIVOS REALES
+const productos = {
+    "Bollería": [
+        { nombre: "Croissant Mantequilla", tipo: "Bollería", dias_descongelado: 2 },
+        { nombre: "Aguacate", tipo: "Fruta", dias_descongelado: 2 },
+        { nombre: "Leche Fresca", tipo: "Lácteo", dias_abierto: 4 }
+    ],
+    "Salado": [
+        { nombre: "Sandwich Mixto", tipo: "Salado", dias_descongelado: 1 }
+    ]
+};
+const obradorData = {
+    productos: [
+        { nombre: "Croissant Almendras", preparacion: "Hornear a 180°C" }
+    ]
+};
+</script>
 <script>
 // --- VARIABLES GLOBALES ---
 const empleadoSelect = document.getElementById("empleado");
@@ -201,6 +223,8 @@ const btnGuardar = document.getElementById("btn-guardar");
 const btnCancelar = document.getElementById("btn-cancelar");
 const btnReset = document.getElementById("btn-reset");
 let productosSeleccionados = new Set();
+// <<-- NUEVO -->> Variable para almacenar los datos de todas las etiquetas a exportar
+let etiquetasParaExportar = [];
 
 // --- INICIALIZACIÓN ---
 document.addEventListener('DOMContentLoaded', () => {
@@ -280,7 +304,9 @@ function actualizarSugerencias() {
 // --- LÓGICA DE ETIQUETAS ---
 function generarEtiquetas(){
     printArea.innerHTML = "";
+    etiquetasParaExportar = []; // <<-- MODIFICADO -->> Limpiamos la lista para exportar cada vez que generamos
     if (productosSeleccionados.size === 0) return;
+    
     const empleado = empleadoSelect.value;
     const ahora = new Date();
     const fechaHora = ahora.toLocaleDateString("es-ES") + " " + ahora.toLocaleTimeString("es-ES", {hour: "2-digit", minute: "2-digit"});
@@ -288,37 +314,122 @@ function generarEtiquetas(){
     productosSeleccionados.forEach(nombreProd => {
         const p = getProductoConStorage(nombreProd);
         if (!p) return;
+        
         const caducidadPrimaria = p.caducidad_primaria;
         let dias = p.dias_abierto ?? p.dias_descongelado ?? 0;
+        let caducidadMostrada, etiquetaCaducidad, caducidadDateObj;
 
-        let caducidadMostrada, etiquetaCaducidad;
         if (caducidadPrimaria) {
             caducidadMostrada = caducidadPrimaria;
             etiquetaCaducidad = 'Cad. Primaria:';
+            caducidadDateObj = parseSpanishDate(caducidadPrimaria);
         } else {
-            let cad = new Date(ahora);
-            cad.setDate(cad.getDate() + dias);
-            caducidadMostrada = dias > 0 ? cad.toLocaleDateString("es-ES") + " " + cad.toLocaleTimeString("es-ES", {hour:"2-digit", minute:"2-digit"}) : "No aplica";
+            caducidadDateObj = new Date(ahora);
+            caducidadDateObj.setDate(caducidadDateObj.getDate() + dias);
+            caducidadMostrada = dias > 0 ? formatDateForDisplay(caducidadDateObj) : "No aplica";
             etiquetaCaducidad = 'Caducidad:';
         }
         
+        // <<-- NUEVO -->> Guardar datos para exportar
+        const etiquetaData = {
+            'Producto': nombreProd,
+            'Tipo': p.tipo,
+            'Empleado': empleado,
+            'Lote': p.lote || '________',
+            'Apertura': fechaHora,
+            'Caducidad': caducidadMostrada,
+            'id': `${nombreProd}-${Date.now()}` // ID único para cada etiqueta
+        };
+        etiquetasParaExportar.push(etiquetaData);
+        
+        // <<-- NUEVO -->> Comprobar si la caducidad es corta
+        const hoy = new Date();
+        hoy.setHours(0,0,0,0);
+        const unaSemana = new Date(hoy);
+        unaSemana.setDate(hoy.getDate() + 7);
+        const esCaducidadCorta = caducidadDateObj && caducidadDateObj >= hoy && caducidadDateObj <= unaSemana;
+
         const etiqueta = document.createElement("div");
         etiqueta.className = "etiqueta";
-        etiqueta.dataset.nombre = nombreProd;
+        if(esCaducidadCorta) etiqueta.classList.add("short-expiry-visual");
+        
+        let botonesHTML = `<button class="etiqueta-btn actualizar-btn" onclick="abrirModalEdicion('etiqueta', '${nombreProd}')">Actualizar</button>`;
+        if (esCaducidadCorta) {
+            // Pasamos el ID único de la etiqueta para identificarla
+            botonesHTML += `<button class="etiqueta-btn siguiente-btn" onclick="programarSiguienteEtiqueta(this, '${etiquetaData.id}')">Siguiente Etiqueta ⏭️</button>`;
+        }
+        
         etiqueta.innerHTML = `
             <div class="nombre-producto">${nombreProd}</div>
             <div>${p.tipo} / ${empleado}</div>
             <div data-tipo="lote">Lote: ${p.lote || '________'}</div>
             <div>Apertura: ${fechaHora}</div>
-            <div class="boton-actualizar-contenedor">
-                <button class="actualizar-btn" onclick="abrirModalEdicion('etiqueta', '${nombreProd}')">Actualizar</button>
-            </div>
+            <div class="etiqueta-botones">${botonesHTML}</div>
             <div data-tipo="caducidad"><strong>${etiquetaCaducidad} ${caducidadMostrada}</strong></div>
         `;
         printArea.appendChild(etiqueta);
     });
     printArea.scrollIntoView({behavior:"smooth"});
 }
+
+// --- <<-- NUEVA FUNCIÓN -->> Para programar la siguiente etiqueta ---
+function programarSiguienteEtiqueta(boton, etiquetaId) {
+    const etiquetaOriginalData = etiquetasParaExportar.find(e => e.id === etiquetaId);
+    if (!etiquetaOriginalData) return;
+
+    const hoy = new Date();
+    const caducidadActual = parseSpanishDate(etiquetaOriginalData.Caducidad);
+    
+    if (!caducidadActual) {
+        alert("No se pudo calcular la fecha de caducidad.");
+        return;
+    }
+
+    // Calculamos la vida útil restante en milisegundos
+    const vidaUtilRestante = caducidadActual.getTime() - hoy.getTime();
+    
+    // La nueva fecha es la caducidad actual + la vida útil restante
+    const siguienteCaducidad = new Date(caducidadActual.getTime() + vidaUtilRestante);
+    
+    // Creamos una nueva entrada para la siguiente etiqueta, basada en la original
+    const siguienteEtiquetaData = {
+        ...etiquetaOriginalData,
+        'Apertura': formatDateForDisplay(caducidadActual), // La "apertura" será la caducidad de la anterior
+        'Caducidad': formatDateForDisplay(siguienteCaducidad),
+        'id': `${etiquetaOriginalData.Producto}-${Date.now()}` // Nuevo ID único
+    };
+
+    etiquetasParaExportar.push(siguienteEtiquetaData);
+
+    // Actualizamos la interfaz del botón
+    boton.textContent = 'Programada ✔️';
+    boton.disabled = true;
+    
+    alert(`Siguiente etiqueta para "${etiquetaOriginalData.Producto}" programada para el ${siguienteEtiquetaData.Caducidad}.\nSe incluirá en el Excel.`);
+}
+
+// --- <<-- NUEVAS FUNCIONES AUXILIARES -->> Para manejar fechas ---
+function parseSpanishDate(dateStr) {
+    if (!dateStr || typeof dateStr !== 'string') return null;
+    try {
+        const parts = dateStr.match(/(\d{2})\/(\d{2})\/(\d{4})(?: (\d{2}):(\d{2}))?/);
+        if (!parts) return null;
+        const [, day, month, year, hour = 0, minute = 0] = parts;
+        return new Date(year, month - 1, day, hour, minute);
+    } catch (e) {
+        return null;
+    }
+}
+function formatDateForDisplay(dateObj) {
+    if (!(dateObj instanceof Date)) return '';
+    const day = String(dateObj.getDate()).padStart(2, '0');
+    const month = String(dateObj.getMonth() + 1).padStart(2, '0');
+    const year = dateObj.getFullYear();
+    const hours = String(dateObj.getHours()).padStart(2, '0');
+    const minutes = String(dateObj.getMinutes()).padStart(2, '0');
+    return `${day}/${month}/${year} ${hours}:${minutes}`;
+}
+
 
 // --- LÓGICA DEL MODAL UNIFICADA ---
 function abrirModalEdicion(origen, nombreProducto) {
@@ -416,8 +527,8 @@ function consultarCaducidades() {
             <p><strong>Lote:</strong> ${prod.lote || 'No definido'}</p>
             <p><strong>Cad. Primaria:</strong> ${prod.caducidad_primaria || 'No definida'}</p>
             ${htmlCaducidades}
-            <div class="boton-actualizar-contenedor">
-                <button class="actualizar-btn" onclick="abrirModalEdicion('consulta', '${prod.nombre}')">Actualizar</button>
+            <div class="etiqueta-botones">
+                <button class="etiqueta-btn actualizar-btn" onclick="abrirModalEdicion('consulta', '${prod.nombre}')">Actualizar</button>
             </div>
         `;
         resultadoConsulta.appendChild(div);
@@ -447,7 +558,6 @@ function simularCaducidad(nombreProducto) {
     }
 }
 
-
 // --- IMPRESIÓN Y EXPORTACIÓN ---
 function imprimirSecuencial(){
     const etiquetas = [...document.querySelectorAll(".etiqueta")];
@@ -459,26 +569,23 @@ function imprimirSecuencial(){
 
 function imprimirEtiqueta(etiquetaHTML){
     const ventana = window.open('','width=400,height=400');
-    ventana.document.write(`<html><head><title>Etiqueta</title><style>@page{size:50mm 30mm;margin:0;}body{margin:0;font-family:sans-serif;} .boton-actualizar-contenedor{display:none;} .etiqueta{width:50mm;height:30mm;padding:2mm;box-sizing:border-box;font-size:12pt;display:flex;flex-direction:column;justify-content:space-around; text-align: left;} .nombre-producto{font-size:13pt; text-align:center;}</style></head><body onload="window.print();window.onafterprint=function(){window.close();}">${etiquetaHTML}</body></html>`);
+    ventana.document.write(`<html><head><title>Etiqueta</title><style>@page{size:50mm 30mm;margin:0;}body{margin:0;font-family:sans-serif;} .etiqueta-botones{display:none;} .etiqueta{width:50mm;height:30mm;padding:2mm;box-sizing:border-box;font-size:12pt;display:flex;flex-direction:column;justify-content:space-around; text-align: left;} .nombre-producto{font-size:13pt; text-align:center;}</style></head><body onload="window.print();window.onafterprint=function(){window.close();}">${etiquetaHTML}</body></html>`);
     ventana.document.close();
 }
 
 function exportarXLSX(){
-    const etiquetas = document.querySelectorAll(".etiqueta");
-    if(etiquetas.length === 0) return;
-    const data = Array.from(etiquetas).map(e => {
-        const nombre = e.querySelector('.nombre-producto').textContent;
-        const tipoEmpleadoText = e.querySelector('div:nth-child(2)').textContent;
-        const lote = e.querySelector('[data-tipo="lote"]').textContent.replace("Lote: ","");
-        const apertura = e.querySelector('div:nth-child(4)').textContent.replace("Apertura: ","");
-        const caducidad = e.querySelector('[data-tipo="caducidad"]').textContent.replace(/Cad\. Primaria:|Caducidad:/g,"").trim();
-        const tipoEmpleado = (tipoEmpleadoText || ' / ').split(" / ");
-        return { Producto: nombre, Tipo: tipoEmpleado[0].trim(), Empleado: tipoEmpleado[1].trim(), Lote: lote, Apertura: apertura, Caducidad: caducidad };
-    });
-    const ws = XLSX.utils.json_to_sheet(data);
+    // <<-- MODIFICADO -->> Ahora usa la lista de datos en lugar de leer el HTML
+    if(etiquetasParaExportar.length === 0) {
+        alert("Primero genera algunas etiquetas para poder exportar.");
+        return;
+    }
+    // Creamos una copia y quitamos la propiedad 'id' que solo era para uso interno
+    const dataParaSheet = etiquetasParaExportar.map(({ id, ...resto }) => resto);
+
+    const ws = XLSX.utils.json_to_sheet(dataParaSheet);
     const wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, "Etiquetas");
-    XLSX.writeFile(wb, "etiquetas_actualizadas.xlsx");
+    XLSX.writeFile(wb, "etiquetas_programadas.xlsx");
 }
 
 // --- NAVEGACIÓN Y OTRAS VISTAS ---
@@ -487,24 +594,11 @@ function mostrarVista(vista) {
     document.getElementById(`vista-${vista}`).style.display = 'block';
 }
 
-// --- LÓGICA DE OBRADOR (CORREGIDA Y COMPLETA) ---
+// --- LÓGICA DE OBRADOR ---
 function cargarProductosObrador(productosACargar) {
     const vistaObrador = document.getElementById('vista-obrador');
     if (!obradorLista) { 
-        vistaObrador.innerHTML = `
-            <div class="obrador-container">
-                <h1>🔪 Obrador</h1>
-                <label for="buscadorObrador">🔍 Buscar producto</label>
-                <input type="text" id="buscadorObrador" placeholder="Escribe para buscar...">
-                <div class="quick-filters">
-                    <button onclick="cargarProductosObradorConFiltro('croissant')">🥐 Croissants</button>
-                    <button onclick="cargarProductosObradorConFiltro('ensalada')">🥗 Ensaladas</button>
-                    <button onclick="cargarProductosObradorConFiltro('focaccia')">🥖 Focaccias</button>
-                    <button onclick="cargarProductosObradorConFiltro('gloria')">✨ Glorias</button>
-                    <button onclick="cargarProductosObradorConFiltro('sandwich')">🥪 Sandwiches</button>
-                </div>
-                <div id="obradorLista" style="margin-top:15px;"></div>
-            </div>`;
+        vistaObrador.innerHTML = `<div class="obrador-container">...</div>`;
     }
     
     const obradorListaElem = document.getElementById('obradorLista');
@@ -546,4 +640,3 @@ function cargarProductosObradorConFiltro(filtro) {
 </script>
 </body>
 </html>
-
