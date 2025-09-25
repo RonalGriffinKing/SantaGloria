@@ -28,20 +28,21 @@ select:focus, input[type="text"]:focus { border-color: #000; outline: none; }
 .print-area { display: flex; flex-wrap: wrap; gap: 15px; padding: 0 15px; justify-content: center; }
 .etiqueta {
   width: 50mm;
-  height: 40mm; /* --- ALTURA AUMENTADA --- */
+  height: 40mm; /* Altura visual aumentada */
   display: flex;
   flex-direction: column;
-  font-size: 10.5pt; /* Letra más pequeña para asegurar que todo quepa */
-  padding: 3mm;
+  justify-content: center; /* Centrado vertical para mejor distribución */
+  font-size: 10pt; /* Tamaño de letra reducido para que quepa todo */
+  padding: 2mm 3mm; /* Un poco más de padding horizontal */
   box-sizing: border-box;
   border: 1px dashed #999;
   background: white;
   border-radius: 4px;
 }
-.etiqueta div { text-align: left; line-height: 1.4; }
-.etiqueta .nombre-producto { font-weight: bold; font-size: 12pt; text-align: center; margin-bottom: 4px; }
-.boton-actualizar-contenedor { text-align: center; margin: 4px 0; }
-.actualizar-btn { background: #000; color: white; border: none; border-radius: 6px; padding: 5px 12px; font-size: 10pt; cursor: pointer; display: inline-block; }
+.etiqueta div { text-align: left; line-height: 1.35; }
+.etiqueta .nombre-producto { font-weight: bold; font-size: 11pt; text-align: center; margin-bottom: 3px; }
+.boton-actualizar-contenedor { text-align: center; margin: 3px 0; }
+.actualizar-btn { background: #000; color: white; border: none; border-radius: 6px; padding: 4px 12px; font-size: 9pt; cursor: pointer; display: inline-block; }
 
 /* --- BOTONES FLOTANTES (FAB) --- */
 .fab-container { position:fixed; bottom:15px; right:15px; display:flex; flex-direction:column; gap:16px; z-index:999; align-items:center; }
@@ -248,7 +249,6 @@ function generarEtiquetas(){
         const etiqueta = document.createElement("div");
         etiqueta.className = "etiqueta";
         etiqueta.dataset.nombre = nombreProd;
-        // --- HTML DE LA ETIQUETA MODIFICADO ---
         etiqueta.innerHTML = `
             <div class="nombre-producto">${nombreProd}</div>
             <div>${productoOriginal.tipo} / ${empleado}</div>
@@ -263,7 +263,6 @@ function generarEtiquetas(){
     });
     printArea.scrollIntoView({behavior:"smooth"});
 }
-
 
 // --- LÓGICA DEL MODAL DE EDICIÓN ---
 function abrirModalEdicion(nombreProducto) {
