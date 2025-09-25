@@ -24,15 +24,15 @@ select:focus, input[type="text"]:focus { border-color: #000; outline: none; }
 .producto-info { font-size: 0.8em; color: #555; background-color: #eee; padding: 3px 7px; border-radius: 6px; white-space: nowrap; }
 .producto-btn.active { background:#000; color:#fff; font-weight:bold; }
 
-/* --- ÁREA DE ETIQUETAS GENERADAS --- */
+/* --- ÁREA DE ETIQUETAS GENERADAS (SOLUCIÓN FINAL) --- */
 .print-area { display: flex; flex-wrap: wrap; gap: 15px; padding: 0 15px; justify-content: center; }
 .etiqueta {
   width: 50mm;
-  min-height: 40mm; /* --- ALTURA MÍNIMA, AHORA PUEDE CRECER --- */
+  height: 42mm; /* --- ALTURA FIJA Y GRANDE --- */
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  font-size: 10.5pt;
+  font-size: 10pt;
   padding: 3mm;
   box-sizing: border-box;
   border: 1px dashed #999;
@@ -40,9 +40,9 @@ select:focus, input[type="text"]:focus { border-color: #000; outline: none; }
   border-radius: 4px;
 }
 .etiqueta div { text-align: left; line-height: 1.3; }
-.etiqueta .nombre-producto { font-weight: bold; font-size: 11pt; text-align: center; margin-bottom: 4px; }
-.boton-actualizar-contenedor { text-align: center; margin: 4px 0; }
-.actualizar-btn { background: #000; color: white; border: none; border-radius: 6px; padding: 5px 12px; font-size: 10pt; cursor: pointer; display: inline-block; }
+.etiqueta .nombre-producto { font-weight: bold; font-size: 11pt; text-align: center; margin-bottom: 2px; }
+.boton-actualizar-contenedor { text-align: center; margin: 2px 0; }
+.actualizar-btn { background: #000; color: white; border: none; border-radius: 6px; padding: 4px 12px; font-size: 9pt; cursor: pointer; display: inline-block; }
 
 /* --- BOTONES FLOTANTES (FAB) --- */
 .fab-container { position:fixed; bottom:15px; right:15px; display:flex; flex-direction:column; gap:16px; z-index:999; align-items:center; }
@@ -68,7 +68,6 @@ select:focus, input[type="text"]:focus { border-color: #000; outline: none; }
 .obrador-details { margin-top:10px; padding-top:10px; border-top:1px dashed #ccc; display:none; }
 .quick-filters { display:flex; flex-wrap:wrap; justify-content:space-around; gap:10px; margin-top:15px; }
 .quick-filters button { flex:1; min-width:120px; padding:10px; border:1px solid #000; border-radius:6px; background:#fff; cursor:pointer; }
-
 
 /* --- IMPRESIÓN --- */
 @media print {
@@ -188,29 +187,24 @@ let productosSeleccionados = new Set();
 
 // --- INICIALIZACIÓN UNIFICADA ---
 document.addEventListener('DOMContentLoaded', () => {
-    // Cargar Empleados
     const empleados = ["Ronald","Lorena","Johnny","Sofía","Claudia","Pamela","Abril","Gloria","Steven"];
     empleados.forEach(e => empleadoSelect.add(new Option(e, e)));
     if(localStorage.getItem("ultimoEmpleado")) empleadoSelect.value = localStorage.getItem("ultimoEmpleado");
     empleadoSelect.addEventListener("change", () => localStorage.setItem("ultimoEmpleado", empleadoSelect.value));
 
-    // Cargar Categorías de Productos
     const categorias = Object.keys(productos);
     categoriaSelect.add(new Option("Todo", "Todo"));
     categorias.forEach(cat => categoriaSelect.add(new Option(cat, cat)));
     actualizarSugerencias();
 
-    // Eventos del Modal
     document.getElementById("btn-guardar-cambios").onclick = guardarCambiosModal;
     document.getElementById("btn-cancelar-cambios").onclick = () => editModal.style.display = 'none';
     editModal.addEventListener('click', (e) => { if (e.target === editModal) editModal.style.display = 'none'; });
     
-    // Eventos de Búsqueda y Foco
     buscadorInput.addEventListener('focus', () => setTimeout(() => buscadorInput.scrollIntoView({ behavior: 'smooth', block: 'start' }), 300));
     buscadorInput.addEventListener("input", actualizarSugerencias);
     busquedaProducto.addEventListener("input", consultarCaducidades);
     
-    // Carga y eventos de Obrador (con protección)
     if (typeof obradorData !== 'undefined' && obradorData.productos) {
         cargarProductosObrador(obradorData.productos);
         buscadorObrador.addEventListener('input', () => {
@@ -380,18 +374,31 @@ function mostrarVista(vista) {
 }
 
 function consultarCaducidades() {
-    // ... Lógica de la vista de consulta ...
+    // Lógica de la vista de consulta
 }
 
+// --- LÓGICA DE OBRADOR (CORREGIDA) ---
 function cargarProductosObrador(productosACargar) {
     if (!obradorLista) return;
     obradorLista.innerHTML = '';
-    // ... Lógica de la vista de obrador ...
+    if (!productosACargar || productosACargar.length === 0) {
+        obradorLista.innerHTML = '<p>No se encontraron productos.</p>';
+        return;
+    }
+    productosACargar.forEach(producto => {
+        const item = document.createElement('div');
+        item.className = 'obrador-item';
+        // Aquí puedes construir el HTML para cada item del obrador
+        item.innerHTML = `<h3>${producto.nombre}</h3>`;
+        obradorLista.appendChild(item);
+    });
 }
 
 function cargarProductosObradorConFiltro(filtro) {
     if (typeof obradorData === 'undefined') return;
-    // ... Lógica de filtros de obrador ...
+    buscadorObrador.value = '';
+    let productosFiltrados = obradorData.productos.filter(p => p.nombre.toLowerCase().includes(filtro.slice(0, -1)));
+    cargarProductosObrador(productosFiltrados);
 }
 </script>
 </body>
