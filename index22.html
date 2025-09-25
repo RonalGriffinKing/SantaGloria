@@ -28,7 +28,7 @@ select:focus, input[type="text"]:focus { border-color: #000; outline: none; }
 .print-area { display: flex; flex-wrap: wrap; gap: 15px; padding: 0 15px; justify-content: center; }
 .etiqueta {
   width: 50mm;
-  height: 42mm; /* --- ALTURA FIJA Y GRANDE --- */
+  height: 42mm; /* --- ALTURA FIJA Y GRANDE PARA PANTALLA --- */
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -65,9 +65,13 @@ select:focus, input[type="text"]:focus { border-color: #000; outline: none; }
 .obrador-container, .consulta-container { padding:15px; }
 .resultado-producto { border:2px dashed #000; border-radius:12px; padding:10px; margin-bottom:10px; background:#f8f8f8; font-size:0.9em; }
 .obrador-item { border:1px solid #ccc; border-radius:8px; padding:10px; margin-bottom:10px; background-color:#fff; }
+.obrador-item h3 { margin-top:0; }
+.obrador-item p { margin:5px 0; font-size: 0.9em; }
+.obrador-item button { background-color:#000; color:white; border:none; padding:6px 12px; border-radius:4px; cursor:pointer; }
 .obrador-details { margin-top:10px; padding-top:10px; border-top:1px dashed #ccc; display:none; }
 .quick-filters { display:flex; flex-wrap:wrap; justify-content:space-around; gap:10px; margin-top:15px; }
 .quick-filters button { flex:1; min-width:120px; padding:10px; border:1px solid #000; border-radius:6px; background:#fff; cursor:pointer; }
+
 
 /* --- IMPRESIÓN --- */
 @media print {
@@ -187,24 +191,29 @@ let productosSeleccionados = new Set();
 
 // --- INICIALIZACIÓN UNIFICADA ---
 document.addEventListener('DOMContentLoaded', () => {
+    // Cargar Empleados
     const empleados = ["Ronald","Lorena","Johnny","Sofía","Claudia","Pamela","Abril","Gloria","Steven"];
     empleados.forEach(e => empleadoSelect.add(new Option(e, e)));
     if(localStorage.getItem("ultimoEmpleado")) empleadoSelect.value = localStorage.getItem("ultimoEmpleado");
     empleadoSelect.addEventListener("change", () => localStorage.setItem("ultimoEmpleado", empleadoSelect.value));
 
+    // Cargar Categorías de Productos
     const categorias = Object.keys(productos);
     categoriaSelect.add(new Option("Todo", "Todo"));
     categorias.forEach(cat => categoriaSelect.add(new Option(cat, cat)));
     actualizarSugerencias();
 
+    // Eventos del Modal
     document.getElementById("btn-guardar-cambios").onclick = guardarCambiosModal;
     document.getElementById("btn-cancelar-cambios").onclick = () => editModal.style.display = 'none';
     editModal.addEventListener('click', (e) => { if (e.target === editModal) editModal.style.display = 'none'; });
     
+    // Eventos de Búsqueda y Foco
     buscadorInput.addEventListener('focus', () => setTimeout(() => buscadorInput.scrollIntoView({ behavior: 'smooth', block: 'start' }), 300));
     buscadorInput.addEventListener("input", actualizarSugerencias);
     busquedaProducto.addEventListener("input", consultarCaducidades);
     
+    // Carga y eventos de Obrador (con protección)
     if (typeof obradorData !== 'undefined' && obradorData.productos) {
         cargarProductosObrador(obradorData.productos);
         buscadorObrador.addEventListener('input', () => {
@@ -377,7 +386,7 @@ function consultarCaducidades() {
     // Lógica de la vista de consulta
 }
 
-// --- LÓGICA DE OBRADOR (CORREGIDA) ---
+// --- LÓGICA DE OBRADOR (CORREGIDA Y COMPLETA) ---
 function cargarProductosObrador(productosACargar) {
     if (!obradorLista) return;
     obradorLista.innerHTML = '';
@@ -388,8 +397,21 @@ function cargarProductosObrador(productosACargar) {
     productosACargar.forEach(producto => {
         const item = document.createElement('div');
         item.className = 'obrador-item';
-        // Aquí puedes construir el HTML para cada item del obrador
-        item.innerHTML = `<h3>${producto.nombre}</h3>`;
+        let detallesHtml = '';
+        if (producto.preparacion || producto.ingredientes_resumen) {
+            detallesHtml += `<p><strong>Ingredientes (resumen):</strong> ${producto.ingredientes_resumen || 'No especificado'}</p>`;
+            detallesHtml += `<button onclick="this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'block' ? 'none' : 'block';">Ver más</button>`;
+            detallesHtml += `<div class="obrador-details">`;
+            if (producto.ingredientes) detallesHtml += `<h4>Ingredientes:</h4><p>${producto.ingredientes}</p>`;
+            if (producto.preparacion) detallesHtml += `<h4>Preparación:</h4><p>${producto.preparacion}</p>`;
+            detallesHtml += `</div>`;
+        }
+        item.innerHTML = `
+            <h3>${producto.nombre}</h3>
+            <p><strong>Descongelación:</strong> ${producto.descongelacion || 'N/A'}</p>
+            <p><strong>Horno:</strong> ${producto.horno_temp ? `${producto.horno_temp}, Prog. ${producto.horno_prog}, ${producto.horno_tiempo}` : 'N/A'}</p>
+            ${detallesHtml}
+        `;
         obradorLista.appendChild(item);
     });
 }
