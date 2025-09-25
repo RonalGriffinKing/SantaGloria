@@ -122,8 +122,20 @@ select:focus, input[type="text"]:focus, input[type="date"]:focus { border-color:
   <div id="resultadoConsulta" style="margin-top:15px; font-size:1em;"></div>
 </div>
 
-<div id="vista-obrador" style="display:none;">
+<div id="vista-obrador" style="display:none;" class="obrador-container">
+  <h1>🔪 Obrador</h1>
+  <label for="buscadorObrador">🔍 Buscar producto</label>
+  <input type="text" id="buscadorObrador" placeholder="Escribe para buscar...">
+  <div class="quick-filters">
+    <button onclick="cargarProductosObradorConFiltro('croissant')">🥐 Croissants</button>
+    <button onclick="cargarProductosObradorConFiltro('ensalada')">🥗 Ensaladas</button>
+    <button onclick="cargarProductosObradorConFiltro('focaccia')">🥖 Focaccias</button>
+    <button onclick="cargarProductosObradorConFiltro('gloria')">✨ Glorias</button>
+    <button onclick="cargarProductosObradorConFiltro('sandwich')">🥪 Sandwiches</button>
   </div>
+  <div id="obradorLista" style="margin-top:15px;"></div>
+</div>
+
 
 <div class="fab-container">
   <div class="fab-group">
@@ -188,37 +200,34 @@ const btnCancelar = document.getElementById("btn-cancelar");
 const btnReset = document.getElementById("btn-reset");
 let productosSeleccionados = new Set();
 
-// --- INICIALIZACIÓN ---
+// --- INICIALIZACIÓN UNIFICADA ---
 document.addEventListener('DOMContentLoaded', () => {
-    // Cargar Empleados
     const empleados = ["Ronald","Lorena","Johnny","Sofía","Claudia","Pamela","Abril","Gloria","Steven"];
     empleados.forEach(e => empleadoSelect.add(new Option(e, e)));
     if(localStorage.getItem("ultimoEmpleado")) empleadoSelect.value = localStorage.getItem("ultimoEmpleado");
     empleadoSelect.addEventListener("change", () => localStorage.setItem("ultimoEmpleado", empleadoSelect.value));
 
-    // Cargar Categorías de Productos
     const categorias = Object.keys(productos);
     categoriaSelect.add(new Option("Todo", "Todo"));
     categorias.forEach(cat => categoriaSelect.add(new Option(cat, cat)));
     actualizarSugerencias();
 
-    // Eventos del Modal
     btnCancelar.onclick = () => editModal.style.display = 'none';
     editModal.addEventListener('click', (e) => { if (e.target === editModal) editModal.style.display = 'none'; });
     
-    // Eventos de Búsqueda y Foco
     buscadorInput.addEventListener('focus', () => setTimeout(() => buscadorInput.scrollIntoView({ behavior: 'smooth', block: 'start' }), 300));
     buscadorInput.addEventListener("input", actualizarSugerencias);
     busquedaProducto.addEventListener("input", consultarCaducidades);
     
-    // Carga y eventos de Obrador
     if (typeof obradorData !== 'undefined' && obradorData.productos) {
         cargarProductosObrador(obradorData.productos);
-        buscadorObrador.addEventListener('input', () => {
-            const texto = buscadorObrador.value.toLowerCase();
-            const productosFiltrados = obradorData.productos.filter(p => p.nombre.toLowerCase().includes(texto));
-            cargarProductosObrador(productosFiltrados);
-        });
+        if(buscadorObrador) {
+            buscadorObrador.addEventListener('input', () => {
+                const texto = buscadorObrador.value.toLowerCase();
+                const productosFiltrados = obradorData.productos.filter(p => p.nombre.toLowerCase().includes(texto));
+                cargarProductosObrador(productosFiltrados);
+            });
+        }
     }
 });
 
@@ -259,7 +268,6 @@ function actualizarSugerencias() {
 function generarEtiquetas(){
     printArea.innerHTML = "";
     if (productosSeleccionados.size === 0) return;
-
     const datosGuardados = JSON.parse(localStorage.getItem('datosProductos')) || {};
     const empleado = empleadoSelect.value;
     const ahora = new Date();
@@ -268,11 +276,9 @@ function generarEtiquetas(){
     productosSeleccionados.forEach(nombreProd => {
         const p = Object.values(productos).flat().find(prod => prod.nombre === nombreProd);
         if (!p) return;
-
         const infoGuardada = datosGuardados[nombreProd] || {};
         const loteFinal = infoGuardada.lote || p.lote || '________';
         const caducidadPrimaria = infoGuardada.caducidad_primaria || p.caducidad_primaria;
-
         let caducidadMostrada, etiquetaCaducidad;
         if (caducidadPrimaria) {
             caducidadMostrada = caducidadPrimaria;
@@ -283,7 +289,6 @@ function generarEtiquetas(){
             caducidadMostrada = p.dias === 0 ? "No aplica" : cad.toLocaleDateString("es-ES") + " " + cad.toLocaleTimeString("es-ES", {hour:"2-digit", minute:"2-digit"});
             etiquetaCaducidad = 'Caducidad:';
         }
-        
         const etiqueta = document.createElement("div");
         etiqueta.className = "etiqueta";
         etiqueta.dataset.nombre = nombreProd;
@@ -309,17 +314,14 @@ function abrirModalEdicion(origen, nombreProducto) {
     const datosGuardados = JSON.parse(localStorage.getItem('datosProductos')) || {};
     const infoGuardada = datosGuardados[nombreProducto] || {};
     const p = Object.values(productos).flat().find(prod => prod.nombre === nombreProducto);
-
     modalLote.value = infoGuardada.lote || p.lote || '';
-    
     const fechaPrimaria = infoGuardada.caducidad_primaria || p.caducidad_primaria;
-    if (fechaPrimaria && fechaPrimaria.includes('/')) {
-        const partes = fechaPrimaria.split('/');
-        modalCaducidadPrimaria.value = `${partes[2]}-${partes[1]}-${partes[0]}`;
+    if (fechaPrimaria && (fechaPrimaria.includes('/') || fechaPrimaria.includes('.'))) {
+        const partes = fechaPrimaria.split(/[/.]/);
+        modalCaducidadPrimaria.value = `${partes[2].length === 2 ? '20' + partes[2] : partes[2]}-${partes[1]}-${partes[0]}`;
     } else {
         modalCaducidadPrimaria.value = '';
     }
-
     if (origen === 'consulta') {
         aperturaContainer.style.display = 'block';
         btnReset.style.display = 'block';
@@ -343,7 +345,6 @@ function guardarCambiosModal(origen) {
         const partes = modalCaducidadPrimaria.value.split('-');
         caducidadPrimaria = `${partes[2]}/${partes[1]}/${partes[0]}`;
     }
-
     const datosGuardados = JSON.parse(localStorage.getItem('datosProductos')) || {};
     datosGuardados[nombre] = { lote: lote, caducidad_primaria: caducidadPrimaria };
     localStorage.setItem('datosProductos', JSON.stringify(datosGuardados));
@@ -383,7 +384,6 @@ function consultarCaducidades() {
         resultadoConsulta.innerHTML = "<p>❌ Producto no encontrado</p>";
         return;
     }
-
     coincidencias.forEach(prod => {
         const infoGuardada = datosGuardados[prod.nombre] || {};
         const lote = infoGuardada.lote || prod.lote || 'No definido';
