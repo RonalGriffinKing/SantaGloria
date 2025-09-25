@@ -5,15 +5,15 @@
 <title>Etiquetas App</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <style>
-/* --- ESTILOS GENERALES (LA VERSIÓN QUE TE GUSTÓ) --- */
+/* --- ESTILOS GENERALES --- */
 body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; margin:0; background:#f9f9fb; color:#333; padding-bottom:120px; -webkit-tap-highlight-color: transparent; }
 header { background: rgba(255,255,255,0.85); backdrop-filter: blur(10px); color:#000; text-align:center; padding:12px; font-size:1.1em; font-weight:bold; position:sticky; top:0; z-index:999; border-bottom: 1px solid #e0e0e0; }
 .nav-buttons { margin-top:8px; }
 .nav-buttons button, .nav-buttons a { text-decoration: none; margin:0 4px; padding:6px 12px; border:none; border-radius:8px; background:#000; color:#fff; cursor:pointer; font-size:0.9em; font-weight: 500; }
 h1 { text-align:center; color:#000; margin:15px 0; font-size:1.5em; }
 label { display:block; margin-top:15px; font-weight:bold; color:#000; font-size:0.9em; margin-bottom: 5px; }
-select, input[type="text"] { width:100%; padding:12px; margin-top:6px; border-radius:8px; border:2px solid #ccc; font-size:1em; background:#fff; color:#000; box-sizing: border-box; transition: border-color 0.2s; }
-select:focus, input[type="text"]:focus { border-color: #000; outline: none; }
+select, input[type="text"], input[type="date"] { width:100%; padding:12px; margin-top:6px; border-radius:8px; border:2px solid #ccc; font-size:1em; background:#fff; color:#000; box-sizing: border-box; transition: border-color 0.2s; }
+select:focus, input[type="text"]:focus, input[type="date"]:focus { border-color: #000; outline: none; }
 
 /* --- FORMULARIO Y SUGERENCIAS --- */
 .fila-inputs { display: flex; gap: 10px; }
@@ -27,8 +27,8 @@ select:focus, input[type="text"]:focus { border-color: #000; outline: none; }
 /* --- ÁREA DE ETIQUETAS GENERADAS (SOLUCIÓN FINAL) --- */
 .print-area { display: flex; flex-wrap: wrap; gap: 15px; padding: 0 15px; justify-content: center; }
 .etiqueta {
-  width: 50mm;
-  height: 42mm; /* --- ALTURA FIJA Y GRANDE PARA PANTALLA --- */
+  width: 189px; /* 50mm */
+  height: 160px; /* 42.3mm - Altura fija y grande para que quepa todo */
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -56,18 +56,17 @@ select:focus, input[type="text"]:focus { border-color: #000; outline: none; }
 .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); display: none; justify-content: center; align-items: center; z-index: 1000; backdrop-filter: blur(3px); }
 .modal-content { background: white; padding: 25px; border-radius: 12px; width: 90%; max-width: 400px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
 .modal-content h2 { margin-top: 0; font-size: 1.3em; }
-.modal-buttons { margin-top: 25px; display: flex; justify-content: flex-end; gap: 10px; }
-.modal-buttons button { padding: 10px 20px; border-radius: 8px; border: none; cursor: pointer; font-weight: bold; }
-#btn-guardar, #btn-guardar-etiqueta { background: #000; color: white; }
-#btn-cancelar, #btn-cancelar-etiqueta { background: #eee; }
+.modal-buttons { margin-top: 25px; display: flex; justify-content: space-between; gap: 10px; }
+.modal-buttons button { padding: 10px 15px; border-radius: 8px; border: none; cursor: pointer; font-weight: bold; }
+#btn-guardar { background: #000; color: white; }
+#btn-cancelar { background: #eee; }
+#btn-reset { background: #E53935; color: white; }
 
 /* --- OBRADOR Y CONSULTA --- */
 .obrador-container, .consulta-container { padding:15px; }
-.resultado-producto { border:2px dashed #000; border-radius:12px; padding:10px; margin-bottom:10px; background:#f8f8f8; font-size:0.9em; }
+.resultado-producto { border:2px dashed #000; border-radius:12px; padding:15px; margin-bottom:10px; background:#f8f8f8; font-size:0.9em; }
+.resultado-producto p { margin: 8px 0; }
 .obrador-item { border:1px solid #ccc; border-radius:8px; padding:10px; margin-bottom:10px; background-color:#fff; }
-.obrador-item h3 { margin-top:0; }
-.obrador-item p { margin:5px 0; font-size: 0.9em; }
-.obrador-item button { background-color:#000; color:white; border:none; padding:6px 12px; border-radius:4px; cursor:pointer; }
 .obrador-details { margin-top:10px; padding-top:10px; border-top:1px dashed #ccc; display:none; }
 .quick-filters { display:flex; flex-wrap:wrap; justify-content:space-around; gap:10px; margin-top:15px; }
 .quick-filters button { flex:1; min-width:120px; padding:10px; border:1px solid #000; border-radius:6px; background:#fff; cursor:pointer; }
@@ -123,19 +122,8 @@ select:focus, input[type="text"]:focus { border-color: #000; outline: none; }
   <div id="resultadoConsulta" style="margin-top:15px; font-size:1em;"></div>
 </div>
 
-<div id="vista-obrador" style="display:none;" class="obrador-container">
-  <h1>🔪 Obrador</h1>
-  <label for="buscadorObrador">🔍 Buscar producto</label>
-  <input type="text" id="buscadorObrador" placeholder="Escribe para buscar...">
-  <div class="quick-filters">
-    <button onclick="cargarProductosObradorConFiltro('croissant')">🥐 Croissants</button>
-    <button onclick="cargarProductosObradorConFiltro('ensalada')">🥗 Ensaladas</button>
-    <button onclick="cargarProductosObradorConFiltro('focaccia')">🥖 Focaccias</button>
-    <button onclick="cargarProductosObradorConFiltro('gloria')">✨ Glorias</button>
-    <button onclick="cargarProductosObradorConFiltro('sandwich')">🥪 Sandwiches</button>
+<div id="vista-obrador" style="display:none;">
   </div>
-  <div id="obradorLista" style="margin-top:15px;"></div>
-</div>
 
 <div class="fab-container">
   <div class="fab-group">
@@ -158,11 +146,18 @@ select:focus, input[type="text"]:focus { border-color: #000; outline: none; }
     <input type="hidden" id="modalProductoNombre">
     <label for="modalLote">Lote</label>
     <input type="text" id="modalLote">
-    <label for="modalCaducidad">Caducidad Primaria (ej: 25/12/2025)</label>
-    <input type="text" id="modalCaducidad">
+    <label for="modalCaducidadPrimaria">Caducidad Primaria</label>
+    <input type="date" id="modalCaducidadPrimaria">
+    <div id="apertura-container" style="display:none;">
+      <label for="modalFechaApertura">Fecha Apertura (para cálculo)</label>
+      <input type="date" id="modalFechaApertura">
+    </div>
     <div class="modal-buttons">
-      <button id="btn-cancelar">Cancelar</button>
-      <button id="btn-guardar">Guardar</button>
+      <button id="btn-reset" style="display:none;">Reset</button>
+      <div>
+        <button id="btn-cancelar">Cancelar</button>
+        <button id="btn-guardar">Guardar</button>
+      </div>
     </div>
   </div>
 </div>
@@ -185,31 +180,38 @@ const editModal = document.getElementById("editModal");
 const modalTitle = document.getElementById("modalTitle");
 const modalProductoNombre = document.getElementById("modalProductoNombre");
 const modalLote = document.getElementById("modalLote");
-const modalCaducidad = document.getElementById("modalCaducidad");
+const modalCaducidadPrimaria = document.getElementById("modalCaducidadPrimaria");
+const modalFechaApertura = document.getElementById("modalFechaApertura");
+const aperturaContainer = document.getElementById("apertura-container");
 const btnGuardar = document.getElementById("btn-guardar");
 const btnCancelar = document.getElementById("btn-cancelar");
+const btnReset = document.getElementById("btn-reset");
 let productosSeleccionados = new Set();
 
-// --- INICIALIZACIÓN UNIFICADA ---
+// --- INICIALIZACIÓN ---
 document.addEventListener('DOMContentLoaded', () => {
+    // Cargar Empleados
     const empleados = ["Ronald","Lorena","Johnny","Sofía","Claudia","Pamela","Abril","Gloria","Steven"];
     empleados.forEach(e => empleadoSelect.add(new Option(e, e)));
     if(localStorage.getItem("ultimoEmpleado")) empleadoSelect.value = localStorage.getItem("ultimoEmpleado");
     empleadoSelect.addEventListener("change", () => localStorage.setItem("ultimoEmpleado", empleadoSelect.value));
 
+    // Cargar Categorías de Productos
     const categorias = Object.keys(productos);
     categoriaSelect.add(new Option("Todo", "Todo"));
     categorias.forEach(cat => categoriaSelect.add(new Option(cat, cat)));
     actualizarSugerencias();
 
-    btnGuardar.onclick = guardarCambiosModal;
+    // Eventos del Modal
     btnCancelar.onclick = () => editModal.style.display = 'none';
     editModal.addEventListener('click', (e) => { if (e.target === editModal) editModal.style.display = 'none'; });
     
+    // Eventos de Búsqueda y Foco
     buscadorInput.addEventListener('focus', () => setTimeout(() => buscadorInput.scrollIntoView({ behavior: 'smooth', block: 'start' }), 300));
     buscadorInput.addEventListener("input", actualizarSugerencias);
     busquedaProducto.addEventListener("input", consultarCaducidades);
     
+    // Carga y eventos de Obrador
     if (typeof obradorData !== 'undefined' && obradorData.productos) {
         cargarProductosObrador(obradorData.productos);
         buscadorObrador.addEventListener('input', () => {
@@ -238,9 +240,9 @@ function actualizarSugerencias() {
         
         const infoGuardada = datosGuardados[p.nombre] || {};
         let infoText = "Sin Lote/Cad.";
-        if (infoGuardada.lote || infoGuardada.caducidad || p.lote || p.caducidad_primaria) {
+        if (infoGuardada.lote || infoGuardada.caducidad_primaria || p.lote || p.caducidad_primaria) {
             const lote = infoGuardada.lote || p.lote;
-            const cad = infoGuardada.caducidad || p.caducidad_primaria;
+            const cad = infoGuardada.caducidad_primaria || p.caducidad_primaria;
             infoText = `${lote ? `L: ${lote}` : ''} ${cad ? `C: ${cad}` : ''}`.trim();
         }
         btn.innerHTML = `<span>${p.nombre}</span><span class="producto-info">${infoText}</span>`;
@@ -269,7 +271,7 @@ function generarEtiquetas(){
 
         const infoGuardada = datosGuardados[nombreProd] || {};
         const loteFinal = infoGuardada.lote || p.lote || '________';
-        const caducidadPrimaria = infoGuardada.caducidad || p.caducidad_primaria;
+        const caducidadPrimaria = infoGuardada.caducidad_primaria || p.caducidad_primaria;
 
         let caducidadMostrada, etiquetaCaducidad;
         if (caducidadPrimaria) {
@@ -291,7 +293,7 @@ function generarEtiquetas(){
             <div data-tipo="lote">Lote: ${loteFinal}</div>
             <div>Apertura: ${fechaHora}</div>
             <div class="boton-actualizar-contenedor">
-                <button class="actualizar-btn" onclick="abrirModalEdicion('${nombreProd}')">Actualizar</button>
+                <button class="actualizar-btn" onclick="abrirModalEdicion('etiqueta', '${nombreProd}')">Actualizar</button>
             </div>
             <div data-tipo="caducidad"><strong>${etiquetaCaducidad} ${caducidadMostrada}</strong></div>
         `;
@@ -300,43 +302,112 @@ function generarEtiquetas(){
     printArea.scrollIntoView({behavior:"smooth"});
 }
 
-// --- LÓGICA DEL MODAL ---
-function abrirModalEdicion(nombreProducto) {
+// --- LÓGICA DEL MODAL UNIFICADA ---
+function abrirModalEdicion(origen, nombreProducto) {
     modalTitle.textContent = `Editar: ${nombreProducto}`;
     modalProductoNombre.value = nombreProducto;
     const datosGuardados = JSON.parse(localStorage.getItem('datosProductos')) || {};
     const infoGuardada = datosGuardados[nombreProducto] || {};
     const p = Object.values(productos).flat().find(prod => prod.nombre === nombreProducto);
+
     modalLote.value = infoGuardada.lote || p.lote || '';
-    modalCaducidad.value = infoGuardada.caducidad || p.caducidad_primaria || '';
+    
+    const fechaPrimaria = infoGuardada.caducidad_primaria || p.caducidad_primaria;
+    if (fechaPrimaria && fechaPrimaria.includes('/')) {
+        const partes = fechaPrimaria.split('/');
+        modalCaducidadPrimaria.value = `${partes[2]}-${partes[1]}-${partes[0]}`;
+    } else {
+        modalCaducidadPrimaria.value = '';
+    }
+
+    if (origen === 'consulta') {
+        aperturaContainer.style.display = 'block';
+        btnReset.style.display = 'block';
+        btnReset.onclick = () => resetProducto(nombreProducto);
+        btnGuardar.onclick = () => guardarCambiosModal('consulta');
+        const hoy = new Date().toISOString().split('T')[0];
+        modalFechaApertura.value = hoy;
+    } else {
+        aperturaContainer.style.display = 'none';
+        btnReset.style.display = 'none';
+        btnGuardar.onclick = () => guardarCambiosModal('etiqueta');
+    }
     editModal.style.display = 'flex';
 }
 
-function guardarCambiosModal() {
+function guardarCambiosModal(origen) {
     const nombre = modalProductoNombre.value;
     const lote = modalLote.value;
-    const caducidad = modalCaducidad.value;
+    let caducidadPrimaria = '';
+    if (modalCaducidadPrimaria.value) {
+        const partes = modalCaducidadPrimaria.value.split('-');
+        caducidadPrimaria = `${partes[2]}/${partes[1]}/${partes[0]}`;
+    }
 
     const datosGuardados = JSON.parse(localStorage.getItem('datosProductos')) || {};
-    datosGuardados[nombre] = { lote, caducidad };
+    datosGuardados[nombre] = { lote: lote, caducidad_primaria: caducidadPrimaria };
     localStorage.setItem('datosProductos', JSON.stringify(datosGuardados));
-
-    const etiqueta = document.querySelector(`.etiqueta[data-nombre="${nombre}"]`);
-    if (etiqueta) {
-        etiqueta.querySelector('[data-tipo="lote"]').textContent = `Lote: ${lote || '________'}`;
-        const cadElem = etiqueta.querySelector('[data-tipo="caducidad"]');
-        if (caducidad) {
-            cadElem.innerHTML = `<strong>Cad. Primaria: ${caducidad}</strong>`;
-        } else {
-            const p = Object.values(productos).flat().find(prod => prod.nombre === nombre);
-            let cad = new Date();
-            cad.setDate(cad.getDate() + p.dias);
-            const cadSecundaria = p.dias === 0 ? "No aplica" : cad.toLocaleDateString("es-ES") + " " + cad.toLocaleTimeString("es-ES", {hour:"2-digit", minute:"2-digit"});
-            cadElem.innerHTML = `<strong>Caducidad: ${cadSecundaria}</strong>`;
-        }
-    }
     editModal.style.display = 'none';
+
+    if (origen === 'consulta') {
+        consultarCaducidades();
+    } else {
+        generarEtiquetas();
+    }
     actualizarSugerencias();
+}
+
+function resetProducto(nombreProducto) {
+    const datosGuardados = JSON.parse(localStorage.getItem('datosProductos')) || {};
+    if (datosGuardados[nombreProducto]) {
+        delete datosGuardados[nombreProducto];
+        localStorage.setItem('datosProductos', JSON.stringify(datosGuardados));
+        editModal.style.display = 'none';
+        consultarCaducidades();
+        actualizarSugerencias();
+        alert(`El producto "${nombreProducto}" ha sido reseteado.`);
+    }
+}
+
+// --- LÓGICA DE CONSULTA ---
+function consultarCaducidades() {
+    const texto = busquedaProducto.value.toLowerCase();
+    resultadoConsulta.innerHTML = "";
+    if (!texto) return;
+
+    const todosLosProductos = Object.values(productos).flat();
+    const coincidencias = todosLosProductos.filter(p => p.nombre.toLowerCase().includes(texto));
+    const datosGuardados = JSON.parse(localStorage.getItem('datosProductos')) || {};
+
+    if (coincidencias.length === 0) {
+        resultadoConsulta.innerHTML = "<p>❌ Producto no encontrado</p>";
+        return;
+    }
+
+    coincidencias.forEach(prod => {
+        const infoGuardada = datosGuardados[prod.nombre] || {};
+        const lote = infoGuardada.lote || prod.lote || 'No definido';
+        const cadPrimaria = infoGuardada.caducidad_primaria || prod.caducidad_primaria || 'No definida';
+        let cadSecundaria = 'N/A';
+        if (prod.dias > 0) {
+            let cad = new Date();
+            cad.setDate(cad.getDate() + prod.dias);
+            cadSecundaria = cad.toLocaleDateString("es-ES");
+        }
+        
+        const div = document.createElement("div");
+        div.className = "resultado-producto";
+        div.innerHTML = `
+            <p><strong>Producto:</strong> ${prod.nombre}</p>
+            <p><strong>Lote:</strong> ${lote}</p>
+            <p><strong>Cad. Primaria:</strong> ${cadPrimaria}</p>
+            <p><strong>Cad. Secundaria (desde hoy):</strong> ${cadSecundaria}</p>
+            <div class="boton-actualizar-contenedor">
+                <button class="actualizar-btn" onclick="abrirModalEdicion('consulta', '${prod.nombre}')">Actualizar</button>
+            </div>
+        `;
+        resultadoConsulta.appendChild(div);
+    });
 }
 
 // --- IMPRESIÓN Y EXPORTACIÓN ---
@@ -376,10 +447,6 @@ function exportarXLSX(){
 function mostrarVista(vista) {
     document.querySelectorAll('[id^="vista-"]').forEach(v => v.style.display = 'none');
     document.getElementById(`vista-${vista}`).style.display = 'block';
-}
-
-function consultarCaducidades() {
-    // Lógica de la vista de consulta
 }
 
 // --- LÓGICA DE OBRADOR (CORREGIDA Y COMPLETA) ---
