@@ -1,6 +1,5 @@
 const productos = {
   "Congelados": [
-    // --- NUEVOS PRODUCTOS DE ALBARÁN ---
     { "nombre": "Croissant Mantequilla (base)", "tipo": "C", "lote": "00108" },
     { "nombre": "Bretzel Crema y Almendra (base)", "tipo": "C", "lote": "20280" },
     { "nombre": "Baguette Gran Reserva (base)", "tipo": "C", "lote": "22001" },
@@ -11,7 +10,6 @@ const productos = {
     { "nombre": "Molde wholegrain ALMA (base)", "tipo": "C", "lote": "84300" },
     { "nombre": "Crujiente Manzana Obrador (base)", "tipo": "C", "lote": "87538" },
     { "nombre": "Empanada Ternera (base)", "tipo": "C", "lote": "ELA02" }, // Se asocia con el elaborado
-    // --- PRODUCTOS EXISTENTES ---
     { "nombre": "Aguacate pulpa (Congelado)", "tipo": "C", "lote": "25080703" },
     { "nombre": "Arroz integral (Congelado)", "tipo": "C", "lote": "A10012" },
     { "nombre": "Base focaccia tomate cherry (Congelada)", "tipo": "C", "lote": "B12034" },
@@ -36,7 +34,6 @@ const productos = {
     { "nombre": "Tortilla francesa (Congelada)", "tipo": "C", "lote": "03082501", "caducidad_primaria": "18/10/2025" }
   ],
   "Refrigerados": [
-    // --- NUEVOS PRODUCTOS DE ALBARÁN ---
     { "nombre": "Aguacates frescos", "dias": 3, "tipo": "R", "estado": "Fresco", "lote": "V2540733", "caducidad_primaria": "26/09/2025" },
     { "nombre": "Espinaca baby fresca", "dias": 2, "tipo": "R", "estado": "Fresco", "lote": "N/A" },
     { "nombre": "Flores (Pensamientos)", "dias": 3, "tipo": "R", "estado": "Fresco", "lote": "N/A" },
@@ -47,7 +44,6 @@ const productos = {
     { "nombre": "Plátano fresco", "dias": 2, "tipo": "R", "estado": "Fresco", "lote": "N/A" },
     { "nombre": "Tomate pera fresco", "dias": 3, "tipo": "R", "estado": "Fresco", "lote": "LT49/352" },
     { "nombre": "Zumo c/Leche Piña (Abierto)", "dias": 2, "tipo": "R", "estado": "Refrigerado y abierto", "lote": "P2519", "caducidad_primaria": "20/04/2026" },
-    // --- PRODUCTOS EXISTENTES ---
     { "nombre": "Aguacate pulpa (En descongelación)", "dias": 2, "tipo": "R", "estado": "Descongelado sin abrir", "lote": "25080703" },
     { "nombre": "Aguacate pulpa (Abierto)", "dias": 2, "tipo": "R", "estado": "Refrigerado y abierto", "lote": "25080703" },
     { "nombre": "Arroz integral (cocinado)", "dias": 3, "tipo": "R", "estado": "Cocinado y refrigerado", "lote": "A10012" },
@@ -97,9 +93,7 @@ const productos = {
     { "nombre": "Zumo limón exprimido (Abierto)", "dias": 40, "tipo": "R", "estado": "Refrigerado y abierto", "lote": "ZL001" }
   ],
   "Secos": [
-    // --- NUEVOS PRODUCTOS DE ALBARÁN ---
     { "nombre": "Zumo c/Leche Piña (Sin abrir)", "dias": 0, "tipo": "S", "estado": "Sin abrir (ver fecha envase)", "lote": "P2519", "caducidad_primaria": "20/04/2026" },
-    // --- PRODUCTOS EXISTENTES ---
     { "nombre": "Aceite de oliva virgen (Abierto)", "dias": 60, "tipo": "S", "estado": "Abierto", "lote": "AOV01" },
     { "nombre": "Almendra granillo", "dias": 0, "tipo": "S", "estado": "No perecedero", "lote": "ALG01" },
     { "nombre": "Arroz integral (seco)", "dias": 0, "tipo": "S", "estado": "No perecedero", "lote": "A10012" },
