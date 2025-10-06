@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Etiquetas App - Versión Mejorada</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<style>
+/* --- ESTILOS GENERALES --- */
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; margin:0; background:#f9f9fb; color:#333; padding-bottom:120px; -webkit-tap-highlight-color: transparent; }
+header { background: rgba(255,255,255,0.85); backdrop-filter: blur(10px); color:#000; text-align:center; padding:12px; font-size:1.1em; font-weight:bold; position:sticky; top:0; z-index:999; border-bottom: 1px solid #e0e0e0; }
+
+/* --- NAV BOTONES MEJORADOS --- */
+.nav-buttons {
+  margin-top:8px;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.nav-buttons button, .nav-buttons a {
+  text-decoration: none;
+  margin:0;
+  padding:8px 16px;
+  border:none;
+  border-radius:8px;
+  background:#000;
+  color:#fff;
+  cursor:pointer;
+  font-size:0.9em;
+  font-weight:500;
+  flex:1;
+  max-width:150px;
+  text-align:center;
+}
+
+/* --- RESTO DE ESTILOS --- */
+h1 { text-align:center; color:#000; margin:15px 0; font-size:1.5em; }
+label { display:block; margin-top:15px; font-weight:bold; color:#000; font-size:0.9em; margin-bottom: 5px; }
+select, input[type="text"], input[type="date"] { width:100%; padding:12px; margin-top:6px; border-radius:8px; border:2px solid #ccc; font-size:1em; background:#fff; color:#000; box-sizing: border-box; transition: border-color 0.2s; }
+select:focus, input[type="text"]:focus, input[type="date"]:focus { border-color: #000; outline: none; }
+
+/* --- FORMULARIO Y SUGERENCIAS --- */
+.fila-inputs { display: flex; gap: 10px; }
+.fila-inputs > div { flex: 1; }
+#productoLista { display:flex; flex-direction: column; gap:8px; margin-top:10px; border-radius: 8px; overflow: visible; max-height: 360px; overflow-y: auto; border: 1px solid #ddd; padding:8px; background: #fff; }
+.producto-btn { display: flex; justify-content: space-between; align-items: center; width: 100%; background:#fff; color:#000; padding:12px; text-align:left; font-size:0.95em; cursor:pointer; user-select:none; border-radius:8px; border:1px solid #eee; }
+.producto-btn .left { display:flex; flex-direction:column; gap:6px; flex:1; }
+.producto-btn .nombre { font-weight:600; }
+.producto-btn .producto-info { font-size:0.82em; color:#555; background-color: #f1f1f1; padding: 4px 8px; border-radius: 6px; display:inline-block; }
+.producto-btn .controls { display:flex; gap:8px; align-items:center; }
+.producto-btn .tipo-select { min-width:180px; }
+.producto-btn.active { background:#f0f7ff; border-color:#bfe0ff; box-shadow:0 2px 8px rgba(0,123,255,0.06); }
+
+/* --- ÁREA DE ETIQUETAS GENERADAS --- */
+.print-area { display: flex; flex-wrap: wrap; gap: 15px; padding: 0 15px; justify-content: center; }
+.etiqueta {
+  width: 189px;
+  height: auto; 
+  min-height: 160px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 10pt;
+  padding: 3mm;
+  box-sizing: border-box;
+  border: 1px dashed #999;
+  background: white;
+  border-radius: 4px;
+}
+.etiqueta.short-expiry-visual { border-left: 4px solid #f39c12; }
+.etiqueta div { text-align: left; line-height: 1.3; }
+.etiqueta .nombre-producto { font-weight: bold; font-size: 11pt; text-align: center; margin-bottom: 4px; }
+.etiqueta-botones { text-align: center; margin: 4px 0; display:flex; gap: 5px; justify-content: center; }
+.etiqueta-btn { border: none; border-radius: 6px; padding: 4px 10px; font-size: 9pt; cursor: pointer; display: inline-block; color: white; }
+.actualizar-btn { background: #000; }
+.siguiente-btn { background: #f39c12; }
+.siguiente-btn:disabled { background: #27ae60; cursor: not-allowed; }
+.caducidad-container div { margin-top: 2px; }
+
+/* --- BOTONES FLOTANTES (FAB) --- */
+.fab-container { position:fixed; bottom:15px; right:15px; display:flex; flex-direction:column; gap:16px; z-index:999; align-items:center; }
+.fab { background:#000; color:#fff; border:none; border-radius:50%; width:60px; height:60px; font-size:24px; display:flex; align-items:center; justify-content:center; cursor:pointer; box-shadow:0 4px 8px rgba(0,0,0,0.2); }
+.fab-imprimir { background: #444; }
+.fab-excel { background: #007ACC; }
+.fab-label { margin-top:4px; font-size:0.8em; color:#000; font-weight:bold; text-align:center; }
+.fab-group { display:flex; flex-direction:column; align-items:center; }
+
+/* --- MODAL DE EDICIÓN --- */
+.modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); display: none; justify-content: center; align-items: center; z-index: 1000; backdrop-filter: blur(3px); }
+.modal-content { background: white; padding: 25px; border-radius: 12px; width: 90%; max-width: 400px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+.modal-content h2 { margin-top: 0; font-size: 1.3em; }
+.modal-buttons { margin-top: 25px; display: flex; justify-content: space-between; gap: 10px; }
+.modal-buttons button { padding: 10px 15px; border-radius: 8px; border: none; cursor: pointer; font-weight: bold; }
+#btn-guardar { background: #000; color: white; }
+#btn-cancelar { background: #eee; }
+#btn-reset { background: #E53935; color: white; }
+
+/* --- OBRADOR Y CONSULTA --- */
+.obrador-container, .consulta-container { padding:15px; }
+.resultado-producto { border:2px dashed #000; border-radius:12px; padding:15px; margin-bottom:10px; background:#f8f8f8; font-size:0.9em; }
+.resultado-producto p { margin: 8px 0; }
+.simulador-fecha { display: flex; gap: 10px; align-items: center; margin-top: 10px; }
+.simulador-fecha input { margin-top: 0; }
+.simulador-fecha button { background: #555; color: white; border: none; padding: 6px 10px; font-size: 0.8em; border-radius: 6px; cursor: pointer;}
+.obrador-item { border:1px solid #ccc; border-radius:8px; padding:10px; margin-bottom:10px; background-color:#fff; }
+.obrador-details { margin-top:10px; padding-top:10px; border-top:1px dashed #ccc; display:none; }
+.quick-filters { display:flex; flex-wrap:wrap; justify-content:space-around; gap:10px; margin-top:15px; }
+.quick-filters button { flex:1; min-width:120px; padding:10px; border:1px solid #000; border-radius:6px; background:#fff; cursor:pointer; }
+
+/* --- IMPRESIÓN --- */
+@media print {
+  @page{size:50mm 30mm; margin:0;} body, html { margin:0; padding:0; }
+  body * { visibility:hidden; } .etiqueta-botones { display: none !important; }
+  .print-area, .print-area * { visibility:visible; }
+  .print-area { position:absolute; top:0; left:0; }
+  .etiqueta { height: 30mm !important; border:none; font-size:13pt; justify-content: space-around; }
+  .etiqueta .nombre-producto { font-size: 14pt; }
+}
+</style>
+</head>
+  <body>
+
+<header>
+  Creado por Ronald – Santa Gloria Russafa
+  <div class="nav-buttons">
+    <button onclick="mostrarVista('etiquetas')">🖨️ Generar</button>
+    <button onclick="mostrarVista('consultar')">📅 Consultar</button>
+    <button onclick="mostrarVista('obrador')">🔪 Obrador</button>
+    <a href="inventario.html">Inventario</a>
+  </div>
+</header>
+
+<div id="vista-etiquetas">
+  <h1>🖨️ Generador de Etiquetas</h1>
+  <div class="form-section" style="padding:0 15px;">
+    <div class="fila-inputs">
+      <div>
+        <label for="empleado">👤 ¿Quién etiqueta?</label>
+        <select id="empleado"></select>
+      </div>
+      <div>
+        <label for="categoria">📦 Categoría</label>
+        <select id="categoria" onchange="actualizarSugerencias()"></select>
+      </div>
+    </div>
+    <label for="buscador">🔍 Buscar producto</label>
+    <input type="text" id="buscador" placeholder="Escribe para filtrar...">
+    <div id="productoLista"></div>
+  </div>
+  <h2 style="margin:20px 15px 10px;">Etiquetas listas:</h2>
+  <div class="print-area" id="printArea"></div>
+  <div style="padding: 0 15px; margin-top: 10px;">
+    <button onclick="generarEtiquetas()" style="margin-right:8px;">Generar</button>
+    <button onclick="imprimirSecuencial()" class="fab-imprimir">Imprimir secuencial</button>
+    <button onclick="exportarXLSX()" class="fab-excel">Descargar XLSX</button>
+  </div>
+  <div id="tabla-resultados" style="padding: 15px;"></div>
+</div>
+
+<div id="vista-consultar" style="display:none;" class="consulta-container">
+  <h1>📅 Consulta de Caducidades</h1>
+  <label for="busquedaProducto">🔍 Buscar producto</label>
+  <input type="text" id="busquedaProducto" placeholder="Escribe un producto...">
+  <div id="resultadoConsulta" style="margin-top:15px; font-size:1em;"></div>
+</div>
+
+<div id="vista-obrador" style="display:none;" class="obrador-container">
+  <h1>🔪 Obrador</h1>
+  <label for="buscadorObrador">🔍 Buscar producto</label>
+  <input type="text" id="buscadorObrador" placeholder="Escribe para buscar...">
+  <div class="quick-filters">
+    <button onclick="cargarProductosObradorConFiltro('croissant')">🥐 Croissants</button>
+    <button onclick="cargarProductosObradorConFiltro('ensalada')">🥗 Ensaladas</button>
+    <button onclick="cargarProductosObradorConFiltro('focaccia')">🥖 Focaccias</button>
+    <button onclick="cargarProductosObradorConFiltro('gloria')">✨ Glorias</button>
+    <button onclick="cargarProductosObradorConFiltro('sandwich')">🥪 Sandwiches</button>
+  </div>
+  <div id="obradorLista" style="margin-top:15px;"></div>
+</div>
+
+<div class="modal-overlay" id="editModal">
+  <div class="modal-content">
+    <h2 id="modalTitle">Editar Información</h2>
+    <input type="hidden" id="modalProductoNombre">
+    <label for="modalLote">Lote</label>
+    <input type="text" id="modalLote">
+    <label for="modalCaducidadPrimaria">Caducidad Primaria</label>
+    <input type="date" id="modalCaducidadPrimaria">
+    <div id="apertura-container" style="display:none;">
+      <label for="modalFechaApertura">Fecha Apertura (para cálculo)</label>
+      <input type="date" id="modalFechaApertura">
+    </div>
+    <div class="modal-buttons">
+      <button id="btn-reset" style="display:none;">Reset</button>
+      <div>
+        <button id="btn-cancelar">Cancelar</button>
+        <button id="btn-guardar">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+<script src="productos.js"></script>
+
+<script>
+// --- VARIABLES GLOBALES ---
+const empleadoSelect = document.getElementById("empleado");
+const categoriaSelect = document.getElementById("categoria");
+const productoLista = document.getElementById("productoLista");
+const buscadorInput = document.getElementById("buscador");
+const printArea = document.getElementById("printArea");
+const busquedaProducto = document.getElementById("busquedaProducto");
+const resultadoConsulta = document.getElementById("resultadoConsulta");
+const buscadorObrador = document.getElementById("buscadorObrador");
+const obradorLista = document.getElementById("obradorLista");
+const editModal = document.getElementById("editModal");
+const modalTitle = document.getElementById("modalTitle");
+const modalProductoNombre = document.getElementById("modalProductoNombre");
+const modalLote = document.getElementById("modalLote");
+const modalCaducidadPrimaria = document.getElementById("modalCaducidadPrimaria");
+const modalFechaApertura = document.getElementById("modalFechaApertura");
+const aperturaContainer = document.getElementById("apertura-container");
+const btnGuardar = document.getElementById("btn-guardar");
+const btnCancelar = document.getElementById("btn-cancelar");
+const btnReset = document.getElementById("btn-reset");
+// ahora usamos Map para almacenar seleccionado + tipo (tipo: 'congelado'|'descongelacion'|'refrigerado')
+let productosSeleccionados = new Map();
+let etiquetasParaExportar = [];
+
+// --- INICIALIZACIÓN ---
+document.addEventListener('DOMContentLoaded', () => {
+    const empleados = ["Ronald","Lorena","Johnny","Sofía","Claudia","Pamela","Abril","Gloria","Steven"];
+    empleados.forEach(e => empleadoSelect.add(new Option(e, e)));
+    if(localStorage.getItem("ultimoEmpleado")) empleadoSelect.value = localStorage.getItem("ultimoEmpleado");
+    empleadoSelect.addEventListener("change", () => localStorage.setItem("ultimoEmpleado", empleadoSelect.value));
+
+    const categorias = (typeof productos !== 'undefined') ? Object.keys(productos) : [];
+    categoriaSelect.add(new Option("Todo", "Todo"));
+    categorias.forEach(cat => categoriaSelect.add(new Option(cat, cat)));
+    actualizarSugerencias();
+
+    btnCancelar.onclick = () => editModal.style.display = 'none';
+    editModal.addEventListener('click', (e) => { if (e.target === editModal) editModal.style.display = 'none'; });
+    buscadorInput.addEventListener('focus', () => setTimeout(() => buscadorInput.scrollIntoView({ behavior: 'smooth', block: 'start' }), 300));
+    buscadorInput.addEventListener("input", actualizarSugerencias);
+    busquedaProducto.addEventListener("input", consultarCaducidades);
+
+    if (typeof obradorData !== 'undefined' && obradorData.productos) {
+        cargarProductosObrador(obradorData.productos);
+        if(buscadorObrador) {
+            buscadorObrador.addEventListener('input', () => {
+                const texto = buscadorObrador.value.toLowerCase();
+                const productosFiltrados = obradorData.productos.filter(p => p.nombre.toLowerCase().includes(texto));
+                cargarProductosObrador(productosFiltrados);
+            });
+        }
+    }
+});
+
+// --- LÓGICA DE DATOS ---
+function getProductoConStorage(nombreProducto) {
+    const allProducts = (typeof productos !== 'undefined') ? Object.values(productos).flat() : [];
+    const original = allProducts.find(p => p.nombre === nombreProducto);
+    if (!original) return null;
+    const datosGuardados = JSON.parse(localStorage.getItem('datosProductos')) || {};
+    const guardado = datosGuardados[nombreProducto] || {};
+    return { ...original, ...guardado };
+}
+
+// --- LÓGICA DE PRODUCTOS Y SUGERENCIAS ---
+function actualizarSugerencias() {
+    productoLista.innerHTML = "";
+    const categoria = categoriaSelect.value;
+    const texto = buscadorInput.value.toLowerCase();
+    const todosLosProductos = (categoria === "Todo") ? ((typeof productos !== 'undefined') ? Object.values(productos).flat() : []) : (productos[categoria] || []);
+
+    let filtrados = texto ? todosLosProductos.filter(p => p.nombre.toLowerCase().includes(texto)) : todosLosProductos;
+    const sugerencias = filtrados.slice(0, 50);
+
+    sugerencias.forEach(p => {
+        const prodConStorage = getProductoConStorage(p.nombre);
+        const btn = document.createElement("div");
+        btn.className = "producto-btn";
+        if (productosSeleccionados.has(p.nombre)) btn.classList.add("active");
+
+        let infoText = "Sin Lote/Cad.";
+        if (prodConStorage && (prodConStorage.lote || prodConStorage.caducidad_primaria)) {
+            infoText = `${prodConStorage.lote ? `L: ${prodConStorage.lote}` : ''} ${prodConStorage.caducidad_primaria ? `C: ${prodConStorage.caducidad_primaria}` : ''}`.trim();
+        }
+
+        // estructura interna
+        const left = document.createElement('div'); left.className = 'left';
+        const nombreSpan = document.createElement('span'); nombreSpan.className = 'nombre'; nombreSpan.textContent = p.nombre;
+        const infoSpan = document.createElement('span'); infoSpan.className = 'producto-info'; infoSpan.textContent = infoText;
+        left.appendChild(nombreSpan); left.appendChild(infoSpan);
+
+        const controls = document.createElement('div'); controls.className = 'controls';
+
+        // select para elegir estado (congelado / descongelacion / refrigerado)
+        const select = document.createElement('select');
+        select.className = 'tipo-select';
+        select.innerHTML = `
+            <option value="">Seleccionar estado...</option>
+            <option value="congelado">🧊 Congelado</option>
+            <option value="descongelacion">🌡️ En descongelación</option>
+            <option value="refrigerado">🥶 Refrigerado / abierto</option>
+        `;
+        // evitar que al clicar el select se dispare el toggle del btn
+        select.addEventListener('click', (ev) => ev.stopPropagation());
+        // cuando cambie el select, guardamos el tipo en el Map
+        select.addEventListener('change', (ev) => {
+            ev.stopPropagation();
+            const tipo = ev.target.value;
+            if (!productosSeleccionados.has(p.nombre)) {
+                productosSeleccionados.set(p.nombre, { tipo });
+                btn.classList.add('active');
+            } else {
+                const prev = productosSeleccionados.get(p.nombre) || {};
+                productosSeleccionados.set(p.nombre, { ...prev, tipo });
+            }
+            // actualizamos texto informativo del botón
+            actualizarInfoBoton(btn, p.nombre);
+        });
+
+        // si ya había una selección previa, inicializamos el select
+        const prevSel = productosSeleccionados.get(p.nombre);
+        if (prevSel && prevSel.tipo) select.value = prevSel.tipo;
+
+        // añadimos un pequeño botón para editar (igual que antes)
+        const editarBtn = document.createElement('button');
+        editarBtn.textContent = 'Editar';
+        editarBtn.style.padding = '6px 8px';
+        editarBtn.style.borderRadius = '6px';
+        editarBtn.style.border = '1px solid #ccc';
+        editarBtn.style.background = '#fff';
+        editarBtn.style.cursor = 'pointer';
+        editarBtn.addEventListener('click', (ev) => { ev.stopPropagation(); abrirModalEdicion('etiqueta', p.nombre); });
+
+        controls.appendChild(select);
+        controls.appendChild(editarBtn);
+
+        btn.appendChild(left);
+        btn.appendChild(controls);
+
+        // click en el producto togglea su selección (si ya está seleccionado lo quita)
+        btn.addEventListener('click', () => {
+            if (productosSeleccionados.has(p.nombre)) {
+                productosSeleccionados.delete(p.nombre);
+                btn.classList.remove('active');
+                // limpiar el select
+                select.value = '';
+            } else {
+                productosSeleccionados.set(p.nombre, { tipo: select.value || '' });
+                btn.classList.add('active');
+            }
+            actualizarInfoBoton(btn, p.nombre);
+        });
+
+        productoLista.appendChild(btn);
+    });
+}
+
+function actualizarInfoBoton(btn, nombre) {
+    const left = btn.querySelector('.left');
+    const info = left.querySelector('.producto-info');
+    const prodConStorage = getProductoConStorage(nombre) || {};
+    let infoText = "Sin Lote/Cad.";
+    if (prodConStorage.lote || prodConStorage.caducidad_primaria) {
+        infoText = `${prodConStorage.lote ? `L: ${prodConStorage.lote}` : ''} ${prodConStorage.caducidad_primaria ? `C: ${prodConStorage.caducidad_primaria}` : ''}`.trim();
+    }
+    const sel = productosSeleccionados.get(nombre);
+    if (sel && sel.tipo) {
+        const labels = { 'congelado': '🧊 Congelado', 'descongelacion': '🌡️ Descongelación', 'refrigerado': '🥶 Refrigerado' };
+        info.textContent = `${labels[sel.tipo] || ''} ${infoText}`.trim();
+    } else {
+        info.textContent = infoText;
+    }
+}
+
+// --- LÓGICA DE ETIQUETAS (ACTUALIZADA: incluye 3 columnas estado con "○")---
+function generarEtiquetas(){
+    printArea.innerHTML = "";
+    etiquetasParaExportar = []; 
+
+    if (productosSeleccionados.size === 0) {
+        alert('No hay productos seleccionados. Selecciona productos y el estado para cada uno.');
+        return;
+    }
+
+    // comprobar que TODOS los seleccionados tienen un estado elegido
+    const sinEstado = [];
+    productosSeleccionados.forEach((val, nombre) => { if (!val.tipo) sinEstado.push(nombre); });
+    if (sinEstado.length > 0) {
+        alert(`Selecciona un estado para:\n- ${sinEstado.join('\n- ')}`);
+        return;
+    }
+
+    const empleado = empleadoSelect.value || '';
+    const ahora = new Date();
+    const fechaHora = ahora.toLocaleDateString("es-ES") + " " + ahora.toLocaleTimeString("es-ES", {hour: "2-digit", minute: "2-digit"});
+
+    productosSeleccionados.forEach((sel, nombreProd) => {
+        const p = getProductoConStorage(nombreProd);
+        if (!p) return;
+
+        // --- Caducidades ---
+        const caducidadPrimariaStr = p.caducidad_primaria || '';
+        const dias = p.dias ?? 0;
+        let caducidadSecundariaStr = '';
+        let caducidadSecundariaDateObj = null;
+        if (dias > 0) {
+            caducidadSecundariaDateObj = new Date(ahora);
+            caducidadSecundariaDateObj.setDate(ahora.getDate() + dias);
+            caducidadSecundariaStr = formatDateForDisplay(caducidadSecundariaDateObj);
+        }
+
+        let fechaParaComprobar = caducidadSecundariaDateObj || parseSpanishDate(caducidadPrimariaStr);
+        const hoy = new Date(); hoy.setHours(0,0,0,0);
+        const unaSemana = new Date(hoy); unaSemana.setDate(hoy.getDate() + 7);
+        const esCaducidadCorta = fechaParaComprobar && fechaParaComprobar >= hoy && fechaParaComprobar <= unaSemana;
+
+        // --- Preparamos fila para excel con 3 columnas de estado (solo 1 tendrá "○") ---
+        const estado = sel.tipo || '';
+        const fila = {
+            'Producto': nombreProd,
+            'Tipo Producto': p.tipo || '',
+            'Empleado': empleado,
+            'Lote': p.lote || '________',
+            'Apertura': fechaHora,
+            'Caducidad Primaria': caducidadPrimariaStr || 'No definida',
+            'Caducidad Secundaria': caducidadSecundariaStr || 'No aplica',
+            'Congelado': estado === 'congelado' ? '○' : '',
+            'En descongelación': estado === 'descongelacion' ? '○' : '',
+            'Refrigerado': estado === 'refrigerado' ? '○' : '',
+            'estado_interno': estado,
+            'id': `${nombreProd.replace(/\s/g, '')}-${Date.now()}`
+        };
+
+        etiquetasParaExportar.push(fila);
+
+        // --- Construir la etiqueta HTML para vista previa / impresión ---
+        const etiqueta = document.createElement("div");
+        etiqueta.className = "etiqueta";
+        if(esCaducidadCorta) etiqueta.classList.add("short-expiry-visual");
+
+        const botonesHTML = `<button class=\"etiqueta-btn actualizar-btn\" onclick=\"abrirModalEdicion('etiqueta', '${nombreProd.replace(/'/g, "\'")}')\">Actualizar</button>${esCaducidadCorta ? `<button class=\"etiqueta-btn siguiente-btn\" onclick=\"programarSiguienteEtiqueta(this, '${fila.id}')\">Siguiente Etiqueta ⏭️</button>` : ''}`;
+
+        let caducidadHTML = '';
+        if (caducidadPrimariaStr) caducidadHTML += `<div><strong>Cad. Primaria: ${caducidadPrimariaStr}</strong></div>`;
+        if (caducidadSecundariaStr) caducidadHTML += `<div><strong>Caducidad: ${caducidadSecundariaStr}</strong></div>`;
+        if (!caducidadPrimariaStr && !caducidadSecundariaStr) caducidadHTML = `<div><strong>Caducidad: No aplica</strong></div>`;
+
+        // mostrar también el estado elegido en la etiqueta (texto, no el círculo)
+        const labelsEstado = { 'congelado': '🧊 Congelado', 'descongelacion': '🌡️ En descongelación', 'refrigerado': '🥶 Refrigerado' };
+        const estadoTexto = labelsEstado[estado] || '';
+
+        etiqueta.innerHTML = `
+            <div class="nombre-producto">${nombreProd}</div>
+            <div>${p.tipo || ''} / ${empleado}</div>
+            <div data-tipo="lote">Lote: ${p.lote || '________'}</div>
+            <div>Apertura: ${fechaHora}</div>
+            <div><strong>Estado:</strong> ${estadoTexto}</div>
+            <div class="etiqueta-botones">${botonesHTML}</div>
+            <div class="caducidad-container">${caducidadHTML}</div>
+        `;
+        printArea.appendChild(etiqueta);
+    });
+
+    // mostrar tabla previa con los círculos (HTML)
+    renderTablaResultados();
+    printArea.scrollIntoView({behavior:"smooth"});
+}
+
+function renderTablaResultados() {
+    if (!etiquetasParaExportar || etiquetasParaExportar.length === 0) { document.getElementById('tabla-resultados').innerHTML = ''; return; }
+    let html = `<table style=\"width:100%;border-collapse:collapse;\"><thead><tr><th>Producto</th><th>Congelado</th><th>En descongelación</th><th>Refrigerado</th><th>Lote</th><th>Cad. Primaria</th><th>Cad. Secundaria</th></tr></thead><tbody>`;
+    etiquetasParaExportar.forEach(f => {
+        html += `<tr><td>${f.Producto}</td><td style=\"font-size:20px;\">${f.Congelado}</td><td style=\"font-size:20px;\">${f['En descongelación']}</td><td style=\"font-size:20px;\">${f.Refrigerado}</td><td>${f.Lote}</td><td>${f['Caducidad Primaria']}</td><td>${f['Caducidad Secundaria']}</td></tr>`;
+    });
+    html += '</tbody></table>';
+    document.getElementById('tabla-resultados').innerHTML = html;
+}
+
+// --- Para programar la siguiente etiqueta ---
+function programarSiguienteEtiqueta(boton, etiquetaId) {
+    const etiquetaOriginalData = etiquetasParaExportar.find(e => e.id === etiquetaId);
+    if (!etiquetaOriginalData) return;
+
+    const hoy = new Date();
+    const caducidadActual = parseSpanishDate(etiquetaOriginalData['Caducidad Secundaria']);
+    if (!caducidadActual) {
+        alert("No se puede programar la siguiente etiqueta porque no hay una caducidad secundaria calculada.");
+        return;
+    }
+
+    const vidaUtilRestante = caducidadActual.getTime() - hoy.getTime();
+    const siguienteCaducidad = new Date(caducidadActual.getTime() + vidaUtilRestante);
+
+    const siguienteEtiquetaData = {
+        ...etiquetaOriginalData,
+        'Apertura': formatDateForDisplay(caducidadActual),
+        'Caducidad Secundaria': formatDateForDisplay(siguienteCaducidad),
+        'id': `${etiquetaOriginalData.Producto.replace(/\s/g, '')}-${Date.now()}`
+    };
+
+    etiquetasParaExportar.push(siguienteEtiquetaData);
+
+    boton.textContent = 'Programada ✔️';
+    boton.disabled = true;
+    renderTablaResultados();
+    alert(`Siguiente etiqueta para "${etiquetaOriginalData.Producto}" programada.\nSu nueva caducidad secundaria será ${siguienteEtiquetaData['Caducidad Secundaria']}.\nSe incluirá en el Excel.`);
+}
+
+// --- FUNCIONES AUXILIARES DE FECHA ---
+function parseSpanishDate(dateStr) {
+    if (!dateStr || typeof dateStr !== 'string') return null;
+    try {
+        const dateAndTime = dateStr.split(' ');
+        const dateParts = dateAndTime[0].split('/');
+        let day = 1, month = 1, year = 1970;
+        if (dateParts.length === 3) { day = parseInt(dateParts[0], 10); month = parseInt(dateParts[1], 10) - 1; year = parseInt(dateParts[2], 10); if (year < 100) { year += 2000; } }
+        else if (dateParts.length === 2) { day = 1; month = parseInt(dateParts[0], 10) - 1; year = parseInt(dateParts[1], 10); }
+        else { return null; }
+        let hour = 0, minute = 0;
+        if (dateAndTime.length > 1) {
+            const timeParts = dateAndTime[1].split(':');
+            if (timeParts.length === 2) { hour = parseInt(timeParts[0], 10); minute = parseInt(timeParts[1], 10); }
+        }
+        return new Date(year, month, day, hour, minute);
+    } catch (e) {
+        console.error("Error parsing date:", dateStr, e);
+        return null;
+    }
+}
+function formatDateForDisplay(dateObj) {
+    if (!(dateObj instanceof Date)) return '';
+    const day = String(dateObj.getDate()).padStart(2, '0');
+    const month = String(dateObj.getMonth() + 1).padStart(2, '0');
+    const year = dateObj.getFullYear();
+    const hours = String(dateObj.getHours()).padStart(2, '0');
+    const minutes = String(dateObj.getMinutes()).padStart(2, '0');
+    return `${day}/${month}/${year} ${hours}:${minutes}`;
+}
+
+// --- LÓGICA DEL MODAL UNIFICADA ---
+function abrirModalEdicion(origen, nombreProducto) {
+    modalTitle.textContent = `Editar: ${nombreProducto}`;
+    modalProductoNombre.value = nombreProducto;
+    const p = getProductoConStorage(nombreProducto) || {};
+    modalLote.value = p.lote || '';
+    if (p.caducidad_primaria) {
+        const fecha = parseSpanishDate(p.caducidad_primaria);
+        if(fecha) modalCaducidadPrimaria.value = fecha.toISOString().split('T')[0];
+    } else {
+        modalCaducidadPrimaria.value = '';
+    }
+
+    if (origen === 'consulta') {
+        aperturaContainer.style.display = 'block';
+        btnReset.style.display = 'block';
+        btnReset.onclick = () => resetProducto(nombreProducto);
+        btnGuardar.onclick = () => guardarCambiosModal('consulta');
+        modalFechaApertura.value = new Date().toISOString().split('T')[0];
+    } else {
+        aperturaContainer.style.display = 'none';
+        btnReset.style.display = 'none';
+        btnGuardar.onclick = () => guardarCambiosModal('etiqueta');
+    }
+    editModal.style.display = 'flex';
+}
+
+function guardarCambiosModal(origen) {
+    const nombre = modalProductoNombre.value;
+    const lote = modalLote.value;
+    let caducidadPrimaria = '';
+    if (modalCaducidadPrimaria.value) {
+        const fecha = new Date(modalCaducidadPrimaria.value);
+        caducidadPrimaria = `${String(fecha.getDate()).padStart(2,'0')}/${String(fecha.getMonth()+1).padStart(2,'0')}/${fecha.getFullYear()}`;
+    }
+    const datosGuardados = JSON.parse(localStorage.getItem('datosProductos')) || {};
+    datosGuardados[nombre] = { lote: lote, caducidad_primaria: caducidadPrimaria };
+    localStorage.setItem('datosProductos', JSON.stringify(datosGuardados));
+    editModal.style.display = 'none';
+
+    if (origen === 'consulta') {
+        consultarCaducidades();
+    } else {
+        generarEtiquetas();
+    }
+    actualizarSugerencias();
+}
+
+function resetProducto(nombreProducto) {
+    const datosGuardados = JSON.parse(localStorage.getItem('datosProductos')) || {};
+    if (datosGuardados[nombreProducto]) {
+        delete datosGuardados[nombreProducto];
+        localStorage.setItem('datosProductos', JSON.stringify(datosGuardados));
+        alert(`El producto "${nombreProducto}" ha sido reseteado.`);
+    } else {
+        alert("Este producto no tiene datos guardados para resetear.");
+    }
+    editModal.style.display = 'none';
+    consultarCaducidades();
+    actualizarSugerencias();
+}
+
+// --- LÓGICA DE CONSULTA ---
+function consultarCaducidades() {
+    const texto = busquedaProducto.value.toLowerCase();
+    resultadoConsulta.innerHTML = "";
+    if (!texto) return;
+
+    const coincidencias = Object.values(productos).flat().filter(p => p.nombre.toLowerCase().includes(texto));
+    if (coincidencias.length === 0) {
+        resultadoConsulta.innerHTML = "<p>❌ Producto no encontrado</p>";
+        return;
+    }
+
+    coincidencias.forEach(prodOriginal => {
+        const prod = getProductoConStorage(prodOriginal.nombre);
+        const div = document.createElement("div");
+        div.className = "resultado-producto";
+        const idUnica = prod.nombre.replace(/\s/g, '');
+
+        let htmlCaducidades = '';
+        if (prod.dias) {
+            htmlCaducidades += `<p><strong>Cad. Secundaria:</strong> <span id="cad-secundaria-${idUnica}"></span> (${prod.dias} días)</p>`;
+        }
+
+        div.innerHTML = `
+            <p><strong>Producto:</strong> ${prod.nombre}</p>
+            <div class="simulador-fecha">
+                <input type="date" id="sim-date-${idUnica}" value="${new Date().toISOString().split('T')[0]}">
+                <button onclick="simularCaducidad('${prod.nombre}')">Simular</button>
+            </div>
+            <p><strong>Lote:</strong> ${prod.lote || 'No definido'}</p>
+            <p><strong>Cad. Primaria:</strong> ${prod.caducidad_primaria || 'No definida'}</p>
+            ${htmlCaducidades}
+            <div class="etiqueta-botones">
+                <button class="etiqueta-btn actualizar-btn" onclick="abrirModalEdicion('consulta', '${prod.nombre}')">Actualizar</button>
+            </div>
+        `;
+        resultadoConsulta.appendChild(div);
+        simularCaducidad(prod.nombre);
+    });
+}
+
+function simularCaducidad(nombreProducto) {
+    const idUnica = nombreProducto.replace(/\s/g, '');
+    const prod = getProductoConStorage(nombreProducto);
+    const fechaBaseInput = document.getElementById(`sim-date-${idUnica}`);
+    if (!fechaBaseInput) return;
+    const fechaBase = new Date(fechaBaseInput.value);
+    fechaBase.setMinutes(fechaBase.getMinutes() + fechaBase.getTimezoneOffset());
+    if (prod.dias) {
+        let cad = new Date(fechaBase);
+        cad.setDate(cad.getDate() + prod.dias);
+        document.getElementById(`cad-secundaria-${idUnica}`).textContent = cad.toLocaleDateString("es-ES");
+    }
+}
+
+// --- IMPRESIÓN Y EXPORTACIÓN ---
+function imprimirSecuencial(){
+    const etiquetas = [...document.querySelectorAll(".etiqueta")];
+    if(etiquetas.length === 0) return;
+    let i = 0;
+    const imprimirUna = () => { if(i < etiquetas.length) { imprimirEtiqueta(etiquetas[i].outerHTML); i++; setTimeout(imprimirUna, 700); }};
+    imprimirUna();
+}
+
+function imprimirEtiqueta(etiquetaHTML){
+    const ventana = window.open('','width=400,height=400');
+    ventana.document.write(`<html><head><title>Etiqueta</title><style>@page{size:50mm 30mm;margin:0;}body{margin:0;font-family:sans-serif;} .etiqueta-botones{display:none;} .etiqueta{width:50mm;height:30mm;padding:2mm;box-sizing:border-box;font-size:12pt;display:flex;flex-direction:column;justify-content:space-around; text-align: left;} .nombre-producto{font-size:13pt; text-align:center;}</style></head><body onload="window.print();window.onafterprint=function(){window.close();}">${etiquetaHTML}</body></html>`);
+    ventana.document.close();
+}
+
+function exportarXLSX(){
+    if(etiquetasParaExportar.length === 0) {
+        alert("Primero genera algunas etiquetas para poder exportar.");
+        return;
+    }
+    // mapear para eliminar campos internos/id si se desea
+    const columnasOrdenadas = etiquetasParaExportar.map(e => ({
+        'Producto': e.Producto,
+        'Tipo Producto': e['Tipo Producto'],
+        'Empleado': e.Empleado,
+        'Lote': e.Lote,
+        'Apertura': e.Apertura,
+        'Caducidad Primaria': e['Caducidad Primaria'],
+        'Caducidad Secundaria': e['Caducidad Secundaria'],
+        'Congelado': e.Congelado,
+        'En descongelación': e['En descongelación'],
+        'Refrigerado': e.Refrigerado
+    }));
+
+    const ws = XLSX.utils.json_to_sheet(columnasOrdenadas);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "Etiquetas");
+    XLSX.writeFile(wb, "etiquetas_programadas.xlsx");
+}
+
+// --- NAVEGACIÓN Y OTRAS VISTAS ---
+function mostrarVista(vista) {
+    document.querySelectorAll('[id^="vista-"]').forEach(v => v.style.display = 'none');
+    document.getElementById(`vista-${vista}`).style.display = 'block';
+}
+
+// --- LÓGICA DE OBRADOR ---
+function cargarProductosObrador(productosACargar) {
+    if (!obradorLista) return;
+    obradorLista.innerHTML = '';
+    if (!productosACargar || productosACargar.length === 0) {
+        obradorLista.innerHTML = '<p>No se encontraron productos.</p>';
+        return;
+    }
+    productosACargar.forEach(producto => {
+        const item = document.createElement('div');
+        item.className = 'obrador-item';
+        let detallesHtml = '';
+        if (producto.preparacion || producto.ingredientes_resumen) {
+            detallesHtml += `<p><strong>Ingredientes (resumen):</strong> ${producto.ingredientes_resumen || 'No especificado'}</p>`;
+            detallesHtml += `<button onclick="this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'block' ? 'none' : 'block';">Ver más</button>`;
+            detallesHtml += `<div class="obrador-details">`;
+            if (producto.ingredientes) detallesHtml += `<h4>Ingredientes:</h4><p>${producto.ingredientes}</p>`;
+            if (producto.preparacion) detallesHtml += `<h4>Preparación:</h4><p>${producto.preparacion}</p>`;
+            detallesHtml += `</div>`;
+        }
+        item.innerHTML = `
+            <h3>${producto.nombre}</h3>
+            <p><strong>Descongelación:</strong> ${producto.descongelacion || 'N/A'}</p>
+            <p><strong>Horno:</strong> ${producto.horno_temp ? `${producto.horno_temp}, Prog. ${producto.horno_prog}, ${producto.horno_tiempo}` : 'N/A'}</p>
+            ${detallesHtml}
+        `;
+        obradorLista.appendChild(item);
+    });
+}
+
+function cargarProductosObradorConFiltro(filtro) {
+    if (typeof obradorData === 'undefined' || !obradorData.productos) return;
+    const buscador = document.getElementById('buscadorObrador');
+    if(buscador) buscador.value = '';
+    let productosFiltrados;
+    if (filtro === 'sandwich') {
+        const sandwichKeywords = ['sandwich', 'sw', 'bikini', 'brioche', 'tosta', 'bocadillo', 'flautín', 'delicia integral'];
+        productosFiltrados = obradorData.productos.filter(p =>
+            sandwichKeywords.some(keyword => p.nombre.toLowerCase().includes(keyword))
+        );
+    } else {
+        productosFiltrados = obradorData.productos.filter(p => p.nombre.toLowerCase().includes(filtro));
+    }
+    cargarProductosObrador(productosFiltrados);
+}
+</script>
+</body>
+</html>
