@@ -613,6 +613,18 @@ function exportarXLSX(){
             horaApertura = partes[1] || '';
         }
 
+        // Calcular hora de cerrado = hora de apertura + 3 minutos
+        let horaCierre = '';
+        if (horaApertura) {
+            const [h, m] = horaApertura.split(':').map(Number);
+            let fecha = new Date();
+            fecha.setHours(h, m + 3, 0, 0); // sumamos 3 minutos
+            horaCierre = String(fecha.getHours()).padStart(2,'0') + ':' + String(fecha.getMinutes()).padStart(2,'0');
+        }
+
+        // Caducidad secundaria solo fecha
+        let cadSec = p['Caducidad Secundaria'] ? p['Caducidad Secundaria'].split(' ')[0] : '';
+
         // Determinar si poner círculo según tipo
         let congelado = '', refrigerado = '';
         if (p.Tipo === 'C') congelado = '◯';
@@ -625,8 +637,9 @@ function exportarXLSX(){
             'Lote': p.Lote,
             'Fecha Apertura': fechaApertura,
             'Hora Apertura': horaApertura,
+            'Hora Cierre': horaCierre,
             'Caducidad Primaria': p['Caducidad Primaria'],
-            'Caducidad Secundaria': p['Caducidad Secundaria'],
+            'Caducidad Secundaria': cadSec,
             'Congelado': congelado,
             'Refrigerado': refrigerado
         };
@@ -637,6 +650,7 @@ function exportarXLSX(){
     XLSX.utils.book_append_sheet(wb, ws, "Etiquetas");
     XLSX.writeFile(wb, "etiquetas_programadas.xlsx");
 }
+
 
 
 // --- NAVEGACIÓN Y OTRAS VISTAS ---
