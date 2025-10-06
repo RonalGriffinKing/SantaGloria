@@ -603,12 +603,41 @@ function exportarXLSX(){
         alert("Primero genera algunas etiquetas para poder exportar.");
         return;
     }
-    const dataParaSheet = etiquetasParaExportar.map(({ id, ...resto }) => resto);
+
+    const dataParaSheet = etiquetasParaExportar.map(p => {
+        // Separar fecha y hora de Apertura
+        let fechaApertura = '', horaApertura = '';
+        if (p.Apertura) {
+            const partes = p.Apertura.split(' ');
+            fechaApertura = partes[0];
+            horaApertura = partes[1] || '';
+        }
+
+        // Determinar si poner círculo según tipo
+        let congelado = '', refrigerado = '';
+        if (p.Tipo === 'C') congelado = '◯';
+        if (p.Tipo === 'R') refrigerado = '◯';
+
+        return {
+            'Producto': p.Producto,
+            'Tipo': p.Tipo,
+            'Empleado': p.Empleado,
+            'Lote': p.Lote,
+            'Fecha Apertura': fechaApertura,
+            'Hora Apertura': horaApertura,
+            'Caducidad Primaria': p['Caducidad Primaria'],
+            'Caducidad Secundaria': p['Caducidad Secundaria'],
+            'Congelado': congelado,
+            'Refrigerado': refrigerado
+        };
+    });
+
     const ws = XLSX.utils.json_to_sheet(dataParaSheet);
     const wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, "Etiquetas");
     XLSX.writeFile(wb, "etiquetas_programadas.xlsx");
 }
+
 
 // --- NAVEGACIÓN Y OTRAS VISTAS ---
 function mostrarVista(vista) {
