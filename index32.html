@@ -631,7 +631,7 @@ function exportarXLSX(){
         if (p.Tipo === 'R') refrigerado = '◯';
 
         return {
-            'Producto': p.Producto,
+            'Producto': p.Producto.replace(/\s*\(.*?\)\s*/g, "").trim(),
             'Tipo': p.Tipo,
             'Empleado': p.Empleado,
             'Lote': p.Lote,
